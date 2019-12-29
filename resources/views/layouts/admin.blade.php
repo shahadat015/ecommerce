@@ -13,9 +13,10 @@
     @stack('css')
     <!-- App css -->
     <link href="{{asset('contents/admin')}}/css/bootstrap.min.css" rel="stylesheet" type="text/css">
-    <link href="{{asset('contents/admin')}}/plugins/sweet-alert2/sweetalert2.min.css" rel="stylesheet" type="text/css">
     <link href="{{asset('contents/admin')}}/css/icons.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="{{asset('contents/admin')}}/plugins/pace/pace.min.css">
     <link href="{{asset('contents/admin')}}/css/metisMenu.min.css" rel="stylesheet" type="text/css">
+    <link href="{{asset('contents/admin')}}/plugins/sweet-alert2/sweetalert2.min.css" rel="stylesheet" type="text/css">
     <link href="{{asset('contents/admin')}}/css/style.css" rel="stylesheet" type="text/css">
 </head>
 
@@ -46,10 +47,11 @@
     <!-- jQuery  -->
     <script src="{{asset('contents/admin')}}/js/jquery.min.js"></script>
     <script src="{{asset('contents/admin')}}/js/bootstrap.bundle.min.js"></script>
-    <script src="{{asset('contents/admin')}}/plugins/sweet-alert2/sweetalert2.min.js"></script>
+    <script src="{{asset('contents/admin')}}/plugins/pace/pace.min.js"></script>
     <script src="{{asset('contents/admin')}}/js/metisMenu.min.js"></script>
     <script src="{{asset('contents/admin')}}/js/waves.min.js"></script>
     <script src="{{asset('contents/admin')}}/js/jquery.slimscroll.min.js"></script>
+    <script src="{{asset('contents/admin')}}/plugins/sweet-alert2/sweetalert2.min.js"></script>
     @stack('js')
     <!-- App js -->
     <script src="{{asset('contents/admin')}}/js/app.js"></script>

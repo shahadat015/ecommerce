@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-
+@section('title', 'Admin Dashboard')
 @push('css')
 	<link href="{{asset('contents/admin')}}/plugins/jvectormap/jquery-jvectormap-2.0.2.css" rel="stylesheet">
 @endpush

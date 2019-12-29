@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Product;
 use Freshbitsweb\Laratables\Laratables;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Permission;
@@ -11,8 +10,15 @@ use Spatie\Permission\Models\Role;
 
 class RoleController extends Controller
 {
-    
-    public function getRoles()
+    public function __construct()
+    {
+        $this->middleware('permission:Create Role')->only(['create', 'store']);
+        $this->middleware('permission:View Role')->only(['index', 'show']);
+        $this->middleware('permission:Update Role')->only(['edit', 'update']);
+        $this->middleware('permission:Delete Role')->only(['destroy', 'delete']);
+    }
+
+    public function roles()
     {
         return Laratables::recordsOf(Role::class);
     }
@@ -31,14 +37,14 @@ class RoleController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required|string|max:255'
+            'name' => 'required|string|max:255|unique:roles'
         ]);
-
+        
         $role = Role::create(['name' => $request->name]);
         $create = $role->syncPermissions($request->permissions);
 
         if($create){
-            return response()->json(['success' => $request->name . ' successfully created!']);
+            return response()->json(['success' => 'Role successfully created!']);
         }else{
             return response()->json(['error' => 'Ops! please try again!']); 
         }
@@ -60,19 +66,18 @@ class RoleController extends Controller
         $update = $role->syncPermissions($request->permissions);
 
         if($update){
-            return response()->json(['success' => $request->name . ' successfully updated!']);
+            return response()->json(['success' => 'Role successfully updated!']);
         }else{
             return response()->json(['error' => 'Ops! please try again!']);
         }
     }
 
-    public function destroy(Role $role)
+    public function destroy(Request $request)
     {
-        $role->revokePermissionTo($role->permissions);
-        $delete = $role->delete();
+        $delete = Role::destroy($request->id);
 
         if($delete){
-            return response()->json(['success' => $role->name . ' successfully deleted']);
+            return response()->json(['success' => 'Role successfully deleted!']);
         }else{
             return response()->json(['error' => 'Deleting failed! Please try again!']);
         }

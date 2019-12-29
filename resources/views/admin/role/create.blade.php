@@ -1,7 +1,5 @@
 @extends('layouts.admin')
-@push('css')
-    <link href="{{asset('contents/admin')}}/plugins/jquery-steps/jquery.steps.css" rel="stylesheet" type="text/css">
-@endpush
+@section('title', 'Create User')
 @section('content')
     <!-- Page-Title -->
     @component('layouts.partials.breadcumb')
@@ -18,52 +16,36 @@
                     <a class="btn btn-info btn-sm float-right" href="{{ route('admin.roles.index') }}"><i class="mdi mdi-arrow-left-thick"></i> Back</a>
                 </div>
                     
-                <div class="card-body">
-                    <form action="{{ route('admin.roles.store') }}" method="post" id="form-horizontal" class="form-horizontal form-wizard-wrapper">
+                <form action="{{ route('admin.roles.store') }}" method="post" id="create-form" class="form-horizontal form-wizard-wrapper">
+                    <div class="card-body">
                     	@csrf
-
-                        <h3>General</h3>
-                        <fieldset>
-                        	<h4>General</h4>
-                        	<hr>
-                            <div class="form-group">
-                                <label for="example-email-input1" class="col-form-label">Role Name</label>
-                                <input name="name" class="form-control" type="text" placeholder="e.g. Admin" value="{{ old('name') }}">
-                            </div>
-                        </fieldset>
+                    	<h4>General</h4>
+                    	<hr>
+                        <div class="form-group">
+                            <label for="example-email-input1" class="col-form-label">Role Name</label>
+                            <input name="name" class="form-control" type="text" placeholder="e.g. Admin" value="{{ old('name') }}" >
+                        </div>
                         <!--end fieldset-->
-                        <h3>Permissions</h3>
-                        <fieldset>
-                        	<h4>Permissions</h4>
-                        	<hr>
-                        	@foreach($permissions as $key=>$permission)
-                            <div class="form-group row">
-                                <div class="col-sm-12 ml-auto">
-                                    <div class="custom-control custom-checkbox">
-                                        <input type="checkbox" name="permissions[]" class="custom-control-input" id="horizontalCheckbox{{$key}}" data-parsley-multiple="groups" data-parsley-mincheck="2" value="{{ $permission->id }}">
-                                        <label class="custom-control-label" for="horizontalCheckbox{{$key}}">{{ $permission->name }}</label>
-                                    </div>
-                                </div>
+                    	<h4>Permissions</h4>
+                    	<hr>
+                    	@foreach($permissions as $key=>$permission)
+                        <div class="form-check-inline my-2">
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" name="permissions[]" class="custom-control-input" id="customCheck{{$key}}" data-parsley-multiple="groups" data-parsley-mincheck="2" value="{{ $permission->id }}">
+                                <label class="custom-control-label" for="customCheck{{$key}}">{{ $permission->name }}</label>
                             </div>
-                            @endforeach
-                        </fieldset>
+                        </div>
+                        @endforeach
                         <!--end fieldset-->
-                    </form>
-                </div>
+                    </div>
+                    <div class="card-footer">
+                        <button type="submit" class="btn btn-submit btn-primary waves-effect waves-light">Submit</button>
+                        <button type="reset" class="btn btn-info waves-effect waves-light">Reset</button>
+                    </div>
+                </form>
             </div>
         </div>
         <!-- end col -->
     </div>
     <!-- end row -->
 @endsection
-@push('js')
-    <script src="{{asset('contents/admin')}}/plugins/jquery-steps/jquery.steps.min.js"></script>
-    <script src="{{asset('contents/admin')}}/pages/jquery.form-wizard.init.js"></script>
-    <script>
-    	$(function() {
-    		$(document).on('click', 'a[href="#finish"]', function () {
-	    		$('#form-horizontal').submit();
-	    	});
-    	})
-    </script>
-@endpush

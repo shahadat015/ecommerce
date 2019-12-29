@@ -19,35 +19,107 @@ class PermissionsTableSeeder extends Seeder
 
     	Permission::insert([
         	[
-	            'name' => 'CRUD PRODUCT',
+	            'name' => 'Create Product',
                 'guard_name' => 'web'
 	        ],
             [
-                'name' => 'CRUD CATEGORY',
+                'name' => 'View Product',
                 'guard_name' => 'web'
             ],
             [
-                'name' => 'CRUD BRAND',
+                'name' => 'Update Product',
                 'guard_name' => 'web'
             ],
             [
-                'name' => 'CRUD USER',
+                'name' => 'Delete Product',
                 'guard_name' => 'web'
             ],
             [
-                'name' => 'CRUD ROLE',
+                'name' => 'Create Category',
                 'guard_name' => 'web'
             ],
             [
-                'name' => 'RD SUBSCRIBER',
+                'name' => 'View Category',
                 'guard_name' => 'web'
             ],
             [
-                'name' => 'RD ORDER',
+                'name' => 'Update Category',
                 'guard_name' => 'web'
             ],
             [
-                'name' => 'RD MESSAGE',
+                'name' => 'Delete Category',
+                'guard_name' => 'web'
+            ],
+            [
+                'name' => 'Create Brand',
+                'guard_name' => 'web'
+            ],
+            [
+                'name' => 'View Brand',
+                'guard_name' => 'web'
+            ],
+            [
+                'name' => 'Update Brand',
+                'guard_name' => 'web'
+            ],
+            [
+                'name' => 'Delete Brand',
+                'guard_name' => 'web'
+            ],
+            [
+                'name' => 'Create User',
+                'guard_name' => 'web'
+            ],
+            [
+                'name' => 'View User',
+                'guard_name' => 'web'
+            ],
+            [
+                'name' => 'Update User',
+                'guard_name' => 'web'
+            ],
+            [
+                'name' => 'Delete User',
+                'guard_name' => 'web'
+            ],
+            [
+                'name' => 'Create Role',
+                'guard_name' => 'web'
+            ],
+            [
+                'name' => 'View Role',
+                'guard_name' => 'web'
+            ],
+            [
+                'name' => 'Update Role',
+                'guard_name' => 'web'
+            ],
+            [
+                'name' => 'Delete Role',
+                'guard_name' => 'web'
+            ],
+            [
+                'name' => 'View Subscriber',
+                'guard_name' => 'web'
+            ],
+            [
+                'name' => 'Delete Subscriber',
+                'guard_name' => 'web'
+            ],
+            [
+                'name' => 'View Order',
+                'guard_name' => 'web'
+            ],
+            [
+                'name' => 'Delete Order',
+                'guard_name' => 'web'
+            ],
+            [
+                'name' => 'View Message',
+                'guard_name' => 'web'
+            ],
+            [
+                'name' => 'Delete Message',
                 'guard_name' => 'web'
             ]
         ]);
@@ -57,8 +129,8 @@ class PermissionsTableSeeder extends Seeder
         $admin->givePermissionTo(Permission::all());
 
         $editor = Role::find(3);
-        $editor->revokePermissionTo(['CRUD PRODUCT', 'CRUD CATEGORY', 'CRUD BRAND', 'RD SUBSCRIBER', 'RD ORDER', 'RD MESSAGE']);
-        $editor->givePermissionTo(['CRUD PRODUCT', 'CRUD CATEGORY', 'CRUD BRAND', 'RD SUBSCRIBER', 'RD ORDER', 'RD MESSAGE']);
+        $editor->revokePermissionTo(['Create Product', 'View Product', 'Update Product', 'Delete Product', 'Create Category', 'View Category', 'Update Category', 'Delete Category', 'Create Brand', 'View Brand', 'Update Brand', 'Delete Brand', 'View Subscriber', 'Delete Subscriber', 'View Order', 'Delete Order', 'View Message', 'Delete Message']);
+        $editor->givePermissionTo(['Create Product', 'View Product', 'Update Product', 'Delete Product', 'Create Category', 'View Category', 'Update Category', 'Delete Category', 'Create Brand', 'View Brand', 'Update Brand', 'Delete Brand', 'View Subscriber', 'Delete Subscriber', 'View Order', 'Delete Order', 'View Message', 'Delete Message']);
         
     }
 }

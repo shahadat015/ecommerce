@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Image;
+use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -23,6 +25,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        View::composer('admin.image.modal', function($view){
+            $view->with('images', Image::latest()->get());
+        });
     }
 }

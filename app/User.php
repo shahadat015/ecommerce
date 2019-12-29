@@ -17,7 +17,7 @@ class User extends Authenticatable implements MustVerifyEmail
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'phone', 'address', 'password', 'image_id'
     ];
 
     /**
@@ -38,24 +38,36 @@ class User extends Authenticatable implements MustVerifyEmail
         'email_verified_at' => 'datetime',
     ];
 
-    public static function laratablesOrderName()
+    public function image()
     {
-        return 'id';
+        return $this->belongsTo(Image::class);
+    }
+
+    public static function laratablesName($user)
+    {
+        if ($user->image) {
+            return '<img src="'. asset($user->image->path()) .'" class="mr-2" alt="" height="52">';
+        }else{
+            return '<img src="'. asset('contents/admin/images/placeholder.png') .'" class="mr-2" alt="" height="52" width="80"> 
+                    <p class="d-inline-block align-middle mb-0">
+                        <a href="#" class="d-inline-block align-middle mb-0 product-name">' . $user->name .'</a>
+                        <br><span class="text-muted font-13"> '. $user->role($user) .' </span>
+                    </p>';
+        }
+    }
+
+    public function role($user)
+    {
+        foreach($user->roles as $role){  
+            return '<span class="text-muted font-13"> '. $role->name .' </span>'; 
+        }
     }
 
     public static function laratablesCustomAction($action)
     {
-        
-        $show = 'admin.users.show';       
-        $edit = 'admin.users.edit';
-        $delte = 'admin.users.destroy';
-        return view('admin.partials.action', compact('action', 'show', 'edit', 'delte'))->render();
+        $route  = $action->getTable();
+        return view('layouts.partials.actions', compact('action', 'route'))->render();
     }
 
-    public static function laratablesRoleRelationQuery()
-    {
-        return function ($query) {
-            $query->with('roles');
-        };
-    }
+
 }

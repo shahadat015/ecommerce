@@ -10,10 +10,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-
-
 Auth::routes(['verify' => true]);
-Route::group(['prefix' => 'customer', 'namespace' => 'Customer', 'middleware' => ['auth', 'verified']], function(){
+
+Route::group(['as' => 'customer.', 'prefix' => 'customer', 'namespace' => 'Customer', 'middleware' => ['auth', 'verified']], function(){
 
 	Route::get('/', 'CustomerController@index');
 	
@@ -25,15 +24,30 @@ Route::group(['prefix' => 'customer', 'namespace' => 'Customer', 'middleware' =>
 | Admin Routes
 |--------------------------------------------------------------------------
 */
-Route::get('admin/login', 'Admin\LoginController@showLoginForm')->name('admin.login');
-
 Route::group(['as' => 'admin.', 'prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['auth', 'role:Super Admin|Admin|Editor']], function(){
 	
-	Route::get('/', 'AdminController@index');
-	Route::resource('/products', 'ProductController')->middleware('permission:CRUD PRODUCT');
-	Route::get('/user', 'UserController@getUsers')->name('user');
-	Route::resource('/users', 'UserController')->middleware('permission:CRUD USER');
-	Route::get('/role', 'RoleController@getRoles')->name('role');
-	Route::resource('/roles', 'RoleController')->middleware('permission:CRUD ROLE');
+	Route::get('/', 'AdminController@index')->name('dashboard');
+	Route::resource('/products', 'ProductController');
 
+	Route::get('/user/profile', 'UserController@profile')->name('user.profile');
+	Route::put('/user/profile', 'UserController@updateProfile')->name('user.profile');
+	Route::get('/users/datatables', 'UserController@users')->name('users.datatables');
+	Route::delete('/user/destroy', 'UserController@destroy')->name('user.destroy');
+	Route::resource('/users', 'UserController');
+
+	Route::get('/roles/datatables', 'RoleController@roles')->name('roles.datatables');
+	Route::delete('/role/destroy', 'RoleController@destroy')->name('role.destroy');
+	Route::resource('/roles', 'RoleController');
+
+	Route::get('/images/datatables', 'ImageController@images')->name('images.datatables');
+	Route::delete('/image/destroy', 'ImageController@destroy')->name('image.destroy');
+	Route::resource('/images', 'ImageController')->only('index', 'store', 'destroy');
+
+	Route::get('/category', 'CategoryController@categories')->name('category');
+	Route::delete('/category/destroy', 'CategoryController@destroy')->name('category.destroy');
+	Route::resource('/categories', 'CategoryController')->except('create', 'show');
+
+	Route::get('/brand/datatables', 'BrandController@brands')->name('brands.datatables');
+	Route::delete('/brand/destroy', 'BrandController@destroy')->name('brand.destroy');
+	Route::resource('/brands', 'BrandController');
 });

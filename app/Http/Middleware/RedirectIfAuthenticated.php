@@ -18,7 +18,7 @@ class RedirectIfAuthenticated
      */
     public function handle($request, Closure $next, $guard = null)
     {
-        if (Auth::guard($guard)->check() && Auth::user()->hasAnyRole(Role::all())) {
+        if (Auth::guard($guard)->check() && Auth::user()->hasAnyRole(['Super Admin', 'Admin', 'Editor'])) {
             return redirect('admin');
         }
         if (Auth::guard($guard)->check()){

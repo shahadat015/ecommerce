@@ -25,7 +25,6 @@
                                         <label class="custom-control-label" for="horizontalCheckbox1"></label>
                                     </div>
                                 </th>
-                                <th>Image</th>
                                 <th>Product Name</th>
                                 <th>Price</th>
                                 <th>Status</th>
@@ -42,11 +41,17 @@
                                 </td>
                                 <td>
                                     <img src="{{asset('contents/admin')}}/images/products/img-2.png" alt="" height="52">
+                                    <p class="d-inline-block align-middle mb-0">
+                                        <a href="#" class="d-inline-block align-middle mb-0 product-name">Apple Watch</a>
+                                        <br><span class="text-muted font-13">Size-05 (Model 2019)</span>
+                                    </p>
                                 </td>
-                                <td>Apple Watch</td>
                                 <td>$39</td>
                                 <td><span class="badge badge-soft-warning">Stock</span></td>
-                                <td><a href="#"><i class="far fa-edit text-info mr-1"></i></a> <a href="#"><i class="far fa-trash-alt text-danger"></i></a></td>
+                                <td>
+                                    <a href="#"><i class="far fa-edit text-info mr-1"></i></a>
+                                    <a href="#"><i class="far fa-trash-alt text-danger"></i></a>
+                                </td>
                             </tr>
                         </tbody>
                     </table>
@@ -62,6 +67,8 @@
     <script src="{{asset('contents/admin')}}/plugins/datatables/jquery.dataTables.min.js"></script>
     <script src="{{asset('contents/admin')}}/plugins/datatables/dataTables.bootstrap4.min.js"></script>
     <script>
-        $('#datatable').DataTable();
+        $(function() {
+            $('#datatable').DataTable();
+        });
     </script>
 @endpush
