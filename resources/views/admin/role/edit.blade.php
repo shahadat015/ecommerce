@@ -17,9 +17,10 @@
                 </div>
                     
                 <form action="{{ route('admin.roles.update', $role->id) }}" method="post" id="update-form" class="form-horizontal form-wizard-wrapper">
+                    @method('put')
+                    @csrf
+                    
                     <div class="card-body">
-                        @method('put')
-                    	@csrf
                         <fieldset>
                         	<h4>General</h4>
                         	<hr>

@@ -119,7 +119,7 @@
                     <li class="nav-item"><a class="nav-link" href="{{ url('/admin/categories') }}"><i class="dripicons-list"></i>Categories</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ url('/admin/brands') }}"><i class="dripicons-article"></i>Brands</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ url('/admin/attributes') }}"><i class="dripicons-checklist"></i>Attributes</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{ url('/admin/attributesets') }}"><i class="dripicons-view-list"></i>Attribute Set</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ url('/admin/attribute-sets') }}"><i class="dripicons-view-list"></i>Attribute Set</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ url('/admin/options') }}"><i class="dripicons-view-list-large"></i>Options</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ url('/admin/reviews') }}"><i class="mdi mdi-star-outline"></i>Review</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ url('/admin/coupons') }}"><i class="dripicons-card"></i>Coupons</a></li>

@@ -1,4 +1,5 @@
 @extends('layouts.admin')
+@section('title', 'Create Brand')
 @section('content')
     <!-- Page-Title -->
     @component('layouts.partials.breadcumb')
@@ -16,9 +17,9 @@
                 </div>
                     
                 <form action="{{ route('admin.brands.store') }}" method="post" id="create-form" class="form-horizontal form-wizard-wrapper">
+                   @csrf
+                   
                     <div class="card-body">
-                    	@csrf
-
                         <div class="form-group">
                             <label for="example-email-input1" class="col-form-label">Brand Name</label>
                             <input name="name" class="form-control" type="text" placeholder="e.g. Nike">

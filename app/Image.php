@@ -20,7 +20,6 @@ class Image extends Model
 
     public static function laratablesCustomAction($action)
     {
-        $route  = $action->getTable();
-        return view('layouts.partials.actions', compact('action', 'route'))->with([ 'view' => false, 'edit' => false, 'image' => true])->render();
+        return view('layouts.partials.actions')->with(['action' => $action, 'route' => $action->getTable(), 'view' => false, 'edit' => false, 'image' => true])->render();
     }
 }

@@ -10,7 +10,7 @@
                 </div>
                 <!--end auth-logo-box-->
                 <div class="text-center auth-logo-text">
-                    <h4 class="mt-0 mb-3 mt-5">Customer Login</h4>
+                    <h4 class="mt-0 mb-3 mt-5">Login</h4>
                     <p class="text-muted mb-0">Sign in to continue to account.</p>
                 </div>
                 <!--end auth-logo-text-->

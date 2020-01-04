@@ -116,7 +116,7 @@
                     </div>
                     <div class="card-footer">
                         <button type="submit" class="btn btn-submit btn-primary waves-effect waves-light">Submit</button>
-                        <button type="reset" class="btn btn-info waves-effect waves-light">Reset</button>
+                        <a href="{{ route('admin.users.index') }}" class="btn btn-info waves-effect waves-light">Cancel</a>
                     </div>
                 </form>
             </div>

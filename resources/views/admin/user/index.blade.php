@@ -24,8 +24,9 @@
                     <table id="datatable" class="table table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                         <thead>
                             <tr>
-                                <th>User Name</th>
+                                <th>Name</th>
                                 <th>Email</th>
+                                <th>Image</th>
                                 <th>
                                     <div class="custom-control custom-checkbox d-inline">
                                         <input type="checkbox" class="check-all custom-control-input" id="horizontalCheckbox">
@@ -54,6 +55,7 @@
                 columns: [
                     { name: 'name' },
                     { name: 'email' },
+                    { name: 'image_id' },
                     { name: 'action', orderable: false, searchable: false }
                 ]
             });

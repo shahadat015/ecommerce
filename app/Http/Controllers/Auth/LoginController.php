@@ -40,10 +40,10 @@ class LoginController extends Controller
 
     protected function redirectTo()
     {
-        if(Auth::user()->hasAnyRole(['Super Admin', 'Admin', 'Editor'])){
-            return 'admin';
-        }else{
+        if(Auth::user()->hasRole(['Customer'])){
             return 'customer';
+        }else{
+            return 'admin';
         }
     }
 }

@@ -17,10 +17,10 @@
                 </div>
                     
                 <form action="{{ route('admin.brands.update', $brand->id) }}" method="post" id="update-form" class="form-horizontal form-wizard-wrapper">
+                   @csrf
+                   @method('put')
+                   
                     <div class="card-body">
-                    	@csrf
-                        @method('put')
-
                         <div class="form-group">
                             <label for="example-email-input1" class="col-form-label">Brand Name</label>
                             <input name="name" class="form-control" type="text" value="{{ $brand->name }}">
@@ -53,7 +53,7 @@
                     </div>
                     <div class="card-footer">
                         <button type="submit" class="btn btn-submit btn-primary waves-effect waves-light">Submit</button>
-                        <button type="reset" class="btn btn-info waves-effect waves-light">Reset</button>
+                        <a href="{{ route('admin.brands.index') }}" class="btn btn-info waves-effect waves-light">Cancel</a>
                     </div>
                 </form>
             </div>

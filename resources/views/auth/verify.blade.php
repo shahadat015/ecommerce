@@ -1,5 +1,5 @@
 @extends('layouts.app')
-
+@section('title', 'Verify Your Email Address')
 @section('content')
 <div class="auth-page">
     <div class="card auth-card shadow-lg">

@@ -2,17 +2,16 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Brand;
+use App\AttributeSet;
 use App\Http\Controllers\Controller;
 use Freshbitsweb\Laratables\Laratables;
 use Illuminate\Http\Request;
-use Illuminate\Support\Str;
 
-class BrandController extends Controller
+class AttributeSetController extends Controller
 {
-    public function brands()
+    public function attributesets()
     {
-        return Laratables::recordsOf(Brand::class, function($query)
+        return Laratables::recordsOf(AttributeSet::class, function($query)
         {
             return $query->latest();
         });
@@ -20,55 +19,48 @@ class BrandController extends Controller
 
     public function index()
     {
-    	return view('admin.brand.index');
+    	return view('admin.attributeset.index');
     }
 
     public function create()
     {
-        return view('admin.brand.create');
+        return view('admin.attributeset.create');
     }
 
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required|string|max:255',
-            'tagline' => 'nullable|string|max:255'
+            'name' => 'required|string|max:255'
         ]);
 
         $request['status'] = (boolean) $request->status;
         $request['slug'] = str_slug($request->name);
-        $create = Brand::create($request->all());
+        $create = AttributeSet::create($request->all());
 
         if($create){
-            return response()->json(['success' => 'Brand successfully created!']);
+            return response()->json(['success' => 'Attribute Set successfully created!']);
         }else{
             return response()->json(['error' => 'Ops! please try again!']); 
         }
     }
-
-    public function show(Brand $brand)
+    
+    public function edit(AttributeSet $attributeSet)
     {
-        return view('admin.brand.show', compact('brand'));
+        return view('admin.attributeset.edit', compact('attributeSet'));
     }
 
-    public function edit(Brand $brand)
-    {
-        return view('admin.brand.edit', compact('brand'));
-    }
-
-    public function update(Request $request, Brand $brand)
+    public function update(Request $request, AttributeSet $attributeSet)
     {
         $request->validate([
-            'name' => 'required|string|max:255',
-            'tagline' => 'nullable|string|max:255'
+            'name' => 'required|string|max:255'
         ]);
 
         $request['status'] = (boolean) $request->status;
         $request['slug'] = str_slug($request->name);
-        $update = $brand->update($request->all());
+        $update = $attributeSet->update($request->all());
 
         if($update){
-            return response()->json(['success' => 'Brand successfully updated!']);
+            return response()->json(['success' => 'Attribute Set successfully updated!']);
         }else{
             return response()->json(['error' => 'Ops! please try again!']); 
         }
@@ -77,10 +69,10 @@ class BrandController extends Controller
     public function destroy(Request $request)
     {
 
-        $delete = Brand::destroy($request->id);
+        $delete = AttributeSet::destroy($request->id);
 
         if($delete){
-            return response()->json(['success' => 'Brand successfully deleted!']);
+            return response()->json(['success' => 'Attribute Set successfully deleted!']);
         }else{
             return response()->json(['error' => 'Deleting failed! Please try again!']);
         }

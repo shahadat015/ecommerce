@@ -12,6 +12,7 @@
         "fideloper/proxy": "^4.0",
         "freshbitsweb/laratables": "^2.1",
         "laravel/framework": "^6.2",
+        "laravel/helpers": "^1.1",
         "laravel/tinker": "^1.0",
         "spatie/laravel-permission": "^3.3"
     },

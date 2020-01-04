@@ -1,5 +1,5 @@
 @extends('layouts.app')
-
+@section('title', 'Reset Password')
 @section('content')
 <div class="auth-page">
     <div class="card auth-card shadow-lg">

@@ -2,9 +2,34 @@
     <link href="{{asset('contents/admin')}}/plugins/dropzone/dropzone.css" rel="stylesheet" type="text/css">
     <link href="{{asset('contents/admin')}}/plugins/datatables/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css">
     <link href="{{asset('contents/admin')}}/plugins/datatables/buttons.bootstrap4.min.css" rel="stylesheet" type="text/css">
+    <link href="{{asset('contents/admin')}}/plugins/animate/animate.css" rel="stylesheet" type="text/css">
+    <style>
+        .mid-y-scroll {
+            overflow-y: scroll;
+            height: 100%;
+            display: block;
+            position: sticky;
+        }
+
+        .mid-y-scroll::-webkit-scrollbar{
+            width: 0;
+            border-radius: 0;
+        }
+
+        /* Track */
+        .mid-y-scroll::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        /* Handle */
+        .mid-y-scrollt::-webkit-scrollbar-thumb,
+        ::-webkit-scrollbar-thumb {
+            background: transparent;
+        }
+    </style>
 @endpush
 <!-- end row -->
-<div class="modal fade bd-example-modal-xl" tabindex="-1" role="dialog" aria-hidden="true">
+<div class="modal zoomIn animated bd-example-modal-xl mid-y-scroll" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-xl">
         <div class="modal-content">
             <div class="modal-header">

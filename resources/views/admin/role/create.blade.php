@@ -17,8 +17,9 @@
                 </div>
                     
                 <form action="{{ route('admin.roles.store') }}" method="post" id="create-form" class="form-horizontal form-wizard-wrapper">
+                    @csrf
+
                     <div class="card-body">
-                    	@csrf
                     	<h4>General</h4>
                     	<hr>
                         <div class="form-group">

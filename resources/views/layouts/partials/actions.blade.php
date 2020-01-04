@@ -12,5 +12,5 @@
 <a href="#" data-url="{{ route('admin.' . Str::singular($route) . '.destroy') }}" data-id="{{ $action->id }}" class="btn-delete"><i class="far fa-trash-alt text-danger mt-1 font-16"></i></a>
 @endif
 @if($image ?? false)
-<a href="#" data-src="{{ asset($action->path()) }}" data-id="{{ $action->id }}" class="select-image"><i class="mdi mdi-checkbox-marked-outline font-18 ml-1"></i></a>
+<a href="#" data-src="{{ asset($action->path()) }}" data-id="{{ $action->id }}" class="select-image"><i class="far fa-check-square text-info font-16 ml-2"></i></a>
 @endif

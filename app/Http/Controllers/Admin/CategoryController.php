@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Admin;
 use App\Category;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Support\Str;
 
 class CategoryController extends Controller
 {
@@ -28,7 +27,7 @@ class CategoryController extends Controller
         ]);
 
         $request['status'] = (boolean) $request->status;
-        $request['slug'] = Str::slug($request->name);
+        $request['slug'] = str_slug($request->name);
         $create = Category::create($request->all());
 
         if($create){
@@ -45,7 +44,7 @@ class CategoryController extends Controller
         ]);
 
         $request['status'] = (boolean) $request->status;
-        $request['slug'] = Str::slug($request->name);
+        $request['slug'] = str_slug($request->name);
         $update = $category->update($request->all());
 
         if($update){

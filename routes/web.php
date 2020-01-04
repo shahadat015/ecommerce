@@ -50,4 +50,16 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'namespace' => 'Admin', 'mi
 	Route::get('/brand/datatables', 'BrandController@brands')->name('brands.datatables');
 	Route::delete('/brand/destroy', 'BrandController@destroy')->name('brand.destroy');
 	Route::resource('/brands', 'BrandController');
+
+	Route::get('/attribute-sets/datatables', 'AttributeSetController@attributesets')->name('attribute-sets.datatables');
+	Route::delete('/attribute-set/destroy', 'AttributeSetController@destroy')->name('attribute-set.destroy');
+	Route::resource('/attribute-sets', 'AttributeSetController')->except('show');
+
+	Route::get('/attributes/datatables', 'AttributeController@attributes')->name('attributes.datatables');
+	Route::delete('/attribute/destroy', 'AttributeController@destroy')->name('attribute.destroy');
+	Route::resource('/attributes', 'AttributeController')->except('show');
+
+	Route::get('/options/datatables', 'OptionController@options')->name('options.datatables');
+	Route::delete('/option/destroy', 'OptionController@destroy')->name('option.destroy');
+	Route::resource('/options', 'OptionController')->except('show');
 });
