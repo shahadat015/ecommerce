@@ -43,7 +43,7 @@
                                         
                                         <div class="col-sm-11">
                                             <label class="control-label">Value</label>
-                                            <input type="text" name="values[][value]" class="form-control" value="{{ $value->value }}">
+                                            <input type="text" name="value" class="form-control" value="{{ $value->value }}">
                                         </div><!--end col-->
 
                                         <div class="col-sm-1">

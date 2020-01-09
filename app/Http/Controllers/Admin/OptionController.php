@@ -34,7 +34,7 @@ class OptionController extends Controller
             'type' => 'required|string|max:255'
         ]);
 
-        $request['status'] = (boolean) $request->is_required;
+        $request['is_required'] = (boolean) $request->is_required;
         $option = Option::create($request->all());
 
         $create = $option->values()->createMany($request->values);
@@ -58,8 +58,7 @@ class OptionController extends Controller
             'type' => 'required|string|max:255'
         ]);
 
-        $request['status'] = (boolean) $request->status;
-        $request['slug'] = str_slug($request->name);
+        $request['is_required'] = (boolean) $request->is_required;
         $option->values()->delete();
         $option->values()->createMany($request->values);
         $update = $option->update($request->all());

@@ -13,47 +13,27 @@
     <div class="row">
         <div class="col-12">
             <div class="card">
+                <div class="card-header">
+                    <h4 class="mt-2 header-title float-left">Products Information</h4>
+                    <a class="btn btn-info btn-sm float-right" href="{{ route('admin.products.create') }}"><i class="mdi mdi-plus-circle-outline"></i> Create Product</a>
+                    <button class="btn-delete btn btn-danger btn-sm float-right mr-2" data-url="{{ route('admin.product.destroy') }}" disabled><i class="mdi mdi-delete"></i> Delete</button>
+                </div>
                 <div class="card-body">
-                    <h4 class="mt-0 header-title">Product Stock</h4>
-                    <p class="text-muted mb-4 font-13">Available all products.</p>
                     <table id="datatable" class="table table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                         <thead>
                             <tr>
+                                <!-- <th>Image</th> -->
+                                <th>Name</th>
+                                <th>Price</th>
+                                <th>Status</th>
                                 <th>
                                     <div class="custom-control custom-checkbox">
                                         <input type="checkbox" class="custom-control-input" id="horizontalCheckbox1" data-parsley-multiple="groups" data-parsley-mincheck="2">
-                                        <label class="custom-control-label" for="horizontalCheckbox1"></label>
+                                        <label class="custom-control-label" for="horizontalCheckbox1">Action</label>
                                     </div>
                                 </th>
-                                <th>Product Name</th>
-                                <th>Price</th>
-                                <th>Status</th>
-                                <th>Action</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr>
-                                <td>
-                                    <div class="custom-control custom-checkbox">
-                                        <input type="checkbox" class="custom-control-input" id="horizontalCheckbox" data-parsley-multiple="groups" data-parsley-mincheck="2">
-                                        <label class="custom-control-label" for="horizontalCheckbox"></label>
-                                    </div>
-                                </td>
-                                <td>
-                                    <img src="{{asset('contents/admin')}}/images/products/img-2.png" alt="" height="52">
-                                    <p class="d-inline-block align-middle mb-0">
-                                        <a href="#" class="d-inline-block align-middle mb-0 product-name">Apple Watch</a>
-                                        <br><span class="text-muted font-13">Size-05 (Model 2019)</span>
-                                    </p>
-                                </td>
-                                <td>$39</td>
-                                <td><span class="badge badge-soft-warning">Stock</span></td>
-                                <td>
-                                    <a href="#"><i class="far fa-edit text-info mr-1"></i></a>
-                                    <a href="#"><i class="far fa-trash-alt text-danger"></i></a>
-                                </td>
-                            </tr>
-                        </tbody>
                     </table>
                 </div>
             </div>
@@ -68,7 +48,16 @@
     <script src="{{asset('contents/admin')}}/plugins/datatables/dataTables.bootstrap4.min.js"></script>
     <script>
         $(function() {
-            $('#datatable').DataTable();
+            $('#datatable').DataTable({
+                serverSide: true,
+                ajax: "{{ route('admin.products.datatables') }}",
+                columns: [
+                    { name: 'name' },
+                    { name: 'price' },
+                    { name: 'status' },
+                    { name: 'action', orderable: false, searchable: false }
+                ]
+            });
         });
     </script>
 @endpush

@@ -24,95 +24,84 @@
                     @csrf
 
                     <div class="card-body">
-                        <ul class="nav nav-tabs" role="tablist">
-                            <li class="nav-item">
-                                <a class="nav-link active" data-toggle="tab" href="#general" role="tab">General</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" data-toggle="tab" href="#permissions" role="tab">Permissions</a>
-                            </li>
-                        </ul>
-                         <div class="tab-content">
-                            <div class="tab-pane active p-3" id="general" role="tabpanel">
-                                <h4>General</h4><hr>
-                                <div class="form-group">
-                                    <label for="name">Name</label>
-                                    <div class="input-group">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text"><i class="far fa-user"></i></span>
-                                        </div>
-                                        <input type="text" name="name" class="form-control" value="{{ $user->name }}">
-                                    </div>
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="far fa-user"></i></span>
                                 </div>
-                                <div class="form-group">
-                                    <label for="name">Email</label>
-                                    <div class="input-group">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text"><i class="far fa-envelope"></i></span>
-                                        </div>
-                                        <input type="email" name="email" class="form-control" value="{{ $user->email }}">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="name">Phone</label>
-                                    <div class="input-group">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text"><i class="fas fa-phone"></i></span>
-                                        </div>
-                                        <input type="text" name="phone" class="form-control" value="{{ $user->phone }}">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="name">Password</label>
-                                    <div class="input-group">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text"><i class="fas fa-lock"></i></span>
-                                        </div>
-                                        <input type="password" name="password" class="form-control" placeholder="Enter password" autocomplete="password">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="name">Confirm Password</label>
-                                    <div class="input-group">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text"><i class="fas fa-lock"></i></span>
-                                        </div>
-                                        <input type="password" name="password_confirmation" class="form-control" placeholder="Confirm password" autocomplete="password_confirmation">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="name">User Role</label>
-                                    <select class="select2 mb-3 select2-multiple" name="roles[]" multiple="multiple" data-placeholder="Choose Role">
-                                        @foreach($roles as $role)
-                                        <option value="{{ $role->name }}"
-                                            @foreach($user->roles as $userRole) {{ $role->name == $userRole->name ? 'selected' : '' }}@endforeach
-                                        >{{ $role->name }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                                <div class="single-image">
-                                    <div class="image-holder">
-                                        @if($user->image)
-                                        <img src="{{ asset($user->image->path()) }}" alt="">
-                                        @else
-                                        <i class="far fa-image"></i>
-                                        @endif
-                                    </div>
-                                </div>
-                                <button type="button" class="btn btn-light image-picker waves-effect waves-light d-block mt-3 mb-3" data-image="single"><i class="far fa-folder-open mr-2"></i> Browse Image</button>
-                            </div>
-                            <div class="tab-pane p-3" id="permissions" role="tabpanel">
-                                <h4>Permissions</h4><hr>
-                                @foreach($permissions as $key=>$permission)
-                                <div class="form-check-inline my-2">
-                                    <div class="custom-control custom-checkbox">
-                                        <input type="checkbox" name="permissions[]" class="custom-control-input" id="customCheck{{$key}}" data-parsley-multiple="groups" data-parsley-mincheck="2" value="{{ $permission->id }}" @foreach($user->permissions as $userPermission) @if($userPermission->id == $permission->id) checked @endif @endforeach>
-                                        <label class="custom-control-label" for="customCheck{{$key}}">{{ $permission->name }}</label>
-                                    </div>
-                                </div>
-                                @endforeach
+                                <input type="text" name="name" class="form-control" value="{{ $user->name }}">
                             </div>
                         </div>
+                        <div class="form-group">
+                            <label for="name">Email</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="far fa-envelope"></i></span>
+                                </div>
+                                <input type="email" name="email" class="form-control" value="{{ $user->email }}">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="name">Phone</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="fas fa-phone"></i></span>
+                                </div>
+                                <input type="text" name="phone" class="form-control" value="{{ $user->phone }}">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="name">Password</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="fas fa-lock"></i></span>
+                                </div>
+                                <input type="password" name="password" class="form-control" placeholder="Enter password" autocomplete="password">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="name">Confirm Password</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="fas fa-lock"></i></span>
+                                </div>
+                                <input type="password" name="password_confirmation" class="form-control" placeholder="Confirm password" autocomplete="password_confirmation">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="name">User Role</label>
+                            <select class="select2 mb-3 select2-multiple" name="roles[]" multiple="multiple" data-placeholder="Choose Role">
+                                @foreach($roles as $role)
+                                <option value="{{ $role->name }}"
+                                    @foreach($user->roles as $userRole) {{ $role->name == $userRole->name ? 'selected' : '' }}@endforeach
+                                >{{ $role->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="name">Permissions</label>
+                            <select class="select2 mb-3 select2-multiple" name="permissions[]" multiple="multiple" data-placeholder="Select Permission">
+                                @foreach($permissions as $permission)
+                                <option value="{{ $permission->id }}"
+                                    @foreach($user->permissions as $userPermission) 
+                                        {{ $permission->id == $userPermission->id ? 'selected' : '' }}
+                                    @endforeach>{{ $permission->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
+                        <div class="single-image">
+                            <div class="image-holder">
+                                @if($user->image)
+                                <img src="{{ asset($user->image->path()) }}" alt="">
+                                @else
+                                <i class="far fa-image"></i>
+                                @endif
+                            </div>
+                        </div>
+                        <button type="button" class="btn btn-light image-picker waves-effect waves-light d-block mt-3 mb-3" data-image="single"><i class="far fa-folder-open mr-2"></i> Browse Image</button>
                     </div>
                     <div class="card-footer">
                         <button type="submit" class="btn btn-submit btn-primary waves-effect waves-light">Submit</button>

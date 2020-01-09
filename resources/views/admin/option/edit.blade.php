@@ -45,17 +45,17 @@
                                         
                                         <div class="col-sm-4">
                                             <label class="control-label">Label</label>
-                                            <input type="text" name="values[0][label]" class="form-control" value="{{ $value->label }}">
+                                            <input type="text" name="label" class="form-control" value="{{ $value->label }}">
                                         </div><!--end col-->
 
                                         <div class="col-sm-4">
                                             <label class="control-label">Price</label>
-                                            <input type="text" name="values[0][price]" class="form-control" value="{{ $value->price }}">
+                                            <input type="text" name="price" class="form-control" value="{{ $value->price }}">
                                         </div><!--end col-->
 
                                         <div class="col-sm-3">
                                             <label class="control-label">Price Type</label>
-                                            <select name="values[0][price_type]" class="form-control">
+                                            <select name="price_type" class="form-control">
                                                 <option value="fixed" {{ $value->price_type == 'fixed' ? 'selected' : '' }}>Fixed</option>
                                                 <option value="percent" {{ $value->price_type == 'fixed' ? 'percent' : '' }}>Percent</option>
                                             </select>

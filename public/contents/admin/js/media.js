@@ -22,9 +22,9 @@ $(function() {
 
             Swal.fire({
                 position: 'top-end',
-                text: 'Image successfully selected!',
+                text: 'Image successfully added!',
                 showConfirmButton: false,
-                timer: 1000
+                timer: 500
             });
         }
     });

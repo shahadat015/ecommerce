@@ -4,28 +4,10 @@
     <link href="{{asset('contents/admin')}}/plugins/datatables/buttons.bootstrap4.min.css" rel="stylesheet" type="text/css">
     <link href="{{asset('contents/admin')}}/plugins/animate/animate.css" rel="stylesheet" type="text/css">
     <style>
-        .mid-y-scroll {
-            overflow-y: scroll;
-            height: 100%;
-            display: block;
-            position: sticky;
-        }
-
-        .mid-y-scroll::-webkit-scrollbar{
-            width: 0;
-            border-radius: 0;
-        }
-
-        /* Track */
-        .mid-y-scroll::-webkit-scrollbar-track {
-            background: transparent;
-        }
-
-        /* Handle */
-        .mid-y-scrollt::-webkit-scrollbar-thumb,
-        ::-webkit-scrollbar-thumb {
-            background: transparent;
-        }
+        .mid-y-scroll{overflow-y:scroll;height:100%;display:block;position:sticky}
+        .mid-y-scroll::-webkit-scrollbar{width:0;border-radius:0}
+        .mid-y-scroll::-webkit-scrollbar-track{background:transparent}
+        .mid-y-scrollt::-webkit-scrollbar-thumb,::-webkit-scrollbar-thumb{background:transparent}
     </style>
 @endpush
 <!-- end row -->

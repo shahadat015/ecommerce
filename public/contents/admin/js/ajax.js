@@ -24,6 +24,7 @@ $(function() {
 				        'success',
 				    );
                     $("#create-form")[0].reset();
+                    $('.invalid-feedback').remove();
                 }else{
                     Swal.fire(
 				        'Error',
@@ -42,6 +43,8 @@ $(function() {
                     // Show error message
                     if(inputField.next().length == 0){
                         inputField.focus().after('<div class="invalid-feedback"> <strong>'+ errorMessage +'</strong> </div>');
+                    }else{
+                        inputField.focus();
                     }
 
                     // Remove error message
@@ -86,6 +89,7 @@ $(function() {
                         data.success,
                         'success',
                     );
+                    $('.invalid-feedback').remove();
                 }else{
                     Swal.fire(
                         'Error',
@@ -104,6 +108,8 @@ $(function() {
                     // Show error message
                     if(inputField.next().length == 0){
                         inputField.focus().after('<div class="invalid-feedback"> <strong>'+ errorMessage +'</strong> </div>');
+                    }else{
+                        inputField.focus();
                     }
 
                     // Remove error message
@@ -127,7 +133,6 @@ $(function() {
     // check all checkbox
     $(document).on('click', '.check-all', function(){
         $('.delete-checkbox').not(this).prop('checked', this.checked);
-        $('.delete-checkbox:checked').length = $('.delete-checkbox:checked').length;
     });
 
     // input checked or not
@@ -218,5 +223,27 @@ $(function() {
             }
         });
     });
+
+    $(document).on('change', '.attributes', function () {
+        var id = $(this).val();
+        var url = window.origin + '/admin/attribute/values/' + id;
+        var select = $(this);
+
+        $.ajax({
+            url: url,
+            type: "GET",
+            dataType: "HTML",
+            success(data) {
+                select.parent().next().children('.select2-multiple').html(data);
+            },
+            error(error) {
+                Swal.fire(
+                    'Ops!',
+                    error.statusText,
+                    'error',
+                );
+            }
+        });
+    })
 
 });

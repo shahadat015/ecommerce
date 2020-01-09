@@ -41,7 +41,7 @@
                                         
                                         <div class="col-sm-11">
                                             <label class="control-label">Value</label>
-                                            <input type="text" name="values[0][value]" placeholder="e.g. SMS, MMS, Email" class="form-control">
+                                            <input type="text" name="value" placeholder="e.g. SMS, MMS, Email" class="form-control">
                                         </div><!--end col-->
 
                                         <div class="col-sm-1">

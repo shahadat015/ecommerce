@@ -1,5 +1,8 @@
 @extends('layouts.admin')
-@section('title', 'Create User')
+@section('title', 'Create Role')
+@push('css')
+    <link href="{{asset('contents/admin')}}/plugins/select2/select2.min.css" rel="stylesheet" type="text/css">
+@endpush
 @section('content')
     <!-- Page-Title -->
     @component('layouts.partials.breadcumb')
@@ -20,23 +23,18 @@
                     @csrf
 
                     <div class="card-body">
-                    	<h4>General</h4>
-                    	<hr>
                         <div class="form-group">
-                            <label for="example-email-input1" class="col-form-label">Role Name</label>
+                            <label for="example-email-input1" class="col-form-label">Name</label>
                             <input name="name" class="form-control" type="text" placeholder="e.g. Admin" value="{{ old('name') }}" >
                         </div>
-                        <!--end fieldset-->
-                    	<h4>Permissions</h4>
-                    	<hr>
-                    	@foreach($permissions as $key=>$permission)
-                        <div class="form-check-inline my-2">
-                            <div class="custom-control custom-checkbox">
-                                <input type="checkbox" name="permissions[]" class="custom-control-input" id="customCheck{{$key}}" data-parsley-multiple="groups" data-parsley-mincheck="2" value="{{ $permission->id }}">
-                                <label class="custom-control-label" for="customCheck{{$key}}">{{ $permission->name }}</label>
-                            </div>
+                        <div class="form-group">
+                            <label for="name">Permissions</label>
+                            <select class="select2 mb-3 select2-multiple" name="permissions[]" multiple="multiple" data-placeholder="Select Permission">
+                                @foreach($permissions as $permission)
+                                <option value="{{ $permission->id }}">{{ $permission->name }}</option>
+                                @endforeach
+                            </select>
                         </div>
-                        @endforeach
                         <!--end fieldset-->
                     </div>
                     <div class="card-footer">
@@ -50,3 +48,11 @@
     </div>
     <!-- end row -->
 @endsection
+@push('js')
+    <script src="{{asset('contents/admin')}}/plugins/select2/select2.min.js"></script>
+    <script>
+        $(".select2").select2({
+            width: "100%"
+        });
+    </script>
+@endpush

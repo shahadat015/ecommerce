@@ -8,6 +8,10 @@ class AttributeSet extends Model
 {
     protected $fillable = ['name', 'slug', 'status'];
 
+    public function attributes() {
+        return $this->hasMany(Attribute::class);
+    }
+
     public static function laratablesStatus($attributeset)
     {
         if ($attributeset->status) {

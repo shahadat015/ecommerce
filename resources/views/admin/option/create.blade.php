@@ -44,17 +44,17 @@
                                         
                                         <div class="col-sm-4">
                                             <label class="control-label">Label</label>
-                                            <input type="text" name="values[0][label]" placeholder="e.g. S, M, L" class="form-control">
+                                            <input type="text" name="label" placeholder="e.g. S, M, L" class="form-control">
                                         </div><!--end col-->
 
                                         <div class="col-sm-4">
                                             <label class="control-label">Price</label>
-                                            <input type="text" name="values[0][price]" placeholder="e.g. Tk 100" class="form-control">
+                                            <input type="text" name="price" placeholder="e.g. Tk 100" class="form-control">
                                         </div><!--end col-->
 
                                         <div class="col-sm-3">
                                             <label class="control-label">Price Type</label>
-                                            <select name="values[0][price_type]" class="form-control">
+                                            <select name="price_type" class="form-control">
                                                 <option value="fixed">Fixed</option>
                                                 <option value="percent">Percent</option>
                                             </select>

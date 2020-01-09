@@ -27,7 +27,6 @@ Route::group(['as' => 'customer.', 'prefix' => 'customer', 'namespace' => 'Custo
 Route::group(['as' => 'admin.', 'prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['auth', 'role:Super Admin|Admin|Editor']], function(){
 	
 	Route::get('/', 'AdminController@index')->name('dashboard');
-	Route::resource('/products', 'ProductController');
 
 	Route::get('/user/profile', 'UserController@profile')->name('user.profile');
 	Route::put('/user/profile', 'UserController@updateProfile')->name('user.profile');
@@ -62,4 +61,9 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'namespace' => 'Admin', 'mi
 	Route::get('/options/datatables', 'OptionController@options')->name('options.datatables');
 	Route::delete('/option/destroy', 'OptionController@destroy')->name('option.destroy');
 	Route::resource('/options', 'OptionController')->except('show');
+
+	Route::get('/attribute/values/{attribute}', 'ProductController@attributeValues');
+	Route::get('/products/datatables', 'ProductController@products')->name('products.datatables');
+	Route::delete('/product/destroy', 'ProductController@destroy')->name('product.destroy');
+	Route::resource('/products', 'ProductController');
 });
