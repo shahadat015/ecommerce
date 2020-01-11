@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-@section('title', 'Create Product')
+@section('title', $product->name)
 @push('css')
     <link href="{{asset('contents/admin')}}/plugins/select2/select2.min.css" rel="stylesheet" type="text/css">
     <link href="{{asset('contents/admin')}}/plugins/daterangepicker/bootstrap-datepicker.min.css" rel="stylesheet">
@@ -52,25 +52,23 @@
                                 <h4>General</h4><hr>
                                 <div class="form-group">
                                     <label for="name">Name<b class="text-danger">*</b></label>
-                                    <input type="text" name="name" class="form-control" placeholder="Product Name">
+                                    <input type="text" name="name" class="form-control" value="{{ $product->name }}">
                                 </div>
 
                                 <div class="form-group">
                                     <label for="name">Description<b class="text-danger">*</b></label>
-                                    <textarea id="elm1" name="description"></textarea>
+                                    <textarea id="elm1" name="description">{{ $product->description }}</textarea>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="name">Category</label>
                                     <select class="select2 mb-3 select2-multiple" name="categories[]" multiple="multiple" data-placeholder="Select Category">
-                                        @foreach($categories as $maincategory)
-                                            <option value="{{ $maincategory->id }}">{{ $maincategory->name }}</option>
-                                            @foreach($maincategory->subcategories as $subcategory)
-                                                <option value="{{ $subcategory->id }}">|--{{ $subcategory->name }}</option>
-                                                @foreach($subcategory->subcategories as $category)
-                                                    <option value="{{ $category->id }}">|--|--{{ $category->name }}</option>
+                                        @foreach($categories as $category)
+                                            <option value="{{ $category->id }}"
+                                                @foreach($product->categories as $productCategory)
+                                                    {{ $productCategory->id == $category->id ? 'selected' : '' }}
                                                 @endforeach
-                                            @endforeach
+                                            >{{ $category->name }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -80,7 +78,7 @@
                                     <select class="form-control" name="brand_id">
                                         <option value="">Select Brand</option>
                                         @foreach($brands as $brand)
-                                            <option value="{{ $brand->id }}">{{ $brand->name }}</option>
+                                            <option value="{{ $brand->id }}" {{ $product->brand_id == $brand->id ? 'selected' : '' }}>{{ $brand->name }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -89,9 +87,16 @@
                                     <div class="col-md-12">
                                         <div class="row">
                                             <div class="image-list">
+                                                @forelse($product->images as $image)
+                                                <div class="image-holder">
+                                                    <img src="{{ asset($image->path()) }}">
+                                                    <input type="hidden" name="images[]" value="{{ $image->id }}">
+                                                    <button type="button" class="btn remove-image"><i class="fas fa-times"></i></button></div>
+                                                @empty
                                                 <div class="image-holder placeholder">
                                                     <i class="far fa-image"></i>
                                                 </div>
+                                                @endforelse
                                             </div>
                                         </div>
                                     </div>
@@ -100,7 +105,7 @@
 
                                 <div class="form-check-inline my-2">
                                     <div class="custom-control custom-checkbox">
-                                        <input type="checkbox" name="status" class="custom-control-input" id="customCheck1" >
+                                        <input type="checkbox" name="status" class="custom-control-input" id="customCheck1" {{ $product->status == 1 ? 'checked' : '' }}>
                                         <label class="custom-control-label" for="customCheck1">Publish the product</label>
                                     </div>
                                 </div>
@@ -110,22 +115,22 @@
 
                                 <div class="form-group">
                                     <label for="name">Price<b class="text-danger">*</b></label>
-                                    <input type="text" name="price" class="form-control" placeholder="Product Price">
+                                    <input type="text" name="price" class="form-control" value="{{ $product->price }}">
                                 </div>
 
                                 <div class="form-group">
                                     <label for="name">Special Price</label>
-                                    <input type="text" name="special_price" class="form-control" placeholder="Special Price">
+                                    <input type="text" name="special_price" class="form-control" value="{{ $product->special_price }}">
                                 </div>
 
                                 <div class="form-group">
                                     <label class="my-3">Special Price Start</label>
-                                    <input type="text" class="form-control datepicker" name="special_price_start" placeholder="Special Price Start">
+                                    <input type="text" class="form-control datepicker" name="special_price_start" value="{{ $product->special_price_start }}">
                                 </div>
 
                                 <div class="form-group">
                                     <label class="my-3">Special Price End</label>
-                                    <input type="text" class="form-control datepicker" name="special_price_end" placeholder="Special Price End">
+                                    <input type="text" class="form-control datepicker" name="special_price_end" value="{{ $product->special_price_end }}">
                                 </div>
                             </div>
                             <div class="tab-pane p-3" id="inventory" role="tabpanel">
@@ -133,27 +138,27 @@
 
                                 <div class="form-group">
                                     <label for="name">SKU</label>
-                                    <input type="text" name="sku" class="form-control" placeholder="SKU">
+                                    <input type="text" name="sku" class="form-control" value="{{ $product->sku }}">
                                 </div>
 
                                 <div class="form-group">
                                     <label for="name">Inventory Management</label>
                                     <select name="manage_stock" class="form-control" id="manage-stock">
-                                        <option value="0">Don't Track Inventory</option>
-                                        <option value="1">Track Inventory</option>
+                                        <option value="0" {{ $product->manage_stock == 0 ? 'selected' : '' }}>Don't Track Inventory</option>
+                                        <option value="1" {{ $product->manage_stock == 1 ? 'selected' : '' }}>Track Inventory</option>
                                     </select>
                                 </div>
 
-                                <div class="form-group d-none" id="qty">
+                                <div class="form-group {{ $product->manage_stock == 0 ? 'd-none' : 'd-block' }}" id="qty">
                                     <label for="name">Quantity<b class="text-danger">*</b></label>
-                                    <input type="text" name="qty" class="form-control" placeholder="Quantity">
+                                    <input type="text" name="qty" class="form-control" value="{{ $product->qty }}">
                                 </div>
 
                                 <div class="form-group">
                                     <label for="name">Stock Availability</label>
                                     <select name="in_stock" class="form-control">
-                                        <option value="0">In Stock</option>
-                                        <option value="1">Out of Stock</option>
+                                        <option value="0" {{ $product->manage_stock == 0 ? 'selected' : '' }}>In Stock</option>
+                                        <option value="1" {{ $product->manage_stock == 1 ? 'selected' : '' }}>Out of Stock</option>
                                     </select>
                                 </div>
                             </div>
@@ -161,18 +166,23 @@
                                 <h4>SEO</h4><hr>
 
                                 <div class="form-group">
+                                    <label for="name">URL</label>
+                                    <input type="text" name="url" class="form-control" value="{{ $product->slug }}">
+                                </div>
+
+                                <div class="form-group">
                                     <label for="name">Meta Title</label>
-                                    <input type="text" name="meta_title" class="form-control" placeholder="Meta Title">
+                                    <input type="text" name="meta_title" class="form-control" value="{{ $product->metadata->meta_title }}">
                                 </div>
 
                                 <div class="form-group">
                                     <label for="name">Meta Keywords</label>
-                                    <input type="text" name="meta_keywords" class="form-control" placeholder="Meta Keywords">
+                                    <input type="text" name="meta_keywords" class="form-control" value="{{ $product->metadata->meta_keywords }}">
                                 </div>
 
                                 <div class="form-group">
                                     <label for="name">Meta Description</label>
-                                    <textarea name="meta_description" class="form-control" cols="30" rows="10"></textarea>
+                                    <textarea name="meta_description" class="form-control" cols="30" rows="10">{{ $product->metadata->meta_description }}</textarea>
                                 </div>
                             </div>
                             <div class="tab-pane p-3" id="attributes" role="tabpanel">
@@ -314,17 +324,17 @@
 
                                 <div class="form-group">
                                     <label for="name">Short Description</label>
-                                    <textarea name="short_description" class="form-control" cols="30" rows="10"></textarea>
+                                    <textarea name="short_description" class="form-control" cols="30" rows="10">{{ $product->short_description }}</textarea>
                                 </div>
 
                                 <div class="form-group">
                                     <label class="my-3">Product New From</label>
-                                    <input type="text" class="form-control datepicker" name="new_from">
+                                    <input type="text" class="form-control datepicker" name="new_from" value="{{ $product->new_from }}">
                                 </div>
 
                                 <div class="form-group">
                                     <label class="my-3">Product New To</label>
-                                    <input type="text" class="form-control datepicker" name="new_to">
+                                    <input type="text" class="form-control datepicker" value="{{ $product->new_to }}">
                                 </div>
                             </div>
                         </div>

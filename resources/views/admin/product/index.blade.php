@@ -52,7 +52,7 @@
                 serverSide: true,
                 ajax: "{{ route('admin.products.datatables') }}",
                 columns: [
-                    { name: 'name' },
+                    { name: 'name'},
                     { name: 'price' },
                     { name: 'status' },
                     { name: 'action', orderable: false, searchable: false }

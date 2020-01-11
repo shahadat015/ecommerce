@@ -2,16 +2,24 @@
 
 namespace App;
 
+use App\Option;
+use App\ProductAttribute;
 use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
 {
     protected $fillable = ['name', 'slug', 'price', 'special_price', 'special_price_start', 'special_price_end', 'description', 'short_description', 'sku', 'manage_stock', 'qty', 'in_stock', 'viewed', 'new_from', 'new_to', 'status'];
 
+
     public function images()
     {
         return $this->morphToMany(Image::class, 'imageable');
     }
+
+    // public function mainImage()
+    // {
+    //     return $this->images()->first();
+    // }
 
     public function categories()
     {
@@ -33,6 +41,39 @@ class Product extends Model
         return $this->morphOne(MetaData::class, 'metaable');
     }
 
+    public function saveAttributes($attributes = [])
+    {
+    	if($this->attributes()){
+    		$this->attributes()->delete();
+    	}
+
+        foreach ($attributes as $attribute) {
+            $productAttributes = ProductAttribute::create([
+                'attribute_id' => $attribute['attribute_id'],
+                'product_id' => $this->id
+            ]);
+            $productAttributes->values()->attach($attribute['attribute_value_id']);
+        }
+    }
+
+    public function saveOptions($options = [])
+    {
+    	if($this->attributes()){
+    		$this->options()->delete();
+    	}
+
+     	foreach ($options as $option) {
+            $productOption = Option::create([
+                'name' => $option['name'],
+                'type' => $option['type'],
+                'is_required' => $option['is_required']
+            ]);
+
+            $productOption->values()->createMany($option['values']);
+            $this->options()->attach($productOption);
+        }
+    }
+
     public static function laratablesStatus($product)
     {
         if ($product->status) {
@@ -42,10 +83,10 @@ class Product extends Model
         }
     }
 
-    // public static function laratablesImageid($product)
+    // public static function laratablesMainImage($product)
     // {
-    //     if ($product->image) {
-    //         return '<img src="'. asset($product->image->path()) .'" class="mr-2" alt="" height="52">';
+    //     if ($product->mainImage) {
+    //         return '<img src="'. asset($product->mainImage->path()) .'" class="mr-2" alt="" height="52">';
     //     }else{
     //         return '<img src="'. asset('contents/admin/images/placeholder.png') .'" class="mr-2" alt="" height="52" width="80">';
     //     }

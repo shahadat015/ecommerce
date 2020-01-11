@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class ProductAttribute extends Model
 {
+	protected $fillable = ['product_id', 'attribute_id'];
+
     public function attribute()
     {
         return $this->belongsTo(Attribute::class);
@@ -13,6 +15,6 @@ class ProductAttribute extends Model
 
     public function values()
     {
-        return $this->hasMany(ProductAttributeValue::class, 'product_attribute_id');
+        return $this->belongsToMany(AttributeValue::class, 'product_attribute_values');
     }
 }

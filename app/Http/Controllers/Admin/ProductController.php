@@ -7,8 +7,10 @@ use App\AttributeSet;
 use App\Brand;
 use App\Category;
 use App\Http\Controllers\Controller;
-use App\Product;
+use App\Http\Requests\ProductValidate;
 use App\Option;
+use App\Product;
+use App\ProductAttribute;
 use Freshbitsweb\Laratables\Laratables;
 use Illuminate\Http\Request;
 
@@ -43,28 +45,10 @@ class ProductController extends Controller
         return view('admin.product.create', compact('categories', 'brands', 'attributesets'));
     }
 
-    public function store(Request $request)
+    public function store(ProductValidate $request)
     {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'description' => 'required|string',
-            'price' => 'required|numeric',
-            'special_price' => 'nullable|numeric',
-            'special_price_start' => 'nullable|required_with:special_price|date',
-            'special_price_end' => 'nullable|required_with:special_price_start|date|after:special_price_start',
-            'sku' => 'nullable|string|max:255',
-            'qty' => 'required_if:manage_stock,1',
-            'meta_title' => 'nullable|string|max:255',
-            'meta_keywords' => 'nullable|string|max:255',
-            'meta_description' => 'nullable|string',
-            'short_description' => 'nullable|string',
-            'new_from' => 'nullable|date',
-            'new_to' => 'nullable|required_with:new_from|date|after:new_from',
-        ]);
 
-        // return $request;
-
-        $request['status'] = (boolean) $request->status;
+        $request['status'] = (boolean)$request->status;
         $request['slug'] = str_slug($request->name);
         $product = Product::create($request->all());
 
@@ -76,15 +60,15 @@ class ProductController extends Controller
             'meta_description' => $request->meta_description,
         ]);
 
-        // $productAttribute = $product->attributes()->create($request->attributes);
-        // $productAttribute->values()->create($request->attributes);
+        if($request->attribute[0]['attribute_id']){
+            $product->saveAttributes($request->attribute);
+        }
 
-        // $option = Option::create($request->options);
-        // $option->values()->create($request->options);
+        if($request->options[0]['name']){
+            $product->saveOptions($request->options); 
+        }
 
-        $create = 1;//$product->options()->attach($option);
-
-        if($create){
+        if($product){
             return response()->json(['success' => 'Product successfully created!']);
         }else{
             return response()->json(['error' => 'Ops! please try again!']); 
@@ -99,12 +83,40 @@ class ProductController extends Controller
 
     public function edit(Product $product)
     {
-        //
+        // return $product->options;
+        $categories = Category::all();
+        $brands = Brand::all();
+        $attributesets = AttributeSet::all();
+        return view('admin.product.edit', compact('categories', 'brands', 'attributesets', 'product'));
     }
 
-    public function update(Request $request, Product $product)
+    public function update(ProductValidate $request, Product $product)
     {
-        //
+        $request['status'] = (boolean)$request->status;
+        $request['slug'] = str_slug($request->url);
+        $product = $product->update($request->all());
+
+        $product->categories()->sync($request->categories);
+        $product->images()->sync($request->images);
+        $product->metadata()->update([
+            'meta_title' => $request->meta_title,
+            'meta_keywords' => $request->meta_keywords,
+            'meta_description' => $request->meta_description,
+        ]);
+
+        if($request->attribute[0]['attribute_id']){
+            $product->saveAttributes($request->attribute);
+        }
+
+        if($request->options[0]['name']){
+            $product->saveOptions($request->options); 
+        }
+
+        if($product){
+            return response()->json(['success' => 'Product successfully updated!']);
+        }else{
+            return response()->json(['error' => 'Ops! please try again!']); 
+        }
     }
 
     public function destroy(Product $product)

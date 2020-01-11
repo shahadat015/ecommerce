@@ -50,7 +50,7 @@ class ImageController extends Controller
 
     public function destroy(Request $request)
     {
-        $delete = Image::find($request->id)->each(function ($image, $key) {
+        $delete = Image::find($request->id)->each(function ($image) {
             $this->removeImage($image->path());
             $image->delete();
         });
