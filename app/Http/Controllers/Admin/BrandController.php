@@ -14,7 +14,7 @@ class BrandController extends Controller
     {
         return Laratables::recordsOf(Brand::class, function($query)
         {
-            return $query->latest();
+            return $query->latest('id');
         });
     }
 

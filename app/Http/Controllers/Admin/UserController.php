@@ -23,7 +23,7 @@ class UserController extends Controller
     {
         return Laratables::recordsOf(User::class, function($query)
         {
-            return $query->latest();
+            return $query->latest('id');
         });
     }
 

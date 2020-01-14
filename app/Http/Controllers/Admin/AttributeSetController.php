@@ -13,7 +13,7 @@ class AttributeSetController extends Controller
     {
         return Laratables::recordsOf(AttributeSet::class, function($query)
         {
-            return $query->latest();
+            return $query->latest('id');
         });
     }
 

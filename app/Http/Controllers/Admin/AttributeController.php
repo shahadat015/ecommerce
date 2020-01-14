@@ -14,7 +14,7 @@ class AttributeController extends Controller
     {
         return Laratables::recordsOf(Attribute::class, function($query)
         {
-            return $query->latest();
+            return $query->latest('id');
         });
     }
 

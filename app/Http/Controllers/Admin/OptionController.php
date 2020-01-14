@@ -13,7 +13,7 @@ class OptionController extends Controller
     {
         return Laratables::recordsOf(Option::class, function($query)
         {
-            return $query->latest();
+            return $query->latest('id');
         });
     }
 

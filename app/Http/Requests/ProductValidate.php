@@ -55,7 +55,7 @@ class ProductValidate extends FormRequest
             {
                  return [
                     'name' => 'required|string|max:255',
-                    'slug' => 'required|string|max:255|unique:products,slug,'.$this->product->id,
+                    'url' => 'required|string|max:255|unique:products,slug,'.$this->product->id,
                     'description' => 'required|string',
                     'price' => 'required|numeric',
                     'special_price' => 'nullable|numeric',

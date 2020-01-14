@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
 {
-    protected $fillable = ['name', 'slug', 'price', 'special_price', 'special_price_start', 'special_price_end', 'description', 'short_description', 'sku', 'manage_stock', 'qty', 'in_stock', 'viewed', 'new_from', 'new_to', 'status'];
+    protected $fillable = ['name', 'slug', 'brand_id', 'price', 'special_price', 'special_price_start', 'special_price_end', 'description', 'short_description', 'sku', 'manage_stock', 'qty', 'in_stock', 'viewed', 'new_from', 'new_to', 'status'];
 
 
     public function images()
@@ -48,19 +48,18 @@ class Product extends Model
     	}
 
         foreach ($attributes as $attribute) {
-            $productAttributes = ProductAttribute::create([
+            $productAttribute = ProductAttribute::create([
                 'attribute_id' => $attribute['attribute_id'],
                 'product_id' => $this->id
             ]);
-            $productAttributes->values()->attach($attribute['attribute_value_id']);
+            $productAttribute->values()->sync($attribute['attribute_value_id']);
         }
     }
 
     public function saveOptions($options = [])
     {
-    	if($this->attributes()){
-    		$this->options()->delete();
-    	}
+
+        $productOptions = [];
 
      	foreach ($options as $option) {
             $productOption = Option::create([
@@ -70,8 +69,11 @@ class Product extends Model
             ]);
 
             $productOption->values()->createMany($option['values']);
-            $this->options()->attach($productOption);
+
+            array_push($productOptions, $productOption->id);
         }
+
+        $this->options()->sync($productOptions);
     }
 
     public static function laratablesStatus($product)

@@ -8,7 +8,7 @@
     <!-- Page-Title -->
     @component('layouts.partials.breadcumb')
     	<li class="breadcrumb-item"><a href="{{ route('admin.products.index') }}">Products</a></li>
-        <li class="breadcrumb-item active">Create</li>
+        <li class="breadcrumb-item active">Update</li>
     @endcomponent
     
     <!-- end page title end breadcrumb -->
@@ -16,12 +16,13 @@
         <div class="col-11">
             <div class="card">
                 <div class="card-header">
-                    <h4 class="mt-2 header-title float-left">Create Product</h4>
+                    <h4 class="mt-2 header-title float-left">Update Product</h4>
                     <a class="btn btn-info btn-sm float-right" href="{{ route('admin.products.index') }}"><i class="mdi mdi-arrow-left-thick"></i> Back</a>
                 </div>
                     
-                <form action="{{ route('admin.products.store') }}" method="post" id="create-form" class="form-horizontal form-wizard-wrapper">
+                <form action="{{ route('admin.products.update', $product->id) }}" method="post" id="update-form" class="form-horizontal form-wizard-wrapper">
                     @csrf
+                    @method('put')
 
                     <div class="card-body">
                         <ul class="nav nav-tabs" role="tablist">
@@ -149,7 +150,7 @@
                                     </select>
                                 </div>
 
-                                <div class="form-group {{ $product->manage_stock == 0 ? 'd-none' : 'd-block' }}" id="qty">
+                                <div class="form-group {{ $product->manage_stock == 0 ? 'd-none' : '' }}" id="qty">
                                     <label for="name">Quantity<b class="text-danger">*</b></label>
                                     <input type="text" name="qty" class="form-control" value="{{ $product->qty }}">
                                 </div>
@@ -157,8 +158,8 @@
                                 <div class="form-group">
                                     <label for="name">Stock Availability</label>
                                     <select name="in_stock" class="form-control">
-                                        <option value="0" {{ $product->manage_stock == 0 ? 'selected' : '' }}>In Stock</option>
-                                        <option value="1" {{ $product->manage_stock == 1 ? 'selected' : '' }}>Out of Stock</option>
+                                        <option value="1" {{ $product->in_stock == 1 ? 'selected' : '' }}>In Stock</option>
+                                        <option value="0" {{ $product->in_stock == 0 ? 'selected' : '' }}>Out of Stock</option>
                                     </select>
                                 </div>
                             </div>
@@ -189,6 +190,41 @@
                                 <h4>Attributes</h4><hr>
                                 <div class="repeater-custom-show-hide">
                                     <div data-repeater-list="attribute">
+                                        @forelse($product->attributes as $productAttribute)
+                                        <div data-repeater-item="">
+                                            <div class="form-group row  d-flex align-items-end"> 
+
+                                                <div class="col-sm-3">
+                                                    <label class="control-label">Attribute</label>
+                                                    <select class="form-control custom-select attributes" name="attribute_id" style="width: 100%; height:36px;">
+                                                        <option value="">Select Attribute</option>
+                                                        @foreach($attributesets as $attributeset)
+                                                        <optgroup label="{{ $attributeset->name }}">
+                                                            @foreach($attributeset->attributes as $attribute)
+                                                            <option value="{{ $attribute->id }}" {{ $productAttribute->attribute_id == $attribute->id ? 'selected' : '' }}>{{ $attribute->name }}</option>
+                                                            @endforeach
+                                                        </optgroup>
+                                                        @endforeach
+                                                    </select>
+                                                </div><!--end col-->                                       
+                                                
+                                                <div class="col-sm-8">
+                                                    <label class="control-label">Value</label>
+                                                    <select class="select2 mb-3 select2-multiple" name="attribute_value_id" multiple="multiple">
+                                                        @foreach($productAttribute->values as $attributeValue)
+                                                            <option value="{{ $attributeValue->id }}" selected>{{ $attributeValue->value }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div><!--end col-->
+
+                                                <div class="col-sm-1">
+                                                    <span data-repeater-delete="" class="btn btn-danger">
+                                                        <span class="far fa-trash-alt"></span>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        @empty
                                         <div data-repeater-item="">
                                             <div class="form-group row  d-flex align-items-end"> 
 
@@ -219,6 +255,7 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        @endforelse
                                     </div>
 
                                     <div class="form-group mb-2">
@@ -234,6 +271,86 @@
 
                                 <div class="repeater-custom-show-hide">
                                     <div data-repeater-list="options">
+                                        @forelse($product->options as $productOption)
+                                        <div data-repeater-item="" class="card">
+                                            <div class="card-body">
+                                                <div class="form-group row">
+                                                    <div class="col-sm-4">
+                                                        <label for="example-email-input1" class="col-form-label">Name</label>
+                                                        <input name="name" class="form-control" type="text" value="{{ $productOption->name }}">
+                                                    </div>
+
+                                                    <div class="col-sm-4">
+                                                        <label for="example-email-input1" class="col-form-label">Type</label>
+                                                        <select name="type" class="form-control">
+                                                            <option value="">Select</option>
+                                                            <option value="dropdown" {{ $productOption->type == 'dropdown' ? 'selected' : '' }}>Dropdown</option>
+                                                            <option value="checkbox" {{ $productOption->type == 'checkbox' ? 'selected' : '' }}>Checkbox</option>
+                                                            <option value="radio" {{ $productOption->type == 'radio' ? 'selected' : '' }}>Radio Button</option>
+                                                            <option value="multiple_select" {{ $productOption->type == 'multiple_select' ? 'selected' : '' }}>Multiple Select</option>
+                                                        </select>
+                                                    </div>
+
+                                                    <div class="col-sm-3">
+                                                        <label for="example-email-input1" class="col-form-label">Is Required?</label>
+                                                        <select name="is_required" class="form-control">
+                                                            <option value="">Select</option>
+                                                            <option value="1" {{ $productOption->is_required == 1 ? 'selected' : '' }}>Required</option>
+                                                            <option value="0" {{ $productOption->is_required == 0 ? 'selected' : '' }}>Not Required</option>
+                                                        </select>
+                                                    </div>
+
+                                                    <div class="col-sm-1 mt-4 pt-2">
+                                                        <span data-repeater-delete="" class="btn btn-danger">
+                                                            <span class="far fa-trash-alt"></span>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                                <div class="repeater-custom-show-hide-inner">
+                                                    <div data-repeater-list="values">
+                                                        @foreach($productOption->values as $optionValue)
+                                                        <div data-repeater-item="">
+                                                            <div class="form-group row  d-flex align-items-end">                                        
+                                                                
+                                                                <div class="col-sm-4">
+                                                                    <label class="control-label">Label</label>
+                                                                    <input type="text" name="label" class="form-control" value="{{ $optionValue->label }}">
+                                                                </div><!--end col-->
+
+                                                                <div class="col-sm-4">
+                                                                    <label class="control-label">Price</label>
+                                                                    <input type="text" name="price" class="form-control" value="{{ $optionValue->price }}">
+                                                                </div><!--end col-->
+
+                                                                <div class="col-sm-3">
+                                                                    <label class="control-label">Price Type</label>
+                                                                    <select name="price_type" class="form-control">
+                                                                        <option value="">Select</option>
+                                                                        <option value="fixed" {{ $optionValue->price_type == 'fixed' ? 'selected' : '' }}>Fixed</option>
+                                                                        <option value="percent" {{ $optionValue->price_type == 'percent' ? 'selected' : '' }}>Percent</option>
+                                                                    </select>
+                                                                </div><!--end col-->
+
+                                                                <div class="col-sm-1">
+                                                                    <span data-repeater-delete="" class="btn btn-danger">
+                                                                        <span class="far fa-trash-alt"></span>
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        @endforeach
+                                                    </div>
+                                                    <div class="form-group mb-2">
+                                                        <span data-repeater-create="values" class="btn btn-light btn-md">
+                                                            <span class="fa fa-plus"></span> Add Value
+                                                        </span>
+
+                                                        <span class="text-danger ml-3"><strong>Note: </strong>The Type, Required and Label field is required when name is present.</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        @empty
                                         <div data-repeater-item="" class="card">
                                             <div class="card-body">
                                                 <div class="form-group row">
@@ -310,6 +427,7 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        @endforelse
                                     </div>
 
                                     <div class="form-group mb-2">
@@ -334,13 +452,13 @@
 
                                 <div class="form-group">
                                     <label class="my-3">Product New To</label>
-                                    <input type="text" class="form-control datepicker" value="{{ $product->new_to }}">
+                                    <input type="text" class="form-control datepicker" name="new_to" value="{{ $product->new_to }}">
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="card-footer">
-                        <button type="submit" class="btn btn-submit btn-primary waves-effect waves-light">Submit</button>
+                        <button type="submit" class="btn btn-submit btn-primary waves-effect waves-light">Update</button>
                         <button type="reset" class="btn btn-info waves-effect waves-light">Reset</button>
                     </div>
                 </form>

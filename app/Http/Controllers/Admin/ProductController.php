@@ -28,7 +28,7 @@ class ProductController extends Controller
     {
         return Laratables::recordsOf(Product::class, function($query)
         {
-            return $query->latest();
+            return $query->latest('id');
         });
     }
 
@@ -92,9 +92,10 @@ class ProductController extends Controller
 
     public function update(ProductValidate $request, Product $product)
     {
+
         $request['status'] = (boolean)$request->status;
         $request['slug'] = str_slug($request->url);
-        $product = $product->update($request->all());
+        $product->update($request->all());
 
         $product->categories()->sync($request->categories);
         $product->images()->sync($request->images);
@@ -119,9 +120,24 @@ class ProductController extends Controller
         }
     }
 
-    public function destroy(Product $product)
+    public function destroy(Request $request)
     {
-        //
+        // $delete = Product::findOrFail($request->id)->each(function ($product){
+        //     $product->categories()->detach();
+        //     $product->images()->detach();
+        //     $product->metadata()->delete();
+        //     $product->attributes()->delete();
+        //     $product->options()->detach();
+        //     $product->delete();  
+        // });
+
+        $delete = Product::destroy($request->id);
+
+        if($delete){
+            return response()->json(['success' => 'Product successfully deleted!']);
+        }else{
+            return response()->json(['error' => 'Ops! please try again!']); 
+        }
     }
 
     public function attributeValues(Attribute $attribute)

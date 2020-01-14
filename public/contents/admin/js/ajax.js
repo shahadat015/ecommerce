@@ -125,7 +125,7 @@ $(function() {
                 }
             },
             complete:function() {
-                $('.btn-submit').attr("disabled", false).html("Submit");
+                $('.btn-submit').attr("disabled", false).html("Update");
             }
         });
     });
