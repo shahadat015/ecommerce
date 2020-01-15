@@ -224,6 +224,7 @@ $(function() {
         });
     });
 
+    // Retrieve attribute values
     $(document).on('change', '.attributes', function () {
         var id = $(this).val();
         var url = window.origin + '/admin/attribute/values/' + id;
@@ -244,6 +245,39 @@ $(function() {
                 );
             }
         });
-    })
+    });
+
+    // Retrieve global options
+    $(document).on('click', '#btn-global', function () {
+        var id = $('#option').val();
+        var url = window.origin + '/admin/option/values/' + id;
+
+        Pace.restart();
+        Pace.track(function () {
+
+            $.ajax({
+                url: url,
+                type: "GET",
+                dataType: "HTML",
+                success(data) {
+                    $('.option').append(data);
+                    $('.repeater-option').repeater({
+                        repeaters: [{
+                            // (Required)
+                            // Specify the jQuery selector for this nested repeater
+                            selector: '.repeater-custom-show-hide-inner'
+                        }]
+                    });
+                },
+                error(error) {
+                    Swal.fire(
+                        'Ops!',
+                        error.statusText,
+                        'error',
+                    );
+                }
+            });
+        });
+    });
 
 });

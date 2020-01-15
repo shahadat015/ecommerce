@@ -279,15 +279,14 @@
                                         <span data-repeater-create="" class="btn btn-light btn-md">
                                             <span class="fa fa-plus"></span> Add Value
                                         </span>
-                                        <span class="text-danger ml-3"><strong>Note: </strong>The value field is required when attribute is present.</span>
                                     </div>
                                 </div>
                             </div>
                             <div class="tab-pane p-3" id="options" role="tabpanel">
                                 <h4>Options</h4><hr>
 
-                                <div class="repeater-custom-show-hide">
-                                    <div data-repeater-list="options">
+                                <div class="repeater-custom-show-hide repeater-option">
+                                    <div data-repeater-list="options" class="option">
                                         @forelse($product->options as $productOption)
                                         <div data-repeater-item="" class="card">
                                             <div class="card-body">
@@ -357,8 +356,6 @@
                                                         <span data-repeater-create="values" class="btn btn-light btn-md">
                                                             <span class="fa fa-plus"></span> Add Value
                                                         </span>
-
-                                                        <span class="text-danger ml-3"><strong>Note: </strong>The Type, Required and Label field is required when name is present.</span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -440,10 +437,24 @@
                                         @endforelse
                                     </div>
 
-                                    <div class="form-group mb-2">
-                                        <span data-repeater-create="options" class="btn btn-light btn-md">
-                                            <span class="fa fa-plus"></span> Add Option
-                                        </span>
+                                    <div class="form-group mb-2 row">
+                                        <div class="col-3">
+                                            <span data-repeater-create="" class="btn btn-light btn-md">
+                                                <span class="fa fa-plus"></span> Add Option
+                                            </span>
+                                        </div>
+                                        <div class="col-3">
+                                            <select id="option" class="form-control">
+                                                @foreach($options as $option)
+                                                <option value="{{ $option->id }}">{{ $option->name }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <div class="col-3">
+                                            <button class="btn btn-light btn-md" id="btn-global" type="button">
+                                                <i class="fa fa-plus"></i> Add Global Option
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

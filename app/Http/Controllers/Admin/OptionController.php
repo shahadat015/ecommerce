@@ -35,6 +35,7 @@ class OptionController extends Controller
         ]);
 
         $request['is_required'] = (boolean) $request->is_required;
+        $request['is_global'] = 1;
         $option = Option::create($request->all());
 
         $create = $option->values()->createMany($request->values);
@@ -59,6 +60,7 @@ class OptionController extends Controller
         ]);
 
         $request['is_required'] = (boolean) $request->is_required;
+        $request['is_global'] = 1;
         $option->values()->delete();
         $option->values()->createMany($request->values);
         $update = $option->update($request->all());

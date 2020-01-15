@@ -42,11 +42,13 @@ class ProductController extends Controller
         $categories = Category::all();
         $brands = Brand::all();
         $attributesets = AttributeSet::all();
-        return view('admin.product.create', compact('categories', 'brands', 'attributesets'));
+        $options = Option::where('is_global', 1)->get();
+        return view('admin.product.create', compact('categories', 'brands', 'attributesets', 'options'));
     }
 
     public function store(ProductValidate $request)
     {
+        // return $request;
 
         $request['status'] = (boolean)$request->status;
         $request['slug'] = str_slug($request->name);
@@ -87,8 +89,9 @@ class ProductController extends Controller
         $categories = Category::all();
         $brands = Brand::all();
         $attributesets = AttributeSet::all();
+        $options = Option::where('is_global', 1)->get();
         $product->load('categories', 'brand', 'attributes', 'options', 'metadata', 'images', 'image');
-        return view('admin.product.edit', compact('categories', 'brands', 'attributesets', 'product'));
+        return view('admin.product.edit', compact('categories', 'brands', 'attributesets', 'options', 'product'));
     }
 
     public function update(ProductValidate $request, Product $product)
@@ -139,5 +142,9 @@ class ProductController extends Controller
     {
         $values = $attribute->values;
         return view('admin.product.values', compact('values'));
+    }
+    public function optionValues(Option $option)
+    {
+        return view('admin.product.options', compact('option'));
     }
 }
