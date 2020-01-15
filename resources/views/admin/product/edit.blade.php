@@ -33,6 +33,9 @@
                                 <a class="nav-link" data-toggle="tab" href="#price" role="tab">Price</a>
                             </li>
                             <li class="nav-item">
+                                <a class="nav-link" data-toggle="tab" href="#image" role="tab">Image</a>
+                            </li>
+                            <li class="nav-item">
                                 <a class="nav-link" data-toggle="tab" href="#inventory" role="tab">Inventory</a>
                             </li>
                             <li class="nav-item">
@@ -84,26 +87,6 @@
                                     </select>
                                 </div>
 
-                                <div class="multiple-images">
-                                    <div class="col-md-12">
-                                        <div class="row">
-                                            <div class="image-list">
-                                                @forelse($product->images as $image)
-                                                <div class="image-holder">
-                                                    <img src="{{ asset($image->path()) }}">
-                                                    <input type="hidden" name="images[]" value="{{ $image->id }}">
-                                                    <button type="button" class="btn remove-image"><i class="fas fa-times"></i></button></div>
-                                                @empty
-                                                <div class="image-holder placeholder">
-                                                    <i class="far fa-image"></i>
-                                                </div>
-                                                @endforelse
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <button type="button" class="btn btn-light image-picker waves-effect waves-light d-block mt-3 mb-3" data-image="multiple"><i class="far fa-folder-open mr-2"></i> Browse Image</button>
-
                                 <div class="form-check-inline my-2">
                                     <div class="custom-control custom-checkbox">
                                         <input type="checkbox" name="status" class="custom-control-input" id="customCheck1" {{ $product->status == 1 ? 'checked' : '' }}>
@@ -134,6 +117,40 @@
                                     <input type="text" class="form-control datepicker" name="special_price_end" value="{{ $product->special_price_end }}">
                                 </div>
                             </div>
+
+                            <div class="tab-pane p-3" id="image" role="tabpanel">
+                                <h4>Main Image</h4><hr>
+                                <div class="single-image">
+                                    <div class="image-holder">
+                                        @if($product->image)
+                                        <img src="{{ asset($product->image->path()) }}" alt="">
+                                        <button type="button" class="btn remove-image" data-image="single"><i class="fas fa-times"></i></button>
+                                        @else
+                                        <i class="far fa-image"></i>
+                                        @endif
+                                    </div>
+                                </div>
+                                <button type="button" class="btn btn-light image-picker waves-effect waves-light d-block mt-3 mb-4" data-image="single"><i class="far fa-folder-open mr-2"></i> Browse Image</button>
+
+                                <h4>Additional Images</h4><hr>
+                                <div class="multiple-images">
+                                    <div class="image-list">
+                                        @forelse($product->images as $image)
+                                        <div class="image-holder">
+                                            <img src="{{ asset($image->path()) }}">
+                                            <input type="hidden" name="images[]" value="{{ $image->id }}">
+                                            <button type="button" class="btn remove-image" data-image="multiple"><i class="fas fa-times"></i></button>
+                                        </div>
+                                        @empty
+                                        <div class="image-holder placeholder">
+                                            <i class="far fa-image"></i>
+                                        </div>
+                                        @endforelse
+                                    </div>
+                                </div>
+                                <button type="button" class="btn btn-light image-picker waves-effect waves-light d-block mt-3 mb-3" data-image="multiple"><i class="far fa-folder-open mr-2"></i> Browse Image</button>
+                            </div>
+
                             <div class="tab-pane p-3" id="inventory" role="tabpanel">
                                 <h4>Inventory</h4><hr>
 
@@ -283,7 +300,6 @@
                                                     <div class="col-sm-4">
                                                         <label for="example-email-input1" class="col-form-label">Type</label>
                                                         <select name="type" class="form-control">
-                                                            <option value="">Select</option>
                                                             <option value="dropdown" {{ $productOption->type == 'dropdown' ? 'selected' : '' }}>Dropdown</option>
                                                             <option value="checkbox" {{ $productOption->type == 'checkbox' ? 'selected' : '' }}>Checkbox</option>
                                                             <option value="radio" {{ $productOption->type == 'radio' ? 'selected' : '' }}>Radio Button</option>
@@ -294,7 +310,6 @@
                                                     <div class="col-sm-3">
                                                         <label for="example-email-input1" class="col-form-label">Is Required?</label>
                                                         <select name="is_required" class="form-control">
-                                                            <option value="">Select</option>
                                                             <option value="1" {{ $productOption->is_required == 1 ? 'selected' : '' }}>Required</option>
                                                             <option value="0" {{ $productOption->is_required == 0 ? 'selected' : '' }}>Not Required</option>
                                                         </select>
@@ -311,7 +326,6 @@
                                                         @foreach($productOption->values as $optionValue)
                                                         <div data-repeater-item="">
                                                             <div class="form-group row  d-flex align-items-end">                                        
-                                                                
                                                                 <div class="col-sm-4">
                                                                     <label class="control-label">Label</label>
                                                                     <input type="text" name="label" class="form-control" value="{{ $optionValue->label }}">
@@ -325,7 +339,6 @@
                                                                 <div class="col-sm-3">
                                                                     <label class="control-label">Price Type</label>
                                                                     <select name="price_type" class="form-control">
-                                                                        <option value="">Select</option>
                                                                         <option value="fixed" {{ $optionValue->price_type == 'fixed' ? 'selected' : '' }}>Fixed</option>
                                                                         <option value="percent" {{ $optionValue->price_type == 'percent' ? 'selected' : '' }}>Percent</option>
                                                                     </select>
@@ -362,7 +375,6 @@
                                                     <div class="col-sm-4">
                                                         <label for="example-email-input1" class="col-form-label">Type</label>
                                                         <select name="type" class="form-control">
-                                                            <option value="">Select</option>
                                                             <option value="dropdown">Dropdown</option>
                                                             <option value="checkbox">Checkbox</option>
                                                             <option value="radio">Radio Button</option>
@@ -373,7 +385,6 @@
                                                     <div class="col-sm-3">
                                                         <label for="example-email-input1" class="col-form-label">Is Required?</label>
                                                         <select name="is_required" class="form-control">
-                                                            <option value="">Select</option>
                                                             <option value="1">Required</option>
                                                             <option value="0">Not Required</option>
                                                         </select>
@@ -403,7 +414,6 @@
                                                                 <div class="col-sm-3">
                                                                     <label class="control-label">Price Type</label>
                                                                     <select name="price_type" class="form-control">
-                                                                        <option value="">Select</option>
                                                                         <option value="fixed">Fixed</option>
                                                                         <option value="percent">Percent</option>
                                                                     </select>

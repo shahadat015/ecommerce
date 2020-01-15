@@ -22,7 +22,7 @@ class Brand extends Model
         }
     }
 
-    public static function laratablesImageid($brand)
+    public static function laratablesImagepath($brand)
     {
         if ($brand->image) {
             return '<img src="'. asset($brand->image->path()) .'" class="mr-2" alt="" height="52">';

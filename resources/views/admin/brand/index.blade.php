@@ -55,7 +55,7 @@
                 columns: [
                     { name: 'name' },
                     { name: 'tagline' },
-                    { name: 'image_id' },
+                    { name: 'image.path' },
                     { name: 'status' },
                     { name: 'action', orderable: false, searchable: false }
                 ]

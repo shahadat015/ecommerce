@@ -13,27 +13,32 @@ $(function() {
         var val = $(this).data('id');
 
         if(imgType == 'single'){
-            $('.image-holder').html('<image src="'+ path +'"><input type="hidden" name="image_id" value="'+ val +'"><button type="button" class="btn remove-image"><i class="fas fa-times"></i></button>');
+            $('.single-image .image-holder').html('<image src="'+ path +'"><input type="hidden" name="image_id" value="'+ val +'"><button type="button" class="btn remove-image"  data-image="single"><i class="fas fa-times"></i></button>');
             $('.bd-example-modal-xl').modal('hide');
         }
         if(imgType == 'multiple'){
             $('.placeholder').remove();
-            $('.image-list').append('<div class="image-holder"><image src="'+ path +'"><input type="hidden" name="images[]" value="'+ val +'"><button type="button" class="btn remove-image"><i class="fas fa-times"></i></button></div>');
+            $('.image-list').append('<div class="image-holder"><image src="'+ path +'"><input type="hidden" name="images[]" value="'+ val +'"><button type="button" class="btn remove-image" data-image="multiple"><i class="fas fa-times"></i></button></div>');
 
-            Swal.fire({
-                position: 'top-end',
+            $.toast({
+                heading: 'Success',
                 text: 'Image successfully added!',
-                showConfirmButton: false,
-                timer: 500
+                position: 'bottom-right',
+                loaderBg:'#ff6849',
+                icon: 'success',
+                hideAfter: 1500, 
+                stack: 6
             });
         }
     });
 
     $(document).on('click', '.remove-image', function() {
+        var imgType = $(this).data('image');
+
         if(imgType == 'single'){
-            $(this).parent().html('<i class="far fa-image"></i>');
+            $(this).parent().html('<i class="far fa-image"></i><input type="hidden" name="image_id" value="">');
         }
-        if(imgType == 'multiple' && $('.image-holder').length == 1){
+        if(imgType == 'multiple' && $('.image-list .image-holder').length == 1){
             $('.image-list').html('<div class="image-holder placeholder"><i class="far fa-image"></i></div>');
         }else{
             $(this).parent().remove();

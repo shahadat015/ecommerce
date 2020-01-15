@@ -1,25 +1,35 @@
 @extends('layouts.admin')
-
+@section('title', $product->name)
 @section('content')
     <!-- Page-Title -->
     @component('layouts.partials.breadcumb')
-		<li class="breadcrumb-item"><a href="{{ url('admin/products') }}">Products</a></li>
+		<li class="breadcrumb-item"><a href="{{ route('admin.products.index') }}">Products</a></li>
         <li class="breadcrumb-item active">Show</li>
     @endcomponent
     <!--end row-->
     <div class="row">
         <div class="col-12">
             <div class="card">
+                <div class="card-header">
+                    <h4 class="mt-2 header-title float-left">Show Product</h4>
+                    <a class="btn btn-info btn-sm float-right" href="{{ route('admin.products.index') }}"><i class="mdi mdi-arrow-left-thick"></i> Back</a>
+                </div>
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-lg-6"><img src="{{asset('contents/admin')}}/images/products/2.jpg" alt="" class="mx-auto d-block" height="400"></div>
+                        <div class="col-lg-6">
+                            @if($product->image)
+                            <img src="{{ asset($product->image->path()) }}" alt="" class="mx-auto d-block" height="330" width="450">
+                            @else
+                            <img src="{{ asset('contents/admin/images/placeholder.png') }}" alt="" class="mx-auto d-block" height="330" width="450">
+                            @endif
+                        </div>
                         <!--end col-->
                         <div class="col-lg-6 align-self-center">
                             <div class="single-pro-detail">
-                                <p class="mb-1">Metrica</p>
+                                <p class="mb-1">{{ $product->sku ?? "PRODUCT SKU" }}</p>
                                 <div class="custom-border mb-3"></div>
-                                <h3 class="pro-title">Metrica Morden Chair</h3>
-                                <p class="text-muted mb-0">Morden and good look model 2019</p>
+                                <h3 class="pro-title">{{ $product->name }}</h3>
+                                <p class="text-muted mb-0">{{ $product->short_description ?? "Product short description" }}</p>
                                 <ul class="list-inline mb-2 product-review">
                                     <li class="list-inline-item"><i class="mdi mdi-star text-warning"></i></li>
                                     <li class="list-inline-item"><i class="mdi mdi-star text-warning"></i></li>
@@ -28,33 +38,29 @@
                                     <li class="list-inline-item"><i class="mdi mdi-star-half text-warning"></i></li>
                                     <li class="list-inline-item">4.5 (30 reviews)</li>
                                 </ul>
-                                <h2 class="pro-price">$89.00 <span><del>$180.00</del></span><small class="text-danger font-weight-bold ml-2">50% Off</small></h2>
+                                @if($product->special_price_end > now())
+                                    <h2 class="pro-price">Tk {{ $product->special_price }} <span><del>Tk {{ $product->price }}</del></span><small class="text-danger font-weight-bold ml-2">{{ round((($product->price - $product->special_price) / $product->price) * 100) }}%</small></h2>
+                                @else
+                                    <h2 class="pro-price">Tk {{ $product->price }}</h2>
+                                @endif
                                 <h6 class="text-muted font-13">Features :</h6>
                                 <ul class="list-unstyled pro-features border-0">
-                                    <li>It is a long established fact that a reader will be distracted.</li>
-                                    <li>Contrary to popular belief, Lorem Ipsum is not text.</li>
-                                    <li>There are many variations of passages of Lorem.</li>
+                                    @foreach($product->attributes as $productAttribute)
+                                    <li>{{ $productAttribute->attribute->name }} : @foreach($productAttribute->values as $attributeValue) {{ $attributeValue->value }} @endforeach</li>
+                                    @endforeach
                                 </ul>
-                                <h6 class="text-muted font-13 d-inline-block align-middle mr-2">Color :</h6>
-                                <div class="radio2 radio-info2 form-check-inline ml-2">
-                                    <input type="radio" id="inlineRadio1" value="option1" name="radioInline" checked="">
-                                    <label for="inlineRadio1"></label>
-                                </div>
-                                <div class="radio2 radio-dark2 form-check-inline">
-                                    <input type="radio" id="inlineRadio2" value="option2" name="radioInline">
-                                    <label for="inlineRadio2"></label>
-                                </div>
-                                <div class="radio2 radio-danger2 form-check-inline">
-                                    <input type="radio" id="inlineRadio3" value="option3" name="radioInline">
-                                    <label for="inlineRadio3"></label>
-                                </div>
-                                <div class="radio2 radio-purple2 form-check-inline">
-                                    <input type="radio" id="inlineRadio4" value="option4" name="radioInline">
-                                    <label for="inlineRadio4"></label>
-                                </div>
-                                <div class="quantity mt-3">
+                                @foreach($product->options as $productOption)
+                                <h6 class="text-muted font-13 d-inline-block align-middle mr-2 mt-0">{{ $productOption->name }} :</h6>
+                                    @foreach($productOption->values as $key=>$optionValue)
+                                    <div class="radio2 radio-info2 form-check-inline ml-2">
+                                        <input type="radio" id="inlineRadio{{ $optionValue->id }}" value="{{ $optionValue->label }}" name="{{ $productOption->name }}" @if($key == 0) checked @endif >
+                                        <label for="inlineRadio{{ $optionValue->id }}" class="mb-0">{{ $optionValue->label }}</label>
+                                    </div>
+                                    @endforeach
+                                @endforeach
+                                <!-- <div class="quantity mt-3">
                                     <input class="form-control" type="number" min="0" value="0" id="example-number-input"> <a href="#" class="btn btn-primary text-white px-4 d-inline-block"><i class="mdi mdi-cart mr-2"></i>Add to Cart</a>
-                                </div>
+                                </div> -->
                             </div>
                         </div>
                         <!--end col-->
@@ -113,30 +119,6 @@
     <!--end row-->
     <div class="row">
         <div class="col-md-9">
-            <div class="card bg-newsletters">
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="newsletters-text">
-                                <h4>Sign Up For News & Get 30% Off</h4>
-                                <p class="text-muted mb-0">It is a long established fact that a reader will be distracted by the readable content.</p>
-                            </div>
-                        </div>
-                        <!--end col-->
-                        <div class="col-md-6 align-self-center">
-                            <div class="newsletters-input">
-                                <form class="position-relative">
-                                    <input type="email" placeholder="Enter Your Email..." required="">
-                                    <button type="submit" class="btn btn-success">Subscribe</button>
-                                </form>
-                            </div>
-                        </div>
-                        <!--end col-->
-                    </div>
-                    <!--end row-->
-                </div>
-                <!--end card-body-->
-            </div>
             <!--end card-->
             <div class="card">
                 <div class="card-body">
@@ -225,11 +207,6 @@
                             </div>
                         </li>
                     </ul>
-                    <div class="review-box text-center align-item-center">
-                        <h3>100%</h3>
-                        <h4 class="header-title">Satisfied Customer</h4>
-                        <p class="text-muted mb-0">All Customers give this product 4 and 5 Star Rating.</p>
-                    </div>
                 </div>
                 <!--end card-body-->
             </div>

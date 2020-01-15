@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
 {
-    protected $fillable = ['name', 'slug', 'brand_id', 'price', 'special_price', 'special_price_start', 'special_price_end', 'description', 'short_description', 'sku', 'manage_stock', 'qty', 'in_stock', 'viewed', 'new_from', 'new_to', 'status'];
+    protected $fillable = ['name', 'slug', 'image_id', 'brand_id', 'price', 'special_price', 'special_price_start', 'special_price_end', 'description', 'short_description', 'sku', 'manage_stock', 'qty', 'in_stock', 'viewed', 'new_from', 'new_to', 'status'];
 
 
     public function images()
@@ -16,10 +16,15 @@ class Product extends Model
         return $this->morphToMany(Image::class, 'imageable');
     }
 
-    // public function mainImage()
-    // {
-    //     return $this->images()->first();
-    // }
+    public function image()
+    {
+        return $this->belongsTo(Image::class);
+    }
+
+    public function brand()
+    {
+        return $this->belongsTo(Brand::class);
+    }
 
     public function categories()
     {
@@ -85,14 +90,14 @@ class Product extends Model
         }
     }
 
-    // public static function laratablesMainImage($product)
-    // {
-    //     if ($product->mainImage) {
-    //         return '<img src="'. asset($product->mainImage->path()) .'" class="mr-2" alt="" height="52">';
-    //     }else{
-    //         return '<img src="'. asset('contents/admin/images/placeholder.png') .'" class="mr-2" alt="" height="52" width="80">';
-    //     }
-    // }
+    public static function laratablesImagepath($product)
+    {
+        if ($product->image) {
+            return '<img src="'. asset($product->image->path()) .'" class="mr-2" alt="" height="52">';
+        }else{
+            return '<img src="'. asset('contents/admin/images/placeholder.png') .'" class="mr-2" alt="" height="52" width="80">';
+        }
+    }
 
     public static function laratablesCustomAction($action)
     {

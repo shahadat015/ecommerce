@@ -43,7 +43,7 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->belongsTo(Image::class);
     }
 
-    public static function laratablesImageid($user)
+    public static function laratablesImagepath($user)
     {
         if ($user->image) {
             return '<img src="'. asset($user->image->path()) .'" class="mr-2" alt="" height="52">';

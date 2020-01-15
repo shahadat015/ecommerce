@@ -17,6 +17,7 @@ class CreateProductsTable extends Migration
             $table->bigIncrements('id');
             $table->string('name');
             $table->string('slug');
+            $table->string('image_id')->nullable();
             $table->float('price');
             $table->float('special_price')->nullable();
             $table->timestamp('special_price_start')->nullable();
@@ -33,7 +34,6 @@ class CreateProductsTable extends Migration
             $table->timestamp('new_to')->nullable();
             $table->boolean('status')->default(true);
             $table->timestamps();
-            $table->softDeletes();
             $table->foreign('brand_id')->references('id')->on('brands')->onDelete('cascade');
         });
     }

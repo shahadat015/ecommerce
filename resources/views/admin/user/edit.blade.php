@@ -96,6 +96,7 @@
                             <div class="image-holder">
                                 @if($user->image)
                                 <img src="{{ asset($user->image->path()) }}" alt="">
+                                <button type="button" class="btn remove-image" data-image="single"><i class="fas fa-times"></i></button>
                                 @else
                                 <i class="far fa-image"></i>
                                 @endif

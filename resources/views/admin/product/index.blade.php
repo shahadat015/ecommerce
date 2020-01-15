@@ -22,13 +22,13 @@
                     <table id="datatable" class="table table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                         <thead>
                             <tr>
-                                <!-- <th>Image</th> -->
                                 <th>Name</th>
+                                <th>Image</th>
                                 <th>Price</th>
                                 <th>Status</th>
                                 <th>
                                     <div class="custom-control custom-checkbox">
-                                        <input type="checkbox" class="custom-control-input" id="horizontalCheckbox1" data-parsley-multiple="groups" data-parsley-mincheck="2">
+                                        <input type="checkbox" class="check-all custom-control-input" id="horizontalCheckbox1">
                                         <label class="custom-control-label" for="horizontalCheckbox1">Action</label>
                                     </div>
                                 </th>
@@ -53,6 +53,7 @@
                 ajax: "{{ route('admin.products.datatables') }}",
                 columns: [
                     { name: 'name'},
+                    { name: 'image.path', orderable: false, searchable: false},
                     { name: 'price' },
                     { name: 'status' },
                     { name: 'action', orderable: false, searchable: false }

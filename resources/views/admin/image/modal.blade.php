@@ -3,6 +3,7 @@
     <link href="{{asset('contents/admin')}}/plugins/datatables/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css">
     <link href="{{asset('contents/admin')}}/plugins/datatables/buttons.bootstrap4.min.css" rel="stylesheet" type="text/css">
     <link href="{{asset('contents/admin')}}/plugins/animate/animate.css" rel="stylesheet" type="text/css">
+    <link href="{{asset('contents/admin')}}/plugins/toast/jquery.toast.css" rel="stylesheet" type="text/css">
     <style>
         .mid-y-scroll{overflow-y:scroll;height:100%;display:block;position:sticky}
         .mid-y-scroll::-webkit-scrollbar{width:0;border-radius:0}
@@ -49,6 +50,7 @@
     <script src="{{asset('contents/admin')}}/plugins/dropzone/dropzone.js"></script>
     <script src="{{asset('contents/admin')}}/plugins/datatables/jquery.dataTables.min.js"></script>
     <script src="{{asset('contents/admin')}}/plugins/datatables/dataTables.bootstrap4.min.js"></script>
+    <script src="{{asset('contents/admin')}}/plugins/toast/jquery.toast.js"></script>
     <script src="{{asset('contents/admin')}}/js/media.js"></script>
     <script>
         $(function() {

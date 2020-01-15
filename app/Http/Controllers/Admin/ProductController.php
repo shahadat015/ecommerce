@@ -39,7 +39,7 @@ class ProductController extends Controller
 
     public function create()
     {
-        $categories = Category::where('category_id', null)->get();
+        $categories = Category::all();
         $brands = Brand::all();
         $attributesets = AttributeSet::all();
         return view('admin.product.create', compact('categories', 'brands', 'attributesets'));
@@ -77,16 +77,17 @@ class ProductController extends Controller
 
     public function show(Product $product)
     {
-        return view('admin.product.show');
+        $product->load('categories', 'brand', 'attributes', 'options', 'metadata', 'images', 'image');
+        return view('admin.product.show', compact('product'));
     }
 
 
     public function edit(Product $product)
     {
-        // return $product->options;
         $categories = Category::all();
         $brands = Brand::all();
         $attributesets = AttributeSet::all();
+        $product->load('categories', 'brand', 'attributes', 'options', 'metadata', 'images', 'image');
         return view('admin.product.edit', compact('categories', 'brands', 'attributesets', 'product'));
     }
 
@@ -96,9 +97,9 @@ class ProductController extends Controller
         $request['status'] = (boolean)$request->status;
         $request['slug'] = str_slug($request->url);
         $product->update($request->all());
-
         $product->categories()->sync($request->categories);
         $product->images()->sync($request->images);
+
         $product->metadata()->update([
             'meta_title' => $request->meta_title,
             'meta_keywords' => $request->meta_keywords,
@@ -122,16 +123,10 @@ class ProductController extends Controller
 
     public function destroy(Request $request)
     {
-        // $delete = Product::findOrFail($request->id)->each(function ($product){
-        //     $product->categories()->detach();
-        //     $product->images()->detach();
-        //     $product->metadata()->delete();
-        //     $product->attributes()->delete();
-        //     $product->options()->detach();
-        //     $product->delete();  
-        // });
-
-        $delete = Product::destroy($request->id);
+        $delete = Product::findOrFail($request->id)->each(function ($product){
+            $product->images()->detach();
+            $product->delete();  
+        });
 
         if($delete){
             return response()->json(['success' => 'Product successfully deleted!']);
