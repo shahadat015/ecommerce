@@ -43,19 +43,19 @@ class ProductController extends Controller
         $brands = Brand::all();
         $attributesets = AttributeSet::all();
         $options = Option::where('is_global', 1)->get();
-        return view('admin.product.create', compact('categories', 'brands', 'attributesets', 'options'));
+        $products = Product::all();
+        return view('admin.product.create', compact('categories', 'brands', 'attributesets', 'options', 'products'));
     }
 
     public function store(ProductValidate $request)
     {
-        // return $request;
 
         $request['status'] = (boolean)$request->status;
         $request['slug'] = str_slug($request->name);
         $product = Product::create($request->all());
 
-        $product->categories()->attach($request->categories);
-        $product->images()->attach($request->images);
+        $product->saveRelations($request);
+        
         $product->metadata()->create([
             'meta_title' => $request->meta_title,
             'meta_keywords' => $request->meta_keywords,
@@ -90,8 +90,9 @@ class ProductController extends Controller
         $brands = Brand::all();
         $attributesets = AttributeSet::all();
         $options = Option::where('is_global', 1)->get();
+        $products = Product::all();
         $product->load('categories', 'brand', 'attributes', 'options', 'metadata', 'images', 'image');
-        return view('admin.product.edit', compact('categories', 'brands', 'attributesets', 'options', 'product'));
+        return view('admin.product.edit', compact('categories', 'brands', 'attributesets', 'options', 'products', 'product'));
     }
 
     public function update(ProductValidate $request, Product $product)
@@ -100,8 +101,7 @@ class ProductController extends Controller
         $request['status'] = (boolean)$request->status;
         $request['slug'] = str_slug($request->url);
         $product->update($request->all());
-        $product->categories()->sync($request->categories);
-        $product->images()->sync($request->images);
+        $product->saveRelations($request);
 
         $product->metadata()->update([
             'meta_title' => $request->meta_title,

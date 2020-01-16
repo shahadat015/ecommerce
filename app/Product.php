@@ -46,6 +46,18 @@ class Product extends Model
         return $this->morphOne(MetaData::class, 'metaable');
     }
 
+    public function relatedProducts()
+    {
+        return $this->belongsToMany(static::class, 'related_products', 'product_id', 'related_product_id');
+    }
+
+    public function saveRelations($request)
+    {
+        $this->categories()->sync($request->categories);
+        $this->relatedProducts()->sync($request->products);
+        $this->images()->sync($request->images);
+    }
+
     public function saveAttributes($attributes = [])
     {
     	if($this->attributes()){

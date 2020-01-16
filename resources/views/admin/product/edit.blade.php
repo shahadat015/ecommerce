@@ -279,6 +279,7 @@
                                         <span data-repeater-create="" class="btn btn-light btn-md">
                                             <span class="fa fa-plus"></span> Add Value
                                         </span>
+                                        <span class="text-danger ml-3"><strong>Note: </strong>The value field is required when attribute is present.</span>
                                     </div>
                                 </div>
                             </div>
@@ -474,6 +475,19 @@
                                 <div class="form-group">
                                     <label class="my-3">Product New To</label>
                                     <input type="text" class="form-control datepicker" name="new_to" value="{{ $product->new_to }}">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="name">Related Products</label>
+                                    <select class="select2 mb-3 select2-multiple" name="products[]" multiple="multiple" data-placeholder="Select Category">
+                                        @foreach($products as $allProduct)
+                                            <option value="{{ $allProduct->id }}"
+                                                @foreach($product->relatedProducts as $relatedProduct)
+                                                    {{ $relatedProduct->id == $allProduct->id ? 'selected' : '' }}
+                                                @endforeach
+                                            >{{ $allProduct->name }}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
                             </div>
                         </div>

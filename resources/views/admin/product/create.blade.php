@@ -20,7 +20,7 @@
                     <a class="btn btn-info btn-sm float-right" href="{{ route('admin.products.index') }}"><i class="mdi mdi-arrow-left-thick"></i> Back</a>
                 </div>
                     
-                <form action="{{ route('admin.products.store') }}" method="post" id="" class="form-horizontal form-wizard-wrapper">
+                <form action="{{ route('admin.products.store') }}" id="create-form" method="post" id="" class="form-horizontal form-wizard-wrapper">
                     @csrf
 
                     <div class="card-body">
@@ -55,7 +55,7 @@
                                 <h4>General</h4><hr>
                                 <div class="form-group">
                                     <label for="name">Name<b class="text-danger">*</b></label>
-                                    <input type="text" name="name" class="form-control" placeholder="Product Name">
+                                    <input type="text" name="name" class="form-control">
                                 </div>
 
                                 <div class="form-group">
@@ -95,22 +95,22 @@
 
                                 <div class="form-group">
                                     <label for="name">Price<b class="text-danger">*</b></label>
-                                    <input type="text" name="price" class="form-control" placeholder="Product Price">
+                                    <input type="text" name="price" class="form-control">
                                 </div>
 
                                 <div class="form-group">
                                     <label for="name">Special Price</label>
-                                    <input type="text" name="special_price" class="form-control" placeholder="Special Price">
+                                    <input type="text" name="special_price" class="form-control">
                                 </div>
 
                                 <div class="form-group">
                                     <label class="my-3">Special Price Start</label>
-                                    <input type="text" class="form-control datepicker" name="special_price_start" placeholder="Special Price Start">
+                                    <input type="text" class="form-control datepicker" name="special_price_start">
                                 </div>
 
                                 <div class="form-group">
                                     <label class="my-3">Special Price End</label>
-                                    <input type="text" class="form-control datepicker" name="special_price_end" placeholder="Special Price End">
+                                    <input type="text" class="form-control datepicker" name="special_price_end">
                                 </div>
                             </div>
                             
@@ -139,7 +139,7 @@
 
                                 <div class="form-group">
                                     <label for="name">SKU</label>
-                                    <input type="text" name="sku" class="form-control" placeholder="SKU">
+                                    <input type="text" name="sku" class="form-control">
                                 </div>
 
                                 <div class="form-group">
@@ -152,7 +152,7 @@
 
                                 <div class="form-group d-none" id="qty">
                                     <label for="name">Quantity<b class="text-danger">*</b></label>
-                                    <input type="text" name="qty" class="form-control" placeholder="Quantity">
+                                    <input type="text" name="qty" class="form-control">
                                 </div>
 
                                 <div class="form-group">
@@ -168,12 +168,12 @@
 
                                 <div class="form-group">
                                     <label for="name">Meta Title</label>
-                                    <input type="text" name="meta_title" class="form-control" placeholder="Meta Title">
+                                    <input type="text" name="meta_title" class="form-control">
                                 </div>
 
                                 <div class="form-group">
                                     <label for="name">Meta Keywords</label>
-                                    <input type="text" name="meta_keywords" class="form-control" placeholder="Meta Keywords">
+                                    <input type="text" name="meta_keywords" class="form-control">
                                 </div>
 
                                 <div class="form-group">
@@ -342,6 +342,15 @@
                                 <div class="form-group">
                                     <label class="my-3">Product New To</label>
                                     <input type="text" class="form-control datepicker" name="new_to">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="name">Related Products</label>
+                                    <select class="select2 mb-3 select2-multiple" name="products[]" multiple="multiple" data-placeholder="Select Product">
+                                        @foreach($products as $product)
+                                            <option value="{{ $product->id }}">{{ $product->name }}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
                             </div>
                         </div>
