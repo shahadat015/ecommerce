@@ -23,28 +23,10 @@
                 <div class="card-body">
                     <div class="row justify-content-center">
                         <div class="col-4">
-                            <div id="jstree-checkbox">
-                                <ul>
-                                    @foreach($categories as $maincategory)
-                                    <li data-url="{{ route('admin.categories.edit', $maincategory->id) }}" data-id="{{ $maincategory->id }}" data-jstree='{"icon":"fa fa-folder text-warning font-18"}' class="jstree-open">{{ $maincategory->name }}
-                                        <ul>
-                                            @foreach($maincategory->subcategories as $subcategory)
-                                            <li data-id="{{ $subcategory->id }}" data-url="{{ route('admin.categories.edit', $subcategory->id) }}" data-id="{{ $maincategory->id }}" data-jstree='{"icon":"fa fa-folder text-warning font-18"}' class="jstree-open">{{ $subcategory->name }}
-                                                <ul>
-                                                    @foreach($subcategory->subcategories as $category)
-                                                    <li data-url="{{ route('admin.categories.edit', $category->id) }}" data-id="{{ $maincategory->id }}" data-id="{{ $category->id }}" data-jstree='{"icon":"fa fa-folder text-warning font-18"}'>{{ $category->name }}</li>
-                                                    @endforeach
-                                                </ul>
-                                            </li>
-                                            @endforeach
-                                        </ul>
-                                    </li>
-                                    @endforeach
-                                </ul>
-                            </div>
+                            <div id="jstree-checkbox"></div>
                         </div>
-                        <div class="col-6" id="category-form">
-                            <form action="{{ route('admin.categories.store') }}" method="post" id="category-form" class="form-horizontal form-wizard-wrapper">
+                        <div class="col-6 category-form">
+                            <form action="{{ route('admin.categories.store') }}" method="post" id="create-category" class="form-horizontal form-wizard-wrapper">
                                 @csrf
 
                                 <div class="form-group">
@@ -53,14 +35,11 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="example-email-input1" class="col-form-label">Selete Category</label>
-                                    <select name="category_id" class="form-control" id="category">
-                                        <option value="">Choose Category</option>
-                                        @foreach($categories as $maincategory)
-                                            <option value="{{ $maincategory->id }}">{{ $maincategory->name }}</option>
-                                            @foreach($maincategory->subcategories as $subcategory)
-                                                <option value="{{ $subcategory->id }}">|--{{ $subcategory->name }}</option>
-                                            @endforeach
+                                    <label for="example-email-input1" class="col-form-label">Parent Category</label>
+                                    <select name="parent_id" class="form-control" id="category">
+                                        <option value="">Parent Category</option>
+                                        @foreach($categories as $key=>$value)
+                                            <option value="{{ $key }}">{{ $value }}</option>
                                         @endforeach
                                     </select>
                                 </div>

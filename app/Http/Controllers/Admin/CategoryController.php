@@ -4,19 +4,27 @@ namespace App\Http\Controllers\Admin;
 
 use App\Category;
 use App\Http\Controllers\Controller;
+use App\Http\Responses\CategoryTreeResponse;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
+
+    public function categories()
+    {
+        $categories = Category::orderBy('parent_id')->get();
+        return new CategoryTreeResponse($categories);
+    }
+
     public function index()
     {
-		$categories = Category::where('category_id', null)->get();
+		$categories = Category::orderBy('parent_id')->get()->nest()->setIndent('|-- ')->listsFlattened('name');
     	return view('admin.category.index', compact('categories'));
     }
 
     public function edit(Category $category)
     {
-        $categories = Category::where('category_id', null)->get();
+        $categories = Category::where('id', '<>', $category->id)->get()->nest()->setIndent('|-- ')->listsFlattened('name');
         return view('admin.category.edit', compact('categories', 'category'));
     }
 
@@ -30,6 +38,7 @@ class CategoryController extends Controller
         $request['slug'] = str_slug($request->name);
         $create = Category::create($request->all());
 
+
         if($create){
             return response()->json(['success' => 'Category successfully created!']);
         }else{
@@ -40,11 +49,12 @@ class CategoryController extends Controller
     public function update(Request $request, Category $category)
     {
         $request->validate([
-            'name' => 'required|string|max:255'
+            'name' => 'required|string|max:255',
+            'url' => 'required|string|max:255|unique:categories,slug,'.$category->id,
         ]);
 
         $request['status'] = (boolean) $request->status;
-        $request['slug'] = str_slug($request->name);
+        $request['slug'] = str_slug($request->url);
         $update = $category->update($request->all());
 
         if($update){
@@ -64,5 +74,11 @@ class CategoryController extends Controller
         }else{
             return response()->json(['error' => 'Deleting failed! Please try again!']);
         }
+    }
+
+    public function getCategories()
+    {
+        $categories = Category::orderBy('parent_id')->get()->nest()->setIndent('|-- ')->listsFlattened('name');
+        return view('admin.category.category', compact('categories'));
     }
 }

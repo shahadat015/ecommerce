@@ -42,6 +42,7 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'namespace' => 'Admin', 'mi
 	Route::delete('/image/destroy', 'ImageController@destroy')->name('image.destroy');
 	Route::resource('/images', 'ImageController')->only('index', 'store', 'destroy');
 
+	Route::get('/getCategories', 'CategoryController@getCategories');
 	Route::get('/category', 'CategoryController@categories')->name('category');
 	Route::delete('/category/destroy', 'CategoryController@destroy')->name('category.destroy');
 	Route::resource('/categories', 'CategoryController')->except('create', 'show');

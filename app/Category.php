@@ -3,15 +3,13 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use TypiCMS\NestableTrait;
 
 class Category extends Model
 {
-    protected $fillable = ['name', 'slug', 'category_id', 'status'];
+	use NestableTrait;
 
-    public function subcategories()
-    {
-        return $this->hasMany(Category::class);
-    }
+    protected $fillable = ['name', 'slug', 'parent_id', 'status'];
 
     public function products()
     {
