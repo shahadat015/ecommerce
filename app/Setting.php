@@ -9,8 +9,6 @@ class Setting extends Model
 {
     protected $fillable = ['key', 'value'];
 
-    
-
     /**
 	 * @param $key
 	 */

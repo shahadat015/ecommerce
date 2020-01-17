@@ -106,7 +106,7 @@
                 </div>
                 <ul class="nav">
                     <li class="nav-item"><a class="nav-link" href="{{ route('admin.dashboard') }}"><i class="dripicons-meter"></i>Dashboard</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{ url('/admin/settings') }}"><i class="dripicons-gear"></i>Settings</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ route('admin.settings') }}"><i class="dripicons-gear"></i>Settings</a></li>
                 </ul>
             </div>
             <!-- end Analytic -->

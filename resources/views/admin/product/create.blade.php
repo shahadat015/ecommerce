@@ -2,7 +2,7 @@
 @section('title', 'Create Product')
 @push('css')
     <link href="{{asset('contents/admin')}}/plugins/select2/select2.min.css" rel="stylesheet" type="text/css">
-    <link href="{{asset('contents/admin')}}/plugins/daterangepicker/bootstrap-datepicker.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{asset('contents/admin')}}/plugins/flatpickr/flatpickr.min.css">
 @endpush
 @section('content')
     <!-- Page-Title -->
@@ -371,20 +371,17 @@
     <script src="{{asset('contents/admin')}}/plugins/select2/select2.min.js"></script>
     <script src="{{asset('contents/admin')}}/plugins/tinymce/tinymce.min.js"></script>
     <script src="{{asset('contents/admin')}}/pages/jquery.form-editor.init.js"></script>
-    <script src="{{asset('contents/admin')}}/plugins/moment/moment.js"></script>
-    <script src="{{asset('contents/admin')}}/plugins/daterangepicker/bootstrap-datepicker.min.js"></script>
     <script src="{{ asset('contents/admin') }}/plugins/repeater/jquery.repeater.min.js"></script>
     <script src="{{ asset('contents/admin') }}/pages/jquery.form-repeater.js"></script>
+    <script src="{{asset('contents/admin')}}/plugins/flatpickr/flatpickr.js"></script>
     <script>
         $(function () {
             $(".select2").select2({
                 width: "100%"
             });
 
-            $('.datepicker').datepicker({
+            $('.datepicker').flatpickr({
                 autoclose: true,
-                todayHighlight: true,
-                format: 'yyyy-mm-dd'
             });
 
             $('#manage-stock').on('change', function () {

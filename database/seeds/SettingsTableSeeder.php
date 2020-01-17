@@ -2,96 +2,124 @@
 
 use App\Setting;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Schema;
 
 class SettingsTableSeeder extends Seeder
 {
+    /**
+     * @var array
+     */
     protected $settings = [
         [
-            'key'                       =>  'site_name',
-            'value'                     =>  'E-Commerce Application',
+            'key'                       =>  'store_name',
+            'value'                     =>  'Laracart',
         ],
         [
-            'key'                       =>  'site_title',
-            'value'                     =>  'E-Commerce',
+            'key'                       =>  'store_tagline',
+            'value'                     =>  'Trasted Online Shop in Bangladesh',
         ],
         [
-            'key'                       =>  'default_email_address',
-            'value'                     =>  'info@gmail.com',
+            'key'                       =>  'store_email',
+            'value'                     =>  'info@example.com',
         ],
         [
-            'key'                       =>  'currency_code',
-            'value'                     =>  'BDT',
+            'key'                       =>  'store_email_two',
+            'value'                     =>  'info@example.com',
         ],
         [
-            'key'                       =>  'currency_symbol',
-            'value'                     =>  'TK',
+            'key'                       =>  'store_phone_two',
+            'value'                     =>  '0123456789',
         ],
         [
-            'key'                       =>  'site_logo',
+            'key'                       =>  'store_phone',
+            'value'                     =>  '0123456789',
+        ],
+        [
+            'key'                       =>  'store_address',
             'value'                     =>  '',
         ],
         [
-            'key'                       =>  'site_favicon',
+            'key'                       =>  'store_address_two',
             'value'                     =>  '',
         ],
         [
-            'key'                       =>  'footer_copyright_text',
+            'key'                       =>  'mail_from_address',
             'value'                     =>  '',
         ],
         [
-            'key'                       =>  'seo_meta_title',
+            'key'                       =>  'mail_from_name',
             'value'                     =>  '',
         ],
         [
-            'key'                       =>  'seo_meta_description',
+            'key'                       =>  'mail_host',
             'value'                     =>  '',
         ],
         [
-            'key'                       =>  'social_facebook',
+            'key'                       =>  'mail_port',
             'value'                     =>  '',
         ],
         [
-            'key'                       =>  'social_twitter',
+            'key'                       =>  'mail_username',
             'value'                     =>  '',
         ],
         [
-            'key'                       =>  'social_instagram',
+            'key'                       =>  'mail_password',
             'value'                     =>  '',
         ],
         [
-            'key'                       =>  'social_linkedin',
+            'key'                       =>  'free_shipping_label',
             'value'                     =>  '',
         ],
         [
-            'key'                       =>  'google_analytics',
+            'key'                       =>  'free_shipping_min_amount',
             'value'                     =>  '',
         ],
         [
-            'key'                       =>  'facebook_pixels',
+            'key'                       =>  'free_shipping_enabled',
             'value'                     =>  '',
         ],
         [
-            'key'                       =>  'stripe_payment_method',
+            'key'                       =>  'local_pickup_label',
             'value'                     =>  '',
         ],
         [
-            'key'                       =>  'stripe_key',
+            'key'                       =>  'local_pickup_cost',
             'value'                     =>  '',
         ],
         [
-            'key'                       =>  'stripe_secret_key',
+            'key'                       =>  'local_pickup_enabled',
             'value'                     =>  '',
         ],
         [
-            'key'                       =>  'paypal_payment_method',
+            'key'                       =>  'cod_label',
             'value'                     =>  '',
         ],
         [
-            'key'                       =>  'paypal_client_id',
+            'key'                       =>  'cod_description',
             'value'                     =>  '',
         ],
         [
-            'key'                       =>  'paypal_secret_id',
+            'key'                       =>  'cod_enabled',
+            'value'                     =>  '',
+        ],
+        [
+            'key'                       =>  'ssl_commrz_label',
+            'value'                     =>  '',
+        ],
+        [
+            'key'                       =>  'ssl_commrz_description',
+            'value'                     =>  '',
+        ],
+        [
+            'key'                       =>  'ssl_commrz_store_id',
+            'value'                     =>  '',
+        ],
+        [
+            'key'                       =>  'ssl_commrz_store_password',
+            'value'                     =>  '',
+        ],
+        [
+            'key'                       =>  'ssl_commrz_enabled',
             'value'                     =>  '',
         ],
     ];
@@ -103,6 +131,9 @@ class SettingsTableSeeder extends Seeder
      */
     public function run()
     {
+        Schema::disableForeignKeyConstraints();
+        Setting::truncate();
+
         foreach ($this->settings as $index => $setting)
         {
             $result = Setting::create($setting);

@@ -3,7 +3,6 @@
 @push('css')
     <link href="{{asset('contents/admin')}}/plugins/dropzone/dropzone.css" rel="stylesheet" type="text/css">
     <link href="{{asset('contents/admin')}}/plugins/datatables/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css">
-    <link href="{{asset('contents/admin')}}/plugins/datatables/buttons.bootstrap4.min.css" rel="stylesheet" type="text/css">
 @endpush
 @section('content')
     <!-- Page-Title -->

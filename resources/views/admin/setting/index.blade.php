@@ -18,8 +18,9 @@
                     <h4 class="mt-2 header-title float-left">Settings</h4>
                 </div>
                     
-                <form action="{{ route('admin.products.store') }}" id="create-form" method="post" id="" class="form-horizontal form-wizard-wrapper">
+                <form action="{{ route('admin.settings') }}" id="update-form" method="post" class="form-horizontal form-wizard-wrapper">
                     @csrf
+                    @method('put')
 
                     <div class="card-body">
                         <ul class="nav nav-tabs" role="tablist">
@@ -27,16 +28,10 @@
                                 <a class="nav-link active" data-toggle="tab" href="#general" role="tab">General</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" data-toggle="tab" href="#sitelogo" role="tab">Site Logo</a>
+                                <a class="nav-link" data-toggle="tab" href="#mail" role="tab">Mail</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" data-toggle="tab" href="#footerandseo" role="tab">Footer and SEO</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" data-toggle="tab" href="#sociallinks" role="tab">Social Links</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" data-toggle="tab" href="#analytics" role="tab">Analytics</a>
+                                <a class="nav-link" data-toggle="tab" href="#shipping" role="tab">Shipping</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" data-toggle="tab" href="#payments" role="tab">Payments</a>
@@ -44,136 +39,156 @@
                         </ul>
                         <div class="tab-content">
                             <div class="tab-pane active p-3" id="general" role="tabpanel">
-                                <h4>General</h4><hr>
+                                <h4>General Setting</h4><hr>
                                 <div class="form-group">
-                                    <label for="name">Site Name</label>
-                                    <input type="text" name="site_name" class="form-control" value="{{ config('settings.site_name') }}">
+                                    <label for="name">Store Name</label>
+                                    <input type="text" name="store_name" class="form-control" value="{{ config('settings.store_name') }}">
                                 </div>
                                 <div class="form-group">
-                                    <label for="name">Site Title</label>
-                                    <input type="text" name="site_title" class="form-control" value="{{ config('settings.site_title') }}">
+                                    <label for="name">Store Tagline</label>
+                                    <input type="text" name="store_tagline" class="form-control" value="{{ config('settings.store_tagline') }}">
                                 </div>
                                 <div class="form-group">
-                                    <label for="name">Default Email Address</label>
-                                    <input type="text" name="default_email_address" class="form-control" value="{{ config('settings.default_email_address') }}">
+                                    <label for="name">Store Email</label>
+                                    <input type="text" name="store_email" class="form-control" value="{{ config('settings.store_email') }}">
                                 </div>
                                 <div class="form-group">
-                                    <label for="name">Currency Code</label>
-                                    <input type="text" name="currency_code" class="form-control" value="{{ config('settings.currency_code') }}">
+                                    <label for="name">Store Email Two</label>
+                                    <input type="text" name="store_email_two" class="form-control" value="{{ config('settings.store_email_two') }}">
                                 </div>
                                 <div class="form-group">
-                                    <label for="name">Currency Symbol</label>
-                                    <input type="text" name="currency_symbol" class="form-control" value="{{ config('settings.currency_symbol') }}">
+                                    <label for="name">Store Phone</label>
+                                    <input type="text" name="store_phone" class="form-control" value="{{ config('settings.store_phone') }}">
+                                </div>
+                                <div class="form-group">
+                                    <label for="name">Store Phone Two</label>
+                                    <input type="text" name="store_phone_two" class="form-control" value="{{ config('settings.store_phone_two') }}">
+                                </div>
+                                <div class="form-group">
+                                    <label for="name">Store Address</label>
+                                    <input type="text" name="store_address" class="form-control" value="{{ config('settings.store_address') }}">
+                                </div>
+                                <div class="form-group">
+                                    <label for="name">Store Address Two</label>
+                                    <input type="text" name="store_address_two" class="form-control" value="{{ config('settings.store_address_two') }}">
                                 </div>
 
-                            </div>
-
-                            <div class="tab-pane p-3" id="sitelogo" role="tabpanel">
-                                <h4>Site Logo</h4><hr>
-                                <div class="single-image">
-                                    <div class="image-holder">
-                                        <i class="far fa-image"></i>
-                                    </div>
-                                </div>
-                                <button type="button" class="btn btn-light image-picker waves-effect waves-light d-block mt-3 mb-4" data-image="single"><i class="far fa-folder-open mr-2"></i> Browse Image</button>
-
-                                <h4>Site Favicon</h4><hr>
-                                <div class="single-image">
-                                    <div class="image-holder">
-                                        <i class="far fa-image"></i>
-                                    </div>
-                                </div>
-                                <button type="button" class="btn btn-light image-picker waves-effect waves-light d-block mt-3 mb-4" data-image="single"><i class="far fa-folder-open mr-2"></i> Browse Image</button>
-                                
                             </div>
                             
-                            <div class="tab-pane p-3" id="footerandseo" role="tabpanel">
-                                <h4>Footer and SEO</h4><hr>
+                            <div class="tab-pane p-3" id="mail" role="tabpanel">
+                                <h4>Mail Setting</h4><hr>
 
                                 <div class="form-group">
-                                    <label for="name">Footer Copyright Text</label>
-                                    <textarea name="footer_copyright_text" class="form-control" cols="30" rows="4">{{ config('settings.footer_copyright_text') }}</textarea>
+                                    <label for="name">Mail From Address</label>
+                                    <input type="text" name="mail_from_address" class="form-control" value="{{ config('settings.mail_from_address') }}">
                                 </div>
-
                                 <div class="form-group">
-                                    <label for="name">Seo Meta Title</label>
-                                    <input type="text" name="seo_meta_title" class="form-control" value="{{ config('settings.seo_meta_title') }}">
+                                    <label for="name">Mail From Name</label>
+                                    <input type="text" name="mail_from_name" class="form-control" value="{{ config('settings.mail_from_name') }}">
                                 </div>
-
                                 <div class="form-group">
-                                    <label for="name">Seo Meta Description</label>
-                                    <textarea name="seo_meta_description" class="form-control" cols="30" rows="4">{{ config('settings.seo_meta_description') }}</textarea>
+                                    <label for="name">Mail Host</label>
+                                    <input type="text" name="mail_host" class="form-control" value="{{ config('settings.mail_host') }}">
                                 </div>
-                            </div>
-
-                            <div class="tab-pane p-3" id="sociallinks" role="tabpanel">
-                                <h4>Social Links</h4><hr>
-
                                 <div class="form-group">
-                                    <label for="name">Facebook Profile</label>
-                                    <input type="text" name="social_facebook" class="form-control" value="{{ config('settings.social_facebook') }}">
+                                    <label for="name">Mail Port</label>
+                                    <input type="text" name="mail_port" class="form-control" value="{{ config('settings.mail_port') }}">
                                 </div>
-
                                 <div class="form-group">
-                                    <label for="name">Twitter Profile</label>
-                                    <input type="text" name="social_twitter" class="form-control" value="{{ config('settings.social_twitter') }}">
+                                    <label for="name">Mail Username</label>
+                                    <input type="text" name="mail_username" class="form-control" value="{{ config('settings.mail_username') }}">
                                 </div>
-
                                 <div class="form-group">
-                                    <label for="name">Instagram Profile</label>
-                                    <input type="text" name="social_instagram" class="form-control" value="{{ config('settings.social_instagram') }}">
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="name">Linkedin Profile</label>
-                                    <input type="text" name="social_linkedin" class="form-control" value="{{ config('settings.social_linkedin') }}">
+                                    <label for="name">Mail Password</label>
+                                    <input type="password" name="mail_password" class="form-control" value="{{ config('settings.mail_password') }}">
                                 </div>
 
                             </div>
-                            <div class="tab-pane p-3" id="analytics" role="tabpanel">
-                                <h4>Analytics</h4><hr>
+
+                            <div class="tab-pane p-3" id="shipping" role="tabpanel">
+                                <h4>Free Shipping</h4><hr>
+
 
                                 <div class="form-group">
-                                    <label for="name">Google Analytics</label>
-                                    <textarea name="google_analytics" class="form-control" cols="30" rows="4">{{ config('settings.google_analytics') }}</textarea>
+                                    <label for="name">Label</label>
+                                    <input type="text" name="free_shipping_label" class="form-control" value="{{ config('settings.free_shipping_label') }}">
                                 </div>
                                 <div class="form-group">
-                                    <label for="name">Facebook Pixels</label>
-                                    <textarea name="facebook_pixels" class="form-control" cols="30" rows="4">{{ config('settings.facebook_pixels') }}</textarea>
+                                    <label for="name">Minimum Amount</label>
+                                    <input type="text" name="free_shipping_min_amount" class="form-control" value="{{ config('settings.free_shipping_min_amount') }}">
                                 </div>
-                                
+
+                                <div class="form-check-inline my-2">
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" name="free_shipping_enabled" class="custom-control-input" id="customCheck1" {{ config('settings.free_shipping_enabled') == 1 ? 'checked'  : '' }}>
+                                        <label class="custom-control-label" for="customCheck1">Enable Free Shipping</label>
+                                    </div>
+                                </div>
+
+                                <h4>Local Pickup</h4><hr>
+
+                                <div class="form-group">
+                                    <label for="name">Label</label>
+                                    <input type="text" name="local_pickup_label" class="form-control" value="{{ config('settings.local_pickup_label') }}">
+                                </div>
+                                <div class="form-group">
+                                    <label for="name">Cost</label>
+                                    <input type="text" name="local_pickup_cost" class="form-control" value="{{ config('settings.local_pickup_cost') }}">
+                                </div>
+
+                                <div class="form-check-inline my-2">
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" name="local_pickup_enabled" class="custom-control-input" id="customCheck2" {{ config('settings.local_pickup_enabled') == 1 ? 'checked'  : '' }}>
+                                        <label class="custom-control-label" for="customCheck2">Enable Local Pickup</label>
+                                    </div>
+                                </div>
+
                             </div>
                             <div class="tab-pane p-3" id="payments" role="tabpanel">
-                                <h4>Payments</h4><hr>
+                                <h4>Cash On Delivery</h4><hr>
 
                                 <div class="form-group">
-                                    <label class="my-3">Stripe Payment Method</label>
-                                    <input type="text" class="form-control " name="stripe_payment_method" value="{{ config('settings.stripe_payment_method') }}">
+                                    <label for="name">Label</label>
+                                    <input type="text" name="cod_label" class="form-control" value="{{ config('settings.cod_label') }}">
+                                </div>
+                                <div class="form-group">
+                                    <label for="name">Description</label>
+                                    <textarea name="cod_description" class="form-control" rows="5">{{config('settings.cod_description') }}</textarea>
+                                </div>
+
+                                <div class="form-check-inline my-2">
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" name="cod_enabled" class="custom-control-input" id="customCheck3"  {{ config('settings.cod_enabled') == 1 ? 'checked'  : '' }}>
+                                        <label class="custom-control-label" for="customCheck3">Enable Cash On Delivery</label>
+                                    </div>
+                                </div>
+
+                                <h4>SSL Commerz</h4><hr>
+
+                                <div class="form-group">
+                                    <label for="name">Label</label>
+                                    <input type="text" name="ssl_commrz_label" class="form-control" value="{{ config('settings.ssl_commrz_label') }}">
+                                </div>
+                                <div class="form-group">
+                                    <label for="name">Description</label>
+                                    <textarea name="ssl_commrz_description" class="form-control" rows="5">{{config('settings.ssl_commrz_description') }}</textarea>
                                 </div>
 
                                 <div class="form-group">
-                                    <label class="my-3">Stripe Key</label>
-                                    <input type="text" class="form-control " name="stripe_key" value="{{ config('settings.stripe_key') }}">
+                                    <label for="name">Store ID</label>
+                                    <input type="text" name="ssl_commrz_store_id" class="form-control" value="{{ config('settings.ssl_commrz_store_id') }}">
                                 </div>
 
                                 <div class="form-group">
-                                    <label class="my-3">Stripe Secret Key</label>
-                                    <input type="text" class="form-control " name="stripe_secret_key" value="{{ config('settings.stripe_secret_key') }}">
+                                    <label for="name">Store Password</label>
+                                    <input type="password" name="ssl_commrz_store_password" class="form-control" value="{{ config('settings.ssl_commrz_store_password') }}">
                                 </div>
 
-                                <div class="form-group">
-                                    <label class="my-3">Paypal Payment Method</label>
-                                    <input type="text" class="form-control " name="paypal_payment_method" value="{{ config('settings.paypal_payment_method') }}">
-                                </div>
-                                
-                                <div class="form-group">
-                                    <label class="my-3">Paypal Client Id</label>
-                                    <input type="text" class="form-control " name="paypal_client_id" value="{{ config('settings.paypal_client_id') }}">
-                                </div>
-
-                                <div class="form-group">
-                                    <label class="my-3">Paypal Secret Id</label>
-                                    <input type="text" class="form-control " name="paypal_secret_id" value="{{ config('settings.paypal_secret_id') }}">
+                                <div class="form-check-inline my-2">
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" name="ssl_commrz_enabled" class="custom-control-input" id="customCheck4" {{ config('settings.ssl_commrz_enabled') == 1 ? 'checked'  : '' }}>
+                                        <label class="custom-control-label" for="customCheck4">Enable SSL Commerz</label>
+                                    </div>
                                 </div>
 
                             </div>

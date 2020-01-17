@@ -76,6 +76,14 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'namespace' => 'Admin', 'mi
 	Route::delete('/product/destroy', 'ProductController@destroy')->name('product.destroy');
 	Route::resource('/products', 'ProductController');
 
-	Route::get('/settings', 'SettingController@index')->name('admin.settings');
-	Route::post('/settings', 'SettingController@update')->name('admin.settings');
+	Route::get('/settings', 'SettingController@index')->name('settings');
+	Route::put('/settings', 'SettingController@update')->name('settings');
+
+	Route::get('/reviews/datatables', 'ReviewController@reviews')->name('reviews.datatables');
+	Route::delete('/review/destroy', 'ReviewController@destroy')->name('review.destroy');
+	Route::resource('/reviews', 'ReviewController')->only('index', 'edit', 'update');
+
+	Route::get('/coupons/datatables', 'CouponController@coupons')->name('coupons.datatables');
+	Route::delete('/coupon/destroy', 'CouponController@destroy')->name('coupon.destroy');
+	Route::resource('/coupons', 'CouponController')->except('show');
 });

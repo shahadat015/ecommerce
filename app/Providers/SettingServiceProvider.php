@@ -2,6 +2,11 @@
 
 namespace App\Providers;
 
+use App\Setting;
+use Illuminate\Foundation\AliasLoader;
+use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
 
 class SettingServiceProvider extends ServiceProvider
@@ -16,7 +21,7 @@ class SettingServiceProvider extends ServiceProvider
         $this->app->bind('settings', function ($app) {
             return new Setting();
         });
-        $loader = \Illuminate\Foundation\AliasLoader::getInstance();
+        $loader = AliasLoader::getInstance();
         $loader->alias('Setting', Setting::class);
     }
 
@@ -28,7 +33,7 @@ class SettingServiceProvider extends ServiceProvider
     public function boot()
     {
         // only use the Settings package if the Settings table is present in the database
-        if (!\App::runningInConsole() && count(Schema::getColumnListing('settings'))) {
+        if (!App::runningInConsole() && count(Schema::getColumnListing('settings'))) {
             $settings = Setting::all();
             foreach ($settings as $key => $setting)
             {
