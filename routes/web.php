@@ -33,7 +33,7 @@ Route::group(['as' => 'customer.', 'prefix' => 'customer', 'namespace' => 'Custo
 
 Route::group(['as' => 'admin.', 'prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['auth']], function(){
 	
-	Route::get('/', 'AdminController@index')->name('dashboard');
+	Route::get('/', 'DashboardController@index')->name('dashboard');
 
 	Route::get('/user/profile', 'UserController@profile')->name('user.profile');
 	Route::put('/user/profile', 'UserController@updateProfile')->name('user.profile');
@@ -75,4 +75,7 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'namespace' => 'Admin', 'mi
 	Route::get('/products/datatables', 'ProductController@products')->name('products.datatables');
 	Route::delete('/product/destroy', 'ProductController@destroy')->name('product.destroy');
 	Route::resource('/products', 'ProductController');
+
+	Route::get('/settings', 'SettingController@index')->name('admin.settings');
+	Route::post('/settings', 'SettingController@update')->name('admin.settings');
 });
