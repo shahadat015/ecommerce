@@ -26,7 +26,7 @@ class VerificationController extends Controller
      *
      * @var string
      */
-    // protected $redirectTo = '/customer';
+    protected $redirectTo = '/customer';
 
     /**
      * Create a new controller instance.
@@ -40,12 +40,4 @@ class VerificationController extends Controller
         $this->middleware('throttle:6,1')->only('verify', 'resend');
     }
 
-    protected function redirectTo()
-    {
-        if(Auth::user()->hasRole(['Customer'])){
-            return 'customer';
-        }else{
-            return 'admin';
-        }
-    }
 }

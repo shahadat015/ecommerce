@@ -10,7 +10,6 @@ class CustomerController extends Controller
     public function index()
     {
     	// return auth()->logout();
-    	// return auth()->user()->roles;
     	return auth()->user()->name;    
     }
 }

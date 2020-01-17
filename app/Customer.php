@@ -4,13 +4,12 @@ namespace App;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Spatie\Permission\Traits\HasRoles;
 
-class User extends Authenticatable
+class Customer extends Authenticatable
 {
-    use Notifiable, HasRoles;
+    use Notifiable;
 
-     /**
+   /**
      * The attributes that are mass assignable.
      *
      * @var array
@@ -48,21 +47,6 @@ class User extends Authenticatable
             return '<img src="'. asset($user->image->path()) .'" class="mr-2" alt="" height="52">';
         }else{
             return '<img src="'. asset('contents/admin/images/placeholder.png') .'" class="mr-2" alt="" height="52" width="80">';
-        }
-    }
-
-    public static function laratablesName($user)
-    {
-        return '<p class="d-inline-block align-middle mb-0">
-                    <a href="#" class="d-inline-block align-middle mb-0 product-name">' . $user->name .'</a>
-                    <br><span class="text-muted font-13"> '. $user->role($user) .' </span>
-                </p>';
-    }
-
-    public function role($user)
-    {
-        foreach($user->roles as $role){  
-            return '<span class="text-muted font-13"> '. $role->name .' </span>'; 
         }
     }
 

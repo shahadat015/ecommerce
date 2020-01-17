@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Login')
+@section('title', 'Admin Login')
 @section('content')
 <div class="auth-page">
     <div class="card auth-card shadow-lg mt-5">
@@ -10,11 +10,11 @@
                 </div>
                 <!--end auth-logo-box-->
                 <div class="text-center auth-logo-text">
-                    <h4 class="mt-0 mb-3 mt-5">Admin Login</h4>
-                    <p class="text-muted mb-0">Sign in to continue to admin.</p>
+                    <h4 class="mt-0 mb-3 mt-5">Customer Login</h4>
+                    <p class="text-muted mb-0">Sign in to continue to account.</p>
                 </div>
                 <!--end auth-logo-text-->
-                <form class="form-horizontal auth-form my-4" method="POST" action="{{ route('login') }}">
+                <form class="form-horizontal auth-form my-4" method="POST" action="{{ route('customer.login') }}">
                     @csrf
 
                     <div class="form-group">
@@ -70,18 +70,22 @@
                 </form>
                 <!--end form-->
             </div>
+            <!--end /div-->
+            <div class="m-3 text-center text-muted">
+                <p class="">Don't have an account ? <a href="{{ route('customer.register') }}" class="text-primary ml-2">Free Resister</a></p>
+            </div>
         </div>
         <!--end card-body-->
     </div>
     <!--end card-->
-    <!-- <div class="account-social text-center mt-4">
+    <div class="account-social text-center mt-4">
         <h6 class="my-4">Or Login With</h6>
         <ul class="list-inline mb-4">
             <li class="list-inline-item"><a href="#" class=""><i class="fab fa-facebook-f facebook"></i></a></li>
             <li class="list-inline-item"><a href="#" class=""><i class="fab fa-twitter twitter"></i></a></li>
             <li class="list-inline-item"><a href="#" class=""><i class="fab fa-google google"></i></a></li>
         </ul>
-    </div> -->
+    </div>
     <!--end account-social-->
 </div>
 @endsection

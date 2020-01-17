@@ -85,7 +85,7 @@
                             <select class="select2 mb-3 select2-multiple" name="permissions[]" multiple="multiple" data-placeholder="Select Permission">
                                 @foreach($permissions as $permission)
                                 <option value="{{ $permission->id }}"
-                                    @foreach($user->permissions as $userPermission) 
+                                    @foreach($user->getAllPermissions() as $userPermission) 
                                         {{ $permission->id == $userPermission->id ? 'selected' : '' }}
                                     @endforeach>{{ $permission->name }}</option>
                                 @endforeach

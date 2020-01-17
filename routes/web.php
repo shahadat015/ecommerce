@@ -10,9 +10,15 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Auth::routes(['verify' => true]);
+Auth::routes(['register' => false]);
 
-Route::group(['as' => 'customer.', 'prefix' => 'customer', 'namespace' => 'Customer', 'middleware' => ['auth', 'verified']], function(){
+Route::get('/customer/login', 'Customer\LoginController@showLoginForm')->name('customer.login');
+Route::post('/customer/login', 'Customer\LoginController@login')->name('customer.login');
+Route::post('/customer/logout', 'Customer\LoginController@logout')->name('customer.logout');
+Route::get('/customer/register', 'Customer\RegisterController@showRegistrationForm')->name('customer.register');
+Route::post('/customer/register', 'Customer\RegisterController@register')->name('customer.register');
+
+Route::group(['as' => 'customer.', 'prefix' => 'customer', 'namespace' => 'Customer', 'middleware' => ['auth:customer', 'verified']], function(){
 
 	Route::get('/', 'CustomerController@index');
 	
@@ -24,7 +30,8 @@ Route::group(['as' => 'customer.', 'prefix' => 'customer', 'namespace' => 'Custo
 | Admin Routes
 |--------------------------------------------------------------------------
 */
-Route::group(['as' => 'admin.', 'prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['auth', 'role:Super Admin|Admin|Editor']], function(){
+
+Route::group(['as' => 'admin.', 'prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['auth']], function(){
 	
 	Route::get('/', 'AdminController@index')->name('dashboard');
 

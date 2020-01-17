@@ -26,14 +26,6 @@ class ResetPasswordController extends Controller
      *
      * @var string
      */
-    // protected $redirectTo = '/customer';
+    protected $redirectTo = '/customer';
 
-    protected function redirectTo()
-    {
-        if(Auth::user()->hasRole(['Customer'])){
-            return 'customer';
-        }else{
-            return 'admin';
-        }
-    }
 }

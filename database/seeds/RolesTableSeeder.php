@@ -20,7 +20,6 @@ class RolesTableSeeder extends Seeder
         $superadmin = Role::create(['name' => 'Super Admin']);
         $admin = Role::create(['name' => 'Admin']);
         $editor = Role::create(['name' => 'Editor']);
-        $customer = Role::create(['name' => 'Customer']);
 
         // First user as super admin
         $user1 = User::find(1);
@@ -36,10 +35,5 @@ class RolesTableSeeder extends Seeder
         $user3 = User::find(3);
         $user3->removeRole($editor);
         $user3->assignRole($editor);
-
-        // Forth user as customer
-        $user4 = User::find(4);
-        $user4->removeRole($customer);
-        $user4->assignRole($customer);
     }
 }

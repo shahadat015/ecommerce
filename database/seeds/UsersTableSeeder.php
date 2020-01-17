@@ -14,29 +14,24 @@ class UsersTableSeeder extends Seeder
     public function run()
     {
     	Schema::disableForeignKeyConstraints();
-    	User::truncate();
-
+    	
+        User::truncate();
         User::insert([
             [
-	            'name' => 'Shahadat Hossain',
-	            'email' => 'shahadat015@gmail.com',
-	            'password' => bcrypt('12345678'),
-	        ],
-	        [
-	            'name' => 'Rayhan Chowdhury',
-	            'email' => 'rayhan@gmail.com',
-	            'password' => bcrypt('12345678'),
-	        ],
-	        [
-	            'name' => 'Ratan Chowdhury',
-	            'email' => 'ratan@gmail.com',
-	            'password' => bcrypt('12345678'),
-	        ],
-	        [
-	            'name' => 'Saddam Hossain',
-	            'email' => 'shahadat018@gmail.com',
-	            'password' => bcrypt('12345678'),
-	        ]
+                'name' => 'Shahadat Hossain',
+                'email' => 'shahadat015@gmail.com',
+                'password' => bcrypt('12345678'),
+            ],
+            [
+                'name' => 'Rayhan Chowdhury',
+                'email' => 'rayhan@gmail.com',
+                'password' => bcrypt('12345678'),
+            ],
+            [
+                'name' => 'Ratan Chowdhury',
+                'email' => 'ratan@gmail.com',
+                'password' => bcrypt('12345678'),
+            ]
         ]);
     }
 }

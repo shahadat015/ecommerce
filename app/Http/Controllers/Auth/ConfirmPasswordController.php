@@ -22,11 +22,11 @@ class ConfirmPasswordController extends Controller
     use ConfirmsPasswords;
 
     /**
-     * Where to redirect users when the intended url fails.
+     * Where to redirect users after confirm password.
      *
      * @var string
      */
-    // protected $redirectTo = '/customer';
+    protected $redirectTo = '/customer';
 
     /**
      * Create a new controller instance.
@@ -38,12 +38,4 @@ class ConfirmPasswordController extends Controller
         $this->middleware('auth');
     }
 
-    protected function redirectTo()
-    {
-        if(Auth::user()->hasRole(['Customer'])){
-            return 'customer';
-        }else{
-            return 'admin';
-        }
-    }
 }

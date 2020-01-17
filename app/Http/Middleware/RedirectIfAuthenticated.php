@@ -18,11 +18,12 @@ class RedirectIfAuthenticated
      */
     public function handle($request, Closure $next, $guard = null)
     {
-        if (Auth::guard($guard)->check() && Auth::user()->hasAnyRole(['Super Admin', 'Admin', 'Editor'])) {
-            return redirect('admin');
-        }
-        if (Auth::guard($guard)->check() && Auth::user()->hasRole('Customer')){
-            return redirect('customer');
+        if (Auth::guard($guard)->check()) {
+            if($guard == 'customer'){
+                return redirect('/customer');
+            }else{
+                return redirect('/admin');
+            }
         }
         return $next($request);
     }
