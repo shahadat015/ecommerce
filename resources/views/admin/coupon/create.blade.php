@@ -20,7 +20,7 @@
                     <a class="btn btn-info btn-sm float-right" href="{{ route('admin.coupons.index') }}"><i class="mdi mdi-arrow-left-thick"></i> Back</a>
                 </div>
                     
-                <form action="{{ route('admin.coupons.store') }}" method="post" id="update-form" class="form-horizontal form-wizard-wrapper">
+                <form action="{{ route('admin.coupons.store') }}" method="post" id="create-form" class="form-horizontal form-wizard-wrapper">
                    @csrf
                    
                     <div class="card-body">
@@ -49,14 +49,14 @@
                                 <div class="form-group">
                                     <label for="example-email-input1" class="col-form-label">Discount Type</label>
                                     <select name="is_percent" class="form-control">
-                                        <option value="1">Fixed</option>
-                                        <option value="2">Percent</option>
+                                        <option value="0">Fixed</option>
+                                        <option value="1">Percent</option>
                                     </select>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="example-email-input1" class="col-form-label">Value</label>
-                                    <input name="value" class="form-control" type="text">
+                                    <input name="value" class="form-control" type="number" min="1">
                                 </div>
 
                                 <div class="form-group">
@@ -87,11 +87,11 @@
                                 <h4>Usage Restrictions</h4><hr>
                                 <div class="form-group">
                                     <label for="example-email-input1" class="col-form-label">Minimum Spend</label>
-                                    <input name="minimum_spend" class="form-control" type="text">
+                                    <input name="minimum_spend" class="form-control" type="number" min="1">
                                 </div>
                                 <div class="form-group">
                                     <label for="example-email-input1" class="col-form-label">Maximum Spend</label>
-                                    <input name="maximum_spend" class="form-control" type="text">
+                                    <input name="maximum_spend" class="form-control" type="number" min="1">
                                 </div>
                                 <div class="form-group">
                                     <label for="example-email-input1" class="col-form-label">Products</label>
@@ -100,7 +100,11 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="example-email-input1" class="col-form-label">Categories</label>
-                                    <input name="categories[]" class="form-control" type="text">
+                                    <select class="select2 mb-3 select2-multiple" name="categories[]" multiple="multiple" data-placeholder="Select Product">
+                                        @foreach($categories as $key=>$value)
+                                        <option value="{{ $key }}">{{ $value }}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
                             </div>
                             <div class="tab-pane p-3" id="limits" role="tabpanel">
@@ -108,18 +112,18 @@
 
                                 <div class="form-group">
                                     <label for="example-email-input1" class="col-form-label">Usage Limit Per Coupon</label>
-                                    <input name="usage_limit_per_coupon" class="form-control" type="text">
+                                    <input name="usage_limit_per_coupon" class="form-control" type="number" min="1">
                                 </div>
                                 <div class="form-group">
                                     <label for="example-email-input1" class="col-form-label">Usage Limit Per Customer</label>
-                                    <input name="usage_limit_per_customer" class="form-control" type="text">
+                                    <input name="usage_limit_per_customer" class="form-control" type="number" min="1">
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="card-footer">
                         <button type="submit" class="btn btn-submit btn-primary waves-effect waves-light">Submit</button>
-                        <a href="{{ route('admin.coupons.index') }}" class="btn btn-info waves-effect waves-light">Cancel</a>
+                        <button type="reset" class="btn btn-info waves-effect waves-light">Reset</button>
                     </div>
                 </form>
             </div>
@@ -136,6 +140,10 @@
 
             $('.datepicker').flatpickr({
                 autoclose: true,
+            });
+
+            $(".select2").select2({
+                width: "100%",
             });
 
             $(".select_product").select2({

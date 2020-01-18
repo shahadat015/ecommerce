@@ -27,9 +27,9 @@
                         <ul class="nav nav-tabs" role="tablist">
                             <li class="nav-item">
                                 <a class="nav-link active" data-toggle="tab" href="#general" role="tab">General</a>
+                            </li>
                             <li class="nav-item">
                                 <a class="nav-link" data-toggle="tab" href="#price" role="tab">Price</a>
-                            </li>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" data-toggle="tab" href="#image" role="tab">Image</a>
@@ -95,12 +95,12 @@
 
                                 <div class="form-group">
                                     <label for="name">Price<b class="text-danger">*</b></label>
-                                    <input type="text" name="price" class="form-control">
+                                    <input type="number" min="1" name="price" class="form-control">
                                 </div>
 
                                 <div class="form-group">
                                     <label for="name">Special Price</label>
-                                    <input type="text" name="special_price" class="form-control">
+                                    <input type="number" min="1" name="special_price" class="form-control">
                                 </div>
 
                                 <div class="form-group">

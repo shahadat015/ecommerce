@@ -24,6 +24,8 @@ Route::group(['as' => 'customer.', 'prefix' => 'customer', 'namespace' => 'Custo
 	
 });
 
+Route::get('{page}/{subs?}', 'PageController@index')
+    ->where(['page' => '^(((?=(?!admin))(?=(?!\/)).))*$', 'subs' => '.*']);
 
 /*
 |--------------------------------------------------------------------------
@@ -87,4 +89,8 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'namespace' => 'Admin', 'mi
 	Route::get('/coupons/datatables', 'CouponController@coupons')->name('coupons.datatables');
 	Route::delete('/coupon/destroy', 'CouponController@destroy')->name('coupon.destroy');
 	Route::resource('/coupons', 'CouponController')->except('show');
+
+	Route::get('/pages/datatables', 'PageController@pages')->name('pages.datatables');
+	Route::delete('/page/destroy', 'PageController@destroy')->name('page.destroy');
+	Route::resource('/pages', 'PageController')->except('show');
 });

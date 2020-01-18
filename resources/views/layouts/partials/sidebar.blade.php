@@ -180,8 +180,7 @@
                     <h6 class="menu-title">Pages</h6>
                 </div>
                 <ul class="nav">
-                    <li class="nav-item"><a class="nav-link" href="../pages/pages-profile.html"><i class="dripicons-user"></i>Profile</a></li>
-                    <li class="nav-item"><a class="nav-link" href="../pages/pages-chat.html"><i class="dripicons-conversation"></i>Chat</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ route('admin.pages.index') }}"><i class="dripicons-document"></i>Pages</a></li>
                 </ul>
             </div>
             <!-- end Pages -->

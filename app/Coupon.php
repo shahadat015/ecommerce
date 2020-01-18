@@ -8,6 +8,16 @@ class Coupon extends Model
 {
 	protected $fillable = ['name', 'code', 'value', 'is_percent', 'free_shipping', 'minimum_spend', 'maximum_spend', 'usage_limit_per_coupon', 'usage_limit_per_customer', 'used', 'is_active', 'start_date', 'end_date'];
 
+	public function products()
+    {
+        return $this->belongsToMany(Product::class, 'coupon_products');
+    }
+
+    public function categories()
+    {
+        return $this->belongsToMany(Category::class, 'coupon_categories');
+    }
+
     public static function laratablesIsActive($coupon)
     {
         if ($coupon->is_active) {

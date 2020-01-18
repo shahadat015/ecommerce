@@ -44,7 +44,7 @@ class ProductController extends Controller
 
     public function create()
     {
-        $categories = $categories = Category::orderBy('parent_id')->get()->nest()->setIndent('|-- ')->listsFlattened('name');
+        $categories = Category::orderBy('parent_id')->get()->nest()->setIndent('|-- ')->listsFlattened('name');
         $brands = Brand::all();
         $attributesets = AttributeSet::all();
         $options = Option::where('is_global', 1)->get();
@@ -61,11 +61,13 @@ class ProductController extends Controller
 
         $product->saveRelations($request);
         
-        $product->metadata()->create([
-            'meta_title' => $request->meta_title,
-            'meta_keywords' => $request->meta_keywords,
-            'meta_description' => $request->meta_description,
-        ]);
+        if($request->meta_title){
+            $product->metadata()->create([
+                'meta_title' => $request->meta_title,
+                'meta_keywords' => $request->meta_keywords,
+                'meta_description' => $request->meta_description,
+            ]);
+        }
 
         if($request->attribute[0]['attribute_id']){
             $product->saveAttributes($request->attribute);
