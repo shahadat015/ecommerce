@@ -23,7 +23,6 @@
                         <thead>
                             <tr>
                                 <th>Name</th>
-                                <th>Tagline</th>
                                 <th>Image</th>
                                 <th>Status</th>
                                 <th>
@@ -53,7 +52,6 @@
                 ajax: "{{ route('admin.brands.datatables') }}",
                 columns: [
                     { name: 'name' },
-                    { name: 'tagline' },
                     { name: 'image.path' },
                     { name: 'status' },
                     { name: 'action', orderable: false, searchable: false }

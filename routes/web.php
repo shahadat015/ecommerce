@@ -20,7 +20,7 @@ Route::post('/customer/register', 'Customer\RegisterController@register')->name(
 
 Route::group(['as' => 'customer.', 'prefix' => 'customer', 'namespace' => 'Customer', 'middleware' => ['auth:customer', 'verified']], function(){
 
-	Route::get('/', 'CustomerController@index');
+	Route::get('/', 'CustomerController@index')->name('dashboard');
 	
 });
 
@@ -73,6 +73,7 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'namespace' => 'Admin', 'mi
 	Route::get('/attribute/values/{attribute}', 'ProductController@attributeValues');
 	Route::get('/option/values/{option}', 'ProductController@optionValues');
 	Route::get('/products/datatables', 'ProductController@products')->name('products.datatables');
+	Route::get('/getProducts/', 'ProductController@getProducts')->name('getProducts');
 	Route::delete('/product/destroy', 'ProductController@destroy')->name('product.destroy');
 	Route::resource('/products', 'ProductController');
 

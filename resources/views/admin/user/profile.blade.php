@@ -62,7 +62,7 @@
                 <div class="col-lg-12 col-xl-12 mx-auto">
                     <div class="card">
                         <div class="card-body">
-                            <form id="form-horizontal" class="form-horizontal form-material mb-0" accept="{{ route('admin.user.profile') }}" method="post">
+                            <form id="update-form" class="form-horizontal form-material mb-0" accept="{{ route('admin.user.profile') }}" method="post">
                                 @csrf
                                 @method('put')
 

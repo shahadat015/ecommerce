@@ -66,8 +66,8 @@
                                 <div class="form-group">
                                     <label for="name">Categories</label>
                                     <select class="select2 mb-3 select2-multiple" name="categories[]" multiple="multiple" data-placeholder="Select Category">
-                                        @foreach($categories as $category)
-                                            <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                        @foreach($categories as $key=>$value)
+                                            <option value="{{ $key }}">{{ $value }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -346,10 +346,7 @@
 
                                 <div class="form-group">
                                     <label for="name">Related Products</label>
-                                    <select class="select2 mb-3 select2-multiple" name="products[]" multiple="multiple" data-placeholder="Select Product">
-                                        @foreach($products as $product)
-                                            <option value="{{ $product->id }}">{{ $product->name }}</option>
-                                        @endforeach
+                                    <select class="select2 mb-3 select2-multiple select_product" name="products[]" multiple="multiple" data-placeholder="Select Product">
                                     </select>
                                 </div>
                             </div>
@@ -378,6 +375,37 @@
         $(function () {
             $(".select2").select2({
                 width: "100%"
+            });
+
+            $(".select_product").select2({
+                width: "100%",
+                tags: false,
+                multiple: true,
+                tokenSeparators: [',', ' '],
+                minimumInputLength: 2,
+                minimumResultsForSearch: 10,
+                ajax: {
+                    url: '{{ route("admin.getProducts") }}',
+                    dataType: "json",
+                    type: "GET",
+                    data: function (params) {
+
+                        var queryParameters = {
+                            term: params.term
+                        }
+                        return queryParameters;
+                    },
+                    processResults: function (data) {
+                        return {
+                            results: $.map(data, function (item) {
+                                return {
+                                    text: item.name,
+                                    id: item.id
+                                }
+                            })
+                        };
+                    }
+                }
             });
 
             $('.datepicker').flatpickr({

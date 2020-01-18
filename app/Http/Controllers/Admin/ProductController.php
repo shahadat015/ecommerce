@@ -32,6 +32,11 @@ class ProductController extends Controller
         });
     }
 
+    public function getProducts()
+    {
+        return response()->json( Product::all());
+    }
+
     public function index()
     {
         return view('admin.product.index');
@@ -39,12 +44,12 @@ class ProductController extends Controller
 
     public function create()
     {
-        $categories = Category::all();
+        $categories = $categories = Category::orderBy('parent_id')->get()->nest()->setIndent('|-- ')->listsFlattened('name');
         $brands = Brand::all();
         $attributesets = AttributeSet::all();
         $options = Option::where('is_global', 1)->get();
-        $products = Product::all();
-        return view('admin.product.create', compact('categories', 'brands', 'attributesets', 'options', 'products'));
+        
+        return view('admin.product.create', compact('categories', 'brands', 'attributesets', 'options'));
     }
 
     public function store(ProductValidate $request)
@@ -86,13 +91,12 @@ class ProductController extends Controller
 
     public function edit(Product $product)
     {
-        $categories = Category::all();
+        $categories = Category::orderBy('parent_id')->get()->nest()->setIndent('|-- ')->listsFlattened('name');
         $brands = Brand::all();
         $attributesets = AttributeSet::all();
         $options = Option::where('is_global', 1)->get();
-        $products = Product::all();
         $product->load('categories', 'brand', 'attributes', 'options', 'metadata', 'images', 'image');
-        return view('admin.product.edit', compact('categories', 'brands', 'attributesets', 'options', 'products', 'product'));
+        return view('admin.product.edit', compact('categories', 'brands', 'attributesets', 'options', 'product'));
     }
 
     public function update(ProductValidate $request, Product $product)

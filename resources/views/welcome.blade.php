@@ -65,15 +65,15 @@
     </head>
     <body>
         <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
+            @if (Route::has('customer.login'))
                 <div class="top-right links">
                     @auth
-                        <a href="{{ url('/admin') }}">Admin</a>
+                        <a href="{{ route('customer.dashboard') }}">Dashboard</a>
                     @else
-                        <a href="{{ route('login') }}">Login</a>
+                        <a href="{{ route('customer.login') }}">Login</a>
 
                         @if (Route::has('register'))
-                            <a href="{{ route('register') }}">Register</a>
+                            <a href="{{ route('customer.register') }}">Register</a>
                         @endif
                     @endauth
                 </div>

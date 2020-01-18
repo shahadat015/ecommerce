@@ -9,7 +9,6 @@ class CustomerController extends Controller
 {
     public function index()
     {
-    	// return auth()->logout();
-    	return auth()->user()->name;    
+    	return view('website.customer.dashboard');    
     }
 }
