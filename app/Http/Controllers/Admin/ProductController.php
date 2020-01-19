@@ -134,6 +134,7 @@ class ProductController extends Controller
     {
         $delete = Product::findOrFail($request->id)->each(function ($product){
             $product->images()->detach();
+            $product->metadata()->delete();
             $product->delete();  
         });
 

@@ -1,9 +1,5 @@
 @extends('layouts.admin')
 @section('title', $page->name)
-@push('css')
-    <link href="{{asset('contents/admin')}}/plugins/select2/select2.min.css" rel="stylesheet" type="text/css">
-    <link rel="stylesheet" href="{{asset('contents/admin')}}/plugins/flatpickr/flatpickr.min.css">
-@endpush
 @section('content')
     <!-- Page-Title -->
     @component('layouts.partials.breadcumb')
@@ -87,66 +83,9 @@
         </div>
         <!-- end col -->
     </div>
-    @include('admin.image.modal')
     <!-- end row -->
 @endsection
 @push('js')
-    <script src="{{asset('contents/admin')}}/plugins/select2/select2.min.js"></script>
     <script src="{{asset('contents/admin')}}/plugins/tinymce/tinymce.min.js"></script>
     <script src="{{asset('contents/admin')}}/pages/jquery.form-editor.init.js"></script>
-    <script src="{{asset('contents/admin')}}/plugins/flatpickr/flatpickr.js"></script>
-    <script src="{{ asset('contents/admin') }}/plugins/repeater/jquery.repeater.min.js"></script>
-    <script src="{{ asset('contents/admin') }}/pages/jquery.form-repeater.js"></script>
-    <script>
-        $(function () {
-            $(".select2").select2({
-                width: "100%"
-            });
-
-            $(".select_product").select2({
-                width: "100%",
-                tags: false,
-                multiple: true,
-                tokenSeparators: [',', ' '],
-                minimumInputLength: 2,
-                minimumResultsForSearch: 10,
-                ajax: {
-                    url: '{{ route("admin.getProducts") }}',
-                    dataType: "json",
-                    type: "GET",
-                    data: function (params) {
-
-                        var queryParameters = {
-                            term: params.term
-                        }
-                        return queryParameters;
-                    },
-                    processResults: function (data) {
-                        return {
-                            results: $.map(data, function (item) {
-                                return {
-                                    text: item.name,
-                                    id: item.id
-                                }
-                            })
-                        };
-                    }
-                }
-            });
-
-            $('.datepicker').flatpickr({
-                autoclose: true,
-            });
-
-            $('#manage-stock').on('change', function () {
-                var val = $(this).val();
-
-                if(val == 1){
-                    $('#qty').removeClass('d-none');
-                }else{
-                    $('#qty').addClass('d-none');
-                }
-            })
-        })
-    </script>
 @endpush

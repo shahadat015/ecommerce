@@ -75,7 +75,7 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'namespace' => 'Admin', 'mi
 	Route::get('/attribute/values/{attribute}', 'ProductController@attributeValues');
 	Route::get('/option/values/{option}', 'ProductController@optionValues');
 	Route::get('/products/datatables', 'ProductController@products')->name('products.datatables');
-	Route::get('/getProducts/', 'ProductController@getProducts')->name('getProducts');
+	Route::get('/getProducts', 'ProductController@getProducts')->name('getProducts');
 	Route::delete('/product/destroy', 'ProductController@destroy')->name('product.destroy');
 	Route::resource('/products', 'ProductController');
 

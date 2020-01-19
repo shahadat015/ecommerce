@@ -2,13 +2,7 @@
     <link href="{{asset('contents/admin')}}/plugins/dropzone/dropzone.css" rel="stylesheet" type="text/css">
     <link href="{{asset('contents/admin')}}/plugins/datatables/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css">
     <link href="{{asset('contents/admin')}}/plugins/animate/animate.css" rel="stylesheet" type="text/css">
-    <link href="{{asset('contents/admin')}}/plugins/toast/jquery.toast.css" rel="stylesheet" type="text/css">
-    <style>
-        .mid-y-scroll{overflow-y:scroll;height:100%;display:block;position:sticky}
-        .mid-y-scroll::-webkit-scrollbar{width:0;border-radius:0}
-        .mid-y-scroll::-webkit-scrollbar-track{background:transparent}
-        .mid-y-scrollt::-webkit-scrollbar-thumb,::-webkit-scrollbar-thumb{background:transparent}
-    </style>
+    <link href="{{asset('contents/admin')}}/css/media.css" rel="stylesheet" type="text/css">
 @endpush
 <!-- end row -->
 <div class="modal zoomIn animated bd-example-modal-xl mid-y-scroll" tabindex="-1" role="dialog" aria-hidden="true">
@@ -49,29 +43,5 @@
     <script src="{{asset('contents/admin')}}/plugins/dropzone/dropzone.js"></script>
     <script src="{{asset('contents/admin')}}/plugins/datatables/jquery.dataTables.min.js"></script>
     <script src="{{asset('contents/admin')}}/plugins/datatables/dataTables.bootstrap4.min.js"></script>
-    <script src="{{asset('contents/admin')}}/plugins/toast/jquery.toast.js"></script>
     <script src="{{asset('contents/admin')}}/js/media.js"></script>
-    <script>
-        $(function() {
-            $('#datatable').DataTable({
-                serverSide: true,
-                ajax: "{{ route('admin.images.datatables') }}",
-                columns: [
-                    { name: 'path' },
-                    { name: 'name' },
-                    { name: 'action', orderable: false, searchable: false }
-                ]
-            });
-        });
-
-        Dropzone.options.myDropzone = {
-          paramName: "file",
-          maxFilesize: 2,
-          init() {
-             this.on("success", function(file) {
-                $('#datatable').DataTable().ajax.reload();
-             });
-          }
-        };
-    </script>
 @endpush

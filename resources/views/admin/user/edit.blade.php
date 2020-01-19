@@ -117,19 +117,5 @@
 @endsection
 @push('js')
     <script src="{{asset('contents/admin')}}/plugins/select2/select2.min.js"></script>
-    <script>
-        ! function(e) {
-            "use strict";
-            var t = function() {};
-            t.prototype.init = function() {
-                e(".select2").select2({
-                    width: "100%"
-                })
-            }, e.AdvancedForm = new t, e.AdvancedForm.Constructor = t
-        }(window.jQuery),
-        function(t) {
-            "use strict";
-            window.jQuery.AdvancedForm.init()
-        }();
-    </script>
+    <script src="{{asset('contents/admin')}}/js/custom.js"></script>
 @endpush

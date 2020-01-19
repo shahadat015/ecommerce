@@ -1,4 +1,12 @@
 $(function() {
+
+    // ajax init
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+
 	// create request
 	$(document).on('submit', '#create-form', function (event) {
 		event.preventDefault();
@@ -18,19 +26,11 @@ $(function() {
             },
             success(data) {
                 if(data.success) {
-                    Swal.fire(
-				        'Success',
-				        data.success,
-				        'success',
-				    );
                     $("#create-form")[0].reset();
                     $('.invalid-feedback').remove();
+                    return successMessage(data.success);
                 }else{
-                    Swal.fire(
-				        'Error',
-				        data.error,
-				        'error',
-				    );
+                    return errorMessage(data.error);
                 }
             },
             error(error) {
@@ -52,11 +52,7 @@ $(function() {
                     	inputField.next().remove();
                     });
                 }else{
-                	Swal.fire(
-				        'Ops!',
-				        error.statusText,
-				        'error',
-				    );
+                    return errorStatusText(error.statusText);
                 }
             },
             complete:function() {
@@ -84,18 +80,10 @@ $(function() {
             },
             success(data) {
                 if(data.success) {
-                    Swal.fire(
-                        'Success',
-                        data.success,
-                        'success',
-                    );
                     $('.invalid-feedback').remove();
+                    return successMessage(data.success);
                 }else{
-                    Swal.fire(
-                        'Error',
-                        data.error,
-                        'error',
-                    );
+                    return errorMessage(data.error);
                 }
             },
             error(error) {
@@ -117,11 +105,7 @@ $(function() {
                         inputField.next().remove();
                     });
                 }else{
-                    Swal.fire(
-                        'Ops!',
-                        error.statusText,
-                        'error',
-                    );
+                    return errorStatusText(error.statusText);
                 }
             },
             complete:function() {
@@ -166,11 +150,15 @@ $(function() {
         id.push($(this).data('id'));
 
         if(id.length == 0){
-            Swal.fire(
-                'Ops!',
-                'Please select at least one data',
-                'error'
-            );
+            $.toast({
+                heading: 'Error',
+                text: 'Please select at least one data',
+                position: 'top-right',
+                loaderBg:'#ff6849',
+                icon: 'error',
+                hideAfter: 3000, 
+                stack: 6
+            });
             return;
         }
 
@@ -195,28 +183,16 @@ $(function() {
                         dataType: "JSON",
                         success(data) {
                             if(data.success) {
-                                Swal.fire(
-                                    'Deleted!',
-                                    data.success,
-                                    'success'
-                                );
                                 $('#datatable').DataTable().ajax.reload();
                                 $(".btn-delete").attr('disabled', true);
                                 $('.check-all').prop("checked", false);
+                                return successMessage(data.success);
                             }else{
-                                Swal.fire(
-                                    'Ops!',
-                                    data.error,
-                                    'error'
-                                );
+                                return errorMessage(data.error);
                             }
                         },
                         error(error) {
-                            Swal.fire(
-                                'Ops!',
-                                error.statusText,
-                                'error',
-                            );
+                            return errorStatusText(error.statusText);
                         }
                     });
                 });
@@ -238,11 +214,7 @@ $(function() {
                 select.parent().next().children('.select2-multiple').html(data);
             },
             error(error) {
-                Swal.fire(
-                    'Ops!',
-                    error.statusText,
-                    'error',
-                );
+                return errorStatusText(error.statusText);
             }
         });
     });
@@ -263,21 +235,55 @@ $(function() {
                     $('.option').append(data);
                     $('.repeater-option').repeater({
                         repeaters: [{
-                            // (Required)
                             // Specify the jQuery selector for this nested repeater
                             selector: '.repeater-custom-show-hide-inner'
                         }]
                     });
                 },
                 error(error) {
-                    Swal.fire(
-                        'Ops!',
-                        error.statusText,
-                        'error',
-                    );
+                    return errorStatusText(error.statusText);
                 }
             });
         });
     });
+
+    // show success message
+    function successMessage(message) {
+        $.toast({
+            heading: 'Success',
+            text: message,
+            position: 'top-right',
+            loaderBg:'#ff6849',
+            icon: 'success',
+            hideAfter: 3000, 
+            stack: 6
+        });
+    };
+
+    // show error message
+    function errorMessage(message) {
+        $.toast({
+            heading: 'Error',
+            text: message,
+            position: 'top-right',
+            loaderBg:'#ff6849',
+            icon: 'error',
+            hideAfter: 3000, 
+            stack: 6
+        });
+    };
+
+    // show error ststus
+    function errorStatusText(message) {
+        $.toast({
+            heading: 'Error',
+            text: message,
+            position: 'top-right',
+            loaderBg:'#ff6849',
+            icon: 'error',
+            hideAfter: 3000, 
+            stack: 6
+        });
+    }
 
 });

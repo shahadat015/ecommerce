@@ -45,4 +45,24 @@ $(function() {
         }
     });
 
+    $('#datatable').DataTable({
+        serverSide: true,
+        ajax: window.origin + '/admin/images/datatables',
+        columns: [
+        { name: 'path' },
+        { name: 'name' },
+        { name: 'action', orderable: false, searchable: false }
+        ]
+    });
+
 });
+
+Dropzone.options.myDropzone = {
+    paramName: "file",
+    maxFilesize: 2,
+    init() {
+        this.on("success", function(file) {
+            $('#datatable').DataTable().ajax.reload();
+        });
+    }
+};

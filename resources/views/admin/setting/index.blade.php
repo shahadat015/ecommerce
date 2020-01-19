@@ -1,9 +1,5 @@
 @extends('layouts.admin')
 @section('title', 'Settings')
-@push('css')
-    <link href="{{asset('contents/admin')}}/plugins/select2/select2.min.css" rel="stylesheet" type="text/css">
-    <link href="{{asset('contents/admin')}}/plugins/daterangepicker/bootstrap-datepicker.min.css" rel="stylesheet">
-@endpush
 @section('content')
     <!-- Page-Title -->
     @component('layouts.partials.breadcumb')
@@ -203,24 +199,5 @@
         </div>
         <!-- end col -->
     </div>
-    @include('admin.image.modal')
     <!-- end row -->
 @endsection
-@push('js')
-    <script src="{{asset('contents/admin')}}/plugins/select2/select2.min.js"></script>
-    <script src="{{asset('contents/admin')}}/plugins/moment/moment.js"></script>
-    <script src="{{asset('contents/admin')}}/plugins/daterangepicker/bootstrap-datepicker.min.js"></script>
-    <script>
-        $(function () {
-            $(".select2").select2({
-                width: "100%"
-            });
-
-            $('.datepicker').datepicker({
-                autoclose: true,
-                todayHighlight: true,
-                format: 'yyyy-mm-dd'
-            });
-        })
-    </script>
-@endpush
