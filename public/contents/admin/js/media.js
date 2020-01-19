@@ -3,7 +3,7 @@ $(function() {
     $(document).on('click', '.image-picker', function() {
         $('.bd-example-modal-xl').modal('show');
 
-        window.imgType = $(this).data('image');
+        window.imgPicker = $(this);
     });
 
     $(document).on('click', '.select-image', function(e) {
@@ -11,11 +11,12 @@ $(function() {
 
         var path = $(this).data('src');
         var val = $(this).data('id');
+        var imgType = imgPicker.data('image');
 
         if(imgType == 'single'){
             $('.single-image .image-holder').html('<image src="'+ path +'"><input type="hidden" name="image_id" value="'+ val +'"><button type="button" class="btn remove-image"  data-image="single"><i class="fas fa-times"></i></button>');
             $('.bd-example-modal-xl').modal('hide');
-        }
+        };
         if(imgType == 'multiple'){
             $('.placeholder').remove();
             $('.image-list').append('<div class="image-holder"><image src="'+ path +'"><input type="hidden" name="images[]" value="'+ val +'"><button type="button" class="btn remove-image" data-image="multiple"><i class="fas fa-times"></i></button></div>');
@@ -29,6 +30,11 @@ $(function() {
                 hideAfter: 1500, 
                 stack: 6
             });
+        };
+
+        if(imgType == 'slider'){
+            imgPicker.children().html('<image src="'+ path +'"><input type="hidden" name="image_id" value="'+ val +'">');
+            $('.bd-example-modal-xl').modal('hide');
         }
     });
 

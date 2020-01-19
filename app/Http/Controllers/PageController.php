@@ -8,9 +8,9 @@ use Illuminate\Http\Request;
 class PageController extends Controller
 {
 
-    public function index($page, $subs = null)
+    public function index($page)
     {
     	$page = Page::whereSlug($page)->firstOrFail();
-        return view('website.page', compact('page'));
+        return view()->first(['website.'.$page->template, 'website.page'], compact('page'));
     }
 }

@@ -24,8 +24,8 @@ Route::group(['as' => 'customer.', 'prefix' => 'customer', 'namespace' => 'Custo
 	
 });
 
-Route::get('{page}/{subs?}', 'PageController@index')
-    ->where(['page' => '^(((?=(?!admin))(?=(?!\/)).))*$', 'subs' => '.*']);
+Route::get('{page}', 'PageController@index')
+    ->where(['page' => '^(((?=(?!admin))(?=(?!\/)).))*$']);
 
 /*
 |--------------------------------------------------------------------------
@@ -93,4 +93,8 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'namespace' => 'Admin', 'mi
 	Route::get('/pages/datatables', 'PageController@pages')->name('pages.datatables');
 	Route::delete('/page/destroy', 'PageController@destroy')->name('page.destroy');
 	Route::resource('/pages', 'PageController')->except('show');
+
+	Route::get('/sliders/datatables', 'SliderController@sliders')->name('sliders.datatables');
+	Route::delete('/slider/destroy', 'SliderController@destroy')->name('slider.destroy');
+	Route::resource('/sliders', 'SliderController')->except('show');
 });

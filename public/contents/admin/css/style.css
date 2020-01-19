@@ -8774,3 +8774,7 @@ hr.thick {
 .form-control:disabled, .form-control[readonly] {
     background-color: #fff;
 }
+
+.image-picker .image-holder{
+    cursor: pointer
+}

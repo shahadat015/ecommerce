@@ -183,7 +183,7 @@
                             </div>
                             <div class="tab-pane p-3" id="attributes" role="tabpanel">
                                 <h4>Attributes</h4><hr>
-                                <div class="repeater-custom-show-hide">
+                                <div class="repeater-attribute">
                                     <div data-repeater-list="attribute">
                                         <div data-repeater-item="">
                                             <div class="form-group row  d-flex align-items-end"> 
@@ -365,11 +365,13 @@
     <!-- end row -->
 @endsection
 @push('js')
-    <script src="{{asset('contents/admin')}}/plugins/select2/select2.min.js"></script>
     <script src="{{asset('contents/admin')}}/plugins/tinymce/tinymce.min.js"></script>
-    <script src="{{asset('contents/admin')}}/pages/jquery.form-editor.init.js"></script>
+    <script src="{{asset('contents/admin')}}/plugins/select2/select2.min.js"></script>
     <script src="{{ asset('contents/admin') }}/plugins/repeater/jquery.repeater.min.js"></script>
-    <script src="{{ asset('contents/admin') }}/pages/jquery.form-repeater.js"></script>
     <script src="{{asset('contents/admin')}}/plugins/flatpickr/flatpickr.js"></script>
-    <script src="{{asset('contents/admin')}}/js/custom.js"></script>
+    <script src="{{asset('contents/admin')}}/pages/jquery.form-editor.init.js"></script>
+    <script src="{{ asset('contents/admin') }}/pages/jquery.form-repeater.js"></script>
+    <script src="{{asset('contents/admin')}}/js/flatpickr.init.js"></script>
+    <script src="{{asset('contents/admin')}}/js/select2.init.js"></script>
+    <script src="{{asset('contents/admin')}}/js/product.js"></script>
 @endpush

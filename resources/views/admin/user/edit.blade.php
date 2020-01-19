@@ -117,5 +117,5 @@
 @endsection
 @push('js')
     <script src="{{asset('contents/admin')}}/plugins/select2/select2.min.js"></script>
-    <script src="{{asset('contents/admin')}}/js/custom.js"></script>
+    <script src="{{asset('contents/admin')}}/js/select2.init.js"></script>
 @endpush

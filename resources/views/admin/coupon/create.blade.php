@@ -135,5 +135,6 @@
 @push('js')
     <script src="{{asset('contents/admin')}}/plugins/select2/select2.min.js"></script>
     <script src="{{asset('contents/admin')}}/plugins/flatpickr/flatpickr.js"></script>
-    <script src="{{asset('contents/admin')}}/js/custom.js"></script>
+    <script src="{{asset('contents/admin')}}/js/select2.init.js"></script>
+    <script src="{{asset('contents/admin')}}/js/flatpickr.init.js"></script>
 @endpush
