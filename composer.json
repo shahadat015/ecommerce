@@ -15,6 +15,7 @@
         "laravel/helpers": "^1.1",
         "laravel/tinker": "^1.0",
         "spatie/laravel-permission": "^3.3",
+        "torann/geoip": "^1.1",
         "typicms/nestablecollection": "^1.1"
     },
     "require-dev": {

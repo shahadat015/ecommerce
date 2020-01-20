@@ -23,7 +23,7 @@ class CreateSliderSlidesTable extends Migration
             $table->string('call_to_action_url')->nullable();
             $table->boolean('open_in_new_window')->default(false);
             $table->timestamps();
-            $table->foreign('slider_id')->references('id')->on('sliders')->onDelete('cascade');
+            
             $table->foreign('image_id')->references('id')->on('images')->onDelete('cascade');
         });
     }

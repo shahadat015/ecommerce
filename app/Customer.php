@@ -41,10 +41,15 @@ class Customer extends Authenticatable
         return $this->belongsTo(Image::class);
     }
 
-    public static function laratablesImagepath($user)
+    public function wishlist()
     {
-        if ($user->image) {
-            return '<img src="'. asset($user->image->path()) .'" class="mr-2" alt="" height="52">';
+        return $this->belongsToMany(Product::class, 'wish_lists')->withTimestamps();
+    }
+
+    public static function laratablesImagepath($customer)
+    {
+        if ($customer->image) {
+            return '<img src="'. asset($customer->image->path()) .'" class="mr-2" alt="" height="52">';
         }else{
             return '<img src="'. asset('contents/admin/images/placeholder.png') .'" class="mr-2" alt="" height="52" width="80">';
         }

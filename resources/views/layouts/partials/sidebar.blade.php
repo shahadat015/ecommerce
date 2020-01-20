@@ -105,12 +105,19 @@
                     <h6 class="menu-title">Dashboard</h6>
                 </div>
                 <ul class="nav">
-                    <li class="nav-item"><a class="nav-link" href="{{ route('admin.dashboard') }}"><i class="dripicons-meter"></i>Dashboard</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{ route('admin.settings') }}"><i class="dripicons-gear"></i>Settings</a></li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('admin.dashboard') }}"><i class="dripicons-meter"></i>Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('admin.settings') }}"><i class="dripicons-gear"></i>Settings</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('admin.visitors') }}"><i class="dripicons-user-group"></i>Visitors</a>
+                    </li>
                 </ul>
             </div>
             <!-- end Analytic -->
-            <div id="MetricaEcommerce" class="main-icon-menu-pane">
+            <div id="MetricaEcommerce" class="main-icon-menu-pane {{ request()->is('admin/products/*', 'admin/brands/*', 'admin/attributes/*', 'admin/attribute-sets/*', 'admin/options/*', 'admin/reviews/*', 'admin/coupons/*') ? 'active' : '' }}">
                 <div class="title-box">
                     <h6 class="menu-title">Products</h6>
                 </div>
@@ -125,7 +132,7 @@
                     <li class="nav-item"><a class="nav-link" href="{{ url('/admin/coupons') }}"><i class="dripicons-card"></i>Coupons</a></li>
                 </ul>
             </div>
-            <div id="MetricaCrypto" class="main-icon-menu-pane">
+            <div id="MetricaCrypto" class="main-icon-menu-pane {{ request()->is('admin/orders/*') ? 'active' : '' }}">
                 <div class="title-box">
                     <h6 class="menu-title">Sales</h6></div>
                 <ul class="nav">
@@ -150,7 +157,7 @@
                 </ul>
             </div>
             <!-- end CRM -->
-            <div id="MetricaOthers" class="main-icon-menu-pane">
+            <div id="MetricaOthers" class="main-icon-menu-pane {{ request()->is('admin/sliders/*') ? 'active' : '' }}">
                 <div class="title-box">
                     <h6 class="menu-title">Appearance</h6>
                 </div>
@@ -175,7 +182,7 @@
                 <!--end nav-->
             </div>
             <!-- end Others -->
-            <div id="MetricaPages" class="main-icon-menu-pane">
+            <div id="MetricaPages" class="main-icon-menu-pane {{ request()->is('admin/pages/*') ? 'active' : '' }}">
                 <div class="title-box">
                     <h6 class="menu-title">Pages</h6>
                 </div>
@@ -184,7 +191,7 @@
                 </ul>
             </div>
             <!-- end Pages -->
-            <div id="MetricaAuthentication" class="main-icon-menu-pane">
+            <div id="MetricaAuthentication" class="main-icon-menu-pane {{ request()->is('admin/users/*', 'admin/roles/*') ? 'active' : '' }}">
                 <div class="title-box">
                     <h6 class="menu-title">Authentication</h6>
                 </div>

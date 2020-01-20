@@ -247,6 +247,55 @@ $(function() {
         });
     });
 
+    // update order status
+    $(document).on('change', '.status', function () {
+        var url = $(this).data('url');
+        var status = $(this).val();
+
+        Pace.restart();
+        Pace.track(function () {
+
+            $.ajax({
+                url: url,
+                type: "POST",
+                data: {status},
+                dataType: "JSON",
+                success(data) {
+                    if(data.success){
+                        return successMessage(data.success);
+                    }else{
+                        return errorMessage(data.error);
+                    }
+                },
+                error(error) {
+                    return errorStatusText(error.statusText);
+                }
+            });
+        });
+    });
+
+    // order invoice email dend
+    $(document).on('click', '.btn-mail', function (e) {
+        e.preventDefault();
+        
+        var url = $(this).attr('href');
+
+        Pace.restart();
+        Pace.track(function () {
+
+            $.ajax({
+                url: url,
+                type: "GET",
+                success(data) {
+                    return successMessage(data.success);
+                },
+                error(error) {
+                    return errorStatusText(error.statusText);
+                }
+            });
+        });
+    });
+
     // show success message
     function successMessage(message) {
         $.toast({
@@ -285,5 +334,6 @@ $(function() {
             stack: 6
         });
     }
+
 
 });

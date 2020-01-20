@@ -8778,3 +8778,8 @@ hr.thick {
 .image-picker .image-holder{
     cursor: pointer
 }
+.status {
+    width: 100%; 
+    border: 1px solid #f9f9f9; 
+    color: #50649c
+}
