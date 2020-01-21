@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class Visitor extends Model
 {
@@ -29,6 +30,17 @@ class Visitor extends Model
 
 		cache([$ip => $ip], now()->addDays());
 	}
+
+	// public static function visitorsAnalytics()
+ //    {
+ //        return static::selectRaw('count(*) as total_visitor')
+ //            ->whereBetween('created_at', [now()->startOfMonth(), now()->endOfMonth()])
+ //            ->selectRaw('EXTRACT(DAY FROM created_at) as day')
+ //            ->groupBy(DB::raw('EXTRACT(DAY FROM created_at)'))
+ //            ->groupBy('city')
+ //            ->orderby('day')
+ //            ->get();
+ //    }
 
 	public static function laratablesCreatedAt($visitor)
     {

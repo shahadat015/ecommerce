@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class Order extends Model
 {
@@ -21,6 +22,22 @@ class Order extends Model
     public function transaction()
     {
         return $this->hasOne(Transaction::class);
+    }
+
+    public static function salesAnalytics()
+    {
+        return static::selectRaw('SUM(total) as total')
+            ->selectRaw('COUNT(*) as total_orders')
+            ->whereBetween('created_at', [now()->startOfWeek(), now()->endOfWeek()])
+            ->selectRaw('EXTRACT(DAY FROM created_at) as day')
+            ->groupBy(DB::raw('EXTRACT(DAY FROM created_at)'))
+            ->orderby('day')
+            ->get();
+    }
+
+    public static function totalSales()
+    {
+        return self::sum('total');
     }
 
     public static function laratablesCreatedAt($order)

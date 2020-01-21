@@ -44,7 +44,7 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-3">
-                            <h6 class="mb-0"><b>Order Date :</b> {{ date_formate($order->created_at) }}</h6>
+                            <h6 class="mb-0"><b>Order Date :</b> {{ date_format($order->created_at, 'd M Y') }}</h6>
                             <h6><b>Order ID :</b> # {{ $order->id }}</h6>
                             <div class="row">
                                 <label for="status" class="col-sm-6"><b>Order Status : </b></label>

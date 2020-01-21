@@ -109,10 +109,10 @@
                         <a class="nav-link" href="{{ route('admin.dashboard') }}"><i class="dripicons-meter"></i>Dashboard</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('admin.settings') }}"><i class="dripicons-gear"></i>Settings</a>
+                        <a class="nav-link" href="{{ route('admin.visitors') }}"><i class="dripicons-user-group"></i>Visitors</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('admin.visitors') }}"><i class="dripicons-user-group"></i>Visitors</a>
+                        <a class="nav-link" href="{{ route('admin.settings') }}"><i class="dripicons-gear"></i>Settings</a>
                     </li>
                 </ul>
             </div>

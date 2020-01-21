@@ -38,6 +38,8 @@ Route::get('{page}', 'PageController@index')
 Route::group(['as' => 'admin.', 'prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['auth']], function(){
 	
 	Route::get('/', 'DashboardController@index')->name('dashboard');
+	Route::get('/sales/analytics', 'DashboardController@salesAnalytics');
+	// Route::get('/visitors/analytics', 'DashboardController@visitorsAnalytics');
 
 	Route::get('/user/profile', 'UserController@profile')->name('user.profile');
 	Route::put('/user/profile', 'UserController@updateProfile')->name('user.profile');
