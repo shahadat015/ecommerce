@@ -29,5 +29,9 @@ class AppServiceProvider extends ServiceProvider
         if(!cache(request()->ip())){
             Visitor::saveVisitor();
         }
+
+        view()->composer('admin.report.*', function ($view) {
+            $view->with('request', $this->app['request']);
+        });
     }
 }

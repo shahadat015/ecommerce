@@ -52,7 +52,7 @@ $(function() {
                     	inputField.next().remove();
                     });
                 }else{
-                    return errorStatusText(error.statusText);
+                    return errorStatusText(error);
                 }
             },
             complete:function() {
@@ -105,7 +105,7 @@ $(function() {
                         inputField.next().remove();
                     });
                 }else{
-                    return errorStatusText(error.statusText);
+                    return errorStatusText(error);
                 }
             },
             complete:function() {
@@ -149,19 +149,6 @@ $(function() {
 
         id.push($(this).data('id'));
 
-        if(id.length == 0){
-            $.toast({
-                heading: 'Error',
-                text: 'Please select at least one data',
-                position: 'top-right',
-                loaderBg:'#ff6849',
-                icon: 'error',
-                hideAfter: 3000, 
-                stack: 6
-            });
-            return;
-        }
-
         Swal.fire({
             title: 'Are you sure?',
             text: "You won't be able to revert this!",
@@ -192,7 +179,7 @@ $(function() {
                             }
                         },
                         error(error) {
-                            return errorStatusText(error.statusText);
+                            return errorStatusText(error);
                         }
                     });
                 });
@@ -203,7 +190,7 @@ $(function() {
     // Retrieve attribute values
     $(document).on('change', '.attributes', function () {
         var id = $(this).val();
-        var url = window.origin + '/admin/attribute/values/' + id;
+        var url = route('attribute.values', id);
         var select = $(this);
 
         $.ajax({
@@ -214,7 +201,7 @@ $(function() {
                 select.parent().next().children('.select2-multiple').html(data);
             },
             error(error) {
-                return errorStatusText(error.statusText);
+                return errorStatusText(error);
             }
         });
     });
@@ -222,7 +209,7 @@ $(function() {
     // Retrieve global options
     $(document).on('click', '#btn-global', function () {
         var id = $('#option').val();
-        var url = window.origin + '/admin/option/values/' + id;
+        var url = route('option.values', id);
 
         Pace.restart();
         Pace.track(function () {
@@ -241,7 +228,7 @@ $(function() {
                     });
                 },
                 error(error) {
-                    return errorStatusText(error.statusText);
+                    return errorStatusText(error);
                 }
             });
         });
@@ -268,7 +255,7 @@ $(function() {
                     }
                 },
                 error(error) {
-                    return errorStatusText(error.statusText);
+                    return errorStatusText(error);
                 }
             });
         });
@@ -290,7 +277,7 @@ $(function() {
                     return successMessage(data.success);
                 },
                 error(error) {
-                    return errorStatusText(error.statusText);
+                    return errorStatusText(error);
                 }
             });
         });
@@ -323,10 +310,10 @@ $(function() {
     };
 
     // show error ststus
-    function errorStatusText(message) {
+    function errorStatusText(error) {
         $.toast({
-            heading: 'Error',
-            text: message,
+            heading: error.status,
+            text: error.statusText,
             position: 'top-right',
             loaderBg:'#ff6849',
             icon: 'error',
@@ -335,5 +322,8 @@ $(function() {
         });
     }
 
-
+    function route(route, id){
+        var url = route.replace(/\./g, '/');
+        return window.origin + '/admin/' + url + '/' + id;
+    }
 });

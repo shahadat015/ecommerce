@@ -153,7 +153,7 @@
                     <h6 class="menu-title">Reports</h6>
                 </div>
                 <ul class="nav">
-                    <li class="nav-item"><a class="nav-link" href="{{ url('/admin/report') }}"><i class="dripicons-document"></i>Reports</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ route('admin.reports') }}"><i class="dripicons-document"></i>Reports</a></li>
                 </ul>
             </div>
             <!-- end CRM -->

@@ -190,17 +190,17 @@
 
                                 <div class="form-group">
                                     <label for="name">Meta Title</label>
-                                    <input type="text" name="meta_title" class="form-control" value="{{ $product->metadata->meta_title }}">
+                                    <input type="text" name="meta_title" class="form-control" value="{{ $product->metadata->meta_title ?? '' }}">
                                 </div>
 
                                 <div class="form-group">
                                     <label for="name">Meta Keywords</label>
-                                    <input type="text" name="meta_keywords" class="form-control" value="{{ $product->metadata->meta_keywords }}">
+                                    <input type="text" name="meta_keywords" class="form-control" value="{{ $product->metadata->meta_keywords ?? '' }}">
                                 </div>
 
                                 <div class="form-group">
                                     <label for="name">Meta Description</label>
-                                    <textarea name="meta_description" class="form-control" cols="30" rows="10">{{ $product->metadata->meta_description }}</textarea>
+                                    <textarea name="meta_description" class="form-control" cols="30" rows="10">{{ $product->metadata->meta_description ?? '' }}</textarea>
                                 </div>
                             </div>
                             <div class="tab-pane p-3" id="attributes" role="tabpanel">

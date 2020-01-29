@@ -110,6 +110,8 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'namespace' => 'Admin', 'mi
 	Route::delete('/transaction/destroy', 'TransactionController@destroy')->name('transaction.destroy');
 	Route::get('/transactions', 'TransactionController@index')->name('transactions');
 
+	Route::get('/reports', 'ReportController@index')->name('reports');
+
 	Route::get('/visitors/datatables', 'VisitorController@visitors')->name('visitors.datatables');
 	Route::delete('/visitor/destroy', 'VisitorController@destroy')->name('visitor.destroy');
 	Route::get('/visitors', 'VisitorController@index')->name('visitors');

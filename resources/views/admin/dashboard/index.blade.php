@@ -91,7 +91,7 @@
                                 <span class="text-info">{{ $topVisitorsArea->city }}</span> 
                                 <small class="float-right text-muted ml-3 font-14">{{ $totalVisitorPercentage = $topVisitorsArea->totalVisitorPercentage($topVisitorsArea->total_visitors) }}%</small>
                                 <div class="progress mt-2" style="height:3px;">
-                                    <div class="progress-bar bg-pink" role="progressbar" style="width: {{ $totalVisitorPercentage }}%; border-radius:5px;" aria-valuenow="81" aria-valuemin="0" aria-valuemax="100"></div>
+                                    <div class="progress-bar bg-secondary" role="progressbar" style="width: {{ $totalVisitorPercentage }}%; border-radius:5px;" aria-valuenow="81" aria-valuemin="0" aria-valuemax="100"></div>
                                 </div>
                             </div>
                         </div>

@@ -90,7 +90,7 @@
                                                         <td class="content-block aligncenter" style="padding: 0 0 20px;" align="center" valign="top">
                                                             <table class="invoice" style="width: 80%;">
                                                                 <tr>
-                                                                    <td style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; font-size: 14px; padding: 5px 0;" valign="top">{{ $order->customer_name }}<br>Invoice #{{ $order->id }}<br>{{ date_formate($order->created_at) }}</td>
+                                                                    <td style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; font-size: 14px; padding: 5px 0;" valign="top">{{ $order->customer_name }}<br>Invoice #{{ $order->id }}<br>{{ date_format($order->created_at, 'd M Y') }}</td>
                                                                 </tr>
                                                                 <tr>
                                                                     <td style="padding: 5px 0;" valign="top">

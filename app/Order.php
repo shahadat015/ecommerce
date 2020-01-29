@@ -39,6 +39,11 @@ class Order extends Model
         return self::sum('total');
     }
 
+    public function getShippingMethodAttribute($value)
+    {
+        return ucwords(str_replace('_', ' ', $value));
+    }
+
     public static function laratablesCreatedAt($order)
     {
         return $order->created_at->diffForHumans();

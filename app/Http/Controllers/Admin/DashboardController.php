@@ -9,7 +9,6 @@ use App\Product;
 use App\Review;
 use App\Visitor;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
 {
