@@ -82,34 +82,20 @@
         <div class="col-lg-4">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="header-title mt-0">Top District Sales</h4>
+                    <h4 class="header-title mt-0">Top District Visitors</h4>
                     <div id="bd-map-markers" class="dashboard-map"></div>
                     <div class="row">
+                        @foreach($topVisitorsAreas as $topVisitorsArea)
                         <div class="col-md-5">
-                            <div class="mt-3"><span class="text-info">USA</span> <small class="float-right text-muted ml-3 font-14">81%</small>
+                            <div class="mt-3">
+                                <span class="text-info">{{ $topVisitorsArea->city }}</span> 
+                                <small class="float-right text-muted ml-3 font-14">{{ $totalVisitorPercentage = $topVisitorsArea->totalVisitorPercentage($topVisitorsArea->total_visitors) }}%</small>
                                 <div class="progress mt-2" style="height:3px;">
-                                    <div class="progress-bar bg-pink" role="progressbar" style="width: 81%; border-radius:5px;" aria-valuenow="81" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                            </div>
-                            <div class="mt-3"><span class="text-info">Greenland</span> <small class="float-right text-muted ml-3 font-14">68%</small>
-                                <div class="progress mt-2" style="height:3px;">
-                                    <div class="progress-bar bg-secondary" role="progressbar" style="width: 68%; border-radius:5px;" aria-valuenow="68" aria-valuemin="0" aria-valuemax="100"></div>
+                                    <div class="progress-bar bg-pink" role="progressbar" style="width: {{ $totalVisitorPercentage }}%; border-radius:5px;" aria-valuenow="81" aria-valuemin="0" aria-valuemax="100"></div>
                                 </div>
                             </div>
                         </div>
-                        <!--end col-->
-                        <div class="col-md-5 ml-auto">
-                            <div class="mt-3"><span class="text-info">Australia</span> <small class="float-right text-muted ml-3 font-14">48%</small>
-                                <div class="progress mt-2" style="height:3px;">
-                                    <div class="progress-bar bg-purple" role="progressbar" style="width: 48%; border-radius:5px;" aria-valuenow="48" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                            </div>
-                            <div class="mt-3"><span class="text-info">Brazil</span> <small class="float-right text-muted ml-3 font-14">32%</small>
-                                <div class="progress mt-2" style="height:3px;">
-                                    <div class="progress-bar bg-warning" role="progressbar" style="width: 32%; border-radius:5px;" aria-valuenow="32" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                            </div>
-                        </div>
+                        @endforeach
                         <!--end col-->
                     </div>
                     <!--end row-->
@@ -121,7 +107,7 @@
         <!--end col-->
     </div>
     <!--end row-->
-    {{--<div class="row">
+    <!--<div class="row">
         <div class="col-lg-4">
             <div class="card">
                 <div class="card-body">
@@ -133,15 +119,11 @@
                                 <p class="mb-0 text-muted"><span class="text-success"><i class="mdi mdi-arrow-up"></i>14.5%</span> Up From Last Month</p>
                             </div>
                         </div>
-                        <!--end col-->
                         <div class="col-4 align-self-center">
                             <div class="icon-info text-right"><i class="dripicons-wallet bg-soft-info"></i></div>
                         </div>
-                        <!--end col-->
                     </div>
-                    <!--end row-->
                 </div>
-                <!--end card-body-->
                 <div class="card-body overflow-hidden p-0">
                     <div class="d-flex mb-0 h-100 dash-info-box">
                         <div class="w-100">
@@ -151,11 +133,8 @@
                         </div>
                     </div>
                 </div>
-                <!--end card-body-->
             </div>
-            <!--end card-->
         </div>
-        <!--end col-->
         <div class="col-lg-4">
             <div class="card">
                 <div class="card-body">
@@ -166,7 +145,6 @@
                                 <div id="re_customers" class="apex-charts mb-n4"></div>
                             </div>
                         </div>
-                        <!--end col-->
                         <div class="col-4 align-self-center">
                             <div class="re-customers-detail">
                                 <h3 class="mb-0">21,546</h3>
@@ -177,15 +155,10 @@
                                 <p class="text-muted"><i class="mdi mdi-circle text-light mr-1"></i>Repeated</p>
                             </div>
                         </div>
-                        <!--end col-->
                     </div>
-                    <!--end row-->
                 </div>
-                <!--end card-body-->
             </div>
-            <!--end card-->
         </div>
-        <!--end col-->
         <div class="col-lg-4">
             <div class="card carousel-bg-img">
                 <div class="card-body dash-info-carousel">
@@ -221,12 +194,9 @@
                         <a class="carousel-control-next" href="#carousel_2" role="button" data-slide="next"><span class="carousel-control-next-icon" aria-hidden="true"></span> <span class="sr-only">Next</span></a>
                     </div>
                 </div>
-                <!--end card-body-->
             </div>
-            <!--end card-->
         </div>
-        <!--end col-->
-    </div>--}}
+    </div>-->
     <!--end row-->
     <div class="row">
         <div class="col-12">

@@ -21,7 +21,7 @@ class DashboardController extends Controller
             'totalProducts' => Product::count(),
             'totalCustomers' => Customer::count(),
             'latestOrders' => $this->getLatestOrders(),
-            // 'latestReviews' => $this->getLatestReviews(),
+            'topVisitorsAreas' => $this->visitorsAnalytics(),
         ]);
     }
 
@@ -30,10 +30,10 @@ class DashboardController extends Controller
     	return response()->json(Order::salesAnalytics());
     }
 
-    // public function visitorsAnalytics()
-    // {
-    // 	return response()->json(Visitor::visitorsAnalytics());
-    // }
+    public function visitorsAnalytics()
+    {
+    	return Visitor::visitorsAnalytics();
+    }
 
     private function getLatestOrders()
     {

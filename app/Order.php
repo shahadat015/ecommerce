@@ -27,7 +27,6 @@ class Order extends Model
     public static function salesAnalytics()
     {
         return static::selectRaw('SUM(total) as total')
-            ->selectRaw('COUNT(*) as total_orders')
             ->whereBetween('created_at', [now()->startOfWeek(), now()->endOfWeek()])
             ->selectRaw('EXTRACT(DAY FROM created_at) as day')
             ->groupBy(DB::raw('EXTRACT(DAY FROM created_at)'))
