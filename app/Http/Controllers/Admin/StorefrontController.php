@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Menu;
 use App\Page;
 use App\Setting;
 use App\Slider;
@@ -17,7 +18,8 @@ class StorefrontController extends Controller
         }
         return view('admin.storefront.general.index', [
         	'sliders' => Slider::all(),
-        	'pages' => Page::all()
+        	'pages' => Page::all(),
+        	'menus' => Menu::all(),
         ]);
 	}
 

@@ -114,6 +114,9 @@
                                     <label for="name">Primary Menu</label>
                                     <select name="storefront_primary_menu" class="form-control">
                                         <option value="">Select Menu</option>
+                                        @foreach($menus as $menu)
+                                            <option value="">{{ $menu->name }}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                                 <div class="form-group">
@@ -125,6 +128,9 @@
                                     <label for="name">Category Menu</label>
                                     <select name="storefront_category_menu" class="form-control">
                                         <option value="">Select Menu</option>
+                                        @foreach($menus as $menu)
+                                            <option value="">{{ $menu->name }}</option>
+                                        @endforeach
                                     </select>
                                 </div>
 
@@ -137,6 +143,9 @@
                                     <label for="name">Footer Menu</label>
                                     <select name="storefront_footer_menu" class="form-control">
                                         <option value="">Select Menu</option>
+                                        @foreach($menus as $menu)
+                                            <option value="">{{ $menu->name }}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>
