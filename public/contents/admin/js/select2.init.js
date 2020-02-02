@@ -12,7 +12,7 @@ $(function () {
 		minimumInputLength: 2,
 		minimumResultsForSearch: 10,
 		ajax: {
-			url: window.origin + '/admin/getProducts',
+			url: route('getProducts'),
 			dataType: "json",
 			type: "GET",
 			data: function (params) {
@@ -34,4 +34,9 @@ $(function () {
 			}
 		}
 	});
+
+	function route(route){
+        var url = route.replace(/\./g, '/');
+        return window.origin + '/admin/' + url;
+    }
 });

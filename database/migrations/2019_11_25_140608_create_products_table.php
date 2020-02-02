@@ -19,6 +19,7 @@ class CreateProductsTable extends Migration
             $table->string('slug');
             $table->string('image_id')->nullable();
             $table->float('price');
+            $table->float('selling_price')->nullable();
             $table->float('special_price')->nullable();
             $table->timestamp('special_price_start')->nullable();
             $table->timestamp('special_price_end')->nullable();

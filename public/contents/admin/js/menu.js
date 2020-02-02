@@ -1,6 +1,6 @@
 $(function() {
-    // create request
-    $(document).on('submit', '#create-category', function (event) {
+    // create menu
+    $(document).on('submit', '#create-menu', function (event) {
         event.preventDefault();
 
         var formdata = new FormData($(this)[0]);
@@ -18,9 +18,8 @@ $(function() {
             },
             success(data) {
                 if(data.success) {
-                    $('#jstree-checkbox').jstree("refresh");
-                    $('#create-category')[0].reset();
-                    return getCategories();
+                    window.location = route('menus.edit', data.id);
+                    return successMessage(data.success);
                 }else{
                     return errorMessage(data.error);
                 }
@@ -29,7 +28,7 @@ $(function() {
                 if(error.status == 422) {
                     var errors = error.responseJSON.errors;
                     var errorField = Object.keys(errors)[0];
-                    var inputField = $('input[name="'+ errorField +'"], select[name="'+ errorField +'"]');
+                    var inputField = $('input[name="'+ errorField +'"]');
                     var errorMessage = errors[errorField][0];
 
                     // Show error message
@@ -54,8 +53,8 @@ $(function() {
     });
 
 
-    // update request
-    $(document).on('submit', '#update-category', function (event) {
+    // update menu
+    $(document).on('submit', '#update-menu', function (event) {
         event.preventDefault();
 
         var formdata = new FormData($(this)[0]);
@@ -73,7 +72,7 @@ $(function() {
             },
             success(data) {
                 if(data.success) {
-                    $('#jstree-checkbox').jstree("refresh");
+                    return successMessage(data.success);
                 }else{
                     return errorMessage(data.error);
                 }
@@ -82,7 +81,7 @@ $(function() {
                 if(error.status == 422) {
                     var errors = error.responseJSON.errors;
                     var errorField = Object.keys(errors)[0];
-                    var inputField = $('input[name="'+ errorField +'"], select[name="'+ errorField +'"]');
+                    var inputField = $('input[name="'+ errorField +'"]');
                     var errorMessage = errors[errorField][0];
 
                     // Show error message
@@ -106,16 +105,35 @@ $(function() {
         });
     });
 
-    // Delete multiple data
-    $(document).on('click', '.delete-category', function() {
-        var id = [];
-        var url = $(this).data('url');
+    // update menu item order
 
-        $('.jstree-clicked').each(function() {
-            id.push($(this).parent().attr('id'));
+    $('.dd').on('change', function() {
+
+        Pace.restart();
+        Pace.track(function () {
+
+            $.ajax({
+                type: 'PUT',
+                url: route('menus.items.order'),
+                contentType: 'application/json; charset=utf-8',
+                data: JSON.stringify($('.dd').nestable('serialize')[0]),
+                success(data) {
+                    return successMessage(data.success);
+                },
+                error(error) {
+                   return errorStatusText(error);
+                },
+            });
         });
+    });
 
-        id.push($(this).attr('id'));
+    // delete menu item
+
+    $(document).on('click', '.btn-destroy', function(e) {
+        e.preventDefault();
+
+        var url = $(this).attr('href');
+        var id = $(e.currentTarget).closest('.dd-item').data('id');
 
         Swal.fire({
             title: 'Are you sure?',
@@ -133,12 +151,12 @@ $(function() {
 
                     $.ajax({
                         url: url,
-                        data: {id:id},
                         type: "DELETE",
                         dataType: "JSON",
                         success(data) {
                             if(data.success) {
-                                location.reload();
+                                $(`.dd-item[data-id=${id}]`).fadeOut();
+                                return successMessage(data.success);
                             }else{
                                 return errorMessage(data.error);
                             }
@@ -152,21 +170,22 @@ $(function() {
         });
     });
 
-    function getCategories() {
-        $.ajax({
-            url: route('getCategories'),
-            type: "GET",
-            dataType: "HTML",
-            success(data) {
-                $('#category').html(data);
-            },
-            error(error) {
-                return errorStatusText(error);
-            }
-        });
-    }
+    // show hide menu type
+    $('.menu-type').on('change', function () {
+        var type = $(this).val();
+        if(type == 'page'){
+            $('.menu-page').removeClass('d-none');
+            $('.menu-category, .menu-url').addClass('d-none');
+        }else if(type == 'url'){
+            $('.menu-url').removeClass('d-none');
+            $('.menu-category, .menu-page').addClass('d-none');
+        }else{
+            $('.menu-category').removeClass('d-none');
+            $('.menu-url, .menu-page').addClass('d-none');
+        }
+    });
 
-        // show success message
+    // show success message
     function successMessage(message) {
         $.toast({
             heading: 'Success',
@@ -205,9 +224,21 @@ $(function() {
         });
     }
 
-    function route(route){
+    // make route to url
+    function route(route, id){
         var url = route.replace(/\./g, '/');
-        return window.origin + '/admin/' + url;
+        var result = url.search(/edit\b/i);
+
+        if(result != -1){
+            var url = url.replace(/edit\b/i, id + '/edit');
+            return window.origin + '/admin/' + url;
+        }else{
+            if(id){
+                return window.origin + '/admin/' + url + '/' + id;
+            }else{
+                return window.origin + '/admin/' + url;
+            }
+        }
     }
 
 });

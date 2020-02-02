@@ -122,6 +122,78 @@ class SettingsTableSeeder extends Seeder
             'key'                       =>  'ssl_commrz_enabled',
             'value'                     =>  '',
         ],
+        [
+            'key'                       =>  'storefront_slider',
+            'value'                     =>  '',
+        ],
+        [
+            'key'                       =>  'storefront_logo',
+            'value'                     =>  '',
+        ],
+        [
+            'key'                       =>  'storefront_favicon',
+            'value'                     =>  '',
+        ],
+        [
+            'key'                       =>  'storefront_terms_page',
+            'value'                     =>  '',
+        ],
+        [
+            'key'                       =>  'storefront_privacy_page',
+            'value'                     =>  '',
+        ],
+        [
+            'key'                       =>  'storefront_footer_address',
+            'value'                     =>  '',
+        ],
+        [
+            'key'                       =>  'storefront_copyright_text',
+            'value'                     =>  '',
+        ],
+        [
+            'key'                       =>  'storefront_primary_menu',
+            'value'                     =>  '',
+        ],
+        [
+            'key'                       =>  'storefront_category_menu_title',
+            'value'                     =>  '',
+        ],
+        [
+            'key'                       =>  'storefront_category_menu',
+            'value'                     =>  '',
+        ],
+        [
+            'key'                       =>  'storefront_footer_menu_title',
+            'value'                     =>  '',
+        ],
+        [
+            'key'                       =>  'storefront_footer_menu',
+            'value'                     =>  '',
+        ],
+        [
+            'key'                       =>  'storefront_facebook_link',
+            'value'                     =>  '',
+        ],
+        [
+            'key'                       =>  'storefront_twitter_link',
+            'value'                     =>  '',
+        ],
+        [
+            'key'                       =>  'storefront_instagram_link',
+            'value'                     =>  '',
+        ],
+        [
+            'key'                       =>  'storefront_linkedin_link',
+            'value'                     =>  '',
+        ],
+        [
+            'key'                       =>  'storefront_google_link',
+            'value'                     =>  '',
+        ],
+        [
+            'key'                       =>  'storefront_youtube_link',
+            'value'                     =>  '',
+        ],
     ];
     
     /**
@@ -142,6 +214,6 @@ class SettingsTableSeeder extends Seeder
                 return;
             }
         }
-        $this->command->info('Inserted '.count($this->settings). ' records');
+        // $this->command->info('Inserted '.count($this->settings). ' records');
     }
 }

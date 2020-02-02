@@ -115,4 +115,18 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'namespace' => 'Admin', 'mi
 	Route::get('/visitors/datatables', 'VisitorController@visitors')->name('visitors.datatables');
 	Route::delete('/visitor/destroy', 'VisitorController@destroy')->name('visitor.destroy');
 	Route::get('/visitors', 'VisitorController@index')->name('visitors');
+
+	Route::get('/storefront', 'StorefrontController@index')->name('storefront');
+	Route::put('/storefront', 'StorefrontController@update')->name('storefront');
+
+	Route::get('/menus/datatables', 'MenuController@menus')->name('menus.datatables');
+	Route::delete('/menu/destroy', 'MenuController@destroy')->name('menu.destroy');
+	Route::resource('/menus', 'MenuController')->except('destroy');
+
+	Route::get('/menus/{menu}/items/create', 'MenuItemController@create')->name('menus.items.create');
+	Route::post('/menus/{menu}/items', 'MenuItemController@store')->name('menus.items');
+	Route::get('/menus/{menu}/items/{menuitem}/edit', 'MenuItemController@edit')->name('menus.items.edit');
+	Route::put('/menus/items/{menuitem}/update', 'MenuItemController@update')->name('menus.items.update');
+	Route::delete('/menus/items/{menuitem}', 'MenuItemController@destroy')->name('menus.items.destroy');
+	Route::put('/menus/items/order', 'MenuItemController@updateOrder')->name('menus.items.order.update');
 });

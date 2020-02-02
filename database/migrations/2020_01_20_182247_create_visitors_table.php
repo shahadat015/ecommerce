@@ -20,8 +20,8 @@ class CreateVisitorsTable extends Migration
             $table->string('state');
             $table->string('city');
             $table->integer('postal_code');
-            $table->float('lat');
-            $table->float('lon');
+            $table->float('lat', 8, 6);
+            $table->float('lon', 8, 6);
             $table->string('timezone');
             $table->string('currency');
             $table->timestamps();

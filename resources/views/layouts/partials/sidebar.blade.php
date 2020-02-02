@@ -123,21 +123,21 @@
                 </div>
                 <ul class="nav">
                     <li class="nav-item"><a class="nav-link" href="{{ route('admin.products.index') }}"><i class="dripicons-view-apps"></i>Catalog</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{ url('/admin/categories') }}"><i class="dripicons-list"></i>Categories</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{ url('/admin/brands') }}"><i class="dripicons-article"></i>Brands</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{ url('/admin/attributes') }}"><i class="dripicons-checklist"></i>Attributes</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{ url('/admin/attribute-sets') }}"><i class="dripicons-view-list"></i>Attribute Set</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{ url('/admin/options') }}"><i class="dripicons-view-list-large"></i>Options</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{ url('/admin/reviews') }}"><i class="mdi mdi-star-outline"></i>Review</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{ url('/admin/coupons') }}"><i class="dripicons-card"></i>Coupons</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ route('admin.categories.index') }}"><i class="dripicons-list"></i>Categories</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ route('admin.brands.index') }}"><i class="dripicons-article"></i>Brands</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ route('admin.attributes.index') }}"><i class="dripicons-checklist"></i>Attributes</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ route('admin.attribute-sets.index') }}"><i class="dripicons-view-list"></i>Attribute Set</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ route('admin.options.index') }}"><i class="dripicons-view-list-large"></i>Options</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ route('admin.reviews.index') }}"><i class="mdi mdi-star-outline"></i>Review</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ route('admin.coupons.index') }}"><i class="dripicons-card"></i>Coupons</a></li>
                 </ul>
             </div>
             <div id="MetricaCrypto" class="main-icon-menu-pane {{ request()->is('admin/orders/*') ? 'active' : '' }}">
                 <div class="title-box">
                     <h6 class="menu-title">Sales</h6></div>
                 <ul class="nav">
-                    <li class="nav-item"><a class="nav-link" href="{{ url('/admin/orders') }}"><i class="dripicons-swap"></i>Orders</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{ url('/admin/transactions') }}"><i class="dripicons-wallet"></i> Transactions</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ route('admin.orders.index') }}"><i class="dripicons-swap"></i>Orders</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ route('admin.transactions') }}"><i class="dripicons-wallet"></i> Transactions</a></li>
                 </ul>
             </div>
             <div id="MetricaProject" class="main-icon-menu-pane">
@@ -157,26 +157,26 @@
                 </ul>
             </div>
             <!-- end CRM -->
-            <div id="MetricaOthers" class="main-icon-menu-pane {{ request()->is('admin/sliders/*') ? 'active' : '' }}">
+            <div id="MetricaOthers" class="main-icon-menu-pane {{ request()->is('admin/sliders/*', 'admin/menus/*') ? 'active' : '' }}">
                 <div class="title-box">
                     <h6 class="menu-title">Appearance</h6>
                 </div>
                 <ul class="nav metismenu" id="main_menu_side_nav">
-                    <li class="nav-item"><a class="nav-link" href="{{ url('/admin/menus') }}"><i class="dripicons-menu"></i>Menus</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{ url('/admin/sliders') }}"><i class="dripicons-photo-group"></i>Sliders</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ route('admin.menus.index') }}"><i class="dripicons-menu"></i>Menus</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ route('admin.sliders.index') }}"><i class="dripicons-photo-group"></i>Sliders</a></li>
                     <li class="nav-item"><a class="nav-link" href="#"><i class="dripicons-view-thumb"></i><span class="w-100">Storefront</span><span class="menu-arrow"><i class="mdi mdi-chevron-right"></i></span></a>
                         <ul class="nav-second-level" aria-expanded="false">
-                            <li><a href="../others/email-inbox.html">General Settings</a></li>
-                            <li><a href="../others/email-read.html">Home Page Sections</a></li>
+                            <li><a href="{{ route('admin.storefront') }}">General Settings</a></li>
+                            <li><a href="{{ route('admin.storefront', ['type' => 'home']) }}">Home Page Sections</a></li>
                         </ul>
                     </li>
-                    <li class="nav-item"><a class="nav-link" href="#"><i class="dripicons-web"></i><span class="w-100">Localization</span><span class="menu-arrow"><i class="mdi mdi-chevron-right"></i></span></a>
+                    <!-- <li class="nav-item"><a class="nav-link" href="#"><i class="dripicons-web"></i><span class="w-100">Localization</span><span class="menu-arrow"><i class="mdi mdi-chevron-right"></i></span></a>
                         <ul class="nav-second-level" aria-expanded="false">
                             <li><a href="../others/email-inbox.html">Translations</a></li>
                             <li><a href="../others/email-read.html">Currency Rates</a></li>
                             <li><a href="../others/email-read.html">Taxes</a></li>
                         </ul>
-                    </li>
+                    </li> -->
                     <!--end nav-item-->
                 </ul>
                 <!--end nav-->

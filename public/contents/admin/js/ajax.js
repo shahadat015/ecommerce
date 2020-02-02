@@ -48,7 +48,7 @@ $(function() {
                     }
 
                     // Remove error message
-                    inputField.on('keydown', function() {
+                    inputField.on('keydown, change', function() {
                     	inputField.next().remove();
                     });
                 }else{
@@ -101,7 +101,7 @@ $(function() {
                     }
 
                     // Remove error message
-                    inputField.on('keydown', function() {
+                    inputField.on('keydown, change', function() {
                         inputField.next().remove();
                     });
                 }else{

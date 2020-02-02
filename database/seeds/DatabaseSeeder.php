@@ -22,6 +22,6 @@ class DatabaseSeeder extends Seeder
         // $this->call(AttributeValuesTableSeeder::class);
         // $this->call(OptionsTableSeeder::class);
         // $this->call(OptionValuesTableSeeder::class);
-        $this->call(SettingsTableSeeder::class);
+        // $this->call(SettingsTableSeeder::class);
     }
 }

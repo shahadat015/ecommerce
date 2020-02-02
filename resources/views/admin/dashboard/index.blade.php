@@ -85,7 +85,7 @@
                     <h4 class="header-title mt-0">Top District Visitors</h4>
                     <div id="bd-map-markers" class="dashboard-map"></div>
                     <div class="row">
-                        @foreach($topVisitorsAreas as $topVisitorsArea)
+                        @forelse($topVisitorsAreas as $topVisitorsArea)
                         <div class="col-md-5">
                             <div class="mt-3">
                                 <span class="text-info">{{ $topVisitorsArea->city }}</span> 
@@ -95,7 +95,17 @@
                                 </div>
                             </div>
                         </div>
-                        @endforeach
+                        @empty
+                        <div class="col-md-5">
+                            <div class="mt-3">
+                                <span class="text-info">No visitors</span> 
+                                <small class="float-right text-muted ml-3 font-14">0%</small>
+                                <div class="progress mt-2" style="height:3px;">
+                                    <div class="progress-bar bg-secondary" role="progressbar" style="width: 100%; border-radius:5px;" aria-valuenow="81" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                            </div>
+                        </div>
+                        @endforelse
                         <!--end col-->
                     </div>
                     <!--end row-->
@@ -217,7 +227,7 @@
                                 <!--end tr-->
                             </thead>
                             <tbody>
-                                @foreach($latestOrders as $latestOrder)
+                                @forelse($latestOrders as $latestOrder)
                                 <tr>
                                     <td>{{ $latestOrder->id }}</td>
                                     <td>{{ $latestOrder->customer_name }}</td>
@@ -228,7 +238,11 @@
                                     <td> {{ date_format($latestOrder->created_at, 'd M Y h:iA') }} </td>
                                     <td><a href="{{ route('admin.orders.show', $latestOrder->id) }}"><i class="far fa-eye text-info mr-1 mt-1 font-16"></i></a></td>
                                 </tr>
-                                @endforeach
+                                @empty
+                                <tr>
+                                    <td class="text-center" colspan="6">No recent order</td>
+                                </tr>
+                                @endforelse
                             </tbody>
                         </table>
                         <!--end table-->

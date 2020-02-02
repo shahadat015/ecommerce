@@ -58,7 +58,7 @@ class AttributeValuesTableSeeder extends Seeder
             ],
             [
                 'attribute_id' => 8,
-                'value' => 'Wi-Fi 802.11 a/b/g/n/ac, dual-band, WiFi Direct, hotspot',
+                'value' => 'Wi-Fi, dual-band, WiFi Direct, hotspot',
             ],
             [
                 'attribute_id' => 9,

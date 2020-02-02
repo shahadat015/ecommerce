@@ -17,45 +17,13 @@ class OptionsTableSeeder extends Seeder
     	
         Option::insert([
             [
-                'name' => 'Size Shows',
+                'name' => 'Size',
                 'type' => 'radio'
             ],
             [
-	            'name' => 'Color Checkbox',
-	            'type' => 'checkbox'
-	        ],
-            [
-                'name' => 'Color Multiple',
-                'type' => 'multiple_select'
-            ],
-            [
-	            'name' => 'Warranty Checkbox',
-	            'type' => 'checkbox'
-	        ],
-            [
-                'name' => 'Warranty Dropdown',
-                'type' => 'dropdown'
-            ],
-            [
-	            'name' => 'Size Dorpdown',
-	            'type' => 'dropdown'
-	        ],
-            [
-	            'name' => 'Color Dropdown',
-	            'type' => 'dropdown'
-	        ],
-            [
-	            'name' => 'Color Checkbox',
-	            'type' => 'checkbox'
-	        ],
-            [
-                'name' => 'Color Multiple',
-                'type' => 'multiple_select'
-            ],
-            [
-                'name' => 'Color Radio',
-                'type' => 'radio'
-            ]
+	            'name' => 'Color',
+	            'type' => 'radio'
+	        ]
         ]);
     }
 }

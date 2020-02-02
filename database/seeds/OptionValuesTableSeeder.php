@@ -18,19 +18,23 @@ class OptionValuesTableSeeder extends Seeder
         OptionValue::insert([
             [
                 'option_id' => 1,
-                'label' => '7 US',
+                'label' => 'S',
             ],
             [
                 'option_id' => 1,
-                'label' => '8.5 US',
+                'label' => 'M',
             ],
             [
                 'option_id' => 1,
-                'label' => '9.5 US',
+                'label' => 'L',
             ],
             [
                 'option_id' => 1,
-                'label' => '10 US',
+                'label' => 'XL',
+            ],
+            [
+                'option_id' => 1,
+                'label' => 'XXL',
             ],
             [
                 'option_id' => 2,
@@ -49,20 +53,8 @@ class OptionValuesTableSeeder extends Seeder
                 'label' => 'Gold',
             ],
             [
-                'option_id' => 3,
-                'label' => 'Black',
-            ],
-            [
-                'option_id' => 3,
-                'label' => 'Silver',
-            ],
-            [
-                'option_id' => 3,
-                'label' => 'Gold',
-            ],
-            [
-                'option_id' => 3,
-                'label' => 'Brown',
+                'option_id' => 2,
+                'label' => 'White',
             ]
         ]);
     }

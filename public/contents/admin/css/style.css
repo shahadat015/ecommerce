@@ -4406,11 +4406,12 @@ dt {
 .dd-handle,
 .dd3-content {
     height: 40px;
-    padding: 8px 10px;
+    padding: 9px 10px;
     border: 1px solid #eff2f9;
     background-color: #ebeff8;
     border-radius: 3px;
-    font-weight: 400
+    font-weight: 400;
+    cursor: move;
 }
 
 .dd-handle:hover,
