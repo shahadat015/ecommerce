@@ -20,7 +20,7 @@ class CreateSlidersTable extends Migration
             $table->integer('autoplay_speed')->nullable();
             $table->boolean('arrows')->default(true);
             $table->boolean('dots')->default(true);
-            $table->boolean('status')->default(false);
+            $table->boolean('is_active')->default(false);
             $table->timestamps();
         });
     }

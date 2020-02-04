@@ -23,23 +23,11 @@ class SettingsTableSeeder extends Seeder
             'value'                     =>  'info@example.com',
         ],
         [
-            'key'                       =>  'store_email_two',
-            'value'                     =>  'info@example.com',
-        ],
-        [
-            'key'                       =>  'store_phone_two',
-            'value'                     =>  '0123456789',
-        ],
-        [
             'key'                       =>  'store_phone',
             'value'                     =>  '0123456789',
         ],
         [
             'key'                       =>  'store_address',
-            'value'                     =>  '',
-        ],
-        [
-            'key'                       =>  'store_address_two',
             'value'                     =>  '',
         ],
         [
@@ -147,6 +135,14 @@ class SettingsTableSeeder extends Seeder
             'value'                     =>  '',
         ],
         [
+            'key'                       =>  'storefront_footer_phone',
+            'value'                     =>  '',
+        ],
+        [
+            'key'                       =>  'storefront_footer_email',
+            'value'                     =>  '',
+        ],
+        [
             'key'                       =>  'storefront_copyright_text',
             'value'                     =>  '',
         ],
@@ -194,6 +190,18 @@ class SettingsTableSeeder extends Seeder
             'key'                       =>  'storefront_youtube_link',
             'value'                     =>  '',
         ],
+        [
+            'key'                       =>  'storefront_meta_title',
+            'value'                     =>  '',
+        ],
+        [
+            'key'                       =>  'storefront_meta_keywords',
+            'value'                     =>  '',
+        ],
+        [
+            'key'                       =>  'storefront_meta_description',
+            'value'                     =>  '',
+        ]
     ];
     
     /**

@@ -4,8 +4,6 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta content="A premium admin dashboard template by Mannatthemes" name="description">
-    <meta content="Mannatthemes" name="author">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>@yield('title', 'Admin Dashboard')</title>
     <!-- App favicon -->
@@ -36,7 +34,7 @@
                 @yield('content')
 
             </div>
-            <footer class="footer text-center text-sm-left">&copy; 2019 Metrica <span class="text-muted d-none d-sm-inline-block float-right">Crafted with <i class="mdi mdi-heart text-danger"></i> by Mannatthemes</span></footer>
+            <footer class="footer text-center text-sm-left">&copy; {!! config('settings.storefront_copyright_text') !!} <span class="text-muted d-none d-sm-inline-block float-right">Crafted with <i class="mdi mdi-heart text-danger"></i> by <a href="https://facebook.com/shahadatbd.dev">Shahadat</a></span></footer>
             <!--end footer-->
         </div>
         <!-- end page content -->

@@ -44,7 +44,7 @@ class ProductController extends Controller
 
     public function create()
     {
-        $categories = Category::orderBy('parent_id')->get()->nest()->setIndent('|-- ')->listsFlattened('name');
+        $categories = Category::treeList();
         $brands = Brand::all();
         $attributesets = AttributeSet::all();
         $options = Option::where('is_global', 1)->get();
@@ -86,18 +86,18 @@ class ProductController extends Controller
 
     public function show(Product $product)
     {
-        $product->load('categories', 'brand', 'attributes', 'options', 'metadata', 'images', 'image');
+        $product->load('categories', 'brand', 'attributes', 'options', 'metadata', 'images');
         return view('admin.product.show', compact('product'));
     }
 
 
     public function edit(Product $product)
     {
-        $categories = Category::orderBy('parent_id')->get()->nest()->setIndent('|-- ')->listsFlattened('name');
+        $categories = Category::treeList();
         $brands = Brand::all();
         $attributesets = AttributeSet::all();
         $options = Option::where('is_global', 1)->get();
-        $product->load('categories', 'brand', 'attributes', 'options', 'metadata', 'images', 'image');
+        $product->load('categories', 'brand', 'attributes', 'options', 'metadata', 'images');
         return view('admin.product.edit', compact('categories', 'brands', 'attributesets', 'options', 'product'));
     }
 
@@ -150,6 +150,7 @@ class ProductController extends Controller
         $values = $attribute->values;
         return view('admin.product.values', compact('values'));
     }
+    
     public function optionValues(Option $option)
     {
         return view('admin.product.options', compact('option'));

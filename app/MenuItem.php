@@ -18,6 +18,16 @@ class MenuItem extends Model
         return $this->hasMany(MenuItem::class, 'parent_id');
     }
 
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
+
+    public function page()
+    {
+        return $this->belongsTo(Page::class);
+    }
+
     public function isCategoryType()
     {
         return $this->type === 'category';

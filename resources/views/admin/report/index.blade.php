@@ -35,13 +35,11 @@
                     <div class="card-body">
                         <div class="form-group">
                             <label class="my-3">Report Type</label>
+                            @php $types = ['coupons_report', 'order_report', 'purchase_report', 'stock_report', 'sales_report', 'shipping_report'] @endphp
                             <select name="type" class="form-control" id="type">
-                                <option value="coupons_report" {{ $request->type == 'coupons_report' ? 'selected' : '' }}>Coupons Report</option>
-                                <option value="order_report" {{ $request->type == 'order_report' ? 'selected' : '' }}>Order Report</option>
-                                <option value="purchase_report" {{ $request->type == 'purchase_report' ? 'selected' : '' }}>Purchase Report</option>
-                                <option value="stock_report" {{ $request->type == 'stock_report' ? 'selected' : '' }}>Stock Report</option>
-                                <option value="sales_report" {{ $request->type == 'sales_report' ? 'selected' : '' }}>Sales Report</option>
-                                <option value="shipping_report" {{ $request->type == 'shipping_report' ? 'selected' : '' }}>Shipping Report</option>
+                                @foreach($types as $type)
+                                <option value="coupons_report" {{ $request->type == $type ? 'selected' : '' }}>Coupons Report</option>
+                                @endforeach
                             </select>
                         </div>
                         @yield('filter')                      

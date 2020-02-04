@@ -16,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'phone', 'address', 'password', 'image_id'
+        'name', 'email', 'phone', 'address', 'password', 'image'
     ];
 
     /**
@@ -37,15 +37,10 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function image()
-    {
-        return $this->belongsTo(Image::class);
-    }
-
-    public static function laratablesImagepath($user)
+    public static function laratablesImage($user)
     {
         if ($user->image) {
-            return '<img src="'. asset($user->image->path()) .'" class="mr-2" alt="" height="52">';
+            return '<img src="'. asset($user->image) .'" class="mr-2" alt="" height="52">';
         }else{
             return '<img src="'. asset('contents/admin/images/placeholder.png') .'" class="mr-2" alt="" height="52" width="80">';
         }

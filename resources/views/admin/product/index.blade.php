@@ -53,7 +53,7 @@
                 ajax: "{{ route('admin.products.datatables') }}",
                 columns: [
                     { name: 'name'},
-                    { name: 'image.path', orderable: false, searchable: false},
+                    { name: 'image', orderable: false, searchable: false},
                     { name: 'price' },
                     { name: 'status' },
                     { name: 'action', orderable: false, searchable: false }

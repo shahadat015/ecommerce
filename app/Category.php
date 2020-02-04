@@ -15,4 +15,19 @@ class Category extends Model
     {
         return $this->belongsToMany(Product::class, 'product_categories');
     }
+
+    public function children()
+    {
+        return $this->hasMany(Category::class, 'parent_id');
+    }
+
+    public static function treeList()
+    {
+        return static::select('id', 'parent_id', 'name')
+            ->orderBy('parent_id')
+            ->get()
+            ->nest()
+            ->setIndent('¦–– ')
+            ->listsFlattened('name');
+    }
 }

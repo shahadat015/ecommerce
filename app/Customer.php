@@ -36,20 +36,15 @@ class Customer extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function image()
-    {
-        return $this->belongsTo(Image::class);
-    }
-
     public function wishlist()
     {
         return $this->belongsToMany(Product::class, 'wish_lists')->withTimestamps();
     }
 
-    public static function laratablesImagepath($customer)
+    public static function laratablesImage($customer)
     {
         if ($customer->image) {
-            return '<img src="'. asset($customer->image->path()) .'" class="mr-2" alt="" height="52">';
+            return '<img src="'. asset($customer->image) .'" class="mr-2" alt="" height="52">';
         }else{
             return '<img src="'. asset('contents/admin/images/placeholder.png') .'" class="mr-2" alt="" height="52" width="80">';
         }

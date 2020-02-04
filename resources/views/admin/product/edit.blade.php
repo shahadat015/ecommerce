@@ -123,7 +123,7 @@
                                 <div class="single-image">
                                     <div class="image-holder">
                                         @if($product->image)
-                                        <img src="{{ asset($product->image->path()) }}" alt="">
+                                        <img src="{{ asset($product->image) }}" alt="">
                                         <button type="button" class="btn remove-image" data-image="single"><i class="fas fa-times"></i></button>
                                         @else
                                         <i class="far fa-image"></i>
@@ -480,7 +480,7 @@
                                 <div class="form-group">
                                     <label for="name">Related Products</label>
                                     <select class="select2 mb-3 select2-multiple select_product" name="products[]" multiple="multiple" data-placeholder="Select Category">
-                                         @foreach($product->relatedProducts as $relatedProduct)
+                                        @foreach($product->relatedProducts as $relatedProduct)
                                             <option value="{{ $relatedProduct->id }}" selected>{{ $relatedProduct->name }}</option>
                                         @endforeach
                                     </select>

@@ -18,13 +18,14 @@ class CategoryController extends Controller
 
     public function index()
     {
-		$categories = Category::orderBy('parent_id')->get()->nest()->setIndent('|-- ')->listsFlattened('name');
+		$categories = Category::treeList();
     	return view('admin.category.index', compact('categories'));
     }
 
     public function edit(Category $category)
     {
-        $categories = Category::where('id', '<>', $category->id)->get()->nest()->setIndent('|-- ')->listsFlattened('name');
+        $categories = Category::where('id', '<>', $category->id)
+        ->get()->nest()->setIndent('|-- ')->listsFlattened('name');
         return view('admin.category.edit', compact('categories', 'category'));
     }
 

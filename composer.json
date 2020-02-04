@@ -9,6 +9,7 @@
     "license": "MIT",
     "require": {
         "php": "^7.2",
+        "bumbummen99/shoppingcart": "^2.8",
         "fideloper/proxy": "^4.0",
         "freshbitsweb/laratables": "^2.1",
         "laravel/framework": "^6.2",

@@ -32,6 +32,9 @@
                             <li class="nav-item">
                                 <a class="nav-link" data-toggle="tab" href="#sociallinks" role="tab">Social Links</a>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link" data-toggle="tab" href="#seo" role="tab">SEO</a>
+                            </li>
                         </ul>
                         <div class="tab-content">
                             <div class="tab-pane active p-3" id="general" role="tabpanel">
@@ -72,6 +75,16 @@
                                 </div>
 
                                 <div class="form-group">
+                                    <label for="name">Footer Phone</label>
+                                    <input type="text" name="storefront_footer_phone" class="form-control" value="{{ config('settings.storefront_footer_phone') }}">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="name">Footer Email</label>
+                                    <input type="text" name="storefront_footer_email" class="form-control" value="{{ config('settings.storefront_footer_email') }}">
+                                </div>
+
+                                <div class="form-group">
                                     <label for="name">Footer Copyright Text</label>
                                     <input type="text" name="storefront_copyright_text" class="form-control" value="{{ config('settings.storefront_copyright_text') }}">
                                 </div>
@@ -83,7 +96,7 @@
                                 <div class="single-image">
                                     <div class="image-holder">
                                         @if(config('settings.storefront_logo'))
-                                        <img src="{{ asset(App\Image::find(config('settings.storefront_logo'))->path()) }}">
+                                        <img src="{{ asset( config('settings.storefront_logo')) }}">
                                         <input type="hidden" name="storefront_logo" value="{{ config('settings.storefront_logo') }}">
                                         @else
                                         <i class="far fa-image"></i>
@@ -96,7 +109,7 @@
                                 <div class="single-image">
                                     <div class="image-holder">
                                         @if(config('settings.storefront_favicon'))
-                                        <img src="{{ asset(App\Image::find(config('settings.storefront_favicon'))->path()) }}">
+                                        <img src="{{ asset(config('settings.storefront_favicon')) }}">
                                         <input type="hidden" name="storefront_favicon" value="{{ config('settings.storefront_favicon') }}">
                                         @else
                                         <i class="far fa-image"></i>
@@ -115,7 +128,7 @@
                                     <select name="storefront_primary_menu" class="form-control">
                                         <option value="">Select Menu</option>
                                         @foreach($menus as $menu)
-                                            <option value="">{{ $menu->name }}</option>
+                                            <option value="{{ $menu->id }}" {{ $menu->id == config('settings.storefront_primary_menu') ? 'selected' : '' }}>{{ $menu->name }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -129,7 +142,7 @@
                                     <select name="storefront_category_menu" class="form-control">
                                         <option value="">Select Menu</option>
                                         @foreach($menus as $menu)
-                                            <option value="">{{ $menu->name }}</option>
+                                            <option value="{{ $menu->id }}" {{ $menu->id == config('settings.storefront_category_menu') ? 'selected' : '' }}>{{ $menu->name }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -144,7 +157,7 @@
                                     <select name="storefront_footer_menu" class="form-control">
                                         <option value="">Select Menu</option>
                                         @foreach($menus as $menu)
-                                            <option value="">{{ $menu->name }}</option>
+                                            <option value="{{ $menu->id }}" {{ $menu->id == config('settings.storefront_footer_menu') ? 'selected' : '' }}>{{ $menu->name }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -182,6 +195,28 @@
                                 <div class="form-group">
                                     <label for="name">Youtube</label>
                                     <input type="text" name="storefront_youtube_link" class="form-control" value="{{ config('settings.storefront_youtube_link') }}">
+                                </div>
+
+                            </div>
+                            <div class="tab-pane p-3" id="seo" role="tabpanel">
+                                <h4>SEO</h4><hr>
+
+                                <div class="form-group">
+                                    <label for="name">Meta Title</label>
+                                    
+                                    <input type="text" name="storefront_meta_title" class="form-control" value="{{ config('settings.storefront_meta_title') }}">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="name">Meta Keywords</label>
+                                    
+                                    <textarea rows="4" name="storefront_meta_keywords" class="form-control">{{ config('settings.storefront_meta_keywords') }}</textarea>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="name">Meta Description</label>
+                                    
+                                    <textarea rows="5" name="storefront_meta_description" class="form-control">{{ config('settings.storefront_meta_description') }}</textarea>
                                 </div>
 
                             </div>

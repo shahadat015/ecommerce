@@ -7,22 +7,21 @@
 </div>
 <div class="form-group">
 	<label>Order Status</label>
+	@php $statuses = ['canceled', 'completed', 'pending', 'processing', 'refunded'] @endphp
 	<select name="status" class="form-control">
 	    <option value="">Please Select</option>
-	    <option value="canceled" {{ $request->status == 'canceled' ? 'selected' : '' }}>Canceled</option>
-	    <option value="completed" {{ $request->status == 'completed' ? 'selected' : '' }}>Completed</option>
-	    <option value="pending" {{ $request->status == 'pending' ? 'selected' : '' }}>Pending</option>
-	    <option value="processing" {{ $request->status == 'processing' ? 'selected' : '' }}>Processing</option>
-	    <option value="refunded" {{ $request->status == 'refunded' ? 'selected' : '' }}>Refunded</option>
+	    @foreach($statuses as $status)
+	    <option value="canceled" {{ $request->status == $status ? 'selected' : '' }}>Canceled</option>
+	    @endforeach
 	</select>
 </div>
 <div class="form-group">
 	<label>Group By</label>
+	@php $groups = ['days', 'weeks', 'months', 'years'] @endphp
 	<select name="group" class="form-control">
 	    <option value="">Please Select</option>
-	    <option value="days" {{ $request->group == 'days' ? 'selected' : '' }}>Days</option>
-	    <option value="weeks" {{ $request->group == 'weeks' ? 'selected' : '' }}>Weeks</option>
-	    <option value="months" {{ $request->group == 'months' ? 'selected' : '' }}>Months</option>
-	    <option value="years" {{ $request->group == 'years' ? 'selected' : '' }}>Years</option>
+	    @foreach($groups as $group)
+	    <option value="days" {{ $request->group == $group ? 'selected' : '' }}>Days</option>
+	    @endforeach
 	</select>
 </div>

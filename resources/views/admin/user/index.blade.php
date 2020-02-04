@@ -54,7 +54,7 @@
                 columns: [
                     { name: 'name' },
                     { name: 'email' },
-                    { name: 'image.path' },
+                    { name: 'image', orderable: false, searchable: false },
                     { name: 'action', orderable: false, searchable: false }
                 ]
             });

@@ -6,12 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Brand extends Model
 {
-    protected $fillable = ['name', 'slug', 'tagline', 'image_id', 'status'];
-
-    public function image()
-    {
-        return $this->belongsTo(Image::class);
-    }
+    protected $fillable = ['name', 'slug', 'tagline', 'image', 'status'];
 
     public static function laratablesStatus($brand)
     {
@@ -22,10 +17,10 @@ class Brand extends Model
         }
     }
 
-    public static function laratablesImagepath($brand)
+    public static function laratablesImage($brand)
     {
         if ($brand->image) {
-            return '<img src="'. asset($brand->image->path()) .'" class="mr-2" alt="" height="52">';
+            return '<img src="'. asset($brand->image) .'" class="mr-2" alt="" height="52">';
         }else{
             return '<img src="'. asset('contents/admin/images/placeholder.png') .'" class="mr-2" alt="" height="52" width="80">';
         }

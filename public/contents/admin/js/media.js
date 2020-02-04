@@ -6,40 +6,43 @@ $(function() {
         window.imgPicker = $(this);
     });
 
+    // add image
     $(document).on('click', '.select-image', function(e) {
         e.preventDefault();
 
+        var url = $(this).attr('href');
         var path = $(this).data('src');
-        var val = $(this).data('id');
+        var id = $(this).data('id');
         var imgType = imgPicker.data('image');
 
         if(imgType == 'single'){
-            $('.single-image .image-holder').html('<image src="'+ path +'"><input type="hidden" name="image_id" value="'+ val +'"><button type="button" class="btn remove-image"  data-image="single"><i class="fas fa-times"></i></button>');
+            $('.single-image .image-holder').html('<image src="'+ url +'"><input type="hidden" name="image" value="'+ path +'"><button type="button" class="btn remove-image"  data-image="single"><i class="fas fa-times"></i></button>');
             $('.bd-example-modal-xl').modal('hide');
         };
 
         if(imgType == 'multiple'){
             $('.placeholder').remove();
-            $('.image-list').append('<div class="image-holder"><image src="'+ path +'"><input type="hidden" name="images[]" value="'+ val +'"><button type="button" class="btn remove-image" data-image="multiple"><i class="fas fa-times"></i></button></div>');
+            $('.image-list').append('<div class="image-holder"><image src="'+ url +'"><input type="hidden" name="images[]" value="'+ id +'"><button type="button" class="btn remove-image" data-image="multiple"><i class="fas fa-times"></i></button></div>');
             return successMessage('Image successfully added!');
         };
 
         if(imgType == 'slider'){
-            imgPicker.children().html('<image src="'+ path +'"><input type="hidden" name="image_id" value="'+ val +'">');
+            imgPicker.children().html('<image src="'+ url +'"><input type="hidden" name="image" value="'+ path +'">');
             $('.bd-example-modal-xl').modal('hide');
         }
 
         if(imgType == 'favicon'){
-            imgPicker.prev().children().html('<image src="'+ path +'"><input type="hidden" name="storefront_favicon" value="'+ val +'">');
+            imgPicker.prev().children().html('<image src="'+ url +'"><input type="hidden" name="storefront_favicon" value="'+ path +'">');
             $('.bd-example-modal-xl').modal('hide');
         }
 
         if(imgType == 'logo'){
-            imgPicker.prev().children().html('<image src="'+ path +'"><input type="hidden" name="storefront_logo" value="'+ val +'">');
+            imgPicker.prev().children().html('<image src="'+ url +'"><input type="hidden" name="storefront_logo" value="'+ path +'">');
             $('.bd-example-modal-xl').modal('hide');
         }
     });
 
+    // remove image
     $(document).on('click', '.remove-image', function() {
         var imgType = $(this).data('image');
 

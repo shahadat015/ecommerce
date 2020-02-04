@@ -23,7 +23,6 @@
                         <thead>
                             <tr>
                                 <th>Name</th>
-                                <th>Status</th>
                                 <th>
                                     <div class="custom-control custom-checkbox">
                                         <input type="checkbox" class="check-all custom-control-input" id="horizontalCheckbox1">
@@ -51,7 +50,6 @@
                 ajax: "{{ route('admin.sliders.datatables') }}",
                 columns: [
                     { name: 'name'},
-                    { name: 'status' },
                     { name: 'action', orderable: false, searchable: false }
                 ]
             });

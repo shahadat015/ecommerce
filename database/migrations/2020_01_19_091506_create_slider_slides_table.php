@@ -16,15 +16,13 @@ class CreateSliderSlidesTable extends Migration
         Schema::create('slider_slides', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('slider_id');
-            $table->unsignedBigInteger('image_id');
+            $table->string('image')->nullable();
             $table->string('title')->nullable();
             $table->string('subtitle')->nullable();
             $table->string('call_to_action_text')->nullable();
             $table->string('call_to_action_url')->nullable();
             $table->boolean('open_in_new_window')->default(false);
             $table->timestamps();
-            
-            $table->foreign('image_id')->references('id')->on('images')->onDelete('cascade');
         });
     }
 

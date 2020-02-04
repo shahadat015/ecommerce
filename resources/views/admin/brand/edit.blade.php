@@ -34,7 +34,7 @@
                         <div class="single-image">
                             <div class="image-holder">
                                 @if($brand->image)
-                                    <img src="{{asset($brand->image->path())}}" class="mr-2" alt="">
+                                    <img src="{{ asset($brand->image) }}" class="mr-2" alt="">
                                     <button type="button" class="btn remove-image" data-image="single"><i class="fas fa-times"></i></button>
                                 @else
                                     <i class="far fa-image"></i>

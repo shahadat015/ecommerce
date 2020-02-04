@@ -17,11 +17,10 @@ class CreateBrandsTable extends Migration
             $table->bigIncrements('id');
             $table->string('name');
             $table->string('tagline')->nullable();
-            $table->unsignedBigInteger('image_id')->nullable();
+            $table->string('image')->nullable();
             $table->string('slug');
             $table->boolean('status')->default(true);
             $table->timestamps();
-            $table->foreign('image_id')->references('id')->on('images')->onDelete('cascade');
         });
     }
 

@@ -6,9 +6,7 @@
 |--------------------------------------------------------------------------
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'WebsiteController@index');
 
 Auth::routes(['register' => false]);
 

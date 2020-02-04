@@ -49,26 +49,13 @@
                                     <input type="text" name="store_email" class="form-control" value="{{ config('settings.store_email') }}">
                                 </div>
                                 <div class="form-group">
-                                    <label for="name">Store Email Two</label>
-                                    <input type="text" name="store_email_two" class="form-control" value="{{ config('settings.store_email_two') }}">
-                                </div>
-                                <div class="form-group">
                                     <label for="name">Store Phone</label>
                                     <input type="text" name="store_phone" class="form-control" value="{{ config('settings.store_phone') }}">
-                                </div>
-                                <div class="form-group">
-                                    <label for="name">Store Phone Two</label>
-                                    <input type="text" name="store_phone_two" class="form-control" value="{{ config('settings.store_phone_two') }}">
                                 </div>
                                 <div class="form-group">
                                     <label for="name">Store Address</label>
                                     <input type="text" name="store_address" class="form-control" value="{{ config('settings.store_address') }}">
                                 </div>
-                                <div class="form-group">
-                                    <label for="name">Store Address Two</label>
-                                    <input type="text" name="store_address_two" class="form-control" value="{{ config('settings.store_address_two') }}">
-                                </div>
-
                             </div>
                             
                             <div class="tab-pane p-3" id="mail" role="tabpanel">

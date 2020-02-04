@@ -42,8 +42,8 @@
                                                         <div class="single-image image-picker" data-image="slider">
                                                             <div class="image-holder">
                                                                 @if($slide->image)
-                                                                <img src="{{ asset($slide->image->path()) }}" alt="">
-                                                                <input type="hidden" name="image_id" value="{{ $slide->image_id }}">
+                                                                <img src="{{ asset($slide->image) }}" alt="">
+                                                                <input type="hidden" name="image" value="{{ $slide->image }}">
                                                                 @else
                                                                 <i class="far fa-image"></i>
                                                                 @endif
