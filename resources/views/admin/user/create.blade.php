@@ -91,7 +91,7 @@
                                 <i class="far fa-image"></i>
                             </div>
                         </div>
-                        <button type="button" class="btn btn-light image-picker waves-effect waves-light d-block mt-3 mb-3" data-image="single"><i class="far fa-folder-open mr-2"></i> Browse Image</button>
+                        <button type="button" class="btn btn-light image-picker waves-effect waves-light d-block mt-3 mb-3" data-image="single" data-name="image"><i class="far fa-folder-open mr-2"></i> Browse Image</button>
                     </div>
 
                     <div class="card-footer">

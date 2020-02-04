@@ -11,16 +11,12 @@ use Illuminate\Http\Request;
 
 class StorefrontController extends Controller
 {
-    public function index(Request $request)
+    public function index()
 	{
-		if ($request->type) {
-	 	   return view('admin.storefront.home.index');
-        }
-        return view('admin.storefront.general.index', [
-        	'sliders' => Slider::all(),
-        	'pages' => Page::all(),
-        	'menus' => Menu::all(),
-        ]);
+		$sliders = Slider::all();
+		$pages = Page::all();
+		$menus = Menu::all();
+        return view('admin.storefront.general.index', compact('sliders', 'pages', 'menus'));
 	}
 
 	/**
@@ -39,6 +35,35 @@ class StorefrontController extends Controller
 			'storefront_google_link' => 'nullable|url|max:255',
 			'storefront_youtube_link' => 'nullable|url|max:255'
 		]);
+
+		$keys = $request->except('_token', '_method');
+
+        foreach ($keys as $key => $value)
+        {
+            Setting::set($key, $value);
+        }
+
+        return response()->json(['success' => 'Settings successfully updated!']);
+	}
+
+	public function sections()
+	{
+		return view('admin.storefront.section.index');
+	}
+
+	/**
+	 * @param Request $request
+	 */
+	public function updateSections(Request $request)
+	{  
+		// $request->validate([
+			
+		// ]);
+
+		// return getType(config('settings.product_carousel_1_products'));
+
+		// $request['product_carousel_1_products'] = json_encode($request->product_carousel_1_products);
+
 
 		$keys = $request->except('_token', '_method');
 

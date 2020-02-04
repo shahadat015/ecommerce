@@ -37,7 +37,7 @@
                                             <div class="card-body">
                                                 <div class="row">
                                                     <div class="col-sm-3 py-3">
-                                                        <div class="single-image image-picker" data-image="slider">
+                                                        <div class="single-image image-picker" data-image="slider" data-name="image">
                                                             <div class="image-holder">
                                                                 <i class="far fa-image"></i>
                                                             </div>

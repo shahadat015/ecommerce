@@ -37,10 +37,10 @@ class AppServiceProvider extends ServiceProvider
 
         view()->composer('layouts.website', function ($view) {
             $primaryMenu = Menu::find(config('settings.storefront_primary_menu'));
-            $primaryMenu->load('menuItems');
-            $popularCategories = Menu::find(config('settings.storefront_footer_menu'))
-                ->menuItems()->where('is_root',0)->get();
-            $view->with(['primaryMenu' => $primaryMenu, 'popularCategories' => $popularCategories]);
+            if($primaryMenu) $primaryMenu->load('menuItems');            
+            $popularCategory = Menu::find(config('settings.storefront_footer_menu'));
+            if($popularCategory) $popularCategory->load('menuItems');
+            $view->with(['primaryMenu' => $primaryMenu, 'popularCategory' => $popularCategory]);
         });
     }
 }

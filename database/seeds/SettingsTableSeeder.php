@@ -28,7 +28,7 @@ class SettingsTableSeeder extends Seeder
         ],
         [
             'key'                       =>  'store_address',
-            'value'                     =>  '',
+            'value'                     =>  '203 East Kazipara, Mirpur, Dhaka-1216.',
         ],
         [
             'key'                       =>  'mail_from_address',
@@ -131,18 +131,6 @@ class SettingsTableSeeder extends Seeder
             'value'                     =>  '',
         ],
         [
-            'key'                       =>  'storefront_footer_address',
-            'value'                     =>  '',
-        ],
-        [
-            'key'                       =>  'storefront_footer_phone',
-            'value'                     =>  '',
-        ],
-        [
-            'key'                       =>  'storefront_footer_email',
-            'value'                     =>  '',
-        ],
-        [
             'key'                       =>  'storefront_copyright_text',
             'value'                     =>  '',
         ],
@@ -200,6 +188,226 @@ class SettingsTableSeeder extends Seeder
         ],
         [
             'key'                       =>  'storefront_meta_description',
+            'value'                     =>  '',
+        ],
+        [
+            'key'                       =>  'product_features_1_icon',
+            'value'                     =>  'icofont-ui-cart',
+        ],
+        [
+            'key'                       =>  'product_features_1_title',
+            'value'                     =>  'FREE SHIPPING & RETURN',
+        ],
+        [
+            'key'                       =>  'product_features_1_subtitle',
+            'value'                     =>  'Free shipping on all orders over Tk 999.',
+        ],
+        [
+            'key'                       =>  'product_features_2_icon',
+            'value'                     =>  'icofont-money-bag',
+        ],
+        [
+            'key'                       =>  'product_features_2_title',
+            'value'                     =>  'MONEY BACK GUARANTEE',
+        ],
+        [
+            'key'                       =>  'product_features_2_subtitle',
+            'value'                     =>  '100% money back guarantee',
+        ],
+        [
+            'key'                       =>  'product_features_3_icon',
+            'value'                     =>  'icofont-support',
+        ],
+        [
+            'key'                       =>  'product_features_3_title',
+            'value'                     =>  'ONLINE SUPPORT 24/7',
+        ],
+        [
+            'key'                       =>  'product_features_3_subtitle',
+            'value'                     =>  'Lorem ipsum dolor sit amet.',
+        ],
+        [
+            'key'                       =>  'product_carousel_1_title',
+            'value'                     =>  '',
+        ],
+        [
+            'key'                       =>  'product_carousel_1_products',
+            'value'                     =>  '',
+        ],
+        [
+            'key'                       =>  'product_carousel_2_title',
+            'value'                     =>  '',
+        ],
+        [
+            'key'                       =>  'product_carousel_2_products',
+            'value'                     =>  '',
+        ],
+        [
+            'key'                       =>  'product_carousel_3_title',
+            'value'                     =>  '',
+        ],
+        [
+            'key'                       =>  'product_carousel_3_products',
+            'value'                     =>  '',
+        ],
+        [
+            'key'                       =>  'product_carousel_4_title',
+            'value'                     =>  '',
+        ],
+        [
+            'key'                       =>  'product_carousel_4_products',
+            'value'                     =>  '',
+        ],
+        [
+            'key'                       =>  'featured_product_image',
+            'value'                     =>  '',
+        ],
+        [
+            'key'                       =>  'featured_product_title',
+            'value'                     =>  '',
+        ],
+        [
+            'key'                       =>  'featured_product_subtitle',
+            'value'                     =>  '',
+        ],
+        [
+            'key'                       =>  'featured_product_cta_text',
+            'value'                     =>  '',
+        ],
+        [
+            'key'                       =>  'featured_product_cta_url',
+            'value'                     =>  '',
+        ],
+        [
+            'key'                       =>  'featured_product_open_in',
+            'value'                     =>  '',
+        ],
+        [
+            'key'                       =>  'featured_products_title',
+            'value'                     =>  '',
+        ],
+        [
+            'key'                       =>  'featured_products',
+            'value'                     =>  '',
+        ],
+        [
+            'key'                       =>  'banner_section_1_image_1',
+            'value'                     =>  '',
+        ],
+        [
+            'key'                       =>  'banner_section_1_cta_1_url',
+            'value'                     =>  '',
+        ],
+        [
+            'key'                       =>  'banner_section_1_cta_1_open_in',
+            'value'                     =>  '',
+        ],
+        [
+            'key'                       =>  'banner_section_1_image_2',
+            'value'                     =>  '',
+        ],
+        [
+            'key'                       =>  'banner_section_1_cta_2_url',
+            'value'                     =>  '',
+        ],
+        [
+            'key'                       =>  'banner_section_1_cta_2_open_in',
+            'value'                     =>  '',
+        ],
+        [
+            'key'                       =>  'banner_section_1_image_3',
+            'value'                     =>  '',
+        ],
+        [
+            'key'                       =>  'banner_section_1_cta_3_url',
+            'value'                     =>  '',
+        ],
+        [
+            'key'                       =>  'banner_section_1_cta_3_open_in',
+            'value'                     =>  '',
+        ],
+        [
+            'key'                       =>  'banner_section_1_image_4',
+            'value'                     =>  '',
+        ],
+        [
+            'key'                       =>  'banner_section_1_cta_4_url',
+            'value'                     =>  '',
+        ],
+        [
+            'key'                       =>  'banner_section_1_cta_4_open_in',
+            'value'                     =>  '',
+        ],
+        [
+            'key'                       =>  'banner_section_2_image_1',
+            'value'                     =>  '',
+        ],
+        [
+            'key'                       =>  'banner_section_2_cta_1_url',
+            'value'                     =>  '',
+        ],
+        [
+            'key'                       =>  'banner_section_2_cta_1_open_in',
+            'value'                     =>  '',
+        ],
+        [
+            'key'                       =>  'banner_section_2_image_2',
+            'value'                     =>  '',
+        ],
+        [
+            'key'                       =>  'banner_section_2_cta_2_url',
+            'value'                     =>  '',
+        ],
+        [
+            'key'                       =>  'banner_section_2_cta_2_open_in',
+            'value'                     =>  '',
+        ],
+        [
+            'key'                       =>  'banner_section_2_image_3',
+            'value'                     =>  '',
+        ],
+        [
+            'key'                       =>  'banner_section_2_cta_3_url',
+            'value'                     =>  '',
+        ],
+        [
+            'key'                       =>  'banner_section_2_cta_3_open_in',
+            'value'                     =>  '',
+        ],
+        [
+            'key'                       =>  'banner_section_2_image_4',
+            'value'                     =>  '',
+        ],
+        [
+            'key'                       =>  'banner_section_2_cta_4_url',
+            'value'                     =>  '',
+        ],
+        [
+            'key'                       =>  'banner_section_2_cta_4_open_in',
+            'value'                     =>  '',
+        ],
+        [
+            'key'                       =>  'product_tab_1_title',
+            'value'                     =>  '',
+        ],
+        [
+            'key'                       =>  'product_tab_1_products',
+            'value'                     =>  '',
+        ],
+        [
+            'key'                       =>  'product_tab_2_title',
+            'value'                     =>  '',
+        ],
+        [
+            'key'                       =>  'product_tab_2_products',
+            'value'                     =>  '',
+        ],
+        [
+            'key'                       =>  'product_tab_3_title',
+            'value'                     =>  '',
+        ],
+        [
+            'key'                       =>  'product_tab_3_products',
             'value'                     =>  '',
         ]
     ];

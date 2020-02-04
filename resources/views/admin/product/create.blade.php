@@ -121,7 +121,7 @@
                                         <i class="far fa-image"></i>
                                     </div>
                                 </div>
-                                <button type="button" class="btn btn-light image-picker waves-effect waves-light d-block mt-3 mb-4" data-image="single"><i class="far fa-folder-open mr-2"></i> Browse Image</button>
+                                <button type="button" class="btn btn-light image-picker waves-effect waves-light d-block mt-3 mb-4" data-image="single" data-name="image"><i class="far fa-folder-open mr-2"></i> Browse Image</button>
 
                                 <h4>Additional Images</h4><hr>
                                 <div class="multiple-images">
@@ -131,7 +131,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <button type="button" class="btn btn-light image-picker waves-effect waves-light d-block mt-3 mb-3" data-image="multiple"><i class="far fa-folder-open mr-2"></i> Browse Image</button>
+                                <button type="button" class="btn btn-light image-picker waves-effect waves-light d-block mt-3 mb-3" data-image="multiple" data-name="images[]"><i class="far fa-folder-open mr-2"></i> Browse Image</button>
                             </div>
 
                             <div class="tab-pane p-3" id="inventory" role="tabpanel">

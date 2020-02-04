@@ -166,8 +166,8 @@
                     <li class="nav-item"><a class="nav-link" href="{{ route('admin.sliders.index') }}"><i class="dripicons-photo-group"></i>Sliders</a></li>
                     <li class="nav-item"><a class="nav-link" href="#"><i class="dripicons-view-thumb"></i><span class="w-100">Storefront</span><span class="menu-arrow"><i class="mdi mdi-chevron-right"></i></span></a>
                         <ul class="nav-second-level" aria-expanded="false">
-                            <li><a href="{{ route('admin.storefront') }}">General Settings</a></li>
-                            <li><a href="{{ route('admin.storefront', ['type' => 'home']) }}">Home Page Sections</a></li>
+                            <li><a href="{{ route('admin.storefront.general') }}">General Settings</a></li>
+                            <li><a href="{{ route('admin.storefront.sections') }}">Home Page Sections</a></li>
                         </ul>
                     </li>
                     <!-- <li class="nav-item"><a class="nav-link" href="#"><i class="dripicons-web"></i><span class="w-100">Localization</span><span class="menu-arrow"><i class="mdi mdi-chevron-right"></i></span></a>

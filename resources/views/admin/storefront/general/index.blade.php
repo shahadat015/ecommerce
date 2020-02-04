@@ -14,7 +14,7 @@
                     <h4 class="mt-2 header-title float-left">Storefront</h4>
                 </div>
                     
-                <form action="{{ route('admin.storefront') }}" id="update-form" method="post" class="form-horizontal form-wizard-wrapper">
+                <form action="{{ route('admin.storefront.general') }}" id="update-form" method="post" class="form-horizontal form-wizard-wrapper">
                     @csrf
                     @method('put')
 
@@ -70,21 +70,6 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="name">Footer Address</label>
-                                    <input type="text" name="storefront_footer_address" class="form-control" value="{{ config('settings.storefront_footer_address') }}">
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="name">Footer Phone</label>
-                                    <input type="text" name="storefront_footer_phone" class="form-control" value="{{ config('settings.storefront_footer_phone') }}">
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="name">Footer Email</label>
-                                    <input type="text" name="storefront_footer_email" class="form-control" value="{{ config('settings.storefront_footer_email') }}">
-                                </div>
-
-                                <div class="form-group">
                                     <label for="name">Footer Copyright Text</label>
                                     <input type="text" name="storefront_copyright_text" class="form-control" value="{{ config('settings.storefront_copyright_text') }}">
                                 </div>
@@ -103,7 +88,7 @@
                                         @endif
                                     </div>
                                 </div>
-                                <button type="button" class="btn btn-light image-picker waves-effect waves-light d-block mt-3 mb-4" data-image="logo"><i class="far fa-folder-open mr-2"></i> Browse Image</button>
+                                <button type="button" class="btn btn-light image-picker waves-effect waves-light d-block mt-3 mb-4" data-image="single" data-name="storefront_logo"><i class="far fa-folder-open mr-2"></i> Browse Image</button>
 
                                 <h4>Site Favicon</h4><hr>
                                 <div class="single-image">
@@ -116,7 +101,7 @@
                                         @endif
                                     </div>
                                 </div>
-                                <button type="button" class="btn btn-light image-picker waves-effect waves-light d-block mt-3 mb-4" data-image="favicon"><i class="far fa-folder-open mr-2"></i> Browse Image</button>
+                                <button type="button" class="btn btn-light image-picker waves-effect waves-light d-block mt-3 mb-4" data-image="single" data-name="storefront_favicon"><i class="far fa-folder-open mr-2"></i> Browse Image</button>
                                 
                             </div>
                             

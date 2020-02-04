@@ -32,9 +32,9 @@
     </section>
     @endif
     <!-- start infobar top -->
-    {{-- @include('website.infobar')
+    @include('website.infobar')
     <!-- satrt summer collection -->
-    @php
+    {{-- @php
         $typeOne = $type->find(1);
         $typeTwo = $type->find(2);
         $typeThree = $type->find(3);
@@ -209,40 +209,34 @@
             </div>
         </div>
     </section>
-    @endif
-
-    @php
-        $firstAdd = $add->first();
-        $secondAdds = $add->skip(1)->take(2)->get();
-        $forthAdd = $add->find(4);
-        $fifthAdds = $add->skip(4)->take(2)->get();
-        $seventhAdd = $add->find(7);
-        $eighthAdd = $add->find(8);
-    @endphp
+    @endif --}}
     <!-- start feater image area page -->
     <section id="feater_image_content">
         <div class="container">
             <div class="row">
                 <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4">
                     <div class="feater_image_content_img">
-                        <a href="{{$firstAdd->url}}">
-                            <img class="img-fluid" src="{{asset('storage/adds/'.$firstAdd->image)}}" alt="">
+                        <a href="{{ url(config('settings.banner_section_1_cta_1_url')) }}">
+                            <img class="img-fluid" src="{{ asset(config('settings.banner_section_1_image_1')) }}" alt="">
                         </a>
                     </div>
                 </div>
                 <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4">
-                    @foreach($secondAdds as $secondAdd)
                     <div class="feater_image_content_img">
-                        <a href="{{$secondAdd->url}}">
-                            <img class="img-fluid" src="{{asset('storage/adds/'.$secondAdd->image)}}" alt="">
+                        <a href="{{ url(config('settings.banner_section_1_cta_2_url')) }}">
+                            <img class="img-fluid" src="{{ asset(config('settings.banner_section_1_image_2')) }}" alt="">
                         </a>
                     </div>
-                    @endforeach
+                    <div class="feater_image_content_img">
+                        <a href="{{ url(config('settings.banner_section_1_cta_3_url')) }}">
+                            <img class="img-fluid" src="{{ asset(config('settings.banner_section_1_image_3')) }}" alt="">
+                        </a>
+                    </div>
                 </div>
                 <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4">
                     <div class="feater_image_content_img">
-                        <a href="{{$forthAdd->url}}">
-                            <img class="img-fluid" src="{{asset('storage/adds/'.$forthAdd->image)}}" alt="">
+                        <a href="{{ url(config('settings.banner_section_1_cta_4_url')) }}">
+                            <img class="img-fluid" src="{{ asset(config('settings.banner_section_1_image_4')) }}" alt="">
                         </a>
                     </div>
                 </div>
@@ -250,7 +244,7 @@
         </div>
     </section>
     <!-- start new arival -->
-    @if($typeFour->status == 1)
+    {{-- @if($typeFour->status == 1)
     <section id="newarival">
         <div class="container">
             <div class="row">
@@ -362,26 +356,31 @@
             </div>
         </div>
     </section>
-    @endif
+    @endif --}}
     <!--start feater product 2-->
     <section id="feater_product_2">
         <div class="container">
             <div class="row">
                 <div class="col-xl-8 col-lg-8 col-md-8 col-sm-8">
                     <div class="row">
-                        @foreach($fifthAdds as $fifthAdd)
                         <div class="col-xl-6 col-lg-6 col-md-6">
                             <div class="feater_product_2_item_img">
-                                <a href="{{$fifthAdd->url}}">
-                                    <img class="img-fluid" src="{{asset('storage/adds/'.$fifthAdd->image)}}" alt="">
+                                <a href="{{ url(config('settings.banner_section_2_cta_1_url')) }}">
+                                    <img class="img-fluid" src="{{ asset(config('settings.banner_section_2_image_1')) }}" alt="">
                                 </a>
                             </div>
                         </div>
-                        @endforeach
+                        <div class="col-xl-6 col-lg-6 col-md-6">
+                            <div class="feater_product_2_item_img">
+                                <a href="{{ url(config('settings.banner_section_2_cta_2_url')) }}">
+                                    <img class="img-fluid" src="{{ asset(config('settings.banner_section_2_image_2')) }}" alt="">
+                                </a>
+                            </div>
+                        </div>
                         <div class="col-xl-12">
                             <div class="feater_product_2_item_img">
-                                <a href="{{$eighthAdd->url}}">
-                                    <img class="img-fluid" src="{{asset('storage/adds/'.$eighthAdd->image)}}" alt="">
+                                <a href="{{ url(config('settings.banner_section_2_cta_3_url')) }}">
+                                    <img class="img-fluid" src="{{ asset(config('settings.banner_section_2_image_3')) }}" alt="">
                                 </a>
                             </div>
                         </div>
@@ -389,8 +388,8 @@
                 </div>
                 <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4">
                     <div class="feater_product_2_item_img">
-                        <a href="{{$seventhAdd->url}}">
-                            <img class="img-fluid" src="{{asset('storage/adds/'.$seventhAdd->image)}}" alt="">
+                        <a href="{{ url(config('settings.banner_section_2_cta_4_url')) }}">
+                            <img class="img-fluid" src="{{ asset(config('settings.banner_section_2_image_4')) }}" alt="">
                         </a>
                     </div>
                 </div>
@@ -407,15 +406,15 @@
                     @foreach($brands as $brand)
                     <div class="shop_brand_slide_item">
                         <a href="{{url('product/brand/'. $brand->slug)}}">
-                            <img src="{{asset('storage/brands/'.$brand->image)}}" alt="">
+                            <img src="{{ asset($brand->image) }}" alt="{{ $brand->name }}">
                         </a>
                     </div>
                     @endforeach
                 </div>
             </div>
         </div>
-    </section>
-    @if($typeSix->status == 1)
+    </section> 
+    {{-- @if($typeSix->status == 1)
     <!--start Gadget-->
     <section id="gadget">
         <div class="container">
@@ -535,13 +534,16 @@
             $('.banar_slider_active').owlCarousel({
                 loop: true,
                 margin: 0,
-                navText: ["<i class='icofont-long-arrow-left'></i>", "<i class='icofont-long-arrow-right'></i>"],
+                navText: [
+                    "<i class='icofont-long-arrow-left'></i>", 
+                    "<i class='icofont-long-arrow-right'></i>"
+                ],
                 animateIn: 'fadeIn',
                 animateOut: 'fadeOut',
                 mouseDrag: false,
-                nav: @if($slider->arrows) true @else false @endif,
-                autoplay: @if($slider->autoplay) true @else false @endif,
-                autoplayTimeout: @php echo $slider->autoplay_speed @endphp,
+                nav: @if($slider && $slider->arrows) true @else false @endif,
+                autoplay: @if($slider && $slider->autoplay) true @else false @endif,
+                autoplayTimeout: @if($slider) @php echo $slider->autoplay_speed @endphp @endif,
                 responsive: {
                     0: {
                         items: 1

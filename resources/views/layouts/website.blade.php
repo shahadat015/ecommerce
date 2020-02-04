@@ -53,7 +53,11 @@
                 <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2">
                     <div class="main_logo">
                         <a href="{{ url('/') }}">
-                            <img class="img-fluid" src="{{ asset(config('settings.storefront_logo')) }}" alt="logo">
+                            @if(config('settings.storefront_logo'))
+                                <img class="img-fluid" src="{{ asset(config('settings.storefront_logo')) }}" alt="logo">
+                            @else
+                                <h5>{{ config('settings.store_name') }}</h5>
+                            @endif
                         </a>
                     </div>
                 </div>
@@ -148,7 +152,7 @@
         </div>
     </section>
     <!-- start main menu area -->
-    @if($primaryMenu)
+    @if($primaryMenu && $primaryMenu->is_active)
     <section id="main_menu">
         <div class="container">
             <div class="row">
@@ -277,7 +281,7 @@
             @method('delete')
         </form>
 
-        @if($primaryMenu)
+        @if($primaryMenu && $primaryMenu->is_active)
         <div id="moble_menu_menu_content">
             <div class="category_menu_mobile_content_menu">
                 <aside class="sidebar">
@@ -327,7 +331,11 @@
                 <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12">
                     <div class="footer_about">
                         <a href="{{ url('/') }}">
-                            <img class="img-fluid" src="{{ asset(config('settings.storefront_logo')) }}" alt="">
+                            @if(config('settings.storefront_logo'))
+                                <img class="img-fluid" src="{{ asset(config('settings.storefront_logo')) }}" alt="">
+                            @else
+                                <h5>{{ config('settings.store_name') }}</h5>
+                            @endif
                         </a>
                         <p>{{ config('settings.store_tagline') }}. </p>
                         <ul>
@@ -354,7 +362,10 @@
                 </div>
                 <div class="col-xl-8 col-lg-8 col-md-8 col-sm-8">
                     <div class="row">
-                        @if($popularCategories->count())
+                        @if($popularCategory)
+                            @php
+                                $popularCategories = $popularCategory->menuItems()->where('is_root',0)->get();
+                            @endphp
                         <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6">
                             <div class="footer_link">
                                 <h3>CATEGORIES</h3>
@@ -382,10 +393,10 @@
                             <div class="footer_link">
                                 <h3>CONTACTS</h3>
                                 <div class="conatct_info_footer">
-                                    <p><span>Address:</span> {{ config('settings.storefront_footer_address') }}</p>
-                                    <p><span>Phone:</span> <a href="tel:{{ config('settings.storefront_footer_phone') }}"> {{ config('settings.storefront_footer_phone') }}</a></p>
+                                    <p><span>Address:</span> {{ config('settings.store_address') }}</p>
+                                    <p><span>Phone:</span> <a href="tel:{{ config('settings.store_phone') }}"> {{ config('settings.store_phone') }}</a></p>
                                     <p><span>Hours:</span> 7 Days a week from 10 am to 6 pm</p>
-                                    <p><span>Email</span> <a href="mailto:{{ config('settings.storefront_footer_email') }}"> {{ config('settings.storefront_footer_email') }}</a></p>
+                                    <p><span>Email</span> <a href="mailto:{{ config('settings.store_email') }}"> {{ config('settings.store_email') }}</a></p>
                                 </div>
                             </div>
                         </div>

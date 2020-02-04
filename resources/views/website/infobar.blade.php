@@ -6,13 +6,13 @@
                     <div class="row align-items-center">
                         <div class="col-xl-2 col-lg-2 col-md-2">
                             <div class="info_bar_item_icon">
-                                <i class="icofont-ui-cart"></i>
+                                <i class="{{ config('settings.product_features_1_icon') }}"></i>
                             </div>
                         </div>
                         <div class="col-xl-10 col-lg-10 col-md-10">
                             <div class="info_bar_item_content">
-                                <h4>FREE SHIPPING & RETURN</h4>
-                                <p>Free shipping on all orders over $99.</p>
+                                <h4>{{ config('settings.product_features_1_title') }}</h4>
+                                <p>{{ config('settings.product_features_1_subtitle') }}</p>
                             </div>
                         </div>
                     </div>
@@ -23,13 +23,13 @@
                     <div class="row align-items-center">
                         <div class="col-xl-2 col-lg-2 col-md-2">
                             <div class="info_bar_item_icon">
-                                <i class="icofont-money-bag"></i>
+                                <i class="{{ config('settings.product_features_2_icon') }}"></i>
                             </div>
                         </div>
                         <div class="col-xl-10 col-lg-10 col-md-10">
                             <div class="info_bar_item_content">
-                                <h4>MONEY BACK GUARANTEE</h4>
-                                <p>100% money back guarantee</p>
+                                <h4>{{ config('settings.product_features_2_title') }}</h4>
+                                <p>{{ config('settings.product_features_2_subtitle') }}</p>
                             </div>
                         </div>
                     </div>
@@ -40,13 +40,13 @@
                     <div class="row align-items-center">
                         <div class="col-xl-2 col-lg-2 col-md-2">
                             <div class="info_bar_item_icon">
-                                <i class="icofont-support"></i>
+                                <i class="{{ config('settings.product_features_3_icon') }}"></i>
                             </div>
                         </div>
                         <div class="col-xl-10 col-lg-10 col-md-10">
                             <div class="info_bar_item_content">
-                                <h4>ONLINE SUPPORT 24/7</h4>
-                                <p>Lorem ipsum dolor sit amet.</p>
+                                <h4>{{ config('settings.product_features_3_title') }}</h4>
+                                <p>{{ config('settings.product_features_3_subtitle') }}</p>
                             </div>
                         </div>
                     </div>

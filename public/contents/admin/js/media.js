@@ -1,8 +1,8 @@
 $(function() {
 
     $(document).on('click', '.image-picker', function() {
-        $('.bd-example-modal-xl').modal('show');
-
+        window.modal = $('.bd-example-modal-xl');
+        modal.modal('show');
         window.imgPicker = $(this);
     });
 
@@ -14,31 +14,22 @@ $(function() {
         var path = $(this).data('src');
         var id = $(this).data('id');
         var imgType = imgPicker.data('image');
+        var name = imgPicker.data('name');
 
         if(imgType == 'single'){
-            $('.single-image .image-holder').html('<image src="'+ url +'"><input type="hidden" name="image" value="'+ path +'"><button type="button" class="btn remove-image"  data-image="single"><i class="fas fa-times"></i></button>');
-            $('.bd-example-modal-xl').modal('hide');
+            imgPicker.prev().children().html('<image src="'+ url +'"><input type="hidden" name="'+ name +'" value="'+ path +'"><button type="button" class="btn remove-image"  data-image="single"><i class="fas fa-times"></i></button>');
+            modal.modal('hide');
         };
 
         if(imgType == 'multiple'){
             $('.placeholder').remove();
-            $('.image-list').append('<div class="image-holder"><image src="'+ url +'"><input type="hidden" name="images[]" value="'+ id +'"><button type="button" class="btn remove-image" data-image="multiple"><i class="fas fa-times"></i></button></div>');
+            $('.image-list').append('<div class="image-holder"><image src="'+ url +'"><input type="hidden" name="'+ name +'" value="'+ id +'"><button type="button" class="btn remove-image" data-image="multiple"><i class="fas fa-times"></i></button></div>');
             return successMessage('Image successfully added!');
         };
 
         if(imgType == 'slider'){
-            imgPicker.children().html('<image src="'+ url +'"><input type="hidden" name="image" value="'+ path +'">');
-            $('.bd-example-modal-xl').modal('hide');
-        }
-
-        if(imgType == 'favicon'){
-            imgPicker.prev().children().html('<image src="'+ url +'"><input type="hidden" name="storefront_favicon" value="'+ path +'">');
-            $('.bd-example-modal-xl').modal('hide');
-        }
-
-        if(imgType == 'logo'){
-            imgPicker.prev().children().html('<image src="'+ url +'"><input type="hidden" name="storefront_logo" value="'+ path +'">');
-            $('.bd-example-modal-xl').modal('hide');
+            imgPicker.children().html('<image src="'+ url +'"><input type="hidden" name="'+ name +'" value="'+ path +'">');
+            modal.modal('hide');
         }
     });
 
@@ -72,7 +63,7 @@ $(function() {
         $.toast({
             heading: 'Success',
             text: message,
-            position: 'top-right',
+            position: 'bottom-right',
             loaderBg:'#ff6849',
             icon: 'success',
             hideAfter: 3000, 

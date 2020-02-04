@@ -18,7 +18,7 @@
                     <div class="row">
                         <div class="col-lg-6">
                             @if($product->image)
-                            <img src="{{ asset($product->image->path()) }}" alt="" class="mx-auto d-block" height="330" width="450">
+                            <img src="{{ asset($product->image) }}" alt="" class="mx-auto d-block" height="330" width="450">
                             @else
                             <img src="{{ asset('contents/admin/images/placeholder.png') }}" alt="" class="mx-auto d-block" height="330" width="450">
                             @endif

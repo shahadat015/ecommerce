@@ -114,8 +114,10 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'namespace' => 'Admin', 'mi
 	Route::delete('/visitor/destroy', 'VisitorController@destroy')->name('visitor.destroy');
 	Route::get('/visitors', 'VisitorController@index')->name('visitors');
 
-	Route::get('/storefront', 'StorefrontController@index')->name('storefront');
-	Route::put('/storefront', 'StorefrontController@update')->name('storefront');
+	Route::get('/storefront/general', 'StorefrontController@index')->name('storefront.general');
+	Route::put('/storefront/general', 'StorefrontController@update')->name('storefront.general');
+	Route::get('/storefront/sections', 'StorefrontController@sections')->name('storefront.sections');
+	Route::put('/storefront/sections', 'StorefrontController@updateSections')->name('storefront.sections');
 
 	Route::get('/menus/datatables', 'MenuController@menus')->name('menus.datatables');
 	Route::delete('/menu/destroy', 'MenuController@destroy')->name('menu.destroy');
