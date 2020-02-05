@@ -189,7 +189,7 @@
                                             <div class="form-group row  d-flex align-items-end"> 
 
                                                 <div class="col-sm-3">
-                                                    <label class="control-label">Attribute</label>
+                                                    <label class="control-label">Attribute<b class="text-danger">*</b></label>
                                                     <select class="form-control custom-select attributes" name="attribute_id" style="width: 100%; height:36px;">
                                                         <option value="">Select Attribute</option>
                                                         @foreach($attributesets as $attributeset)
@@ -203,7 +203,7 @@
                                                 </div><!--end col-->                                       
                                                 
                                                 <div class="col-sm-8">
-                                                    <label class="control-label">Value</label>
+                                                    <label class="control-label">Value<b class="text-danger">*</b></label>
                                                     <select class="select2 mb-3 select2-multiple" name="attribute_value_id" multiple="multiple">
                                                     </select>
                                                 </div><!--end col-->
@@ -221,7 +221,6 @@
                                         <span data-repeater-create="" class="btn btn-light btn-md">
                                             <span class="fa fa-plus"></span> Add Value
                                         </span>
-                                        <span class="text-danger ml-3"><strong>Note: </strong>The value field is required when attribute is present.</span>
                                     </div>
                                 </div>
                             </div>
@@ -234,12 +233,12 @@
                                             <div class="card-body">
                                                 <div class="form-group row">
                                                     <div class="col-sm-4">
-                                                        <label for="example-email-input1" class="col-form-label">Name</label>
+                                                        <label for="example-email-input1" class="col-form-label">Name<b class="text-danger">*</b></label>
                                                         <input name="name" class="form-control" type="text">
                                                     </div>
 
                                                     <div class="col-sm-4">
-                                                        <label for="example-email-input1" class="col-form-label">Type</label>
+                                                        <label for="example-email-input1" class="col-form-label">Type<b class="text-danger">*</b></label>
                                                         <select name="type" class="form-control">
                                                             <option value="dropdown">Dropdown</option>
                                                             <option value="checkbox">Checkbox</option>
@@ -249,7 +248,7 @@
                                                     </div>
 
                                                     <div class="col-sm-3">
-                                                        <label for="example-email-input1" class="col-form-label">Is Required?</label>
+                                                        <label for="example-email-input1" class="col-form-label">Is Required?<b class="text-danger">*</b></label>
                                                         <select name="is_required" class="form-control">
                                                             <option value="1">Required</option>
                                                             <option value="0">Not Required</option>
@@ -267,17 +266,17 @@
                                                         <div data-repeater-item="">
                                                             <div class="form-group row  d-flex align-items-end">
                                                                 <div class="col-sm-4">
-                                                                    <label class="control-label">Label</label>
+                                                                    <label class="control-label">Label<b class="text-danger">*</b></label>
                                                                     <input type="text" name="label" class="form-control">
                                                                 </div><!--end col-->
 
                                                                 <div class="col-sm-4">
-                                                                    <label class="control-label">Price</label>
+                                                                    <label class="control-label">Price<b class="text-danger">*</b></label>
                                                                     <input type="text" name="price" class="form-control">
                                                                 </div><!--end col-->
 
                                                                 <div class="col-sm-3">
-                                                                    <label class="control-label">Price Type</label>
+                                                                    <label class="control-label">Price Type<b class="text-danger">*</b></label>
                                                                     <select name="price_type" class="form-control">
                                                                         <option value="fixed">Fixed</option>
                                                                         <option value="percent">Percent</option>
@@ -296,8 +295,6 @@
                                                         <span data-repeater-create="" class="btn btn-light btn-md">
                                                             <span class="fa fa-plus"></span> Add Value
                                                         </span>
-
-                                                        <span class="text-danger ml-3"><strong>Note: </strong>The Type, Required and Label field is required when name is present.</span>
                                                     </div>
                                                 </div>
                                             </div>

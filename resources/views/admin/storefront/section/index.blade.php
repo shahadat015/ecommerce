@@ -11,7 +11,7 @@
     
     <!-- end page title end breadcrumb -->
     <div class="row justify-content-center">
-        <div class="col-11">
+        <div class="col-12">
             <div class="card">
                 <div class="card-header">
                     <h4 class="mt-2 header-title float-left">Storefront</h4>
@@ -31,6 +31,9 @@
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" data-toggle="tab" href="#featured" role="tab">Featured Products</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" data-toggle="tab" href="#recent" role="tab">Recent Products</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" data-toggle="tab" href="#banner1" role="tab">Banner Section 1</a>
@@ -102,7 +105,17 @@
                                 <div class="form-group">
                                     <label for="name">Products</label>
                                     <select class="select2 mb-3 select2-multiple select_product" name="product_carousel_1_products[]" multiple="multiple" data-placeholder="Select Product">
+                                        @foreach($carousel_1_products as $carousel_1_product)
+                                            <option value="{{ $carousel_1_product->id }}" selected>{{ $carousel_1_product->name }}</option>
+                                        @endforeach
                                     </select>
+                                </div>
+
+                                <div class="form-check-inline mt-1 mb-3">
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" name="product_carousel_1_enable" class="custom-control-input" id="customCheck1" {{ config("settings.product_carousel_1_enable") ? 'checked' : '' }}>
+                                        <label class="custom-control-label" for="customCheck1">Enable product carousel-1 </label>
+                                    </div>
                                 </div>
 
                                 <h4>Product Carousel -2</h4><hr>
@@ -114,8 +127,19 @@
                                 <div class="form-group">
                                     <label for="name">Products</label>
                                     <select class="select2 mb-3 select2-multiple select_product" name="product_carousel_2_products[]" multiple="multiple" data-placeholder="Select Product">
+                                        @foreach($carousel_2_products as $carousel_2_product)
+                                            <option value="{{ $carousel_2_product->id }}" selected>{{ $carousel_2_product->name }}</option>
+                                        @endforeach
                                     </select>
                                 </div>
+
+                                <div class="form-check-inline mt-1 mb-3">
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" name="product_carousel_2_enable" class="custom-control-input" id="customCheck2" {{ config("settings.product_carousel_2_enable") ? 'checked' : '' }}>
+                                        <label class="custom-control-label" for="customCheck2">Enable product carousel-2 </label>
+                                    </div>
+                                </div>
+
 
                                 <h4>Product Carousel -3</h4><hr>
                                 <div class="form-group">
@@ -126,19 +150,17 @@
                                 <div class="form-group">
                                     <label for="name">Products</label>
                                     <select class="select2 mb-3 select2-multiple select_product" name="product_carousel_3_products[]" multiple="multiple" data-placeholder="Select Product">
+                                        @foreach($carousel_3_products as $carousel_3_product)
+                                            <option value="{{ $carousel_3_product->id }}" selected>{{ $carousel_3_product->name }}</option>
+                                        @endforeach
                                     </select>
                                 </div>
 
-                                <h4>Product Carousel -4</h4><hr>
-                                <div class="form-group">
-                                    <label for="name">Section Title</label>
-                                    <input type="text" name="product_carousel_4_title" class="form-control" value="{{ config('settings.product_carousel_4_title') }}">
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="name">Products</label>
-                                    <select class="select2 mb-3 select2-multiple select_product" name="product_carousel_4_products[]" multiple="multiple" data-placeholder="Select Product">
-                                    </select>
+                                <div class="form-check-inline mt-1 mb-3">
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" name="product_carousel_3_enable" class="custom-control-input" id="customCheck3" {{ config("settings.product_carousel_3_enable") ? 'checked' : '' }}>
+                                        <label class="custom-control-label" for="customCheck3">Enable product carousel-3 </label>
+                                    </div>
                                 </div>
                             </div>
                             <div class="tab-pane p-3" id="featured" role="tabpanel">
@@ -198,9 +220,40 @@
                                 <div class="form-group">
                                     <label for="name">Products</label>
                                     <select class="select2 mb-3 select2-multiple select_product" name="featured_products[]" multiple="multiple" data-placeholder="Select Product">
+                                        @foreach($featured_products as $featured_product)
+                                            <option value="{{ $featured_product->id }}" selected>{{ $featured_product->name }}</option>
+                                        @endforeach
                                     </select>
                                 </div>
+
+                                <div class="form-check-inline mt-1 mb-2">
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" name="featured_product_enable" class="custom-control-input" id="customCheck5" {{ config("settings.featured_product_enable") ? 'checked' : '' }} >
+                                        <label class="custom-control-label" for="customCheck5">Enable featured products </label>
+                                    </div>
+                                </div>
                             </div>
+
+                            <div class="tab-pane p-3" id="recent" role="tabpanel">
+                                <h4>Recent Products</h4><hr>
+                                <div class="form-group">
+                                    <label for="name">Section Title</label>
+                                    <input type="text" name="recent_products_title" class="form-control" value="{{ config('settings.recent_products_title') }}">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="name">Total Products</label>
+                                    <input type="number" name="recent_total_products" class="form-control" value="{{ config('settings.recent_total_products') }}">
+                                </div>
+
+                                <div class="form-check-inline mt-1 mb-2">
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" name="enable_recent_products" class="custom-control-input" id="customCheck7" {{ config("settings.enable_recent_products") ? 'checked' : '' }} >
+                                        <label class="custom-control-label" for="customCheck7">Enable Recent products </label>
+                                    </div>
+                                </div>
+                            </div>
+
                             <div class="tab-pane p-3" id="banner1" role="tabpanel">
                                 <h4>Banner Section -1</h4><hr>
                                 <div class="row">
@@ -489,6 +542,9 @@
                                 <div class="form-group">
                                     <label for="name">Tab Products</label>
                                     <select class="select2 mb-3 select2-multiple select_product" name="product_tab_1_products[]" multiple="multiple" data-placeholder="Select Product">
+                                        @foreach($tab_1_products as $tab_1_product)
+                                            <option value="{{ $tab_1_product->id }}" selected>{{ $tab_1_product->name }}</option>
+                                        @endforeach
                                     </select>
                                 </div>
 
@@ -502,6 +558,9 @@
                                 <div class="form-group">
                                     <label for="name">Tab Products</label>
                                     <select class="select2 mb-3 select2-multiple select_product" name="product_tab_2_products[]" multiple="multiple" data-placeholder="Select Product">
+                                        @foreach($tab_2_products as $tab_2_product)
+                                            <option value="{{ $tab_2_product->id }}" selected>{{ $tab_2_product->name }}</option>
+                                        @endforeach
                                     </select>
                                 </div>
 
@@ -515,7 +574,17 @@
                                 <div class="form-group">
                                     <label for="name">Tab Products</label>
                                     <select class="select2 mb-3 select2-multiple select_product" name="product_tab_3_products[]" multiple="multiple" data-placeholder="Select Product">
+                                        @foreach($tab_3_products as $tab_3_product)
+                                            <option value="{{ $tab_3_product->id }}" selected>{{ $tab_3_product->name }}</option>
+                                        @endforeach
                                     </select>
+                                </div>
+
+                                <div class="form-check-inline mt-1 mb-2">
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" name="enable_products_tabs" class="custom-control-input" id="customCheck6" {{ config("settings.enable_products_tabs") ? 'checked' : '' }}>
+                                        <label class="custom-control-label" for="customCheck6">Enable products tabs</label>
+                                    </div>
                                 </div>
                             </div>
                         </div>

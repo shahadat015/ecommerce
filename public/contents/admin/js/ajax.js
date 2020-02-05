@@ -41,7 +41,7 @@ $(function() {
                     var errorMessage = errors[errorField][0];
 
                     // Show error message
-                    if(inputField.next().length == 0){
+                    if(inputField.next('.invalid-feedback').length == 0){
                         inputField.focus().after('<div class="invalid-feedback"> <strong>'+ errorMessage +'</strong> </div>');
                     }else{
                         inputField.focus();
@@ -49,7 +49,7 @@ $(function() {
 
                     // Remove error message
                     inputField.on('keydown, change', function() {
-                    	inputField.next().remove();
+                    	inputField.next('.invalid-feedback').remove();
                     });
                 }else{
                     return errorStatusText(error);
@@ -94,7 +94,7 @@ $(function() {
                     var errorMessage = errors[errorField][0];
 
                     // Show error message
-                    if(inputField.next().length == 0){
+                    if(inputField.next('.invalid-feedback').length == 0){
                         inputField.focus().after('<div class="invalid-feedback"> <strong>'+ errorMessage +'</strong> </div>');
                     }else{
                         inputField.focus();
@@ -102,7 +102,7 @@ $(function() {
 
                     // Remove error message
                     inputField.on('keydown, change', function() {
-                        inputField.next().remove();
+                        inputField.next('.invalid-feedback').remove();
                     });
                 }else{
                     return errorStatusText(error);

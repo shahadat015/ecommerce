@@ -34,29 +34,14 @@
     <!-- start infobar top -->
     @include('website.infobar')
     <!-- satrt summer collection -->
-    {{-- @php
-        $typeOne = $type->find(1);
-        $typeTwo = $type->find(2);
-        $typeThree = $type->find(3);
-        $typeFour = $type->find(4);
-        $typeFive = $type->find(5);
-        $typeSix = $type->find(6);
-        $summerCollections = $typeOne->products()->active()->instock()->latest()->limit(10)->get();
-        $winterCollections = $typeTwo->products()->active()->instock()->latest()->limit(10)->get();
-        $featuredProducts = $typeThree->products()->active()->instock()->latest()->skip(1)->limit(7)->get();
-        $featuredFirstProduct = $typeThree->products()->active()->instock()->latest()->first();
-        $newArivals = $typeFour->products()->active()->instock()->latest()->limit(10)->get();
-        $trendyTshirts = $typeFive->products()->active()->instock()->latest()->limit(10)->get();
-        $gadgetAccessories = $typeSix->products()->active()->instock()->latest()->limit(10)->get();
-    @endphp
 
-    @if($typeOne->status == 1)
+    @if(config('settings.product_carousel_1_enable'))
     <section id="summer_conllection">
         <div class="container">
             <div class="row">
                 <div class="col-xl-12">
                     <div class="summer_title">
-                        <h3>{{$typeOne->name}}</h3>
+                        <h3>{{ config('settings.product_carousel_1_title') }}</h3>
                     </div>
                 </div>
             </div>
@@ -64,66 +49,24 @@
                 <div class="row">
                     <div class="col-xl-12">
                         <div class="summer_slide_active owl-carousel">
-                            @foreach($summerCollections as $summerCollection)
+                            @foreach($carousel_1_products as $carousel_1_product)
                             <div class="summer_slide_item">
-                                <a href="{{url('product/' .$summerCollection->id .'/'. $summerCollection->slug)}}">
+                                <a href="{{ url('product/'. $carousel_1_product->slug) }}">
                                     <div class="summmer_image">
-                                        <img src="{{asset('storage/products/'. $summerCollection->image)}}" alt="">
+                                        <img height="170" src="{{ asset($carousel_1_product->image ?? 'contents/admin/images/placeholder.png') }}" alt="">
                                         <div class="sumer_pro_hover">
                                             <ul>
-                                                <li><a class="addtocart" href="{{url('/cart/add/' .$summerCollection->id)}}"><i class="icofont-shopping-cart"></i></a></li>
-                                                <li><a href="{{url('product/' .$summerCollection->id .'/'. $summerCollection->slug)}}"><i class="icofont-eye-alt"></i></a></li>
-                                                <li><a href="{{url('/favorite/'.$summerCollection->id)}}"><i class="icofont-ui-love"></i></a></li>
+                                                <li><a class="addtocart" href="{{url('/cart/add/' . $carousel_1_product->id)}}"><i class="icofont-shopping-cart"></i></a></li>
+                                                <li><a href="{{url('product/' . $carousel_1_product->slug)}}"><i class="icofont-eye-alt"></i></a></li>
+                                                <li><a href="{{url('/favorite/'. $carousel_1_product->id)}}"><i class="icofont-ui-love"></i></a></li>
                                             </ul>
                                         </div>
                                     </div>
                                     <div class="summmer_item_content">
-                                        <h4>{{str_limit($summerCollection->name, 20)}}</h4>
-                                        <h3>Tk {{$summerCollection->price}}</h3>
-                                        @include('website.partial.rating', ['rating' => $summerCollection->reviews()->avg('rating')])
-                                        <a class="addtocart" href="{{url('/cart/add/' .$summerCollection->id)}}"><i class="icofont-shopping-cart"></i> Add To Cart</a>
-                                    </div>
-                                </a>
-                            </div>
-                            @endforeach
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    @else
-        <section id="summer_conllection">
-        <div class="container">
-            <div class="row">
-                <div class="col-xl-12">
-                    <div class="summer_title">
-                        <h3>{{$typeTwo->name}}</h3>
-                    </div>
-                </div>
-            </div>
-            <div class="summer_slide_container">
-                <div class="row">
-                    <div class="col-xl-12">
-                        <div class="summer_slide_active owl-carousel">
-                            @foreach($winterCollections as $winterCollection)
-                            <div class="summer_slide_item">
-                                <a href="{{url('product/' .$winterCollection->id .'/'. $winterCollection->slug)}}">
-                                    <div class="summmer_image">
-                                        <img src="{{asset('storage/products/'. $winterCollection->image)}}" alt="">
-                                        <div class="sumer_pro_hover">
-                                            <ul>
-                                                <li><a class="addtocart" href="{{url('/cart/add/' .$winterCollection->id)}}"><i class="icofont-shopping-cart"></i></a></li>
-                                                <li><a href="{{url('product/' .$winterCollection->id .'/'. $winterCollection->slug)}}"><i class="icofont-eye-alt"></i></a></li>
-                                                <li><a href="{{url('/favorite/'.$winterCollection->id)}}"><i class="icofont-ui-love"></i></a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="summmer_item_content">
-                                        <h4>{{str_limit($winterCollection->name, 20)}}</h4>
-                                        <h3>Tk {{$winterCollection->price}}</h3>
-                                        @include('website.partial.rating', ['rating' => $winterCollection->reviews()->avg('rating')])
-                                        <a class="addtocart" href="{{url('/cart/add/' .$winterCollection->id)}}"><i class="icofont-shopping-cart"></i> Add To Cart</a>
+                                        <h4>{{str_limit($carousel_1_product->name, 20)}}</h4>
+                                        <h3>Tk {{$carousel_1_product->price}}</h3>
+                                        @include('website.partial.rating', ['rating' => $carousel_1_product->reviews()->avg('rating')])
+                                        <a class="addtocart" href="{{url('/cart/add/' . $carousel_1_product->id)}}"><i class="icofont-shopping-cart"></i> Add To Cart</a>
                                     </div>
                                 </a>
                             </div>
@@ -136,13 +79,13 @@
     </section>
     @endif
     <!-- satrt feater product -->
-    @if($typeThree->status == 1)
+    @if(config('settings.featured_product_enable'))
     <section id="feature_product">
         <div class="container">
             <div class="row">
                 <div class="col-xl-12">
                     <div class="feature_product_title">
-                        <h3>{{$typeThree->name}}</h3>
+                        <h3>{{ config('settings.featured_products_title') }}</h3>
                     </div>
                 </div>
             </div>
@@ -152,54 +95,47 @@
                         <div class="row">
                             <div class="col-xl-5 col-lg-5 col-md-6">
                                 <div class="feater_product_image">
-                                    <img class="img-fluid" src="{{asset('storage/products/'.$featuredFirstProduct->image)}}" alt="">
+                                    <img class="img-fluid" src="{{ asset(config('settings.featured_product_image') ?? 'contents/admin/images/placeholder.png')}}" alt="">
                                     <div class="feater_product_image_overlay_content">
-                                        <h3>{{str_limit($featuredFirstProduct->name, 20)}}</h3>
-                                        <p>{{str_limit($featuredFirstProduct->description, 30)}} </p>
-                                        <h6>Tk {{$featuredFirstProduct->price}}</h6>
-                                        <a href="{{url('product/'.$featuredFirstProduct->id.'/'.$featuredFirstProduct->slug)}}">View Details</a>
+                                        <h3>{{ str_limit(config('settings.featured_product_title'), 20) }}</h3>
+                                        <p>{{ str_limit(config('settings.featured_product_subtitle'), 30) }} </p>
+                                        <a href="{{ url('product/'. config('settings.featured_product_cta_url')) }}" target="{{ config('settings.featured_product_open_in') }}">{{ str_limit(config('settings.featured_product_cta_text'), 30) }}</a>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-xl-7 col-lg-7 col-md-6 col-sm-12">
                                 <div class="row">
-                                    @foreach($featuredProducts as $key=>$featuredProduct)
+                                    @foreach($featured_products as $key=>$featured_product)
                                     <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 pl-0 text-center">
                                         <div class="feater_product_item">
-                                            <a href="{{url('product/'.$featuredProduct->id.'/'.$featuredProduct->slug)}}">
-                                                <img class="img-fluid" src="{{asset('storage/products/'.$featuredProduct->image)}}" alt="">
+                                            <a href="{{url('product/'.$featured_product->slug)}}">
+                                                <img class="img-fluid" src="{{asset($featured_product->image ?? 'contents/admin/images/placeholder.png')}}" alt="">
                                             </a>
-                                            <h4>{{str_limit($featuredProduct->name, 20)}}</h4>
-                                            <h3>TK {{$featuredProduct->price}}</h3>
-                                            @include('website.partial.rating', ['rating' => $featuredProduct->reviews()->avg('rating')])
-                                            <a class="addtocart" href="{{url('cart/add/'.$featuredProduct->id)}}"><i class="icofont-shopping-cart"></i></a>
-                                            <a href="{{url('favorite/'.$featuredProduct->id)}}"><i class="fas fa-heart"></i></a>
-                                            <a href="{{url('product/'.$featuredProduct->id.'/'.$featuredProduct->slug)}}"><i class="fas fa-exchange-alt"></i></a>
+                                            <h4>{{str_limit($featured_product->name, 20)}}</h4>
+                                            <h3>TK {{$featured_product->price}}</h3>
+                                            @include('website.partial.rating', ['rating' => $featured_product->reviews()->avg('rating')])
+                                            <a class="addtocart" href="{{url('cart/add/'.$featured_product->id)}}"><i class="icofont-shopping-cart"></i></a>
+                                            <a href="{{url('favorite/'.$featured_product->id)}}"><i class="fas fa-heart"></i></a>
+                                            <a href="{{url('product/' .$featured_product->slug)}}"><i class="fas fa-exchange-alt"></i></a>
                                         </div>
                                     </div>
-                                        @if($key+1 == 3)
-                                            @break
-                                        @endif
                                     @endforeach
                                 </div>
                             </div>
-                            @foreach($featuredProducts as $key=>$featuredProduct)
-                                @if($key+1 < 4)
-                                    @continue
-                                @endif
+                            @foreach($featured_products as $key=>$featured_product)
                             <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6">
                                 <div class="feater_product_item feater_product_item_2">
-                                    <a href="{{url('product/'.$featuredProduct->id.'/'.$featuredProduct->slug)}}">
-                                        <img class="img-fluid" src="{{asset('storage/products/'.$featuredProduct->image)}}" alt="">
+                                    <a href="{{url('product/'.$featured_product->slug)}}">
+                                        <img class="img-fluid" src="{{asset($featured_product->image ?? 'contents/admin/images/placeholder.png')}}" alt="">
                                     </a>
-                                    <a href="{{url('product/'.$featuredProduct->id.'/'.$featuredProduct->slug)}}">
-                                        <h4>{{str_limit($featuredProduct->name, 20)}}</h4>
+                                    <a href="{{url('product/'.$featured_product->slug)}}">
+                                        <h4>{{str_limit($featured_product->name, 20)}}</h4>
                                     </a>
-                                    <h3>Tk {{$featuredProduct->price}}</h3>
-                                    @include('website.partial.rating', ['rating' => $featuredProduct->reviews()->avg('rating')])
-                                    <a class="addtocart" href="{{url('cart/add/'.$featuredProduct->id)}}"><i class="icofont-shopping-cart"></i></a>
-                                    <a href="{{url('favorite/'.$featuredProduct->id)}}"><i class="fas fa-heart"></i></a>
-                                    <a href="{{url('product/'.$featuredProduct->id.'/'.$featuredProduct->slug)}}"><i class="fas fa-exchange-alt"></i></a>
+                                    <h3>Tk {{$featured_product->price}}</h3>
+                                    @include('website.partial.rating', ['rating' => $featured_product->reviews()->avg('rating')])
+                                    <a class="addtocart" href="{{url('cart/add/'.$featured_product->id)}}"><i class="icofont-shopping-cart"></i></a>
+                                    <a href="{{url('favorite/'.$featured_product->id)}}"><i class="fas fa-heart"></i></a>
+                                    <a href="{{url('product/'.$featured_product->slug)}}"><i class="fas fa-exchange-alt"></i></a>
                                 </div>
                             </div>
                             @endforeach
@@ -209,7 +145,7 @@
             </div>
         </div>
     </section>
-    @endif --}}
+    @endif
     <!-- start feater image area page -->
     <section id="feater_image_content">
         <div class="container">
@@ -244,13 +180,13 @@
         </div>
     </section>
     <!-- start new arival -->
-    {{-- @if($typeFour->status == 1)
+    @if(config('settings.enable_recent_products'))
     <section id="newarival">
         <div class="container">
             <div class="row">
                 <div class="col-xl-12">
                     <div class="new_arival_title">
-                        <h3>{{$typeFour->name}}</h3>
+                        <h3>{{ config('settings.recent_products_title') }}</h3>
                     </div>
                 </div>
             </div>
@@ -259,33 +195,33 @@
                     <div class="row">
                         <div class="col-xl-12">
                             <div class="new_arival_slider_active owl-carousel">
-                                @foreach($newArivals as $newArival)
+                                @foreach($recent_products as $recent_product)
                                 <!-- single item -->
                                 <div class="new_arival_item">
-                                    <a href="{{url('product/' .$newArival->id .'/'. $newArival->slug)}}">
+                                    <a href="{{url('product/' . $recent_product->slug)}}">
                                         <div class="new_arival_image">
-                                            <img src="{{asset('storage/products/'.$newArival->image)}}" alt="">
+                                            <img height="170" src="{{asset($recent_product->image ?? 'contents/admin/images/placeholder.png')}}" alt="">
                                             <div class="new_arival_hover">
                                                 <ul>
-                                                    <li><a class="addtocart" href="{{url('cart/add/'.$newArival->id)}}"><i class="icofont-ui-cart"></i></a></li>
-                                                    <li><a href="{{url('/favorite/'.$newArival->id)}}"><i class="icofont-ui-love"></i></a></li>
-                                                    <li><a href="{{url('product/' . $newArival->id . '/' . $newArival->slug)}}"><i class="icofont-eye"></i></a></li>
+                                                    <li><a class="addtocart" href="{{url('cart/add/'.$recent_product->id)}}"><i class="icofont-ui-cart"></i></a></li>
+                                                    <li><a href="{{url('/favorite/'.$recent_product->id)}}"><i class="icofont-ui-love"></i></a></li>
+                                                    <li><a href="{{url('product/' . $recent_product->id . '/' . $recent_product->slug)}}"><i class="icofont-eye"></i></a></li>
                                                 </ul>
                                             </div>
                                         </div>
                                         <div class="new_arival_content">
-                                            <a href="{{url('product/' .$newArival->id .'/'. $newArival->slug)}}">
-                                                <h4>{{str_limit($newArival->name, 20)}}</h4>
+                                            <a href="{{url('product/'. $recent_product->slug)}}">
+                                                <h4>{{str_limit($recent_product->name, 20)}}</h4>
                                             </a>
                                             <div class="row">
                                                 <div class="col-xl-6">
                                                     <div class="new_arival_content_price">
-                                                        <h3>Tk {{$newArival->price}}</h3>
+                                                        <h3>Tk {{$recent_product->price}}</h3>
                                                     </div>
                                                 </div>
                                                 <div class="col-xl-6">
                                                     <div class="new_arival_content_reating">
-                                                        @include('website.partial.rating', ['rating' => $newArival->reviews()->avg('rating')])
+                                                        @include('website.partial.rating', ['rating' => $recent_product->reviews()->avg('rating')])
                                                     </div>
                                                 </div>
                                             </div>
@@ -301,14 +237,14 @@
         </div>
     </section>
     @endif
-    @if($typeFive->status == 1)
+    @if(config('settings.product_carousel_2_enable'))
     <!-- start tshirt area -->
     <section id="teshirt">
         <div class="container">
             <div class="row">
                 <div class="col-xl-12">
                     <div class="teshirt_title">
-                        <h3>{{$typeFive->name}}</h3>
+                        <h3>{{ config('settings.product_carousel_2_title') }}</h3>
                     </div>
                 </div>
             </div>
@@ -317,32 +253,32 @@
                     <div class="col-xl-12">
                         <div class="teshirt_slide_active owl-carousel">
                             <!--single item-->
-                            @foreach($trendyTshirts as $trendyTshirt)
+                            @foreach($carousel_2_products as $carousel_2_product)
                             <div class="teshirt_slide_item">
-                                <a href="{{url('product/' .$trendyTshirt->id .'/'. $trendyTshirt->slug)}}">
+                                <a href="{{url('product/' . $carousel_2_product->slug)}}">
                                     <div class="teshirt_slide_image">
-                                        <img src="{{asset('storage/products/'.$trendyTshirt->image)}}" alt="">
+                                        <img height="170" src="{{ asset($carousel_2_product->image ?? 'contents/admin/images/placeholder.png') }}" alt="">
                                         <div class="teshirt_hover">
                                             <ul>
-                                                <li><a class="addtocart" href="{{url('cart/add/'.$trendyTshirt->id)}}"><i class="icofont-ui-cart"></i></a></li>
-                                                <li><a href="{{url('/favorite/'.$trendyTshirt->id)}}"><i class="icofont-ui-love"></i></a></li>
-                                                <li><a href="{{url('product/' . $trendyTshirt->id . '/' . $trendyTshirt->slug)}}"><i class="icofont-eye"></i></a></li>
+                                                <li><a class="addtocart" href="{{url('cart/add/'.$carousel_2_product->id)}}"><i class="icofont-ui-cart"></i></a></li>
+                                                <li><a href="{{url('/favorite/'.$carousel_2_product->id)}}"><i class="icofont-ui-love"></i></a></li>
+                                                <li><a href="{{url('product/' . $carousel_2_product->slug)}}"><i class="icofont-eye"></i></a></li>
                                             </ul>
                                         </div>
                                     </div>
                                     <div class="teshirt_slide_cotent">
-                                        <a href="{{url('product/' .$trendyTshirt->id .'/'. $trendyTshirt->slug)}}">
-                                            <h4>{{str_limit($trendyTshirt->name)}}</h4>
+                                        <a href="{{url('product/'. $carousel_2_product->slug)}}">
+                                            <h4>{{str_limit($carousel_2_product->name)}}</h4>
                                         </a>
                                         <div class="row">
                                             <div class="col-xl-6">
                                                 <div class="teshirt_slide_cotent_price">
-                                                    <h3>Tk {{$trendyTshirt->price}}</h3>
+                                                    <h3>Tk {{$carousel_2_product->price}}</h3>
                                                 </div>
                                             </div>
                                             <div class="col-xl-6">
                                                 <div class="teshirt_slide_cotent_rating">
-                                                    @include('website.partial.rating', ['rating' => $trendyTshirt->reviews()->avg('rating')])
+                                                    @include('website.partial.rating', ['rating' => $carousel_2_product->reviews()->avg('rating')])
                                                 </div>
                                             </div>
                                         </div>
@@ -356,7 +292,7 @@
             </div>
         </div>
     </section>
-    @endif --}}
+    @endif
     <!--start feater product 2-->
     <section id="feater_product_2">
         <div class="container">
@@ -414,14 +350,14 @@
             </div>
         </div>
     </section> 
-    {{-- @if($typeSix->status == 1)
+    @if(config('settings.product_carousel_3_enable'))
     <!--start Gadget-->
     <section id="gadget">
         <div class="container">
             <div class="row">
                 <div class="col-xl-12">
                     <div class="gadget_title">
-                        <h3>{{$typeSix->name}}</h3>
+                        <h3>{{ config('settings.product_carousel_3_title') }}</h3>
                     </div>
                 </div>
             </div>
@@ -430,33 +366,33 @@
                     <div class="col-xl-12">
                         <div class="gadegt_slider_active owl-carousel">
                             <!-- single item -->
-                            @foreach($gadgetAccessories as $gadgetAccessory)
+                            @foreach($carousel_3_products as $carousel_3_product)
                             <div class="gadget_slid_item">
-                                <a href="{{url('product/' .$gadgetAccessory->id .'/'. $gadgetAccessory->slug)}}">
+                                <a href="{{url('product/' . $carousel_3_product->slug)}}">
                                     <div class="gadget_slid_image">
-                                        <img src="{{asset('storage/products/'.$gadgetAccessory->image)}}" alt="">
+                                        <img height="170" src="{{ asset($carousel_3_product->image ?? 'contents/admin/images/placeholder.png')}}" alt="">
                                         <div class="gadget_hover">
                                             <ul>
-                                                <li><a class="addtocart" href="{{url('cart/add/'.$gadgetAccessory->id)}}"><i class="icofont-ui-cart"></i></a></li>
-                                                <li><a href="{{url('/favorite/'.$gadgetAccessory->id)}}"><i class="icofont-ui-love"></i></a></li>
-                                                <li><a href="{{url('product/' . $gadgetAccessory->id . '/' . $gadgetAccessory->slug)}}"><i class="icofont-eye"></i></a></li>
+                                                <li><a class="addtocart" href="{{url('cart/add/'.$carousel_3_product->id)}}"><i class="icofont-ui-cart"></i></a></li>
+                                                <li><a href="{{url('/favorite/'.$carousel_3_product->id)}}"><i class="icofont-ui-love"></i></a></li>
+                                                <li><a href="{{url('product/' . $carousel_3_product->slug)}}"><i class="icofont-eye"></i></a></li>
                                             </ul>
                                         </div>
                                     </div>
                                 </a>
                                 <div class="gadget_slid_content">
-                                    <a href="{{url('product/' .$gadgetAccessory->id .'/'. $gadgetAccessory->slug)}}">
-                                        <h4>{{str_limit($gadgetAccessory->name, 20)}}</h4>
+                                    <a href="{{url('product/' . $carousel_3_product->slug)}}">
+                                        <h4>{{str_limit($carousel_3_product->name, 20)}}</h4>
                                     </a>
                                     <div class="row">
                                         <div class="col-xl-6">
                                             <div class="gadget_slid_content_price">
-                                                <h3>Tk {{$gadgetAccessory->price}}</h3>
+                                                <h3>Tk {{$carousel_3_product->price}}</h3>
                                             </div>
                                         </div>
                                         <div class="col-xl-6">
                                             <div class="gadget_slid_content_reating">
-                                                @include('website.partial.rating', ['rating' => $gadgetAccessory->reviews()->avg('rating')])
+                                                @include('website.partial.rating', ['rating' => $carousel_3_product->reviews()->avg('rating')])
                                             </div>
                                         </div>
                                     </div>
@@ -471,57 +407,112 @@
     </section>
     @endif
     <!-- start tab product -->
+    @if(config('settings.enable_products_tabs'))
     <section id="tab_product">
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
                     <nav>
                         <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
-                            @foreach($categories as $key=>$category)
-                            <a class="product_tab_link {{$key+1 == 1 ? 'active' : ''}}" data-toggle="tab" href="#{{$category->slug}}" role="tab" aria-controls="nav-home" aria-selected="true">{{$category->name}}</a>
-                            @endforeach
+                            <a class="product_tab_link active" data-toggle="tab" href="#{{ str_slug(config('settings.product_tab_1_title')) }}" role="tab" aria-controls="nav-home" aria-selected="true">{{ config('settings.product_tab_1_title') }}</a>
+                            <a class="product_tab_link" data-toggle="tab" href="#{{ str_slug(config('settings.product_tab_2_title')) }}" role="tab" aria-controls="nav-home" aria-selected="true">{{ config('settings.product_tab_2_title') }}</a>
+                            <a class="product_tab_link" data-toggle="tab" href="#{{ str_slug(config('settings.product_tab_3_title')) }}" role="tab" aria-controls="nav-home" aria-selected="true">{{ config('settings.product_tab_3_title') }}</a>
                         </div>
                     </nav>
                     <div class="tab-content" id="nav-tabContent">
-                        @foreach($categories as $key=>$category)
-                            <div class="tab-pane fade show {{$key+1 == 1 ? 'active' : ''}}" id="{{$category->slug}}" role="tabpanel" aria-labelledby="nav-home-tab">
-                                <div class="row">
-                                    @php
-                                        $products = $category->products()->limit(8)->get();
-                                    @endphp
-                                    @foreach($products as $product)
-                                    <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6">
-                                        <a href="{{url('product/' .$product->id .'/'. $product->slug)}}">
-                                            <div class="tab_product_item text-center">
-                                                <div class="tab_product_image">
-                                                    <img class="img-fluid" src="{{asset('storage/products/'.$product->image)}}" alt="">
-                                                    <div class="product_tab_hover">
-                                                        <ul>
-                                                            <li><a class="addtocart" href="{{url('cart/add/'.$product->id)}}"><i class="icofont-ui-cart"></i></a></li>
-                                                            <li><a href="{{url('/favorite/'.$product->id)}}"><i class="icofont-ui-love"></i></a></li>
-                                                            <li><a href="{{url('product/' . $product->id . '/' . $product->slug)}}"><i class="icofont-eye"></i></a></li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                                <div class="tab_product_contnt">
-                                                    @include('website.partial.rating', ['rating' => $product->reviews()->avg('rating')])
-                                                    <a href="{{url('product/' .$product->id .'/'. $product->slug)}}">
-                                                        <h4>{{str_limit($product->name, 20)}}</h4>
-                                                    </a>
-                                                    <h3>Tk {{$product->price}}</h3>
+                        <div class="tab-pane fade show active" id="{{ str_slug(config('settings.product_tab_1_title')) }}" role="tabpanel" aria-labelledby="nav-home-tab">
+                            <div class="row">
+                                @foreach($tab_1_products as $tab_1_product)
+                                <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6">
+                                    <a href="{{url('product/' . $tab_1_product->slug)}}">
+                                        <div class="tab_product_item text-center">
+                                            <div class="tab_product_image">
+                                                <img class="img-fluid" src="{{asset($tab_1_product->image ?? 'contents/admin/images/placeholder.png')}}" alt="">
+                                                <div class="product_tab_hover">
+                                                    <ul>
+                                                        <li><a class="addtocart" href="{{url('cart/add/'.$tab_1_product->id)}}"><i class="icofont-ui-cart"></i></a></li>
+                                                        <li><a href="{{url('/favorite/'.$tab_1_product->id)}}"><i class="icofont-ui-love"></i></a></li>
+                                                        <li><a href="{{url('tab_1_product/' . $tab_1_product->slug)}}"><i class="icofont-eye"></i></a></li>
+                                                    </ul>
                                                 </div>
                                             </div>
-                                        </a>
-                                    </div>
-                                    @endforeach
+                                            <div class="tab_product_contnt">
+                                                @include('website.partial.rating', ['rating' => $tab_1_product->reviews()->avg('rating')])
+                                                <a href="{{url('tab_1_product/' . $tab_1_product->slug)}}">
+                                                    <h4>{{str_limit($tab_1_product->name, 20)}}</h4>
+                                                </a>
+                                                <h3>Tk {{$tab_1_product->price}}</h3>
+                                            </div>
+                                        </div>
+                                    </a>
                                 </div>
+                                @endforeach
                             </div>
-                        @endforeach
+                        </div>
+                        <div class="tab-pane fade show" id="{{ str_slug(config('settings.product_tab_2_title')) }}" role="tabpanel" aria-labelledby="nav-home-tab">
+                            <div class="row">
+                                @foreach($tab_2_products as $tab_2_product)
+                                <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6">
+                                    <a href="{{url('product/' . $tab_2_product->slug)}}">
+                                        <div class="tab_product_item text-center">
+                                            <div class="tab_product_image">
+                                                <img class="img-fluid" src="{{asset($tab_2_product->image ?? 'contents/admin/images/placeholder.png')}}" alt="">
+                                                <div class="product_tab_hover">
+                                                    <ul>
+                                                        <li><a class="addtocart" href="{{url('cart/add/'.$tab_2_product->id)}}"><i class="icofont-ui-cart"></i></a></li>
+                                                        <li><a href="{{url('/favorite/'.$tab_2_product->id)}}"><i class="icofont-ui-love"></i></a></li>
+                                                        <li><a href="{{url('tab_2_product/' . $tab_2_product->slug)}}"><i class="icofont-eye"></i></a></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <div class="tab_product_contnt">
+                                                @include('website.partial.rating', ['rating' => $tab_2_product->reviews()->avg('rating')])
+                                                <a href="{{url('tab_2_product/' . $tab_2_product->slug)}}">
+                                                    <h4>{{str_limit($tab_2_product->name, 20)}}</h4>
+                                                </a>
+                                                <h3>Tk {{$tab_2_product->price}}</h3>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                                @endforeach
+                            </div>
+                        </div>
+                        <div class="tab-pane fade show" id="{{ str_slug(config('settings.product_tab_3_title')) }}" role="tabpanel" aria-labelledby="nav-home-tab">
+                            <div class="row">
+                                @foreach($tab_3_products as $tab_3_product)
+                                <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6">
+                                    <a href="{{url('product/' . $tab_3_product->slug)}}">
+                                        <div class="tab_product_item text-center">
+                                            <div class="tab_product_image">
+                                                <img class="img-fluid" src="{{asset($tab_3_product->image ?? 'contents/admin/images/placeholder.png')}}" alt="">
+                                                <div class="product_tab_hover">
+                                                    <ul>
+                                                        <li><a class="addtocart" href="{{url('cart/add/'.$tab_3_product->id)}}"><i class="icofont-ui-cart"></i></a></li>
+                                                        <li><a href="{{url('/favorite/'.$tab_3_product->id)}}"><i class="icofont-ui-love"></i></a></li>
+                                                        <li><a href="{{url('tab_3_product/' . $tab_3_product->slug)}}"><i class="icofont-eye"></i></a></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <div class="tab_product_contnt">
+                                                @include('website.partial.rating', ['rating' => $tab_3_product->reviews()->avg('rating')])
+                                                <a href="{{url('tab_3_product/' . $tab_3_product->slug)}}">
+                                                    <h4>{{str_limit($tab_3_product->name, 20)}}</h4>
+                                                </a>
+                                                <h3>Tk {{$tab_3_product->price}}</h3>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                                @endforeach
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </section>--}}
+    </section>
+    @endif
     <form id="addtocart" action="" method="POST" style="display: none;">
         @csrf
     </form>

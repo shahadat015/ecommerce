@@ -31,6 +31,11 @@ class Product extends Model
         return $this->hasMany(ProductAttribute::class);
     }
 
+    public function reviews()
+    {
+        return $this->hasMany(Review::class);
+    }
+
     public function options()
     {
         return $this->belongsToMany(Option::class, 'product_options');
@@ -86,6 +91,10 @@ class Product extends Model
         }
 
         $this->options()->sync($productOptions);
+    }
+
+    function scopePublished($query){
+        return $query->where('status', 1);
     }
 
     public static function laratablesStatus($product)

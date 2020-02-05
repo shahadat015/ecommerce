@@ -11,7 +11,7 @@
 	<select name="status" class="form-control">
 	    <option value="">Please Select</option>
 	    @foreach($statuses as $status)
-	    <option value="canceled" {{ $request->status == $status ? 'selected' : '' }}>Canceled</option>
+	    <option value="canceled" {{ $request->status == $status ? 'selected' : '' }}>{{ ucfirst(str_replace('_', ' ', $status)) }}</option>
 	    @endforeach
 	</select>
 </div>
@@ -21,7 +21,7 @@
 	<select name="group" class="form-control">
 	    <option value="">Please Select</option>
 	    @foreach($groups as $group)
-	    <option value="days" {{ $request->group == $group ? 'selected' : '' }}>Days</option>
+	    <option value="days" {{ $request->group == $group ? 'selected' : '' }}>{{ ucfirst(str_replace('_', ' ', $group)) }}</option>
 	    @endforeach
 	</select>
 </div>

@@ -235,11 +235,19 @@ class SettingsTableSeeder extends Seeder
             'value'                     =>  '',
         ],
         [
+            'key'                       =>  'product_carousel_1_enable',
+            'value'                     =>  '',
+        ],
+        [
             'key'                       =>  'product_carousel_2_title',
             'value'                     =>  '',
         ],
         [
             'key'                       =>  'product_carousel_2_products',
+            'value'                     =>  '',
+        ],
+        [
+            'key'                       =>  'product_carousel_2_enable',
             'value'                     =>  '',
         ],
         [
@@ -251,11 +259,7 @@ class SettingsTableSeeder extends Seeder
             'value'                     =>  '',
         ],
         [
-            'key'                       =>  'product_carousel_4_title',
-            'value'                     =>  '',
-        ],
-        [
-            'key'                       =>  'product_carousel_4_products',
+            'key'                       =>  'product_carousel_3_enable',
             'value'                     =>  '',
         ],
         [
@@ -288,6 +292,22 @@ class SettingsTableSeeder extends Seeder
         ],
         [
             'key'                       =>  'featured_products',
+            'value'                     =>  '',
+        ],
+        [
+            'key'                       =>  'featured_product_enable',
+            'value'                     =>  '',
+        ],
+        [
+            'key'                       =>  'recent_products_title',
+            'value'                     =>  '',
+        ],
+        [
+            'key'                       =>  'recent_total_products',
+            'value'                     =>  '',
+        ],
+        [
+            'key'                       =>  'enable_recent_products',
             'value'                     =>  '',
         ],
         [
@@ -408,6 +428,10 @@ class SettingsTableSeeder extends Seeder
         ],
         [
             'key'                       =>  'product_tab_3_products',
+            'value'                     =>  '',
+        ],
+                [
+            'key'                       =>  'enable_products_tabs',
             'value'                     =>  '',
         ]
     ];

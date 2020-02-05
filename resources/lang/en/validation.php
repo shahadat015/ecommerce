@@ -130,9 +130,60 @@ return [
     */
 
     'custom' => [
-        'attribute-name' => [
-            'rule-name' => 'custom-message',
+        'attribute.*.attribute_value_id' => [
+            'required_with' => 'The value field is required when attribute is selected.',
         ],
+        'options.*.type' => [
+            'required_with' => 'The type field is required when name is present.',
+        ],
+        'options.*.is_required' => [
+            'required_with' => 'The is required field is required when name is present',
+        ],
+        'options.*.values.*.label' => [
+            'required_with' => 'The label field is required when name is present',
+        ],
+        'options.*.values.*.price_type' => [
+            'required_with' => 'The price type field is required when name is present',
+        ],
+        'product_carousel_1_title' => [
+            'required_with' => 'The title field is required when carousel is enabled',
+        ],
+        'product_carousel_2_title' => [
+            'required_with' => 'The title field is required when carousel is enabled',
+        ],
+        'product_carousel_3_title' => [
+            'required_with' => 'The title field is required when carousel is enabled',
+        ],
+        'product_tab_1_title' => [
+            'required_with' => 'The title field is required when tab is enabled',
+        ],
+        'product_features_1_icon' => [
+            'required' => 'The icon field is required',
+        ],
+        'product_features_1_title' => [
+            'required' => 'The title field is required',
+        ],
+        'product_features_1_subtitle' => [
+            'required' => 'The subtitle field is required',
+        ],
+        'product_features_2_icon' => [
+            'required' => 'The icon field is required',
+        ],
+        'product_features_2_title' => [
+            'required' => 'The title  is required',
+        ],
+        'product_features_2_subtitle' => [
+            'required' => 'The subtitle field is required',
+        ],
+        'product_features_3_icon' => [
+            'required' => 'The icon field is required',
+        ],
+        'product_features_3_title' => [
+            'required' => 'The title field is required',
+        ],
+        'product_features_3_subtitle' => [
+            'required' => 'The subtitle field is required',
+        ]
     ],
 
     /*

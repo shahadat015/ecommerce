@@ -85,14 +85,15 @@ class ProductValidate extends FormRequest
      *
      * @return array
      */
-    public function messages()
-    {
-        return [
-            '*.required' => 'The :attribute field is required.',
-            '*.required_if' => 'The :attribute field is required when :other is :value.',
-            '*.email' => 'The :attribute must be a valid email address.',
-            '*.unique' => 'The :attribute has already been taken.',
-            '*.confirmed' => 'The :attribute confirmation does not match.',
-        ];
-    }
+    // public function messages()
+    // {
+    //     return [
+    //         '*.required' => 'The :attribute field is required.',
+    //         '*.required_if' => 'The :attribute field is required when :other is :value.',
+    //         '*.required_with' => 'The :attribute field is required when :other is present.',
+    //         '*.email' => 'The :attribute must be a valid email address.',
+    //         '*.unique' => 'The :attribute has already been taken.',
+    //         '*.confirmed' => 'The :attribute confirmation does not match.',
+    //     ];
+    // }
 }
