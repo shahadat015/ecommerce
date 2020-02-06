@@ -283,6 +283,26 @@ $(function() {
         });
     });
 
+    // enable and disable subscriber
+    $(document).on('click', '.custom-switch .custom-control-input', function(e){
+
+        var action = $(this).data('url');
+
+        $.ajax({
+            url: action,
+            type: "PUT",
+            dataType: "JSON",
+            cache: false,
+            success(data) {
+                $('#datatable').DataTable().ajax.reload();
+                return successMessage(data.success);
+            },
+            error(error) {
+                return errorStatusText(error);
+            },
+        });
+    });
+
     // show success message
     function successMessage(message) {
         $.toast({

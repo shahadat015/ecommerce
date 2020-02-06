@@ -1,12 +1,12 @@
 @extends('layouts.admin')
-@section('title', 'Menus')
+@section('title', 'Contact Messages')
 @push('css')
     <link href="{{asset('contents/admin')}}/plugins/datatables/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css">
 @endpush
 @section('content')
     <!-- Page-Title -->
     @component('layouts.partials.breadcumb')
-        <li class="breadcrumb-item active">Menus</li>
+        <li class="breadcrumb-item active">Messages</li>
     @endcomponent
     
     <!-- end page title end breadcrumb -->
@@ -14,15 +14,17 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
-                    <h4 class="mt-2 float-left">Menus</h4>
-                    <a class="btn btn-info btn-sm float-right" href="{{ route('admin.menus.create') }}"><i class="mdi mdi-plus-circle-outline"></i> Create Menus</a>
-                    <button class="btn-delete btn btn-danger btn-sm float-right mr-2" data-url="{{ route('admin.menu.destroy') }}" disabled=""><i class="mdi mdi-delete"></i> Delete</button>
+                    <h4 class="mt-2 float-left">Messages</h4>
+                    <button class="btn-delete btn btn-danger btn-sm float-right mr-2" data-url="{{ route('admin.message.destroy') }}" disabled=""><i class="mdi mdi-delete"></i> Delete</button>
                 </div>
                 <div class="card-body">
                     <table id="datatable" class="table table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                         <thead>
                             <tr>
                                 <th>Name</th>
+                                <th>Email</th>         
+                                <th>Subject</th>
+                                <th>Time</th>
                                 <th>Status</th>
                                 <th>
                                     <div class="custom-control custom-checkbox">
@@ -48,10 +50,13 @@
         $(function() {
             $('#datatable').DataTable({
                 serverSide: true,
-                ajax: "{{ route('admin.menus.datatables') }}",
+                ajax: "{{ route('admin.messages.datatables') }}",
                 columns: [
-                    { name: 'name' },
-                    { name: 'is_active' },
+                    { name: 'name'},
+                    { name: 'email'},
+                    { name: 'subject' },
+                    { name: 'created_at' },
+                    { name: 'status' },
                     { name: 'action', orderable: false, searchable: false }
                 ]
             });

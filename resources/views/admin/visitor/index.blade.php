@@ -28,8 +28,8 @@
                                 <th>Visiting Time</th>
                                 <th>
                                     <div class="custom-control custom-checkbox">
-                                        <input type="checkbox" class="check-all custom-control-input" id="horizontalCheckbox1">
-                                        <label class="custom-control-label" for="horizontalCheckbox1">Action</label>
+                                        <input type="checkbox" class="check-all custom-control-input" id="horizontalCheckbox">
+                                        <label class="custom-control-label" for="horizontalCheckbox">Action</label>
                                     </div>
                                 </th>
                             </tr>

@@ -235,7 +235,7 @@
                                     <td>
                                         <span class="badge badge-boxed badge-soft-primary">{{ $latestOrder->status }}</span>
                                     </td>
-                                    <td> {{ date_format($latestOrder->created_at, 'd M Y h:iA') }} </td>
+                                    <td> {{ date_formate($latestOrder->created_at) }} </td>
                                     <td><a href="{{ route('admin.orders.show', $latestOrder->id) }}"><i class="far fa-eye text-info mr-1 mt-1 font-16"></i></a></td>
                                 </tr>
                                 @empty

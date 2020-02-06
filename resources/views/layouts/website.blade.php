@@ -276,10 +276,6 @@
                 </div>
             </div>
         </div>
-        <form id="remove-from-Cart" action="" method="POST" style="display: none;">
-            @csrf
-            @method('delete')
-        </form>
 
         @if($primaryMenu && $primaryMenu->is_active)
         <div id="moble_menu_menu_content">
@@ -303,18 +299,12 @@
                         <h3>Sign up to newsletter</h3>
                         <p>Instant Sign Up. Cancel Anytime. No Credit Card Required</p>
                         <div class="news_later_form">
-                            <form action="{{ route('subscribe') }}" method="post">
+                            <form action="{{ route('subscribe') }}" method="post" id="subscriber-form">
                                 @csrf
 
                                 <div class="news_later_input_container">
-                                    <input name="email" type="email" placeholder="Enter your email" required="">
-
-                                    @error('email'))
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @endif
-                                    <button type="submit">Subscribe</button>
+                                    <input name="email_address" type="email" placeholder="Enter your email" required>
+                                    <button class="btn-subscribe" type="submit">Subscribe</button>
                                 </div>
                             </form>
                         </div>

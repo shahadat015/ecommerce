@@ -34,7 +34,7 @@
                                 <th>Filename</th>
                                 <th>
                                     <div class="custom-control custom-checkbox d-inline">
-                                        <input type="checkbox" class="check-all custom-control-input" id="horizontalCheckbox" data-parsley-multiple="groups" data-parsley-mincheck="2">
+                                        <input type="checkbox" class="check-all custom-control-input" id="horizontalCheckbox">
                                         <label class="custom-control-label" for="horizontalCheckbox">Action</label>
                                     </div>
                                 </th>

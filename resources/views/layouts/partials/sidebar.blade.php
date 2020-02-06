@@ -112,6 +112,12 @@
                         <a class="nav-link" href="{{ route('admin.visitors') }}"><i class="dripicons-user-group"></i>Visitors</a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" href="{{ route('admin.messages.index') }}"><i class="dripicons-message"></i>Messages</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('admin.subscribers.index') }}"><i class="dripicons-user-group"></i>Subscribers</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="{{ url('/') }}" target="_blank"><i class="dripicons-monitor"></i>Visit Store</a>
                     </li>
                     <li class="nav-item">
@@ -199,6 +205,7 @@
                     <h6 class="menu-title">Authentication</h6>
                 </div>
                 <ul class="nav metismenu">
+                    <li class="nav-item"><a class="nav-link" href="{{ route('admin.customers.index') }}"><i class="dripicons-user-group"></i>Customers</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ route('admin.users.index') }}"><i class="dripicons-user-group"></i>Users</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ route('admin.roles.index') }}"><i class="dripicons-user-id"></i>Roles</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="dripicons-clockwise"></i>Logout</a></li>

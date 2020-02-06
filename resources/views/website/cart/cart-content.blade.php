@@ -17,7 +17,7 @@
                 @foreach(Cart::content() as $cartItem)
                 <tr scope="row">
                     <td class="remove_btn_cart">
-                        <a class="removetocart" href="{{ route('cart.remove', $cartItem->rowId) }}"><i class="icofont-trash"></i></a></td>
+                        <a class="removefromcart" href="{{ route('cart.remove', $cartItem->rowId) }}"><i class="icofont-trash"></i></a></td>
                     <td class="text-center">
                         <img width="80" class="img-fluid" src="{{ asset($cartItem->options->image) }}" alt=""></td>
                     <td>

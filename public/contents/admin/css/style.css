@@ -3293,7 +3293,8 @@ label {
 }
 
 .custom-control-label {
-    padding-top: 2px
+    padding-top: 2px;
+    cursor: pointer
 }
 
 .form-control {

@@ -38,7 +38,7 @@
                             @php $types = ['coupons_report', 'order_report', 'purchase_report', 'stock_report', 'sales_report', 'shipping_report'] @endphp
                             <select name="type" class="form-control" id="type">
                                 @foreach($types as $type)
-                                <option value="coupons_report" {{ $request->type == $type ? 'selected' : '' }}>{{ ucfirst(str_replace('_', ' ', $type)) }}</option>
+                                <option value="{{ $type }}" {{ $request->type == $type ? 'selected' : '' }}>{{ ucfirst(str_replace('_', ' ', $type)) }}</option>
                                 @endforeach
                             </select>
                         </div>

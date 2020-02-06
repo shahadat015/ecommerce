@@ -63,6 +63,18 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'namespace' => 'Admin', 'mi
 	Route::get('/sales/analytics', 'DashboardController@salesAnalytics');
 	Route::get('/visitors/analytics', 'DashboardController@visitorsAnalytics');
 
+	Route::get('/messages/datatables', 'ContactController@messages')->name('messages.datatables');
+	Route::delete('/message/destroy', 'ContactController@destroy')->name('message.destroy');
+	Route::resource('/messages', 'ContactController')->only('index','show');
+
+	Route::get('/subscribers/datatables', 'SubscriberController@subscribers')->name('subscribers.datatables');
+	Route::delete('/subscriber/destroy', 'SubscriberController@destroy')->name('subscriber.destroy');
+	Route::resource('/subscribers', 'SubscriberController')->only('index','show', 'update');
+
+	Route::get('/customers/datatables', 'CustomerController@customers')->name('customers.datatables');
+	Route::delete('/customer/destroy', 'CustomerController@destroy')->name('customer.destroy');
+	Route::resource('/customers', 'CustomerController')->except('destroy');
+
 	Route::get('/user/profile', 'UserController@profile')->name('user.profile');
 	Route::put('/user/profile', 'UserController@updateProfile')->name('user.profile');
 	Route::get('/users/datatables', 'UserController@users')->name('users.datatables');

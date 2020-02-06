@@ -44,17 +44,16 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-3">
-                            <h6 class="mb-0"><b>Order Date :</b> {{ date_format($order->created_at, 'd M Y') }}</h6>
+                            <h6 class="mb-0"><b>Order Date :</b> {{ date_formate($order->created_at) }}</h6>
                             <h6><b>Order ID :</b> # {{ $order->id }}</h6>
                             <div class="row">
                                 <label for="status" class="col-sm-6"><b>Order Status : </b></label>
                                 <div class="col-sm-6">
+                                    @php $statuses = ['canceled', 'completed', 'pending', 'processing', 'refunded'] @endphp
                                     <select name="status" class="status" data-url="{{ route('admin.orders.status', $order->id) }}">
-                                        <option value="canceled" {{ $order->status == 'canceled' ? 'selected' : '' }}>Canceled</option>
-                                        <option value="completed" {{ $order->status == 'completed' ? 'selected' : '' }}>Completed</option>
-                                        <option value="pending" {{ $order->status == 'pending' ? 'selected' : '' }}>Pending</option>
-                                        <option value="processing" {{ $order->status == 'processing' ? 'selected' : '' }}>Processing</option>
-                                        <option value="refunded" {{ $order->status == 'refunded' ? 'selected' : '' }}>Refunded</option>
+                                        @foreach($statuses as $status)
+                                            <option value="{{ $status }}" {{ $request->status == $status ? 'selected' : '' }}>{{ ucfirst(str_replace('_', ' ', $status)) }}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>
