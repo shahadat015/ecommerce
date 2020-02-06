@@ -1,20 +1,18 @@
 @extends('layouts.website')
 @section('title', $product->name)
-@section('keywords', $product->name)
-@section('description', $product->description)
 @push('css')
-    <link rel="stylesheet" href="{{asset('contents/website/assests/css/owl.carousel.min.css')}}">
-    <link rel="stylesheet" href="{{asset('contents/website/assests/css/slick.css')}}">
-    <link rel="stylesheet" href="{{asset('contents/website/assests/css/better-rating.css')}}">
+    <link rel="stylesheet" href="{{asset('contents/website/css/owl.carousel.min.css')}}">
+    <link rel="stylesheet" href="{{asset('contents/website/css/slick.css')}}">
+    <link rel="stylesheet" href="{{asset('contents/website/css/better-rating.css')}}">
 @endpush
 @section('content')
     <!-- start infobar top -->
-    @include('website.infobar')
+    @include('website.partial.infobar')
     <!-- satrt breadcome area -->
-    @component('website.breadcumb')
-    <li>@foreach($product->maincategories as $maincategory)<a href="{{url('product/category/'.$maincategory->slug)}}"><i class="icofont-thin-right"></i>  {{$maincategory->name}} </a>@endforeach</li>
-    <li>@foreach($product->categories as $category)<a href="{{url('product/category/'.$category->id .'/'.$category->slug)}}"><i class="icofont-thin-right"></i>  {{$category->name}} </a>@endforeach</li>
-    <li><i class="icofont-thin-right"></i> {{$product->name}} </li>
+    @component('website.partial.breadcumb')
+    <li>@foreach($product->categories as $category)<a href="{{ route('product.category', $category->slug) }}"><i class="icofont-thin-right"></i>  {{ $category->name}} </a>@endforeach</li>
+    <li>@foreach($category->children as $subcategory)<a href="route('product.category', $subcategory->slug) }}"><i class="icofont-thin-right"></i>  {{  $subcategory->name}} </a>@endforeach</li>
+    <li><i class="icofont-thin-right"></i> {{ $product->name }} </li>
     @endcomponent
     <!-- start product details main section -->
     <section id="product_details">
@@ -27,9 +25,9 @@
                         <div class="details_brands">
                             <h4>Brands</h4>
                             <ul>
-                                @foreach($brands as $brand)
+                                {{--@foreach($brands as $brand)
                                 <li><a href="{{url('product/brand/'. $brand->slug)}}">{{$brand->name}} <span>{{$brand->products()->count()}}</span></a></li>
-                                @endforeach
+                                @endforeach--}}
                             </ul>
                         </div>
                     </div>
@@ -42,63 +40,43 @@
                                 <div class="col-xl-5 col-lg-5">
                                     <div class="details_slide_active_top">
                                         <div class="details_slide_item">
-                                            <img class="img-fluid" src="{{asset('storage/products/'.$product->image)}}" alt="">
+                                            <img class="img-fluid" src="{{ asset($product->image) }}" alt="">
                                         </div>
-                                        @if($product->image_two != NULL)
+                                        @foreach($product->images as $image)
                                         <div class="details_slide_item">
-                                            <img class="img-fluid" src="{{asset('storage/products/'.$product->image_two)}}" alt="">
+                                            <img class="img-fluid" src="{{ asset($image->path()) }}" alt="">
                                         </div>
-                                        @endif
-                                        @if($product->image_three != NULL)
-                                        <div class="details_slide_item">
-                                            <img class="img-fluid" src="{{asset('storage/products/'.$product->image_three)}}" alt="">
-                                        </div>
-                                        @endif
-                                        @if($product->image_four != NULL)
-                                        <div class="details_slide_item">
-                                            <img class="img-fluid" src="{{asset('storage/products/'.$product->image_four)}}" alt="">
-                                        </div>
-                                        @endif
+                                        @endforeach
                                     </div>
                                     <div class="details_slide_active_bottom">
                                         <div class="details_slide_item_bottom">
-                                            <img class="img-fluid" src="{{asset('storage/products/'.$product->image)}}" alt="">
+                                            <img class="img-fluid" src="{{ asset($product->image) }}" alt="">
                                         </div>
-                                        @if($product->image_two != NULL)
+                                        @foreach($product->images as $image)
                                         <div class="details_slide_item_bottom">
-                                            <img class="img-fluid" src="{{asset('storage/products/'.$product->image_two)}}" alt="">
+                                            <img class="img-fluid" src="{{ asset($image->path()) }}" alt="">
                                         </div>
-                                        @endif
-                                        @if($product->image_three != NULL)
-                                        <div class="details_slide_item_bottom">
-                                            <img class="img-fluid" src="{{asset('storage/products/'.$product->image_three)}}" alt="">
-                                        </div>
-                                        @endif
-                                        @if($product->image_four != NULL)
-                                        <div class="details_slide_item_bottom">
-                                            <img class="img-fluid" src="{{asset('storage/products/'.$product->image_four)}}" alt="">
-                                        </div>
-                                        @endif
+                                        @endforeach
                                     </div>
                                 </div>
                                 <div class="col-xl-7 col-lg-7">
                                     <div class="product_slide_right_content">
-                                        <h3>{{$product->name}} </h3>
-                                        <h4>Product Code: {{$product->code}}</h4>
-                                        <h2>&#2547; {{$product->price}}</h2>
-                                        <p>{{$product->description}}. </p>
-                                        <form action="{{url('cart/add/'.$product->id)}}" method="post">
+                                        <h3>{{ $product->name }} </h3>
+                                        <h4>Product Code: {{ $product->sku }}</h4>
+                                        <h2>&#2547; {{ $product->price }}</h2>
+                                        <p>{{ $product->short_description }}. </p>
+                                        <form action="{{ route('cart.add', $product->id)}}" method="post">
                                             @csrf
                                             <div class="details_size">
                                                 <div class="row">
                                                     <legend class="col-form-label col-sm-2 pt-0">sizes:</legend>
                                                     <div class="col-sm-10">
-                                                        @foreach($product->sizes as $size)
+                                                        {{--@foreach($product->sizes as $size)
                                                         <div class="form-check">
                                                             <input class="form-check-input" type="radio" name="size" id="gridRadios1" value="{{$size->name}}" checked>
                                                             <label class="form-check-label" for="gridRadios1">{{$size->name}}</label>
                                                         </div>
-                                                        @endforeach
+                                                        @endforeach--}}
                                                     </div>
                                                 </div>
                                             </div>
@@ -106,12 +84,12 @@
                                                 <div class="row">
                                                     <legend class="col-form-label col-sm-2 pt-0">Colors:</legend>
                                                     <div class="col-sm-10">
-                                                        @foreach($product->colors as $color)
+                                                        {{--@foreach($product->colors as $color)
                                                         <div class="form-check">
                                                             <input class="form-check-input" type="radio" name="color" id="gridRadios1" value="{{$color->name}}" checked>
                                                             <label class="form-check-label" for="gridRadios1">{{$color->name}}</label>
                                                         </div>
-                                                        @endforeach
+                                                        @endforeach --}}
                                                     </div>
                                                 </div>
                                             </div>
@@ -119,12 +97,12 @@
                                                 <div class="row align-items-center">
                                                     <div class="col-xl-4 col-md-4 col-sm-5">
                                                         <div class="quantity_form_input">
-                                                            <input name="qty" type="number" value="1" min="1" max="{{$product->stock}}" step="1">
+                                                            <input name="qty" type="number" value="1" min="1" max="{{ $product->qty }}" step="1">
                                                         </div>
                                                     </div>
                                                     <div class="col-xl-8 col-md-8 col-sm-7">
                                                         <button class="detail_shop_btn"><i class="icofont-shopping-cart"></i> Buy Now</button>
-                                                        <a href="{{url('/favorite/'.$product->id)}}"><i class="fas fa-heart"></i></a>
+                                                        <a href="{{ route('customer.favorite', $product->id) }}"><i class="fas fa-heart"></i></a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -158,7 +136,7 @@
                                                 </div>
                                                 <div class="col-xl-8">
                                                     <div class="payment_accept_img">
-                                                        <img class="img-fluid" src="{{asset('contents/website/')}}/assests/img/payment-icons.png" alt="">
+                                                        <img class="img-fluid" src="{{asset('contents/website/img/payment-icons.png')}}" alt="">
                                                     </div>
                                                 </div>
                                             </div>
@@ -168,7 +146,7 @@
                             </div>
                         </div>
                         <!-- satrt details tab area -->
-                        <div class="details_tab_section">
+                        {{--<div class="details_tab_section">
                             <div class="row">
                                 <div class="col-xl-12 ">
                                     <nav>
@@ -267,7 +245,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div>--}}
                     </div>
                 </div>
             </div>
@@ -283,7 +261,7 @@
                     </div>
                 </div>
             </div>
-            <div class="related_product_slide_container">
+            {{--<div class="related_product_slide_container">
                 <div class="row">
                     <div class="col-xl-12">
                         <div class="related_product_slide_active owl-carousel">
@@ -312,27 +290,22 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div>--}}
         </div>
     </section>
-    <form id="addtocart-form" action="" method="POST" style="display: none;">
-        @csrf
-    </form>
 @endsection
 @push('js')
-    <script src="{{asset('contents/website/assests/js/owl.carousel.min.js')}}"></script>
-    <script src="{{asset('contents/website/assests/js/owl.carousel.active.js')}}"></script>
-    <script src="{{asset('contents/website/assests/js/slick.min.js')}}"></script>
-    <script src="{{asset('contents/website/assests/js/slick.active.js')}}"></script>
-    <script src="{{asset('contents/website/assests/js/bootstrap-input-spinner.js')}}"></script>
-    <script src="{{asset('contents/website/assests/js/better-rating.js')}}"></script>
+    <script src="{{asset('contents/website/js/owl.carousel.min.js')}}"></script>
+    <script src="{{asset('contents/website/js/owl.carousel.active.js')}}"></script>
+    <script src="{{asset('contents/website/js/slick.min.js')}}"></script>
+    <script src="{{asset('contents/website/js/slick.active.js')}}"></script>
+    <script src="{{asset('contents/website/js/bootstrap-input-spinner.js')}}"></script>
+    <script src="{{asset('contents/website/js/better-rating.js')}}"></script>
     <script>
         $(function(){
             // this is for input group
             $("input[type='number']").InputSpinner();
-
             $('#better-rating-form').betterRating();
-
         });
     </script>
 @endpush

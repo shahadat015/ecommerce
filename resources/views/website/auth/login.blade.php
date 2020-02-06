@@ -1,91 +1,62 @@
-@extends('layouts.app')
-@section('title', 'Admin Login')
+@extends('layouts.website')
+@section('title', 'Login')
 @section('content')
-<div class="auth-page">
-    <div class="card auth-card shadow-lg mt-5">
-        <div class="card-body">
-            <div class="px-3">
-                <div class="auth-logo-box">
-                    <img src="{{ asset('contents/admin/images/logo-sm.png') }}" height="55" alt="logo" class="auth-logo">
-                </div>
-                <!--end auth-logo-box-->
-                <div class="text-center auth-logo-text">
-                    <h4 class="mt-0 mb-3 mt-5">Customer Login</h4>
-                    <p class="text-muted mb-0">Sign in to continue to account.</p>
-                </div>
-                <!--end auth-logo-text-->
-                <form class="form-horizontal auth-form my-4" method="POST" action="{{ route('customer.login') }}">
-                    @csrf
-
-                    <div class="form-group">
-                        <label for="email">E-mail Address</label>
-                        <div class="input-group mb-3">
-                            <span class="auth-form-icon"><i class="dripicons-user"></i> </span>
-                            <input type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required placeholder="Enter E-mail" autocomplete="email">
-                        </div>
-
-                        @error('email')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
+    <section id="login_page">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-5 col-md-7 col-sm-9 mx-auto">
+                    <div class="login_main_container">
+                        <h3>We're glad to see you again!</h3>
+                        <p>Don't have an account? <a href="{{ route('customer.register') }}">Sign Up!</a></p>
                     </div>
-                    <!--end form-group-->
-                    <div class="form-group">
-                        <label for="password">Password</label>
-                        <div class="input-group mb-3"><span class="auth-form-icon"><i class="dripicons-lock"></i> </span>
-                            <input type="password" class="form-control @error('password') is-invalid @enderror" name="password" required placeholder="Enter password" autocomplete="new-password">
-                        </div>
+                    <div class="login_page_login_container">
+                        <form action="{{ route('customer.login') }}" method="post">
+                            @csrf
 
-                        @error('password')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
-                    </div>
-                    <!--end form-group-->
-                    <div class="form-group row mt-4">
-                        <div class="col-sm-6">
-                            <div class="custom-control custom-switch switch-success">
-                                <input type="checkbox" class="custom-control-input" id="customSwitchSuccess" name="remember">
-                                <label class="custom-control-label text-muted" for="customSwitchSuccess">Remember Me</label>
+                            <div class="row">
+                                <div class="col-xl-12">
+                                    <div class="input_login_box">
+                                        <input name="email" type="text" placeholder="Email" value="{{ old('email') }}" required> 
+                                        <label><i class="icofont-user-alt-3"></i></label>
+
+                                        @error('email')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                        @endif
+                                    </div>
+                                </div>
+                                <div class="col-xl-12">
+                                    <div class="input_login_box">
+                                        <input name="password" type="password" placeholder="Password" required=""> 
+                                        <label><i class="icofont-lock"></i></label>
+
+                                        @error('password')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                        @endif
+                                    </div>
+                                </div>
+                                <div class="col-xl-12">
+                                    <div class="login_page_btn text-center">
+                                        <button type="submit">Login Now</button>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                        <!--end col-->
-                        @if (Route::has('password.request'))
-                        <div class="col-sm-6 text-right">
-                            <a href="{{ route('password.request') }}" class="text-muted font-13"><i class="dripicons-lock"></i> Forgot password?</a>
-                        </div>
-                        @endif
-                        <!--end col-->
+                        </form>
                     </div>
-                    <!--end form-group-->
-                    <div class="form-group mb-0 row">
-                        <div class="col-12 mt-2">
-                            <button class="btn btn-primary btn-round btn-block waves-effect waves-light" type="submit">Login <i class="fas fa-sign-in-alt ml-1"></i></button>
+                    <div class="login_with_social_container">
+                        <h4>or</h4>
+                        <div class="login_with_social_button text-center">
+                            <ul>
+                                <li><a class="facebook_login" href="{{ url('login/facebook') }}"><i class="fab fa-facebook-f"></i> Log In via Facebook</a></li>
+                                <li><a class="google_login" href="{{ url('login/google') }}"><i class="fab fa-google-plus-g"></i> Log In via Google+</a></li>
+                            </ul>
                         </div>
-                        <!--end col-->
                     </div>
-                    <!--end form-group-->
-                </form>
-                <!--end form-->
-            </div>
-            <!--end /div-->
-            <div class="m-3 text-center text-muted">
-                <p class="">Don't have an account ? <a href="{{ route('customer.register') }}" class="text-primary ml-2">Free Resister</a></p>
+                </div>
             </div>
         </div>
-        <!--end card-body-->
-    </div>
-    <!--end card-->
-    <div class="account-social text-center mt-4">
-        <h6 class="my-4">Or Login With</h6>
-        <ul class="list-inline mb-4">
-            <li class="list-inline-item"><a href="#" class=""><i class="fab fa-facebook-f facebook"></i></a></li>
-            <li class="list-inline-item"><a href="#" class=""><i class="fab fa-twitter twitter"></i></a></li>
-            <li class="list-inline-item"><a href="#" class=""><i class="fab fa-google google"></i></a></li>
-        </ul>
-    </div>
-    <!--end account-social-->
-</div>
+    </section>
 @endsection

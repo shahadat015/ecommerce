@@ -32,7 +32,7 @@ class PageController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required|string|max:255',
+            'name' => 'required|string|max:255|unique:pages',
             'body' => 'required|string'
         ]);
 
@@ -40,13 +40,7 @@ class PageController extends Controller
         $request['slug'] = str_slug($request->name);
         $page = Page::create($request->all());
         
-        if($request->meta_title){
-            $page->metadata()->create([
-                'meta_title' => $request->meta_title,
-                'meta_keywords' => $request->meta_keywords,
-                'meta_description' => $request->meta_description,
-            ]);
-        }
+        $page->saveMetaData($request);
         
         if($page){
             return response()->json(['success' => 'Page successfully created!']);
@@ -73,11 +67,7 @@ class PageController extends Controller
         $request['slug'] = str_slug($request->url);
         $page->update($request->all());
 
-        $page->metadata()->update([
-            'meta_title' => $request->meta_title,
-            'meta_keywords' => $request->meta_keywords,
-            'meta_description' => $request->meta_description,
-        ]);
+        $page->saveMetaData($request);
 
         if($page){
             return response()->json(['success' => 'Page successfully updated!']);

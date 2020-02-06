@@ -1,17 +1,29 @@
 @extends('layouts.website')
-@section('title', $page->name)
+@section('title', $page->metadata->meta_title ?? $page->name)
+@section('description', $page->metadata->meta_description ?? '')
+@section('keywords', $page->metadata->meta_keywords ?? '')
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-10">
-            <div class="card">
-                <div class="card-header">{{ $page->name }}</div>
-
-                <div class="card-body">
-                    {!! $page->body !!}
+    @component('website.partial.breadcumb')
+    <li><i class="icofont-thin-right"></i> {{ $page->name }} </li>
+    @endcomponent
+    <!-- satrt about us banar -->
+    <section id="about_banar">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="about_us_banar" style="background: url({{ asset('contents/website/img/about-us.jpg') }});">
+                        <h3>{{ $page->name }}</h3>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</div>
+    </section>
+    <!-- about main content start -->
+    <section id="about_main_content">
+        <div class="container">
+            <div class="row">
+                {!! $page->body !!}
+            </div>
+        </div>
+    </section>
 @endsection

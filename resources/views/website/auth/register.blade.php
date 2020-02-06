@@ -1,98 +1,81 @@
-@extends('layouts.app')
-@section('title', 'Register')
+@extends('layouts.website')
+@section('title', 'Customer Signup')
 @section('content')
-<div class="auth-page">
-    <div class="card auth-card shadow-lg mt-5">
-        <div class="card-body">
-            <div class="px-3">
-                <div class="auth-logo-box">
-                    <img src="{{asset('contents/admin')}}/images/logo-sm.png" height="55" alt="logo" class="auth-logo">
-                </div>
-                <!--end auth-logo-box-->
-                <div class="text-center auth-logo-text">
-                    <h4 class="mt-5 mb-3">Free Registration</h4>
-                    <p class="text-muted mb-0">Get your free account now.</p>
-                </div>
-                <!--end auth-logo-text-->
-                <form class="form-horizontal auth-form my-4" method="POST" action="{{ route('customer.register') }}">
-                    @csrf
-
-                    <div class="form-group">
-                        <label for="username">Name</label>
-                        <div class="input-group mb-3">
-                            <span class="auth-form-icon"><i class="dripicons-user"></i> </span>
-                            <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" placeholder="Enter Name">
+    <!-- satrt registration area -->
+    <section id="registration">
+        .<div class="container">
+            <div class="row">
+                <div class="col-xl-6 col-md-8 col-12 mx-auto">
+                    <div class="registration_container">
+                        <div class="registration_top text-center">
+                            <h4>Let's create your account!</h4>
+                            <p>Already have an account? <a href="{{ route('customer.login') }}">Login</a></p>
                         </div>
+                        <div class="registration_form">
+                            <form action="{{  route('customer.register') }}" method="post">
+                                @csrf
+                                
+                                <div class="input_login_box">
+                                    <input name="name" type="text" placeholder="Name" value="{{ old('name') }}" required="">
+                                    <label><i class="icofont-user-alt-3"></i></label>
 
-                        @error('name')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
-                    </div>
+                                    @error('name')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @endif
+                                </div>
+                                <div class="input_login_box">
+                                    <input name="email" type="email" placeholder="Email Address" value="{{ old('email') }}" required="">
+                                    <label><i class="icofont-email"></i></label>
 
-                    <!--end form-group-->
-                    <div class="form-group">
-                        <label for="useremail">Email</label>
-                        <div class="input-group mb-3"><span class="auth-form-icon"><i class="dripicons-mail"></i> </span>
-                            <input type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" placeholder="Enter Email">
+                                    @error('email')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @endif
+                                </div>
+                                <div class="input_login_box">
+                                    <input name="phone" type="text" placeholder="Phone" value="{{ old('phone') }}" required="">
+                                    <label><i class="icofont-phone"></i></label>
+
+                                    @error('phone')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @endif
+                                </div>
+                                <div class="input_login_box">
+                                    <input name="password" type="password" placeholder="Password" required="">
+                                    <label><i class="icofont-lock"></i></label>
+
+                                    @error('password')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @endif
+                                </div>
+                                <div class="input_login_box">
+                                    <input name="password_confirmation" type="password" placeholder="Re-Password" required="">
+                                    <label><i class="icofont-lock"></i></label>
+                                </div>
+                                <div class="registration_page_btn text-center">
+                                    <button type="submit">Register Now</button>
+                                </div>
+                            </form>
                         </div>
-
-                        @error('email')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
-                    </div>
-                    <!--end form-group-->
-                    <div class="form-group">
-                        <label for="userpassword">Password</label>
-                        <div class="input-group mb-3"><span class="auth-form-icon"><i class="dripicons-lock"></i> </span>
-                            <input type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password" placeholder="Enter password">
-                        </div>
-
-                        @error('password')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
-                    </div>
-                    <!--end form-group-->
-                    <div class="form-group">
-                        <label for="conf_password">Confirm Password</label>
-                        <div class="input-group mb-3"><span class="auth-form-icon"><i class="dripicons-lock-open"></i> </span>
-                            <input type="password" class="form-control" name="password_confirmation" required autocomplete="new-password" placeholder="Enter Confirm Password">
-                        </div>
-                        <!--end form-group-->
-                    </div>
-                    <!--end form-group-->
-                    <div class="form-group row mt-4">
-                        <div class="col-sm-12">
-                            <div class="custom-control custom-switch switch-success">
-                                <input type="checkbox" class="custom-control-input" id="customSwitchSuccess">
-                                <label class="custom-control-label text-muted" for="customSwitchSuccess">By registering you agree to the Frogetor <a href="#" class="text-primary">Terms of Use</a></label>
+                        <div class="login_with_social_container">
+                            <h4>or</h4>
+                            <div class="login_with_social_button text-center">
+                                <ul>
+                                    <li><a class="facebook_login" href="{{ url('login/facebook') }}"><i class="fab fa-facebook-f"></i> Register via Facebook</a></li>
+                                    <li><a class="google_login" href="{{ url('login/google') }}"><i class="fab fa-google-plus-g"></i> Register via Google+</a></li>
+                                </ul>
                             </div>
                         </div>
-                        <!--end col-->
                     </div>
-                    <!--end form-group-->
-                    <div class="form-group mb-0 row">
-                        <div class="col-12 mt-2">
-                            <button class="btn btn-primary btn-round btn-block waves-effect waves-light" type="submit">Register <i class="fas fa-sign-in-alt ml-1"></i></button>
-                        </div>
-                        <!--end col-->
-                    </div>
-                    <!--end form-group-->
-                </form>
-                <!--end form-->
-            </div>
-            <!--end /div-->
-            <div class="m-3 text-center text-muted">
-                <p class="">Already have an account ? <a href="{{ route('customer.login') }}" class="text-primary ml-2">Log in</a></p>
+                </div>
             </div>
         </div>
-        <!--end card-body-->
-    </div>
-    <!--end card-->
-</div>
+    </section>
 @endsection

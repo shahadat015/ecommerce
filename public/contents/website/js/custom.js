@@ -58,5 +58,4 @@
         $("#removetocart-form").submit();
     });
 
-
 })(jQuery);

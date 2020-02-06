@@ -1,22 +1,13 @@
-@extends('layouts.app')
-@section('title', '500 - Internal Server Error')
+@extends('layouts.website')
+@section('title', '500 - Internal server error')
 @section('content')
-<div class="auth-page">
-    <div class="card auth-card shadow-lg">
-        <div class="card-body">
-            <div class="px-3">
-                <div class="auth-logo-box">
-                    <img src="{{asset('contents/admin/images/logo-sm.png')}}" height="55" alt="logo" class="auth-logo">
-                </div>
-                <!--end auth-logo-box--><img src="{{asset('contents/admin/images/500.jpg')}}" alt="" class="d-block mx-auto mt-4" height="250">
-                <div class="text-center auth-logo-text mb-4">
-                    <h4 class="mt-0 mb-3 mt-5">Somthing went wrong</h4><a href="{{url('/')}}" class="btn btn-sm btn-primary">Back to Home</a></div>
-                <!--end auth-logo-text-->
+    <div id="notfound">
+        <div class="notfound">
+            <div class="notfound-404">
+                <h3>Internal Server Error!</h3>
+                <h1><span>5</span><span>0</span><span>0</span></h1>
             </div>
-            <!--end /div-->
+            <h2>We are sorry, something went wrong</h2>
         </div>
-        <!--end card-body-->
     </div>
-    <!--end card-->
-</div>
 @endsection

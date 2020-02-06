@@ -59,17 +59,17 @@
 
                                 <div class="form-group">
                                     <label for="name">Meta Title</label>
-                                    <input type="text" name="meta_title" class="form-control" value="{{ $page->meta_title }}">
+                                    <input type="text" name="meta_title" class="form-control" value="{{ $page->metadata->meta_title ?? ''}}">
                                 </div>
 
                                 <div class="form-group">
                                     <label for="name">Meta Keywords</label>
-                                    <input type="text" name="meta_keywords" class="form-control" value="{{ $page->meta_keywords }}">
+                                    <input type="text" name="meta_keywords" class="form-control" value="{{ $page->metadata->meta_keywords ?? ''}}">
                                 </div>
 
                                 <div class="form-group">
                                     <label for="name">Meta Description</label>
-                                    <textarea name="meta_description" class="form-control" cols="30" rows="10">{{ $page->meta_description }}</textarea>
+                                    <textarea name="meta_description" class="form-control" cols="30" rows="10">{{ $page->metadata->meta_description ?? '' }}</textarea>
                                 </div>
                             </div>
                         </div>

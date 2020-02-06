@@ -53,7 +53,7 @@ class MenuController extends Controller
     {
         $menuItems = $menu->menuItems()
             ->where('parent_id', NULL)
-            ->orderBy('position', 'DESC')
+            ->orderBy('parent_id')
             ->get()->nest();
         return view('admin.menu.edit', compact('menu', 'menuItems'));
     }

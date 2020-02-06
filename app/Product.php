@@ -10,7 +10,6 @@ class Product extends Model
 {
     protected $fillable = ['name', 'slug', 'image', 'brand_id', 'price', 'special_price', 'special_price_start', 'special_price_end', 'description', 'short_description', 'sku', 'manage_stock', 'qty', 'in_stock', 'viewed', 'new_from', 'new_to', 'status'];
 
-
     public function images()
     {
         return $this->morphToMany(Image::class, 'imageable');
@@ -46,6 +45,25 @@ class Product extends Model
         return $this->morphOne(MetaData::class, 'metaable');
     }
 
+    public function saveMetaData($request)
+    {
+        if($this->metadata){
+            $this->metadata()->update([
+                'meta_title' => $request->meta_title,
+                'meta_keywords' => $request->meta_keywords,
+                'meta_description' => $request->meta_description,
+            ]);
+        }else{
+            if($request->meta_title){
+                $this->metadata()->create([
+                    'meta_title' => $request->meta_title,
+                    'meta_keywords' => $request->meta_keywords,
+                    'meta_description' => $request->meta_description,
+                ]);
+            }
+        }
+    }
+
     public function relatedProducts()
     {
         return $this->belongsToMany(static::class, 'related_products', 'product_id', 'related_product_id');
@@ -56,41 +74,49 @@ class Product extends Model
         $this->categories()->sync($request->categories);
         $this->relatedProducts()->sync($request->products);
         $this->images()->sync($request->images);
+        $this->saveMetaData($request);
+        $this->saveAttributes($request->attribute);
+        $this->saveOptions($request->options); 
     }
 
     public function saveAttributes($attributes = [])
     {
-    	if($this->attributes()){
-    		$this->attributes()->delete();
-    	}
+        if($attributes[0]['attribute_id']){
+            if($this->attributes){
+                $this->attributes()->delete();
+            }
 
-        foreach ($attributes as $attribute) {
-            $productAttribute = ProductAttribute::create([
-                'attribute_id' => $attribute['attribute_id'],
-                'product_id' => $this->id
-            ]);
-            $productAttribute->values()->sync($attribute['attribute_value_id']);
+            foreach ($attributes as $attribute) {
+                $productAttribute = ProductAttribute::create([
+                    'attribute_id' => $attribute['attribute_id'],
+                    'product_id' => $this->id
+                ]);
+                $productAttribute->values()->sync($attribute['attribute_value_id']);
+            }
         }
     }
 
     public function saveOptions($options = [])
     {
 
-        $productOptions = [];
+        if($options[0]['name']){
 
-     	foreach ($options as $option) {
-            $productOption = Option::create([
-                'name' => $option['name'],
-                'type' => $option['type'],
-                'is_required' => $option['is_required']
-            ]);
+            $productOptions = [];
 
-            $productOption->values()->createMany($option['values']);
+            foreach ($options as $option) {
+                $productOption = Option::create([
+                    'name' => $option['name'],
+                    'type' => $option['type'],
+                    'is_required' => $option['is_required']
+                ]);
 
-            array_push($productOptions, $productOption->id);
+                $productOption->values()->createMany($option['values']);
+
+                array_push($productOptions, $productOption->id);
+            }
+
+            $this->options()->sync($productOptions);
         }
-
-        $this->options()->sync($productOptions);
     }
 
     function scopePublished($query){

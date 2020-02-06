@@ -8,6 +8,11 @@ class Brand extends Model
 {
     protected $fillable = ['name', 'slug', 'tagline', 'image', 'status'];
 
+    public function products()
+    {
+        return $this->hasMany(Product::class);
+    }
+
     public static function laratablesStatus($brand)
     {
         if ($brand->status) {

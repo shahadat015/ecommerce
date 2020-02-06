@@ -4,7 +4,7 @@
 @push('css')
     <link rel="stylesheet" href="{{asset('contents/website/assests/css/owl.carousel.min.css')}}">
 @endpush
-    @include('website.infobar')
+    @include('website.partial.infobar')
     <!-- satrt product page main container -->
     <section id="product_page_main_container">
         <div class="container">
@@ -18,7 +18,7 @@
                             <ul>
                                 @foreach($products as $product)
                                     @foreach($product->categories as $category)
-                                    <li><a href="{{url('product/category/'.$category->id.'/'. $category->slug)}}">{{$category->name}}</a></li>
+                                    <li><a href="{{ url('product/category/'. $category->slug) }}">{{ $category->name }}</a></li>
                                     @endforeach 
                                 @endforeach
                             </ul>
@@ -52,7 +52,7 @@
                             </ul>
                         </div> -->
                         <!-- product page feater product slider -->
-                        <div class="product_page_feater_product">
+                        {{--<div class="product_page_feater_product">
                             <h4>FEATURED PRODUCTS</h4>
                             <div class="product_page_feater_product_slide_active owl-carousel">
                                 @php
@@ -149,7 +149,7 @@
                                 </div>
                                 @endif
                             </div>
-                        </div>
+                        </div>--}}
                     </div>
                 </div>
                 @endif
@@ -160,26 +160,26 @@
                             <!-- single product -->
                             @forelse($products as $product)
                             <div class="col-xl-4 col-lg-6 col-md-6">
-                                <a href="{{url('product/'.$product->id.'/'.$product->slug)}}">
+                                <a href="{{ route('product', $product->slug) }}">
                                     <div class="product_page_product">
                                         <div class="product_page_product_image">
-                                            <img class="img-fluid" src="{{asset('storage/products/' .$product->image)}}" alt="">
+                                            <img class="img-fluid" src="{{ asset($product->image ?? 'contents/admin/images/placeholder.png') }}" alt="">
                                             <div class="produtc_page_product_hover">
                                                 <ul>
                                                     <li>
-                                                        <a class="addtocart" href="{{url('cart/add/'.$product->id)}}">
+                                                        <a class="addtocart" href="{{ route('cart.add', $product->id)}}">
                                                             <i class="icofont-ui-cart"></i>
                                                         </a>
                                                     </li>
-                                                    <li><a href="{{url('/favorite/'.$product->id)}}"><i class="icofont-ui-love"></i></a></li>
-                                                    <li><a href="{{url('product/' .$product->id . '/' . $product->slug)}}"><i class="icofont-eye"></i></a></li>
+                                                    <li><a href="{{ route('customer.favorite', $product->id)}}"><i class="icofont-ui-love"></i></a></li>
+                                                    <li><a href="{{ route('product', $product->slug)}}"><i class="icofont-eye"></i></a></li>
                                                 </ul>
                                             </div>
                                         </div>
                                         <div class="product_page_product_content text-center">
                                             <h4>{{str_limit($product->name, 20)}}</h4>
                                             <h3>&#2547; {{$product->price}}</h3>
-                                            <a class="addtocart" href="{{url('cart/add/'.$product->id)}}"><i class="icofont-ui-cart"></i> Add To Cart</a>
+                                            <a class="addtocart" href="{{ route('cart.add', $product->id)}}"><i class="icofont-ui-cart"></i> Add To Cart</a>
                                         </div>
                                     </div>
                                 </a>
@@ -225,9 +225,6 @@
             </div>
         </div>
     </section>
-    <form id="addtocart-form" action="" method="POST" style="display: none;">
-        @csrf
-    </form>
 @endsection
 @push('js')
     <script src="{{asset('contents/website/assests/js/owl.carousel.min.js')}}"></script>

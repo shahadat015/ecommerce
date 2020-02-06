@@ -54,28 +54,13 @@ class ProductController extends Controller
 
     public function store(ProductValidate $request)
     {
+        $slug = str_slug($request->name);
+        $product = Product::where('slug', $slug)->first();
 
         $request['status'] = (boolean)$request->status;
-        $request['slug'] = str_slug($request->name);
+        $request['slug'] = $product ? $slug .'-'. uniqid() : $slug;
         $product = Product::create($request->all());
-
         $product->saveRelations($request);
-        
-        if($request->meta_title){
-            $product->metadata()->create([
-                'meta_title' => $request->meta_title,
-                'meta_keywords' => $request->meta_keywords,
-                'meta_description' => $request->meta_description,
-            ]);
-        }
-
-        if($request->attribute[0]['attribute_id']){
-            $product->saveAttributes($request->attribute);
-        }
-
-        if($request->options[0]['name']){
-            $product->saveOptions($request->options); 
-        }
 
         if($product){
             return response()->json(['success' => 'Product successfully created!']);
@@ -108,20 +93,6 @@ class ProductController extends Controller
         $request['slug'] = str_slug($request->url);
         $product->update($request->all());
         $product->saveRelations($request);
-
-        $product->metadata()->update([
-            'meta_title' => $request->meta_title,
-            'meta_keywords' => $request->meta_keywords,
-            'meta_description' => $request->meta_description,
-        ]);
-
-        if($request->attribute[0]['attribute_id']){
-            $product->saveAttributes($request->attribute);
-        }
-
-        if($request->options[0]['name']){
-            $product->saveOptions($request->options); 
-        }
 
         if($product){
             return response()->json(['success' => 'Product successfully updated!']);

@@ -91,15 +91,15 @@
                                                 <a href="{{ url('customer/orders') }}"><i class="fas fa-shopping-bag"></i> My Orders</a>
                                            </li>
                                             <li>
-                                                <a href="{{url('customer/logout') }}"><i class="fas fa-unlock"></i> Logout</a>
+                                                <a href="{{ route('customer.logout') }}"><i class="fas fa-unlock"></i> Logout</a>
                                            </li>
                                         </ul>
                                     </li>
                                 </ul>
                                 @else
                                 <ul>
-                                    <li><a href="{{url('customer/login') }}"><i class="fas fa-lock"></i> Login</a></li>
-                                    <li><a href="{{url('customer/register') }}"><i class="far fa-user"></i> Sign Up</a></li>
+                                    <li><a href="{{ route('customer.login') }}"><i class="fas fa-lock"></i> Login</a></li>
+                                    <li><a href="{{ route('customer.register') }}"><i class="far fa-user"></i> Sign Up</a></li>
 
                                 </ul>
                                 @endauth
@@ -110,7 +110,7 @@
                                 <div class="user_cart_box">
                                     <p>Cart-<span>{{ Cart::total() }}</span></p>
                                     <span class="cart_bag"><i class="fas fa-shopping-bag"></i></span>
-                                    <h6>{{ Cart::count() }}</h6>
+                                    <h6>{{ Cart::content()->count() }}</h6>
                                 </div>
                             </div>
                             <div class="cart_togle_content">
@@ -120,14 +120,14 @@
                                         <div class="row">
                                             <div class="col-4 col-xl-4 col-lg-4 col-md-4 col-sm-4">
                                                 <div class="mini_cart_image">
-                                                    <img class="img-fluid" src="{{ asset('storage/products/'.$cartItem->options->image) }}" alt="cart">
+                                                    <img class="img-fluid" src="{{ asset($cartItem->options->image) }}" alt="cart">
                                                 </div>
                                             </div>
                                             <div class="col-8 col-xl-8 col-lg-8 col-md-8 col-sm-8">
                                                 <div class="mini_cart_content">
                                                     <h4>{{ str_limit($cartItem->name, 20) }}</h4>
                                                     <p>{{ $cartItem->qty}} × {{ $cartItem->price }}</p>
-                                                    <a class="removetocart" href="{{ url('cart/remove/'.$cartItem->rowId) }}"><i class="far fa-trash-alt"></i></a>
+                                                    <a class="removefromcart" href="{{ route('cart.remove', $cartItem->rowId) }}"><i class="far fa-trash-alt"></i></a>
                                                 </div>
                                             </div>
                                         </div>
@@ -139,8 +139,8 @@
                                     @endforelse
                                     @if(Cart::count() > 0)
                                     <div class="min_cart_button_bottom text-center">
-                                        <a href="{{url('shopping/cart') }}">View Cart</a>
-                                        <a href="{{url('payment/method') }}" class="min_cart_btn_sp">Check Out</a>
+                                        <a href="{{ route('cart') }}">View Cart</a>
+                                        <a href="{{ route('checkout') }}" class="min_cart_btn_sp">Check Out</a>
                                     </div>
                                     @endif
                                 </div>
@@ -267,8 +267,8 @@
                             @endforelse
                             @if(Cart::count() > 0)
                             <div class="min_cart_button_bottom text-center">
-                                <a href="{{ url('shopping-cart') }}">View Cart</a>
-                                <a href="{{ url('payment') }}" class="min_cart_btn_sp">Check Out</a>
+                                <a href="{{ route('cart') }}">View Cart</a>
+                                <a href="{{ route('checkout') }}" class="min_cart_btn_sp">Check Out</a>
                             </div>
                             @endif
                         </div>
@@ -303,7 +303,7 @@
                         <h3>Sign up to newsletter</h3>
                         <p>Instant Sign Up. Cancel Anytime. No Credit Card Required</p>
                         <div class="news_later_form">
-                            <form action="{{url('subscribe') }}" method="post">
+                            <form action="{{ route('subscribe') }}" method="post">
                                 @csrf
 
                                 <div class="news_later_input_container">
@@ -427,13 +427,7 @@
     <script src="{{ asset('contents/website/js/metisMenu.min.js') }}"></script>
     @stack('js')
     <script src="{{ asset('contents/website/js/custom.js') }}"></script>
-    <script>
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
-    </script>
+    <script src="{{ asset('contents/website/js/ajax.js') }}"></script>
 </body>
 
 </html>

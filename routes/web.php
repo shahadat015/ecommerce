@@ -8,28 +8,54 @@
 
 Route::get('/', 'WebsiteController@index');
 
-Auth::routes(['register' => false]);
+Route::get('/product/category/{slug}', 'ProductController@productByCategory')->name('product.category');
+Route::get('/product/brand/{slug}', 'ProductController@productByBrand')->name('product.brand');
+Route::get('/product/{slug}', 'ProductController@show')->name('product');
 
-Route::get('/customer/login', 'Customer\LoginController@showLoginForm')->name('customer.login');
-Route::post('/customer/login', 'Customer\LoginController@login')->name('customer.login');
-Route::post('/customer/logout', 'Customer\LoginController@logout')->name('customer.logout');
-Route::get('/customer/register', 'Customer\RegisterController@showRegistrationForm')->name('customer.register');
-Route::post('/customer/register', 'Customer\RegisterController@register')->name('customer.register');
+Route::get('/contact', 'ContactController@index')->name('contact');
+Route::post('/contact', 'ContactController@store')->name('contact');
 
-Route::group(['as' => 'customer.', 'prefix' => 'customer', 'namespace' => 'Customer', 'middleware' => ['auth:customer', 'verified']], function(){
+Route::get('/cart', 'CartController@index')->name('cart');
+Route::post('/cart/add/{product}', 'CartController@store')->name('cart.add');
+Route::get('/cart/item', 'CartController@itemCount')->name('cart.item');
+Route::get('/cart/content', 'CartController@cartContent')->name('cart.content');
+Route::put('/cart/update/{rowId}', 'CartController@update')->name('cart.update');
+Route::post('/cart/remove/{rowId}', 'CartController@destroy')->name('cart.remove');
 
-	Route::get('/', 'CustomerController@index')->name('dashboard');
+Route::get('/checkout', 'CheckoutController@index')->name('checkout');
+Route::post('/checkout', 'CheckoutController@store')->name('checkout');
+
+Route::get('/payment', 'PaymentController@index')->name('payment');
+Route::post('/payment', 'PaymentController@store')->name('payment');
+
+Route::get('/confirm', 'PaymentController@confirm')->name('confirm');
+
+Route::get('/subscribe', 'SubscriberController@index')->name('subscribe');
+Route::post('/subscribe', 'SubscriberController@store')->name('subscribe');
+
+Route::group(['as' => 'customer.', 'prefix' => 'customer', 'namespace' => 'Customer'], function(){
+
+	Route::get('/login', 'LoginController@showLoginForm')->name('login');
+	Route::post('/login', 'LoginController@login')->name('login');
+	Route::get('/register', 'RegisterController@showRegistrationForm')->name('register');
+	Route::post('/register', 'RegisterController@register')->name('register');
+	Route::post('/logout', 'LoginController@logout')->name('logout');
+
+	Route::middleware(['auth:customer', 'verified'])->group(function(){
+
+		Route::get('/', 'CustomerController@index')->name('dashboard');
+		Route::get('/favorite/{product}', 'CustomerController@store')->name('favorite');
+
+	});
 	
 });
-
-Route::get('{page}', 'PageController@index')
-    ->where(['page' => '^(((?=(?!admin))(?=(?!\/)).))*$']);
 
 /*
 |--------------------------------------------------------------------------
 | Admin Routes
 |--------------------------------------------------------------------------
 */
+Auth::routes(['register' => false]);
 
 Route::group(['as' => 'admin.', 'prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['auth']], function(){
 	
@@ -130,3 +156,5 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'namespace' => 'Admin', 'mi
 	Route::delete('/menus/items/{menuitem}', 'MenuItemController@destroy')->name('menus.items.destroy');
 	Route::put('/menus/items/order', 'MenuItemController@updateOrder')->name('menus.items.order.update');
 });
+
+Route::get('{page}', 'PageController@index');

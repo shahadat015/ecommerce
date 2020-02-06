@@ -1,7 +1,7 @@
 <nav class="sidebar-nav">
   <ul class="metismenu" id="auto-collapse-menu-demo">
     @php 
-        $primaryMenus = $primaryMenu->menuItems()->where('is_root', 0)->with('category', 'page')->get();
+        $primaryMenus = $primaryMenu->menuItems()->where('is_root', 0)->orderBy('position')->with('category', 'page')->get();
         $rootItem = $primaryMenu->menuItems()->where('is_root', 1)->first();
     @endphp
     @foreach($primaryMenus as $menuItem)

@@ -35,8 +35,11 @@ class CategoryController extends Controller
             'name' => 'required|string|max:255'
         ]);
 
+        $slug = str_slug($request->name);
+        $category = Category::where('slug', $slug)->first();
+
         $request['status'] = (boolean) $request->status;
-        $request['slug'] = str_slug($request->name);
+        $request['slug'] = $category ? $slug .'-'. uniqid() : $slug;
         $create = Category::create($request->all());
 
 
