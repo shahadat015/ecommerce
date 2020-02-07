@@ -430,8 +430,24 @@ class SettingsTableSeeder extends Seeder
             'key'                       =>  'product_tab_3_products',
             'value'                     =>  '',
         ],
-                [
+        [
             'key'                       =>  'enable_products_tabs',
+            'value'                     =>  '',
+        ],
+        [
+            'key'                       =>  'facebook_client_id',
+            'value'                     =>  '',
+        ],
+        [
+            'key'                       =>  'facebook_client_secret',
+            'value'                     =>  '',
+        ],
+        [
+            'key'                       =>  'google_client_id',
+            'value'                     =>  '',
+        ],
+        [
+            'key'                       =>  'google_client_secret',
             'value'                     =>  '',
         ]
     ];

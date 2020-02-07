@@ -7,40 +7,33 @@
         <div class="container">
             <div class="row">
                 <div class="col-xl-4 col-md-4">
-                    @include('website.customer.sidebar')
+                    @include('website.partial.sidebar')
                 </div>
                 <div class="col-xl-8 col-md-8">
                     <div class="user_dashboard_sidebar_main_content">
                         <div class="order_status_container">
                             @forelse($orders as $order)
-                            <a href="{{url('customer/order/details/'.$order->id)}}">
+                            <a href="{{ url('customer/order/'.$order->id) }}">
                                 <div class="order_status_item">
                                     <div class="row align-items-center">
                                         <div class="col-xl-3 col-md-3 col-sm-3">
                                             @php
-                                                $product = App\Order::find($order->id)->products()->first();
-                                                $productImage = App\Product::find($product->product_id);
+                                                $product = $order->products()->first();
                                             @endphp
                                             <div class="order_status_item_image">
-                                                <img class="img-fluid" src="{{asset('storage/products/'.$productImage->image)}}" alt="">
+                                                <img class="img-fluid" src="{{ asset($product->product->image) }}" alt="">
                                             </div>
                                         </div>
                                         <div class="col-xl-6 col-md-6 col-sm-6">
                                             <div class="order_status_item_info">
-                                                <h4>{{$product->name}}</h4>
-                                                <h5>Order total: Tk {{$order->order_total}}</h5>
-                                                <p>Order Date: {{$order->created_at->format('d M Y')}}</p>
+                                                <h4>{{ $product->name }}</h4>
+                                                <h5>Order total: Tk {{ $order->total }}</h5>
+                                                <p>Order Date: {{ date_formate($order->created_at) }} </p>
                                             </div>
                                         </div>
                                         <div class="col-xl-3 col-md-3 col-sm-3">
                                             <div class="order_status_item_info_status">
-                                                @if($order->status == 1)
-                                                <span class="badge badge-info">Progerss</span>
-                                                @elseif($order->status == 2)
-                                                <span class="badge badge-success">Delivered</span>
-                                                @else
-                                                <span class="badge badge-danger">Canceled</span>
-                                                @endif
+                                                <span class="badge badge-info">{{ $order->status }}</span>
                                             </div>
                                         </div>
                                     </div>
@@ -52,7 +45,7 @@
                                     <span><i class="icofont-close"></i></span>
                                     <h3>There have no items you buyed</h3>
                                     <p>Please buy some product as you like.</p>
-                                    <a href="{{url('/')}}">Retuen Shop</a>
+                                    <a href="{{ route('customer.dashboard') }}">Retuen Dashboard</a>
                                 </div>
                             </div>
                             @endforelse
@@ -63,7 +56,7 @@
                         <div class="row">
                             <div class="col-xl-6 col-lg-6 col-md-6">
                                 <div class="pagination_info">
-                                    <p>Showing {{$orders->count()}} of  {{$orders->total()}} Orders</p>
+                                    <p>Showing {{ $orders->count() }} of  {{ $orders->total() }} Orders</p>
                                 </div>
                             </div>
                             <div class="col-xl-6 col-lg-6 col-md-6">
@@ -71,7 +64,7 @@
                                     <nav aria-label="Page navigation example">
                                         <ul class="pagination justify-content-end">
                                             <li class="page-item">
-                                                {{$orders->links()}}
+                                                {{ $orders->links() }}
                                             </li>
                                         </ul>
                                     </nav>

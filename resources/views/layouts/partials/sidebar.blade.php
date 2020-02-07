@@ -200,7 +200,7 @@
                 </ul>
             </div>
             <!-- end Pages -->
-            <div id="MetricaAuthentication" class="main-icon-menu-pane {{ request()->is('admin/users/*', 'admin/roles/*') ? 'active' : '' }}">
+            <div id="MetricaAuthentication" class="main-icon-menu-pane {{ request()->is('admin/users/*', 'admin/roles/*', 'admin/user/*') ? 'active' : '' }}">
                 <div class="title-box">
                     <h6 class="menu-title">Authentication</h6>
                 </div>

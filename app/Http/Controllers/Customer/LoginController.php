@@ -8,6 +8,8 @@ use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
+use Socialite;
+use App\Customer;
 
 class LoginController extends Controller
 {
@@ -212,6 +214,47 @@ class LoginController extends Controller
     protected function guard()
     {
         return Auth::guard('customer');
+    }
+
+    /**
+     * Redirect the user to the GitHub authentication page.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function redirectToProvider($provider)
+    {
+        return Socialite::driver($provider)->redirect();
+    }
+
+    /**
+     * Obtain the user information from GitHub.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function handleProviderCallback($provider)
+    {
+        $socialUser = Socialite::driver($provider)->user();
+
+        $user = $this->findOrCreateUser($socialUser);
+
+        $this->guard()->login($user);
+
+        return redirect($this->redirectPath());
+    }
+
+    protected function findOrCreateUser($socialUser)
+    {
+        $user = Customer::firstOrNew(['email' => $socialUser->getEmail()]);
+
+        if($user->exists) return $user;
+
+        $user->fill([
+            'name' => $socialUser->getName(),
+            'password' => bcrypt('12345678'),
+            'image' => $socialUser->getAvatar()
+        ])->save();
+
+        return $user;
     }
 
 }

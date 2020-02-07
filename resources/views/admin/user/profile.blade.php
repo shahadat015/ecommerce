@@ -18,7 +18,7 @@
                                 <div class="met-profile-main">
                                     <div class="met-profile-main-pic">
                                         @if($user->image)
-                                        <img src="{{ asset($user->image->path()) }}" alt="" class="rounded-circle" width="120">
+                                        <img src="{{ asset($user->image) }}" alt="" class="rounded-circle" width="120">
                                         @else
                                         <img src="{{ asset('contents/admin/images/users/avatar.png') }}" alt="" class="rounded-circle" width="120">
                                         @endif
@@ -92,7 +92,7 @@
                                     <div class="single-image">
                                         <div class="image-holder">
                                             @if($user->image)
-                                            <img src="{{ asset($user->image->path()) }}" alt="">
+                                            <img src="{{ asset($user->image) }}" alt="">
                                             @else
                                             <i class="far fa-image"></i>
                                             @endif

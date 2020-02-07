@@ -32,6 +32,9 @@
                             <li class="nav-item">
                                 <a class="nav-link" data-toggle="tab" href="#payments" role="tab">Payments</a>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link" data-toggle="tab" href="#social" role="tab">Social Login</a>
+                            </li>
                         </ul>
                         <div class="tab-content">
                             <div class="tab-pane active p-3" id="general" role="tabpanel">
@@ -174,6 +177,28 @@
                                     </div>
                                 </div>
 
+                            </div>
+                            <div class="tab-pane p-3" id="social" role="tabpanel">
+                                <h4>Facebook</h4><hr>
+
+                                <div class="form-group">
+                                    <label for="name">Facebook App ID</label>
+                                    <input type="text" name="facebook_client_id" class="form-control" value="{{ config('settings.facebook_client_id') }}">
+                                </div>
+                                <div class="form-group">
+                                    <label for="name">Facebook App Secret</label>
+                                    <input type="password" name="facebook_client_secret" class="form-control" value="{{ config('settings.facebook_client_secret') }}">
+                                </div>
+
+                                <h4>Google</h4><hr>
+                                <div class="form-group">
+                                    <label for="name">Google App ID</label>
+                                    <input type="text" name="google_client_id" class="form-control" value="{{ config('settings.google_client_id') }}">
+                                </div>
+                                <div class="form-group">
+                                    <label for="name">Google App Secret</label>
+                                    <input type="password" name="google_client_secret" class="form-control" value="{{ config('settings.google_client_secret') }}">
+                                </div>
                             </div>
                         </div>
                     </div>

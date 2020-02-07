@@ -513,6 +513,7 @@
         </div>
     </section>
     @endif
+
 @endsection
 @push('js')
     <script src="{{asset('contents/website/js/owl.carousel.min.js')}}"></script>

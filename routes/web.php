@@ -6,7 +6,7 @@
 |--------------------------------------------------------------------------
 */
 
-Route::get('/', 'WebsiteController@index');
+Route::get('/', 'WebsiteController@index')->name('home');
 
 Route::get('/product/category/{slug}', 'ProductController@productByCategory')->name('product.category');
 Route::get('/product/brand/{slug}', 'ProductController@productByBrand')->name('product.brand');
@@ -33,6 +33,9 @@ Route::get('/confirm', 'PaymentController@confirm')->name('confirm');
 Route::get('/subscribe', 'SubscriberController@index')->name('subscribe');
 Route::post('/subscribe', 'SubscriberController@store')->name('subscribe');
 
+Route::get('login/{provider}', 'Customer\LoginController@redirectToProvider');
+Route::get('login/{provider}/callback', 'Customer\LoginController@handleProviderCallback');
+
 Route::group(['as' => 'customer.', 'prefix' => 'customer', 'namespace' => 'Customer'], function(){
 
 	Route::get('/login', 'LoginController@showLoginForm')->name('login');
@@ -41,10 +44,14 @@ Route::group(['as' => 'customer.', 'prefix' => 'customer', 'namespace' => 'Custo
 	Route::post('/register', 'RegisterController@register')->name('register');
 	Route::post('/logout', 'LoginController@logout')->name('logout');
 
-	Route::middleware(['auth:customer', 'verified'])->group(function(){
+	Route::middleware(['auth:customer'])->group(function(){
 
 		Route::get('/', 'CustomerController@index')->name('dashboard');
-		Route::get('/favorite/{product}', 'CustomerController@store')->name('favorite');
+		Route::get('/orders', 'CustomerController@orders')->name('orders');
+		Route::get('/account', 'CustomerController@account')->name('account');
+		Route::put('/account', 'CustomerController@updateAccount')->name('account');
+		Route::get('/favorites', 'CustomerController@favorite')->name('favorites');
+		Route::post('/favorite/{product}', 'CustomerController@storeFavorite')->name('favorite');
 
 	});
 	
@@ -57,7 +64,7 @@ Route::group(['as' => 'customer.', 'prefix' => 'customer', 'namespace' => 'Custo
 */
 Auth::routes(['register' => false]);
 
-Route::group(['as' => 'admin.', 'prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['auth']], function(){
+Route::group(['as' => 'admin.', 'prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'auth'], function(){
 	
 	Route::get('/', 'DashboardController@index')->name('dashboard');
 	Route::get('/sales/analytics', 'DashboardController@salesAnalytics');

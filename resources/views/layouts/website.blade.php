@@ -81,17 +81,18 @@
                         <div class="col-xl-7 col-lg-7 col-md-7 col-sm-7">
                             <div class="user_login">
                                 @auth('customer')
+                                @php $customer = auth('customer')->user(); @endphp
                                 <ul>
-                                    <li><a href="{{ url('customer/dashboard') }}"><i class="far fa-user"></i> {{ auth()->user()->name }}</a>
+                                    <li><a href="{{ route('customer.dashboard') }}"><i class="far fa-user"></i> {{ $customer->name }}</a>
                                         <ul>
                                             <li class="{{ request()->is('customer/account') ? 'active' : '' }}">
-                                                <a href="{{ url('customer/account') }}"><i class="far fa-user"></i> My Profile</a>
+                                                <a href="{{ route('customer.account') }}"><i class="far fa-user"></i> My Profile</a>
                                            </li>
                                             <li class="{{ request()->is('customer/orders') ? 'active' : '' }}">
-                                                <a href="{{ url('customer/orders') }}"><i class="fas fa-shopping-bag"></i> My Orders</a>
+                                                <a href="{{ route('customer.orders') }}"><i class="fas fa-shopping-bag"></i> My Orders</a>
                                            </li>
                                             <li>
-                                                <a href="{{ route('customer.logout') }}"><i class="fas fa-unlock"></i> Logout</a>
+                                                <a href="{{ route('customer.logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="fas fa-unlock"></i> Logout</a>
                                            </li>
                                         </ul>
                                     </li>
@@ -210,7 +211,7 @@
                         <div class="user_login">
                             @auth('customer')
                             <ul>
-                                <li><a href="{{url('customer/dashboard') }}"><i class="far fa-user"></i> {{ str_limit(auth()->user()->name, 8) }}</a>
+                                <li><a href="{{url('customer/dashboard') }}"><i class="far fa-user"></i> {{ str_limit($customer->name, 8) }}</a>
                                     <ul>
                                         <li class="{{ request()->is('customer/account') ? 'active' : '' }}">
                                             <a href="{{url('customer/account') }}"><i class="far fa-user"></i> My Profile</a>
@@ -408,6 +409,9 @@
             </div>
         </div>
     </footer>
+    <form id="logout-form" class="d-none" action="{{ route('customer.logout') }}" method="POST">
+        @csrf
+    </form>
     <!-- ========== this is main js link ========== -->
     <script src="{{ asset('contents/website/js/jquery-3.3.1.min.js') }}"></script>
     <script src="{{ asset('contents/website/js/sweet-alert.js') }}"></script>
