@@ -116,6 +116,19 @@ class ProductController extends Controller
         }
     }
 
+    public function updateStatus(Product $product)
+    {
+        if($product->status){
+            $product->status = false;
+            $product->save();
+            return response()->json(['success' => 'Product successfullly unpublished!']);
+        }
+
+        $product->status = true;
+        $product->save();
+        return response()->json(['success' => 'Product successfullly published!']);
+    }
+
     public function attributeValues(Attribute $attribute)
     {
         $values = $attribute->values;

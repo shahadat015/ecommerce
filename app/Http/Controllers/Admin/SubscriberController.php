@@ -28,11 +28,11 @@ class SubscriberController extends Controller
             $subscriber->status = false;
             $subscriber->save();
             return response()->json(['success' => 'Subscriber successfullly disabled!']);
-        }else{
-            $subscriber->status = true;
-            $subscriber->save();
-            return response()->json(['success' => 'Subscriber successfullly enabled!']);
         }
+        
+        $subscriber->status = true;
+        $subscriber->save();
+        return response()->json(['success' => 'Subscriber successfullly enabled!']);
     }
 
     public function destroy(Request $request)

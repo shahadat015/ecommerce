@@ -3,7 +3,7 @@
 @section('content')
     <!-- Page-Title -->
     @component('layouts.partials.breadcumb')
-    <li class="breadcrumb-item"><a href="{{ route('admin.users.index') }}">Uers</a></li>
+    <li class="breadcrumb-item"><a href="{{ route('admin.users.index') }}">User</a></li>
     <li class="breadcrumb-item active">Show</li>
     @endcomponent
     
@@ -22,7 +22,7 @@
                                 <div class="met-profile-main">
                                     <div class="met-profile-main-pic">
                                         @if($user->image)
-                                        <img src="{{ asset($user->image->path()) }}" alt="" class="rounded-circle" width="120">
+                                        <img src="{{ asset($user->image) }}" alt="" class="rounded-circle" width="120">
                                         @else
                                         <img src="{{ asset('contents/admin/images/users/avatar.png') }}" alt="" class="rounded-circle" width="120">
                                         @endif

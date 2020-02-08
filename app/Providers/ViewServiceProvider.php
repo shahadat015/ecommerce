@@ -23,8 +23,9 @@ class ViewServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        view()->composer('layouts.website', 'App\Http\View\Composers\HomePageComposer');
-        view()->composer(['website.index', 'admin.storefront.section.index'], 'App\Http\View\Composers\ProductComposer');
+        view()->composer('layouts.website', 'App\Http\View\Composers\MenuComposer');
+        view()->composer('website.index', 'App\Http\View\Composers\HomeComposer');
+        view()->composer('website.product.sidebar', 'App\Http\View\Composers\ProductComposer');
         view()->composer('admin.report.*', function ($view) {
             $view->with('request', $this->app['request']);
         });

@@ -58,7 +58,7 @@
                                             <ul>
                                                 <li><a class="addtocart" href="{{ route('cart.add', $carousel_1_product->id) }}"><i class="icofont-shopping-cart"></i></a></li>
                                                 <li><a href="{{ route('product', $carousel_1_product->slug)}}"><i class="icofont-eye-alt"></i></a></li>
-                                                <li><a href="{{ route('customer.favorite', $carousel_1_product->id)}}"><i class="icofont-ui-love"></i></a></li>
+                                                <li><a class="addtofavorite" href="{{ route('customer.favorite', $carousel_1_product->id)}}"><i class="icofont-ui-love"></i></a></li>
                                             </ul>
                                         </div>
                                     </div>
@@ -108,36 +108,39 @@
                                     @foreach($featured_products as $key=>$featured_product)
                                     <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 pl-0 text-center">
                                         <div class="feater_product_item">
-                                            <a href="{ route('product', featured_product->slug)}}">
+                                            <a href="{{ route('product', $featured_product->slug)}}">
                                                 <img class="img-fluid" src="{{asset($featured_product->image ?? 'contents/admin/images/placeholder.png')}}" alt="">
                                             </a>
                                             <h4>{{str_limit($featured_product->name, 20)}}</h4>
                                             <h3>TK {{$featured_product->price}}</h3>
                                             @include('website.partial.rating', ['rating' => $featured_product->reviews()->avg('rating')])
                                             <a class="addtocart" href="{{ route('cart.add', $featured_product->id) }}"><i class="icofont-shopping-cart"></i></a>
-                                            <a href="{ route(customer.favorite', $featured_product->id)}}"><i class="fas fa-heart"></i></a>
-                                            <a href="{ route('product', $featured_product->slug)}}"><i class="fas fa-exchange-alt"></i></a>
+                                             <a class="addtofavorite" href="{{ route('customer.favorite', $featured_product->id) }}"><i class="fas fa-heart"></i></a>
+                                            <a href="{{ route('product', $featured_product->slug) }}"><i class="fas fa-exchange-alt"></i></a>
                                         </div>
                                     </div>
+                                    @if($key == 2) @break @endif
                                     @endforeach
                                 </div>
                             </div>
                             @foreach($featured_products as $key=>$featured_product)
+                            @if($key <= 2) @continue @endif
                             <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6">
                                 <div class="feater_product_item feater_product_item_2">
-                                    <a href="{ route('product', featured_product->slug)}}">
-                                        <img class="img-fluid" src="{{asset($featured_product->image ?? 'contents/admin/images/placeholder.png')}}" alt="">
+                                    <a href="{{ route('product', $featured_product->slug)}}">
+                                        <img class="img-fluid" src="{{ asset($featured_product->image ?? 'contents/admin/images/placeholder.png')}}" alt="">
                                     </a>
-                                    <a href="{ route('product', featured_product->slug)}}">
+                                    <a href="{{ route('product', $featured_product->slug)}}">
                                         <h4>{{str_limit($featured_product->name, 20)}}</h4>
                                     </a>
                                     <h3>Tk {{$featured_product->price}}</h3>
                                     @include('website.partial.rating', ['rating' => $featured_product->reviews()->avg('rating')])
                                     <a class="addtocart" href="{{ route('cart.add', $featured_product->id) }}"><i class="icofont-shopping-cart"></i></a>
-                                    <a href="{ route(customer.favorite', $featured_product->id)}}"><i class="fas fa-heart"></i></a>
-                                    <a href="{ route('product', featured_product->slug)}}"><i class="fas fa-exchange-alt"></i></a>
+                                     <a class="addtofavorite" href="{{ route('customer.favorite', $featured_product->id)}}"><i class="fas fa-heart"></i></a>
+                                    <a href="{{ route('product', $featured_product->slug)}}"><i class="fas fa-exchange-alt"></i></a>
                                 </div>
                             </div>
+                            @if($key == 6) @break @endif
                             @endforeach
                         </div>
                     </div>
@@ -198,19 +201,19 @@
                                 @foreach($recent_products as $recent_product)
                                 <!-- single item -->
                                 <div class="new_arival_item">
-                                    <a href="{ route('product', $recent_product->slug)}}">
+                                    <a href="{{ route('product', $recent_product->slug)}}">
                                         <div class="new_arival_image">
                                             <img height="170" src="{{asset($recent_product->image ?? 'contents/admin/images/placeholder.png')}}" alt="">
                                             <div class="new_arival_hover">
                                                 <ul>
                                                     <li><a class="addtocart" href="{{ route('cart.add', $recent_product->id) }}"><i class="icofont-ui-cart"></i></a></li>
-                                                    <li><a href="{{ route('customer.favorite', $recent_product->id)}}"><i class="icofont-ui-love"></i></a></li>
-                                                    <li><a href="{ route('product', $recent_product->id . '/' . $recent_product->slug)}}"><i class="icofont-eye"></i></a></li>
+                                                    <li><a class="addtofavorite" href="{{ route('customer.favorite', $recent_product->id)}}"><i class="icofont-ui-love"></i></a></li>
+                                                    <li><a href="{{ route('product', $recent_product->id . '/' . $recent_product->slug)}}"><i class="icofont-eye"></i></a></li>
                                                 </ul>
                                             </div>
                                         </div>
                                         <div class="new_arival_content">
-                                            <a href="{ route('product', $recent_product->slug)}}">
+                                            <a href="{{ route('product', $recent_product->slug)}}">
                                                 <h4>{{str_limit($recent_product->name, 20)}}</h4>
                                             </a>
                                             <div class="row">
@@ -255,19 +258,19 @@
                             <!--single item-->
                             @foreach($carousel_2_products as $carousel_2_product)
                             <div class="teshirt_slide_item">
-                                <a href="{ route('product', $carousel_2_product->slug)}}">
+                                <a href="{{ route('product', $carousel_2_product->slug)}}">
                                     <div class="teshirt_slide_image">
                                         <img height="170" src="{{ asset($carousel_2_product->image ?? 'contents/admin/images/placeholder.png') }}" alt="">
                                         <div class="teshirt_hover">
                                             <ul>
                                                 <li><a class="addtocart" href="{{ route('cart.add', $carousel_2_product->id) }}"><i class="icofont-ui-cart"></i></a></li>
-                                                <li><a href="{{ route('customer.favorite', $carousel_2_product->id)}}"><i class="icofont-ui-love"></i></a></li>
-                                                <li><a href="{ route('product', $carousel_2_product->slug)}}"><i class="icofont-eye"></i></a></li>
+                                                <li><a class="addtofavorite" href="{{ route('customer.favorite', $carousel_2_product->id)}}"><i class="icofont-ui-love"></i></a></li>
+                                                <li><a href="{{ route('product', $carousel_2_product->slug)}}"><i class="icofont-eye"></i></a></li>
                                             </ul>
                                         </div>
                                     </div>
                                     <div class="teshirt_slide_cotent">
-                                        <a href="{ route('product', $carousel_2_product->slug)}}">
+                                        <a href="{{ route('product', $carousel_2_product->slug)}}">
                                             <h4>{{str_limit($carousel_2_product->name)}}</h4>
                                         </a>
                                         <div class="row">
@@ -368,20 +371,20 @@
                             <!-- single item -->
                             @foreach($carousel_3_products as $carousel_3_product)
                             <div class="gadget_slid_item">
-                                <a href="{ route('product', $carousel_3_product->slug)}}">
+                                <a href="{{ route('product', $carousel_3_product->slug)}}">
                                     <div class="gadget_slid_image">
                                         <img height="170" src="{{ asset($carousel_3_product->image ?? 'contents/admin/images/placeholder.png')}}" alt="">
                                         <div class="gadget_hover">
                                             <ul>
                                                 <li><a class="addtocart" href="{{ route('cart.add', $carousel_3_product->id) }}"><i class="icofont-ui-cart"></i></a></li>
-                                                <li><a href="{{ route('customer.favorite', $carousel_3_product->id)}}"><i class="icofont-ui-love"></i></a></li>
-                                                <li><a href="{ route('product', $carousel_3_product->slug)}}"><i class="icofont-eye"></i></a></li>
+                                                <li><a class="addtofavorite" href="{{ route('customer.favorite', $carousel_3_product->id)}}"><i class="icofont-ui-love"></i></a></li>
+                                                <li><a href="{{ route('product', $carousel_3_product->slug)}}"><i class="icofont-eye"></i></a></li>
                                             </ul>
                                         </div>
                                     </div>
                                 </a>
                                 <div class="gadget_slid_content">
-                                    <a href="{ route('product', $carousel_3_product->slug)}}">
+                                    <a href="{{ route('product', $carousel_3_product->slug)}}">
                                         <h4>{{str_limit($carousel_3_product->name, 20)}}</h4>
                                     </a>
                                     <div class="row">
@@ -431,7 +434,7 @@
                                                 <div class="product_tab_hover">
                                                     <ul>
                                                         <li><a class="addtocart" href="{{ route('cart.add', $tab_1_product->id) }}"><i class="icofont-ui-cart"></i></a></li>
-                                                        <li><a href="{{ route('customer.favorite', $tab_1_product->id)}}"><i class="icofont-ui-love"></i></a></li>
+                                                        <li><a class="addtofavorite" href="{{ route('customer.favorite', $tab_1_product->id)}}"><i class="icofont-ui-love"></i></a></li>
                                                         <li><a href="{{ route('product', $tab_1_product->slug) }}"><i class="icofont-eye"></i></a></li>
                                                     </ul>
                                                 </div>
@@ -460,7 +463,7 @@
                                                 <div class="product_tab_hover">
                                                     <ul>
                                                         <li><a class="addtocart" href="{{ route('cart.add', $tab_2_product->id) }}"><i class="icofont-ui-cart"></i></a></li>
-                                                        <li><a href="{{ route('customer.favorite', $tab_2_product->id) }}"><i class="icofont-ui-love"></i></a></li>
+                                                        <li><a class="addtofavorite" href="{{ route('customer.favorite', $tab_2_product->id) }}"><i class="icofont-ui-love"></i></a></li>
                                                         <li><a href="{{ route('product', $tab_2_product->slug) }}"><i class="icofont-eye"></i></a></li>
                                                     </ul>
                                                 </div>
@@ -489,7 +492,7 @@
                                                 <div class="product_tab_hover">
                                                     <ul>
                                                         <li><a class="addtocart" href="{{ route('cart.add', $tab_3_product->id) }}"><i class="icofont-ui-cart"></i></a></li>
-                                                        <li><a href="{{ route('customer.favorite', $tab_3_product->id) }}"><i class="icofont-ui-love"></i></a></li>
+                                                        <li><a class="addtofavorite" href="{{ route('customer.favorite', $tab_3_product->id) }}"><i class="icofont-ui-love"></i></a></li>
                                                         <li><a href="{{ route('product', $tab_3_product->slug) }}"><i class="icofont-eye"></i></a></li>
                                                     </ul>
                                                 </div>

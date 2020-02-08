@@ -24,6 +24,6 @@ class Subscriber extends Model
 
     public static function laratablesCustomAction($action)
     {
-        return view('layouts.partials.actions')->with(['switch' => true, 'edit' => false, 'view' => false, 'action' => $action, 'route' => 'messages'])->render();
+        return view('layouts.partials.actions')->with(['switch' => true, 'edit' => false, 'view' => false, 'action' => $action, 'route' => $action->getTable()])->render();
     }
 }

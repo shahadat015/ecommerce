@@ -4,7 +4,7 @@
 </div>
 @if($switch ?? false)
 <div class="custom-control custom-switch switch-primary d-inline">
-    <input type="checkbox" class="custom-control-input" id="customSwitchPrimary{{$action->id}}" data-url="{{ route('admin.subscribers.update', $action->id) }}" {{ $action->status ? 'checked' : '' }}>
+    <input type="checkbox" class="custom-control-input" id="customSwitchPrimary{{$action->id}}" data-url="{{ route('admin.' . str_singular($route) . '.update', $action->id) }}" {{ $action->status ? 'checked' : '' }}>
     <label class="custom-control-label" for="customSwitchPrimary{{$action->id}}"></label>
 </div>
 @endif

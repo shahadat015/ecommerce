@@ -53,14 +53,19 @@ class CartController extends Controller
 
     public function itemCount()
     {
-    	return '<p>Cart-<span>' .  Cart::total()  . '</span></p>
+    	return '<p>Cart-<span>Tk ' .  Cart::total()  . '</span></p>
                 <span class="cart_bag"><i class="fas fa-shopping-bag"></i></span>
                 <h6> '.  Cart::content()->count() .'</h6>';
     }
 
+    public function miniCart()
+    {
+    	return view('website.cart.mini-cart');
+    }
+    
     public function cartContent()
     {
-    	return view('website.cart.cart-content');
+        return view('website.cart.cart-content');
     }
 
 }

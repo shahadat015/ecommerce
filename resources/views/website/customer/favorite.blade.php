@@ -30,7 +30,7 @@
                                         </div>
                                         <div class="col-xl-3 col-md-3 col-sm-3">
                                             <div class="order_status_item_info_status">
-                                                <a href="{{ route('favorite', $product->id) }}">
+                                                <a class="removefavorite" href="{{ route('customer.favorite', $product->id) }}">
                                                     <span class="badge badge-danger">Remove</span>
                                                 </a>
                                             </div>

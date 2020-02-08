@@ -109,13 +109,13 @@
                         <div class="col-xl-5 col-lg-5 col-md-5 col-sm-5 ptl ptr">
                             <div class="user_cart">
                                 <div class="user_cart_box">
-                                    <p>Cart-<span>{{ Cart::total() }}</span></p>
+                                    <p>Cart-<span>Tk {{ Cart::total() }}</span></p>
                                     <span class="cart_bag"><i class="fas fa-shopping-bag"></i></span>
                                     <h6>{{ Cart::content()->count() }}</h6>
                                 </div>
                             </div>
                             <div class="cart_togle_content">
-                                <div class="row">
+                                <div class="row mini-cart">
                                     @forelse(Cart::content() as $cartItem)
                                     <div class="mini_cart_item">
                                         <div class="row">

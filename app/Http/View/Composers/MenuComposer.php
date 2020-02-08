@@ -6,7 +6,7 @@ use App\Menu;
 use App\Product;
 use Illuminate\View\View;
 
-class HomePageComposer
+class MenuComposer
 {
     /**
      * The user repository implementation.

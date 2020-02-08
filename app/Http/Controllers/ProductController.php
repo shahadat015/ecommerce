@@ -17,15 +17,17 @@ class ProductController extends Controller
     public function show($slug)
     { 
         $product = Product::where('slug', $slug)->firstOrFail();
-        $product->load('categories', 'brand', 'attributes', 'options', 'metadata', 'images'); 
-        return view('website.product.show', compact('product'));
+        $brands = Brand::where('status', 1)->inRandomOrder()->limit(10)->get();
+        $product->load('categories', 'brand', 'attributes', 'options', 'metadata', 'images');
+        $relatedProducts = $product->relatedProducts()->published()->get();
+        return view('website.product.show', compact('product', 'brands', 'relatedProducts'));
     }
 
     public function productByCategory($slug)
     {
         $category = Category::where('slug', $slug)->firstOrFail();
         $category->load('products');
-        $products = $category->products()->with('categories', 'brand')->paginate(12);
+        $products = $category->products()->paginate(12);
         return view('website.product.index', compact('products'));
     }
 
@@ -33,7 +35,7 @@ class ProductController extends Controller
     {
         $brand = Brand::where('slug', $slug)->firstOrFail();
         $brand->load('products');
-        $products = $brand->products()->with('categories', 'brand')->paginate(12);
+        $products = $brand->products()->paginate(12);
         return view('website.product.index', compact('products'));
     }
 }

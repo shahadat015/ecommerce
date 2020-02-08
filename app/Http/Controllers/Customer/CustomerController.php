@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Customer;
 
 use App\Http\Controllers\Controller;
+use App\Product;
 use Illuminate\Http\Request;
 
 class CustomerController extends Controller
@@ -54,12 +55,31 @@ class CustomerController extends Controller
 
     public function favorite()
     {
-    	$favorites = auth()->user()->wishlist;
+    	$favorites = auth()->user()->wishlist()->paginate(10);
     	return view('website.customer.favorite', compact('favorites'));    
     }
 
-    public function storeFavorite()
+    public function storeFavorite($id)
     {
-    	
+    	$customer = auth()->user();
+
+        if($customer->wishlist->contains($id)){
+            return response()->json(['success' => 'Product has already your favorite list']);
+        }
+
+        $customer->wishlist()->attach($id);
+        return response()->json(['success' => 'Product added to your favorite list']);
+    }
+
+    public function removeFavorite($id)
+    {
+        $customer = auth()->user();
+
+        if($customer->wishlist->contains($id)){
+            $customer->wishlist()->detach($id);
+            return response()->json(['success' => 'Product removed from your favorite list']);
+        }
+
+        return response()->json(['success' => 'Product has not in your favorite list']);
     }
 }

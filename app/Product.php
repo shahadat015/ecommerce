@@ -143,7 +143,6 @@ class Product extends Model
 
     public static function laratablesCustomAction($action)
     {
-        $route  = $action->getTable();
-        return view('layouts.partials.actions', compact('action', 'route'))->render();
+        return view('layouts.partials.actions')->with(['action' => $action, 'route' => $action->getTable(), 'switch' => 'true'])->render();
     }
 }

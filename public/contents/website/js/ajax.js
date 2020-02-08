@@ -190,6 +190,7 @@ $(function() {
             success(data) {
                 if(data.success) {
                     $('.user_cart_box').load(route('cart.item'));
+                    $('.mini-cart').load(route('cart.minicart'));
                     return successMessage(data.success);
                 }else{
                     return errorMessage(data.error);
@@ -229,6 +230,8 @@ $(function() {
             },
             success(data) {
                 if(data.success) {
+                    $('.user_cart_box').load(route('cart.item'));
+                    $('.mini-cart').load(route('cart.minicart'));
                     return cartContent();
                 }else{
                     return errorMessage(data.error);
@@ -276,6 +279,8 @@ $(function() {
             },
             success(data) {
                 if(data.success) {
+                    $('.user_cart_box').load(route('cart.item'));
+                    $('.mini-cart').load(route('cart.minicart'));
                     return successMessage(data.success);
                 }else{
                     return errorMessage(data.error);
@@ -288,6 +293,62 @@ $(function() {
                 btn.closest('.mini_cart_item').fadeOut();
                 return cartContent();
             }
+        });
+    });
+
+    // add to favorite
+    $(document).on('click', '.addtofavorite', function(e) {
+        e.preventDefault();
+        var action = $(this).attr('href');
+        var btnText = $(this).html();
+        var btn = $(this);
+
+        $.ajax({
+            url: action,
+            type: "POST",
+            dataType: "JSON",
+            cache: false,
+            beforeSend:function() {
+                btn.html("<span class='spinner-border spinner-border-sm'></span>");
+            },
+            success(data) {
+                if(data.success) {
+                    return successMessage(data.success);
+                }else{
+                    return errorMessage(data.error);
+                }
+            },
+            error(error) {
+                return errorMessage('Please Login before to add favorite');
+            },
+            complete:function() {
+                btn.html(btnText);
+            }
+        });
+    });
+
+    // remove from favorite
+    $(document).on('click', '.removefavorite', function(e) {
+        e.preventDefault();
+        var action = $(this).attr('href');
+        var _this = $(this);
+
+        $.ajax({
+            url: action,
+            type: "DELETE",
+            dataType: "JSON",
+            cache: false,
+            success(data) {
+                if(data.success) {
+                    _this.closest('.order_status_item').fadeOut();
+                    return successMessage(data.success);
+                }else{
+                    return errorMessage(data.error);
+                }
+            },
+            error(error) {
+                return errorStatusText(error);
+            },
         });
     });
 
