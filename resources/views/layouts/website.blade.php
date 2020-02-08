@@ -52,7 +52,7 @@
             <div class="row align-items-center">
                 <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2">
                     <div class="main_logo">
-                        <a href="{{ url('/') }}">
+                        <a href="{{ route('home') }}">
                             @if(config('settings.storefront_logo'))
                                 <img class="img-fluid" src="{{ asset(config('settings.storefront_logo')) }}" alt="logo">
                             @else
@@ -63,7 +63,7 @@
                 </div>
                 <div class="col-xl-5 col-lg-5 col-md-5 col-sm-5">
                     <div class="serach_bar">
-                        <form action="{{url('search') }}" method="get">
+                        <form action="{{ url('search') }}" method="get">
                             <div class="search_form_box">
                                 <input type="text" name="query" placeholder="Search for product" value="{{ request('query') }}" required="">
                                 <button type="submit"><i class="fas fa-search"></i></button>
@@ -172,14 +172,14 @@
             <div class="row align-items-center">
                 <div class="col-4 col-sm-4">
                     <div class="mobile_menu_top_logo">
-                        <a href="{{ url('/') }}">
+                        <a href="{{ route('home') }}">
                             <img class="img-fluid" src="{{ asset(config('settings.storefront_logo')) }}" alt="logo">
                         </a>
                     </div>
                 </div>
                 <div class="col-8 col-sm-8">
                     <div class="mobile_menu_top_search">
-                        <form action="{{url('search') }}" method="get">
+                        <form action="{{ url('search') }}" method="get">
                             <div class="mobile_menu_top_search_box">
                                 <input type="text" name="query" placeholder="Search for product" value="{{ request('query') }}" required>
                                 <button type="submit"><i class="fas fa-search"></i></button>
@@ -211,24 +211,24 @@
                         <div class="user_login">
                             @auth('customer')
                             <ul>
-                                <li><a href="{{url('customer/dashboard') }}"><i class="far fa-user"></i> {{ str_limit($customer->name, 8) }}</a>
+                                <li><a href="{{ route('customer.dashboard') }}"><i class="far fa-user"></i> {{ str_limit($customer->name, 8) }}</a>
                                     <ul>
                                         <li class="{{ request()->is('customer/account') ? 'active' : '' }}">
-                                            <a href="{{url('customer/account') }}"><i class="far fa-user"></i> My Profile</a>
+                                            <a href="{{ route('customer.account') }}"><i class="far fa-user"></i> My Profile</a>
                                        </li>
                                         <li class="{{ request()->is('customer/orders') ? 'active' : '' }}">
-                                            <a href="{{url('customer/orders') }}"><i class="fas fa-shopping-bag"></i> My Orders</a>
+                                            <a href="{{ route('customer.orders') }}"><i class="fas fa-shopping-bag"></i> My Orders</a>
                                        </li>
                                     </ul>
                                 </li>
                                 <li>
-                                    <a href="{{url('customer/logout') }}"><i class="fas fa-unlock"></i> Logout</a>
+                                    <a href="{{ route('customer.logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="fas fa-unlock"></i> Logout</a>
                                </li>
                             </ul>
                             @else
                             <ul>
-                                <li><a href="{{url('customer/login') }}"><i class="fas fa-lock"></i> Login</a></li>
-                                <li><a href="{{url('customer/register') }}"><i class="far fa-user"></i> Sign Up</a></li>
+                                <li><a href="{{ route('customer.login') }}"><i class="fas fa-lock"></i> Login</a></li>
+                                <li><a href="{{ route('customer.register') }}"><i class="far fa-user"></i> Sign Up</a></li>
                             </ul>
                             @endauth
                         </div>
@@ -256,7 +256,7 @@
                                         <div class="mini_cart_content">
                                             <h4>{{ str_limit($cartItem->name, 30) }}</h4>
                                             <p>{{ $cartItem->qty}} × {{ $cartItem->price}}</p>
-                                            <a class="removetocart" href="{{url('cart/remove/'.$cartItem->rowId) }}"><i class="far fa-trash-alt"></i></a>
+                                            <a class="removetocart" href="{{ route('cart.remove', $cartItem->rowId) }}"><i class="far fa-trash-alt"></i></a>
                                         </div>
                                     </div>
                                 </div>
@@ -321,7 +321,7 @@
             <div class="row">
                 <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12">
                     <div class="footer_about">
-                        <a href="{{ url('/') }}">
+                        <a href="{{ route('home') }}">
                             @if(config('settings.storefront_logo'))
                                 <img class="img-fluid" src="{{ asset(config('settings.storefront_logo')) }}" alt="">
                             @else
@@ -362,7 +362,7 @@
                                 <h3>CATEGORIES</h3>
                                 <ul>
                                     @foreach($popularCategories as $popularCategory)
-                                        <li><a href="{{ url('product/category/'.$popularCategory->url) }}">{{ $popularCategory->name}}</a></li>
+                                        <li><a href="{{ $popularCategory->url }}">{{ $popularCategory->name}}</a></li>
                                     @endforeach
                                 </ul>
                             </div>
@@ -372,11 +372,11 @@
                             <div class="footer_link">
                                 <h3>MY ACCOUNT</h3>
                                 <ul>
-                                    <li><a href="{{ url('customer/orders') }}">Orders</a></li>
+                                    <li><a href="{{ route('customer.orders') }}">Orders</a></li>
                                     <li><a href="#">Compare</a></li>
-                                    <li><a href="#">Wishlist</a></li>
-                                    <li><a href="{{ url('customer/login') }}">Log In</a></li>
-                                    <li><a href="{{ url('customer/register') }}">Register</a></li>
+                                    <li><a href="{{ route('customer.favorites') }}">Wishlist</a></li>
+                                    <li><a href="{{ route('customer.login') }}">Log In</a></li>
+                                    <li><a href="{{ route('customer.register') }}">Register</a></li>
                                 </ul>
                             </div>
                         </div>

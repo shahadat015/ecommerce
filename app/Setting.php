@@ -8,6 +8,15 @@ use Illuminate\Support\Facades\Config;
 class Setting extends Model
 {
     protected $fillable = ['key', 'value'];
+    protected $casts = [
+    	'free_shipping_enabled' => 'boolean',
+ 		'local_pickup_enabled' => 'boolean',
+ 		'cod_enabled' => 'boolean',
+ 		'ssl_commrz_enabled' => 'boolean',
+ 		'facebook_login_enable' => 'boolean',
+ 		'google_login_enable' => 'boolean'
+ 
+    ];
 
     /**
 	 * @param $key

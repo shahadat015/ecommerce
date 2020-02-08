@@ -189,6 +189,13 @@
                                     <label for="name">Facebook App Secret</label>
                                     <input type="password" name="facebook_client_secret" class="form-control" value="{{ config('settings.facebook_client_secret') }}">
                                 </div>
+                                <div class="form-check-inline my-2">
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" name="facebook_login_enable" class="custom-control-input" id="customCheck5" {{ config('settings.facebook_login_enable') == 1 ? 'checked'  : '' }}>
+                                        <label class="custom-control-label" for="customCheck5">Enable Facebook Login</label>
+                                    </div>
+                                </div>
+
 
                                 <h4>Google</h4><hr>
                                 <div class="form-group">
@@ -199,6 +206,13 @@
                                     <label for="name">Google App Secret</label>
                                     <input type="password" name="google_client_secret" class="form-control" value="{{ config('settings.google_client_secret') }}">
                                 </div>
+                                <div class="form-check-inline my-2">
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" name="google_login_enable" class="custom-control-input" id="customCheck6" {{ config('settings.google_login_enable') == 1 ? 'checked'  : '' }}>
+                                        <label class="custom-control-label" for="customCheck6">Enable google login</label>
+                                    </div>
+                                </div>
+
                             </div>
                         </div>
                     </div>

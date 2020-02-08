@@ -7,7 +7,7 @@
     @foreach($primaryMenus as $menuItem)
         @if($menuItem->isCategoryType() && $rootItem->id == $menuItem->parent_id)
             <li class="{{ request()->is('product/category/'. $menuItem->category->slug) ? 'active' : '' }}">
-                <a href="{{ url('product/category/'. $menuItem->category->slug) }}" aria-expanded="false"><i class="icofont-label"></i> {{ $menuItem->name }}
+                <a href="{{ route('product.category', $menuItem->category->slug) }}" aria-expanded="false"><i class="icofont-label"></i> {{ $menuItem->name }}
                     @php  
                         $subMenus = $menuItem->category->children()->with('children')->get(); 
                     @endphp
@@ -27,7 +27,7 @@
                                 </a>
                                 <ul aria-expanded="false" class="animated fadeIn">
                                     @foreach($subMenu->children()->with('children')->get() as $subSubMenu)
-                                        <li class="{{ request()->is('product/category/'. $subSubMenu->slug) ? 'active' : '' }}"><a href="{{url('product/category/'. $subSubMenu->slug) }}">{{ $subSubMenu->name}}</a></li>
+                                        <li class="{{ request()->is('product/category/'. $subSubMenu->slug) ? 'active' : '' }}"><a href="{{ route('product.category', $subSubMenu->slug) }}">{{ $subSubMenu->name}}</a></li>
                                     @endforeach
                                 </ul>
                             </li>
@@ -73,7 +73,7 @@
 
         @if($menuItem->isUrlType() && $rootItem->id == $menuItem->parent_id)
             <li class="{{ request()->is($menuItem->url) ? 'active' : '' }}">
-                <a href="{{url($menuItem->url) }}" aria-expanded="false"><i class="icofont-label"></i> {{ $menuItem->name }}
+                <a href="{{ $menuItem->url }}" aria-expanded="false"><i class="icofont-label"></i> {{ $menuItem->name }}
                     @php  
                         $subMenus = $menuItem->items()->with('items')->get(); 
                     @endphp
@@ -93,7 +93,7 @@
                                 </a>
                                 <ul aria-expanded="false" class="animated fadeIn">
                                     @foreach($subMenu->items()->with('items')->get() as $subSubMenu)
-                                        <li class="{{ request()->is($menuItem->url) ? 'active' : '' }}"><a href="{{url($menuItem->url) }}">{{ $subSubMenu->name}}</a></li>
+                                        <li class="{{ request()->is($menuItem->url) ? 'active' : '' }}"><a href="{{ $menuItem->url }}">{{ $subSubMenu->name}}</a></li>
                                     @endforeach
                                 </ul>
                             </li>

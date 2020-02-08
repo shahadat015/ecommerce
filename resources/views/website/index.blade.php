@@ -99,7 +99,7 @@
                                     <div class="feater_product_image_overlay_content">
                                         <h3>{{ str_limit(config('settings.featured_product_title'), 20) }}</h3>
                                         <p>{{ str_limit(config('settings.featured_product_subtitle'), 30) }} </p>
-                                        <a href="{{ route('product', config('settings.featured_product_cta_url')) }}" target="{{ config('settings.featured_product_open_in') }}">{{ str_limit(config('settings.featured_product_cta_text'), 30) }}</a>
+                                        <a href="{{ config('settings.featured_product_cta_url') }}" target="{{ config('settings.featured_product_open_in') }}">{{ str_limit(config('settings.featured_product_cta_text'), 30) }}</a>
                                     </div>
                                 </div>
                             </div>
@@ -152,26 +152,26 @@
             <div class="row">
                 <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4">
                     <div class="feater_image_content_img">
-                        <a href="{{ url(config('settings.banner_section_1_cta_1_url')) }}">
+                        <a href="{{ config('settings.banner_section_1_cta_1_url') }}">
                             <img class="img-fluid" src="{{ asset(config('settings.banner_section_1_image_1')) }}" alt="">
                         </a>
                     </div>
                 </div>
                 <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4">
                     <div class="feater_image_content_img">
-                        <a href="{{ url(config('settings.banner_section_1_cta_2_url')) }}">
+                        <a href="{{ config('settings.banner_section_1_cta_2_url') }}">
                             <img class="img-fluid" src="{{ asset(config('settings.banner_section_1_image_2')) }}" alt="">
                         </a>
                     </div>
                     <div class="feater_image_content_img">
-                        <a href="{{ url(config('settings.banner_section_1_cta_3_url')) }}">
+                        <a href="{{ config('settings.banner_section_1_cta_3_url') }}">
                             <img class="img-fluid" src="{{ asset(config('settings.banner_section_1_image_3')) }}" alt="">
                         </a>
                     </div>
                 </div>
                 <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4">
                     <div class="feater_image_content_img">
-                        <a href="{{ url(config('settings.banner_section_1_cta_4_url')) }}">
+                        <a href="{{ config('settings.banner_section_1_cta_4_url') }}">
                             <img class="img-fluid" src="{{ asset(config('settings.banner_section_1_image_4')) }}" alt="">
                         </a>
                     </div>
@@ -301,21 +301,21 @@
                     <div class="row">
                         <div class="col-xl-6 col-lg-6 col-md-6">
                             <div class="feater_product_2_item_img">
-                                <a href="{{ url(config('settings.banner_section_2_cta_1_url')) }}">
+                                <a href="{{ config('settings.banner_section_2_cta_1_url') }}">
                                     <img class="img-fluid" src="{{ asset(config('settings.banner_section_2_image_1')) }}" alt="">
                                 </a>
                             </div>
                         </div>
                         <div class="col-xl-6 col-lg-6 col-md-6">
                             <div class="feater_product_2_item_img">
-                                <a href="{{ url(config('settings.banner_section_2_cta_2_url')) }}">
+                                <a href="{{ config('settings.banner_section_2_cta_2_url') }}">
                                     <img class="img-fluid" src="{{ asset(config('settings.banner_section_2_image_2')) }}" alt="">
                                 </a>
                             </div>
                         </div>
                         <div class="col-xl-12">
                             <div class="feater_product_2_item_img">
-                                <a href="{{ url(config('settings.banner_section_2_cta_3_url')) }}">
+                                <a href="{{ config('settings.banner_section_2_cta_3_url') }}">
                                     <img class="img-fluid" src="{{ asset(config('settings.banner_section_2_image_3')) }}" alt="">
                                 </a>
                             </div>
@@ -324,7 +324,7 @@
                 </div>
                 <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4">
                     <div class="feater_product_2_item_img">
-                        <a href="{{ url(config('settings.banner_section_2_cta_4_url')) }}">
+                        <a href="{{ config('settings.banner_section_2_cta_4_url') }}">
                             <img class="img-fluid" src="{{ asset(config('settings.banner_section_2_image_4')) }}" alt="">
                         </a>
                     </div>
@@ -349,7 +349,7 @@
                 </div>
             </div>
         </div>
-    </section> 
+    </section>
     @if(config('settings.product_carousel_3_enable'))
     <!--start Gadget-->
     <section id="gadget">
@@ -424,24 +424,24 @@
                             <div class="row">
                                 @foreach($tab_1_products as $tab_1_product)
                                 <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6">
-                                    <a href="{ route('product', $tab_1_product->slug)}}">
+                                    <a href="{{ route('product', $tab_1_product->slug) }}">
                                         <div class="tab_product_item text-center">
                                             <div class="tab_product_image">
-                                                <img class="img-fluid" src="{{asset($tab_1_product->image ?? 'contents/admin/images/placeholder.png')}}" alt="">
+                                                <img class="img-fluid" src="{{ asset($tab_1_product->image ?? 'contents/admin/images/placeholder.png') }}" alt="">
                                                 <div class="product_tab_hover">
                                                     <ul>
                                                         <li><a class="addtocart" href="{{ route('cart.add', $tab_1_product->id) }}"><i class="icofont-ui-cart"></i></a></li>
                                                         <li><a href="{{ route('customer.favorite', $tab_1_product->id)}}"><i class="icofont-ui-love"></i></a></li>
-                                                        <li><a href="{{url('tab_1_product/' . $tab_1_product->slug)}}"><i class="icofont-eye"></i></a></li>
+                                                        <li><a href="{{ route('product', $tab_1_product->slug) }}"><i class="icofont-eye"></i></a></li>
                                                     </ul>
                                                 </div>
                                             </div>
                                             <div class="tab_product_contnt">
                                                 @include('website.partial.rating', ['rating' => $tab_1_product->reviews()->avg('rating')])
-                                                <a href="{{url('tab_1_product/' . $tab_1_product->slug)}}">
-                                                    <h4>{{str_limit($tab_1_product->name, 20)}}</h4>
+                                                <a href="{{ route('product', $tab_1_product->slug) }}">
+                                                    <h4>{{ str_limit($tab_1_product->name, 20) }}</h4>
                                                 </a>
-                                                <h3>Tk {{$tab_1_product->price}}</h3>
+                                                <h3>Tk {{ $tab_1_product->price }}</h3>
                                             </div>
                                         </div>
                                     </a>
@@ -453,24 +453,24 @@
                             <div class="row">
                                 @foreach($tab_2_products as $tab_2_product)
                                 <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6">
-                                    <a href="{ route('product', $tab_2_product->slug)}}">
+                                    <a href="{{ route('product', $tab_2_product->slug)}}">
                                         <div class="tab_product_item text-center">
                                             <div class="tab_product_image">
-                                                <img class="img-fluid" src="{{asset($tab_2_product->image ?? 'contents/admin/images/placeholder.png')}}" alt="">
+                                                <img class="img-fluid" src="{{ asset($tab_2_product->image ?? 'contents/admin/images/placeholder.png') }}" alt="">
                                                 <div class="product_tab_hover">
                                                     <ul>
                                                         <li><a class="addtocart" href="{{ route('cart.add', $tab_2_product->id) }}"><i class="icofont-ui-cart"></i></a></li>
-                                                        <li><a href="{{ route('customer.favorite', $tab_2_product->id)}}"><i class="icofont-ui-love"></i></a></li>
-                                                        <li><a href="{{url('tab_2_product/' . $tab_2_product->slug)}}"><i class="icofont-eye"></i></a></li>
+                                                        <li><a href="{{ route('customer.favorite', $tab_2_product->id) }}"><i class="icofont-ui-love"></i></a></li>
+                                                        <li><a href="{{ route('product', $tab_2_product->slug) }}"><i class="icofont-eye"></i></a></li>
                                                     </ul>
                                                 </div>
                                             </div>
                                             <div class="tab_product_contnt">
                                                 @include('website.partial.rating', ['rating' => $tab_2_product->reviews()->avg('rating')])
-                                                <a href="{{url('tab_2_product/' . $tab_2_product->slug)}}">
-                                                    <h4>{{str_limit($tab_2_product->name, 20)}}</h4>
+                                                <a href="{{ route('product', $tab_2_product->slug) }}">
+                                                    <h4>{{ str_limit($tab_2_product->name, 20) }}</h4>
                                                 </a>
-                                                <h3>Tk {{$tab_2_product->price}}</h3>
+                                                <h3>Tk {{ $tab_2_product->price }}</h3>
                                             </div>
                                         </div>
                                     </a>
@@ -482,21 +482,21 @@
                             <div class="row">
                                 @foreach($tab_3_products as $tab_3_product)
                                 <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6">
-                                    <a href="{ route('product', $tab_3_product->slug)}}">
+                                    <a href="{{ route('product', $tab_3_product->slug) }}">
                                         <div class="tab_product_item text-center">
                                             <div class="tab_product_image">
-                                                <img class="img-fluid" src="{{asset($tab_3_product->image ?? 'contents/admin/images/placeholder.png')}}" alt="">
+                                                <img class="img-fluid" src="{{ asset($tab_3_product->image ?? 'contents/admin/images/placeholder.png') }}" alt="">
                                                 <div class="product_tab_hover">
                                                     <ul>
                                                         <li><a class="addtocart" href="{{ route('cart.add', $tab_3_product->id) }}"><i class="icofont-ui-cart"></i></a></li>
-                                                        <li><a href="{{ route('customer.favorite', $tab_3_product->id)}}"><i class="icofont-ui-love"></i></a></li>
-                                                        <li><a href="{{url('tab_3_product/' . $tab_3_product->slug)}}"><i class="icofont-eye"></i></a></li>
+                                                        <li><a href="{{ route('customer.favorite', $tab_3_product->id) }}"><i class="icofont-ui-love"></i></a></li>
+                                                        <li><a href="{{ route('product', $tab_3_product->slug) }}"><i class="icofont-eye"></i></a></li>
                                                     </ul>
                                                 </div>
                                             </div>
                                             <div class="tab_product_contnt">
                                                 @include('website.partial.rating', ['rating' => $tab_3_product->reviews()->avg('rating')])
-                                                <a href="{{url('tab_3_product/' . $tab_3_product->slug)}}">
+                                                <a href="{{ route('product', $tab_3_product->slug) }}">
                                                     <h4>{{str_limit($tab_3_product->name, 20)}}</h4>
                                                 </a>
                                                 <h3>Tk {{$tab_3_product->price}}</h3>

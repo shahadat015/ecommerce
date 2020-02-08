@@ -183,6 +183,30 @@ return [
         ],
         'product_features_3_subtitle' => [
             'required' => 'The subtitle field is required',
+        ],
+        'banner_section_1_cta_1_url' => [
+            'required_with' => 'The price type field is required when name is present',
+        ],
+        'banner_section_1_cta_2_url' => [
+            'required_with' => 'The url field is required when image is present',
+        ],
+        'banner_section_1_cta_3_url' => [
+            'required_with' => 'The url field is required when image is present',
+        ],
+        'banner_section_1_cta_4_url' => [
+            'required_with' => 'The url field is required when image is present',
+        ],
+        'banner_section_2_cta_1_url' => [
+            'required_with' => 'The url field is required when image is present',
+        ],
+        'banner_section_2_cta_2_url' => [
+            'required_with' => 'The url field is required when image is present',
+        ],
+        'banner_section_2_cta_3_url' => [
+            'required_with' => 'The url field is required when image is present',
+        ],
+        'banner_section_2_cta_4_url' => [
+            'required_with' => 'The url field is required when image is present',
         ]
     ],
 

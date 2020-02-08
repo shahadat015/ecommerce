@@ -163,6 +163,9 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'namespace' => 'Admin', 'mi
 	Route::put('/storefront/general', 'StorefrontController@update')->name('storefront.general');
 	Route::get('/storefront/sections', 'StorefrontController@sections')->name('storefront.sections');
 	Route::put('/storefront/sections', 'StorefrontController@updateSections')->name('storefront.sections');
+	Route::get('/carousel/{id}/products', 'StorefrontController@carouselProducts')->name('carousel.products');
+	Route::get('/featuredProducts', 'StorefrontController@featuredProducts')->name('featuredProducts');
+	Route::get('/tab/{id}/products', 'StorefrontController@tabProducts')->name('tab.products');
 
 	Route::get('/menus/datatables', 'MenuController@menus')->name('menus.datatables');
 	Route::delete('/menu/destroy', 'MenuController@destroy')->name('menu.destroy');

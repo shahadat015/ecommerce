@@ -7,7 +7,7 @@
         @foreach($primaryMenus as $menuItem)
         @if($menuItem->isCategoryType() && $rootItem->id == $menuItem->parent_id)
         <li class="{{ request()->is('product/category/'. $menuItem->category->slug) ? 'active' : '' }}">
-            <a href="{{ url('product/category/'. $menuItem->category->slug) }}">{{ $menuItem->name }}</a>
+            <a href="{{ route('product.category', $menuItem->category->slug) }}">{{ $menuItem->name }}</a>
             @php  
                 $subMenus = $menuItem->category->children()->with('children')->get(); 
             @endphp
@@ -21,11 +21,11 @@
                                     @foreach($subMenus as $subMenu)
                                         <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4">
                                             <div class="mega_menu_link_item">
-                                               <a href="{{ url('product/category/'. $subMenu->slug) }}"><h4>{{ $subMenu->name }}</h4></a>
+                                               <a href="{{ route('product.category', $subMenu->slug) }}"><h4>{{ $subMenu->name }}</h4></a>
                                                @if($subMenu->children()->count())
                                                 <ul>
                                                     @foreach($subMenu->children()->with('children')->get() as $subSubMenu)
-                                                    <li><a href="{{ url('product/category/'. $subSubMenu->slug) }}">{{ $subSubMenu->name}}</a></li>
+                                                    <li><a href="{{ route('product.category', $subSubMenu->slug) }}">{{ $subSubMenu->name}}</a></li>
                                                     @endforeach
                                                 </ul>
                                                 @endif
@@ -49,7 +49,7 @@
                                     <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
                                         <div class="mega_menu_link_image_item">
                                             <a href="#">
-                                                <img class="img-fluid" src="{{ asset('contents/website') }}/img/block_menu2.jpg" alt="menu-image">
+                                                <img class="img-fluid" src="{{ asset('contents/website/img/block_menu2.jpg') }}" alt="menu-image">
                                                 <h4>Get 40% Discount</h4>
                                             </a>
                                         </div>
@@ -123,7 +123,7 @@
         @endif
         @if($menuItem->isUrlType() && $rootItem->id == $menuItem->parent_id)
         <li class="{{ request()->is($menuItem->url) ? 'active' : '' }}">
-            <a href="{{url($menuItem->url) }}">{{ $menuItem->name}}</a>
+            <a href="{{ $menuItem->url }}">{{ $menuItem->name}}</a>
             @php 
                 $subMenus = $menuItem->items()->with('items')->get(); 
             @endphp
@@ -137,11 +137,11 @@
                                     @foreach($subMenus as $subMenu)
                                         <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4">
                                             <div class="mega_menu_link_item">
-                                                <a href="{{ url($subMenu->url) }}"><h4>{{ $subMenu->name }}</h4></a>
+                                                <a href="{{ $subMenu->url }}"><h4>{{ $subMenu->name }}</h4></a>
                                                 @if($subMenu->items()->with('items')->count())
                                                 <ul>
                                                     @foreach($subMenu->items()->with('items')->get() as $subSubMenu)
-                                                    <li><a href="{{ url($subSubMenu->url) }}">{{ $subSubMenu->name}}</a></li>
+                                                    <li><a href="{{ $subSubMenu->url }}">{{ $subSubMenu->name}}</a></li>
                                                     @endforeach
                                                 </ul>
                                                 @endif
@@ -165,7 +165,7 @@
                                     <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
                                         <div class="mega_menu_link_image_item">
                                             <a href="#">
-                                                <img class="img-fluid" src="{{ asset('contents/website') }}/img/block_menu2.jpg" alt="menu-image">
+                                                <img class="img-fluid" src="{{ asset('contents/website/img/block_menu2.jpg') }}" alt="menu-image">
                                                 <h4>Get 40% Discount</h4>
                                             </a>
                                         </div>

@@ -443,11 +443,19 @@ class SettingsTableSeeder extends Seeder
             'value'                     =>  '',
         ],
         [
+            'key'                       =>  'facebook_login_enable',
+            'value'                     =>  '',
+        ],
+        [
             'key'                       =>  'google_client_id',
             'value'                     =>  '',
         ],
         [
             'key'                       =>  'google_client_secret',
+            'value'                     =>  '',
+        ],
+        [
+            'key'                       =>  'google_login_enable',
             'value'                     =>  '',
         ]
     ];

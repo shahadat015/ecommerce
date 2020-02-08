@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 @section('title', 'Settings')
 @push('css')
-    <link href="{{asset('contents/admin')}}/plugins/select2/select2.min.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="{{ asset('contents/admin') }}/plugins/selectize/selectize.css">
 @endpush
 @section('content')
     <!-- Page-Title -->
@@ -47,7 +47,7 @@
                         </ul>
                         <div class="tab-content">
                             <div class="tab-pane active p-3" id="features" role="tabpanel">
-                                <h4>Features -1</h4><hr>
+                                <h4>Features 1</h4><hr>
                                 <div class="form-group">
                                     <label for="name">Icon</label>
                                     <input type="text" name="product_features_1_icon" class="form-control" value="{{ config('settings.product_features_1_icon') }}">
@@ -63,7 +63,7 @@
                                     <input type="text" name="product_features_1_subtitle" class="form-control" value="{{ config('settings.product_features_1_subtitle') }}">
                                 </div>
 
-                                <h4>Features -2</h4><hr>
+                                <h4>Features 2</h4><hr>
                                 <div class="form-group">
                                     <label for="name">Icon</label>
                                     <input type="text" name="product_features_2_icon" class="form-control" value="{{ config('settings.product_features_2_icon') }}">
@@ -79,7 +79,7 @@
                                     <input type="text" name="product_features_2_subtitle" class="form-control" value="{{ config('settings.product_features_2_subtitle') }}">
                                 </div>
 
-                                <h4>Features -3</h4><hr>
+                                <h4>Features 3</h4><hr>
                                 <div class="form-group">
                                     <label for="name">Icon</label>
                                     <input type="text" name="product_features_3_icon" class="form-control" value="{{ config('settings.product_features_3_icon') }}">
@@ -96,7 +96,7 @@
                                 </div>
                             </div>
                             <div class="tab-pane p-3" id="carousel" role="tabpanel">
-                                <h4>Product Carousel -1</h4><hr>
+                                <h4>Product Carousel 1</h4><hr>
                                 <div class="form-group">
                                     <label for="name">Section Title</label>
                                     <input type="text" name="product_carousel_1_title" class="form-control" value="{{ config('settings.product_carousel_1_title') }}">
@@ -104,10 +104,8 @@
 
                                 <div class="form-group">
                                     <label for="name">Products</label>
-                                    <select class="select2 mb-3 select2-multiple select_product" name="product_carousel_1_products[]" multiple="multiple" data-placeholder="Select Product">
-                                        @foreach($carousel_1_products as $carousel_1_product)
-                                            <option value="{{ $carousel_1_product->id }}" selected>{{ $carousel_1_product->name }}</option>
-                                        @endforeach
+                                    <select class="carousel1Products" name="product_carousel_1_products[]" placeholder="Select Product" multiple>
+                                        <option value="">Select Product</option>
                                     </select>
                                 </div>
 
@@ -118,7 +116,7 @@
                                     </div>
                                 </div>
 
-                                <h4>Product Carousel -2</h4><hr>
+                                <h4>Product Carousel 2</h4><hr>
                                 <div class="form-group">
                                     <label for="name">Section Title</label>
                                     <input type="text" name="product_carousel_2_title" class="form-control" value="{{ config('settings.product_carousel_2_title') }}">
@@ -126,10 +124,8 @@
 
                                 <div class="form-group">
                                     <label for="name">Products</label>
-                                    <select class="select2 mb-3 select2-multiple select_product" name="product_carousel_2_products[]" multiple="multiple" data-placeholder="Select Product">
-                                        @foreach($carousel_2_products as $carousel_2_product)
-                                            <option value="{{ $carousel_2_product->id }}" selected>{{ $carousel_2_product->name }}</option>
-                                        @endforeach
+                                    <select class="carousel2Products" name="product_carousel_2_products[]" placeholder="Select Product" multiple>
+                                        <option value="">Select Product</option>
                                     </select>
                                 </div>
 
@@ -141,7 +137,7 @@
                                 </div>
 
 
-                                <h4>Product Carousel -3</h4><hr>
+                                <h4>Product Carousel 3</h4><hr>
                                 <div class="form-group">
                                     <label for="name">Section Title</label>
                                     <input type="text" name="product_carousel_3_title" class="form-control" value="{{ config('settings.product_carousel_3_title') }}">
@@ -149,10 +145,8 @@
 
                                 <div class="form-group">
                                     <label for="name">Products</label>
-                                    <select class="select2 mb-3 select2-multiple select_product" name="product_carousel_3_products[]" multiple="multiple" data-placeholder="Select Product">
-                                        @foreach($carousel_3_products as $carousel_3_product)
-                                            <option value="{{ $carousel_3_product->id }}" selected>{{ $carousel_3_product->name }}</option>
-                                        @endforeach
+                                    <select class="carousel3Products" name="product_carousel_3_products[]" placeholder="Select Product" multiple>
+                                        <option value="">Select Product</option>
                                     </select>
                                 </div>
 
@@ -219,10 +213,8 @@
 
                                 <div class="form-group">
                                     <label for="name">Products</label>
-                                    <select class="select2 mb-3 select2-multiple select_product" name="featured_products[]" multiple="multiple" data-placeholder="Select Product">
-                                        @foreach($featured_products as $featured_product)
-                                            <option value="{{ $featured_product->id }}" selected>{{ $featured_product->name }}</option>
-                                        @endforeach
+                                    <select class="featuredProducts" name="featured_products[]" placeholder="Select Product" multiple>
+                                        <option value="">Select Product</option>
                                     </select>
                                 </div>
 
@@ -255,7 +247,7 @@
                             </div>
 
                             <div class="tab-pane p-3" id="banner1" role="tabpanel">
-                                <h4>Banner Section -1</h4><hr>
+                                <h4>Banner Section 1</h4><hr>
                                 <div class="row">
                                     <div class="col-sm-3 py-2">
                                         <div class="single-image image-picker" data-image="slider" data-name="banner_section_1_image_1">
@@ -394,7 +386,7 @@
                                 </div>
                             </div>
                             <div class="tab-pane p-3" id="banner2" role="tabpanel">
-                                <h4>Banner Section -2</h4><hr>
+                                <h4>Banner Section 2</h4><hr>
                                 <div class="row">
                                     <div class="col-sm-3 py-2">
                                         <div class="single-image image-picker" data-image="slider" data-name="banner_section_2_image_1">
@@ -533,51 +525,47 @@
                                 </div>
                             </div>
                             <div class="tab-pane p-3" id="tab" role="tabpanel">
-                                <h4>Product Tab -1</h4><hr>
+                                <h4>Product Tab 1</h4><hr>
                                 <div class="form-group">
-                                    <label for="name">Tab Title</label>
+                                    <label for="name">Title</label>
                                     <input type="text" name="product_tab_1_title" class="form-control" value="{{ config('settings.product_tab_1_title') }}">
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="name">Tab Products</label>
-                                    <select class="select2 mb-3 select2-multiple select_product" name="product_tab_1_products[]" multiple="multiple" data-placeholder="Select Product">
-                                        @foreach($tab_1_products as $tab_1_product)
-                                            <option value="{{ $tab_1_product->id }}" selected>{{ $tab_1_product->name }}</option>
-                                        @endforeach
+                                    <label for="name">Products</label>
+                                    <select class="tab1Products" name="product_tab_1_products[]" placeholder="Select Product" multiple>
+                                        <option value="">Select Product</option>
                                     </select>
                                 </div>
 
-                                <h4>Product Tab -2</h4><hr>
+                                <h4>Product Tab 2</h4><hr>
 
                                 <div class="form-group">
-                                    <label for="name">Tab Title</label>
+                                    <label for="name">Title</label>
                                     <input type="text" name="product_tab_2_title" class="form-control" value="{{ config('settings.product_tab_2_title') }}">
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="name">Tab Products</label>
-                                    <select class="select2 mb-3 select2-multiple select_product" name="product_tab_2_products[]" multiple="multiple" data-placeholder="Select Product">
-                                        @foreach($tab_2_products as $tab_2_product)
-                                            <option value="{{ $tab_2_product->id }}" selected>{{ $tab_2_product->name }}</option>
-                                        @endforeach
+                                    <label for="name">Products</label>
+                                    <select class="tab2Products" name="product_tab_2_products[]" placeholder="Select Product" multiple>
+                                        <option value="">Select Product</option>
                                     </select>
                                 </div>
 
-                                <h4>Product Tab -3</h4><hr>
+                                <h4>Product Tab 3</h4><hr>
 
                                 <div class="form-group">
-                                    <label for="name">Tab Title</label>
+                                    <label for="name">Title</label>
                                     <input type="text" name="product_tab_3_title" class="form-control" value="{{ config('settings.product_tab_3_title') }}">
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="name">Tab Products</label>
-                                    <select class="select2 mb-3 select2-multiple select_product" name="product_tab_3_products[]" multiple="multiple" data-placeholder="Select Product">
-                                        @foreach($tab_3_products as $tab_3_product)
-                                            <option value="{{ $tab_3_product->id }}" selected>{{ $tab_3_product->name }}</option>
-                                        @endforeach
-                                    </select>
+                                    <label for="name">Products</label>
+                                    <div class="form-group">
+                                      <select class="tab3Products" name="product_tab_3_products[]" placeholder="Select Product" multiple>
+                                        <option value="">Select Product</option>
+                                      </select>
+                                    </div>
                                 </div>
 
                                 <div class="form-check-inline mt-1 mb-2">
@@ -601,6 +589,6 @@
     <!-- end row -->
 @endsection
 @push('js')
-    <script src="{{asset('contents/admin')}}/plugins/select2/select2.min.js"></script>
-    <script src="{{asset('contents/admin')}}/js/select2.init.js"></script>
+    <script src="{{ asset('contents/admin') }}/plugins/selectize/selectize.min.js"></script>
+    <script src="{{ asset('contents/admin') }}/js/selectize.init.js"></script>
 @endpush

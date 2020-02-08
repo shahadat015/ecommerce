@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StorefrontValidate;
 use App\Menu;
 use App\Page;
+use App\Product;
 use App\Setting;
 use App\Slider;
 use Illuminate\Http\Request;
@@ -19,9 +21,6 @@ class StorefrontController extends Controller
         return view('admin.storefront.general.index', compact('sliders', 'pages', 'menus'));
 	}
 
-	/**
-	 * @param Request $request
-	 */
 	public function update(Request $request)
 	{  
 		$request->validate([
@@ -51,30 +50,8 @@ class StorefrontController extends Controller
 		return view('admin.storefront.section.index');
 	}
 
-	/**
-	 * @param Request $request
-	 */
-	public function updateSections(Request $request)
+	public function updateSections(StorefrontValidate $request)
 	{  
-		$request->validate([
-			'product_features_1_icon' => 'required|string|max:255',
-			'product_features_1_title' => 'required|string|max:255',
-			'product_features_1_subtitle' => 'required|string|max:255',
-			'product_features_2_icon' => 'required|string|max:255',
-			'product_features_2_title' => 'required|string|max:255',
-			'product_features_2_subtitle' => 'required|string|max:255',
-			'product_features_3_icon' => 'required|string|max:255',
-			'product_features_3_title' => 'required|string|max:255',
-			'product_features_3_subtitle' => 'required|string|max:255',
-			'product_carousel_1_title' => 'nullable|required_with:product_carousel_1_enable',
-			'product_carousel_2_title' => 'nullable|required_with:product_carousel_2_enable',
-			'product_carousel_3_title' => 'nullable|required_with:product_carousel_3_enable',
-			'featured_products_title' => 'nullable|required_with:featured_product_enable',
-			'recent_products_title' => 'nullable|required_with:enable_recent_products',
-			'recent_total_products' => 'nullable|required_with:enable_recent_products',
-			'product_tab_1_title' => 'nullable|required_with:enable_products_tabs',
-		]);
-
 		$request['product_carousel_1_enable'] = (boolean) $request->product_carousel_1_enable;
 		$request['product_carousel_2_enable'] = (boolean) $request->product_carousel_2_enable;
 		$request['product_carousel_3_enable'] = (boolean) $request->product_carousel_3_enable;
@@ -90,4 +67,22 @@ class StorefrontController extends Controller
 
         return response()->json(['success' => 'Settings successfully updated!']);
 	}
+
+	public function carouselProducts($id)
+    {
+        $ids = json_decode(config('settings.product_carousel_'. $id .'_products'));
+        return Product::whereIn('id', $ids ?: [])->get();
+    }
+
+    public function featuredProducts()
+    {
+        $ids = json_decode(config('settings.featured_products'));
+        return Product::whereIn('id', $ids ?: [])->get();
+    }
+    public function tabProducts($id)
+    {
+        $ids = json_decode(config('settings.product_tab_'. $id .'_products'));
+        return Product::whereIn('id', $ids ?: [])->get();
+    }
+
 }
