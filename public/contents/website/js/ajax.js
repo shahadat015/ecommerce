@@ -38,7 +38,7 @@ $(function() {
             	if(error.status == 422) {
                     var errors = error.responseJSON.errors;
                     var errorField = Object.keys(errors)[0];
-                    var inputField = $('input[name="'+ errorField +'"], select[name="'+ errorField +'"], textarea[name="'+ errorField +'"]');
+                    var inputField = $('input[name="'+ errorField +'"], textarea[name="'+ errorField +'"]');
                     var errorMessage = errors[errorField][0];
 
                     // Show error message
@@ -93,7 +93,7 @@ $(function() {
                 if(error.status == 422) {
                     var errors = error.responseJSON.errors;
                     var errorField = Object.keys(errors)[0];
-                    var inputField = $('input[name="'+ errorField +'"], select[name="'+ errorField +'"], textarea[name="'+ errorField +'"]');
+                    var inputField = $('input[name="'+ errorField +'"]');
                     var errorMessage = errors[errorField][0];
 
                     // Show error message
@@ -117,7 +117,7 @@ $(function() {
         });
     });
 
-    // contact form
+    // account update form
     $(document).on('submit', '#account-update', function (event) {
         event.preventDefault();
 
@@ -148,7 +148,7 @@ $(function() {
                 if(error.status == 422) {
                     var errors = error.responseJSON.errors;
                     var errorField = Object.keys(errors)[0];
-                    var inputField = $('input[name="'+ errorField +'"], select[name="'+ errorField +'"], textarea[name="'+ errorField +'"]');
+                    var inputField = $('input[name="'+ errorField +'"]');
                     var errorMessage = errors[errorField][0];
 
                     // Show error message
@@ -296,6 +296,44 @@ $(function() {
         });
     });
 
+    // add to cart form
+    $(document).on('submit', '#addtocart-form', function (event) {
+        event.preventDefault();
+
+        var formdata = new FormData($(this)[0]);
+        var btn = $('.btn-submit')
+        var btnText = $('.btn-submit').html();
+
+        $.ajax({
+            url: this.action,
+            type: this.method,
+            data: formdata,
+            dataType: "JSON",
+            contentType: false,
+            processData: false,
+            cache: false,
+            beforeSend:function() {
+                btn.attr("disabled", true).html("<span class='spinner-border spinner-border-sm'></span> Loadding...");
+            },
+            success(data) {
+                if(data.success) {
+                    $('.user_cart_box').load(route('cart.item'));
+                    $('.mini-cart').load(route('cart.minicart'));
+                    return successMessage(data.success);
+                }else{
+                    return errorMessage(data.error);
+                }
+            },
+            error(error) {
+                return errorStatusText(error);
+            },
+            complete:function() {
+                btn.attr("disabled", false).html(btnText);
+            }
+        });
+    });
+
+
     // add to favorite
     $(document).on('click', '.addtofavorite', function(e) {
         e.preventDefault();
@@ -349,61 +387,6 @@ $(function() {
             error(error) {
                 return errorStatusText(error);
             },
-        });
-    });
-
-    // create request
-    $(document).on('submit', '#addtocart-form', function (event) {
-        event.preventDefault();
-
-        var formdata = new FormData($(this)[0]);
-        var btnText = $('.btn-submit').text();
-
-        $.ajax({
-            url: this.action,
-            type: this.method,
-            data: formdata,
-            dataType: "JSON",
-            contentType: false,
-            processData: false,
-            cache: false,
-            beforeSend:function() {
-                $('.btn-submit').attr("disabled", true).html("<span class='spinner-border spinner-border-sm'></span> Loadding...");
-            },
-            success(data) {
-                if(data.success) {
-                    $("#create-form")[0].reset();
-                    $('.invalid-feedback').remove();
-                    return successMessage(data.success);
-                }else{
-                    return errorMessage(data.error);
-                }
-            },
-            error(error) {
-                if(error.status == 422) {
-                    var errors = error.responseJSON.errors;
-                    var errorField = Object.keys(errors)[0];
-                    var inputField = $('input[name="'+ errorField +'"], select[name="'+ errorField +'"], textarea[name="'+ errorField +'"]');
-                    var errorMessage = errors[errorField][0];
-
-                    // Show error message
-                    if(inputField.next('.invalid-feedback').length == 0){
-                        inputField.focus().after('<div class="invalid-feedback"> <strong>'+ errorMessage +'</strong> </div>');
-                    }else{
-                        inputField.focus();
-                    }
-
-                    // Remove error message
-                    inputField.on('keydown, change', function() {
-                        inputField.next('.invalid-feedback').remove();
-                    });
-                }else{
-                    return errorStatusText(error);
-                }
-            },
-            complete:function() {
-                $('.btn-submit').attr("disabled", false).html(btnText);
-            }
         });
     });
 

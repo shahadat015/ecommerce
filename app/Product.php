@@ -4,6 +4,7 @@ namespace App;
 
 use App\Option;
 use App\ProductAttribute;
+use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
@@ -104,11 +105,13 @@ class Product extends Model
             $productOptions = [];
 
             foreach ($options as $option) {
-                $productOption = Option::create([
+                $productOption = Option::updateOrCreate([
                     'name' => $option['name'],
                     'type' => $option['type'],
                     'is_required' => $option['is_required']
                 ]);
+
+                $productOption->values()->delete();
 
                 $productOption->values()->createMany($option['values']);
 
@@ -117,6 +120,11 @@ class Product extends Model
 
             $this->options()->sync($productOptions);
         }
+    }
+
+    public function ScopeInStock($query)
+    {
+        return $query->where('in_stock', 1);
     }
 
     function scopePublished($query){

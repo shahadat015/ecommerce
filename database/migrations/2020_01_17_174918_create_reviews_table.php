@@ -20,7 +20,7 @@ class CreateReviewsTable extends Migration
             $table->integer('rating');
             $table->string('reviewer_name');
             $table->text('comment')->nullable();
-            $table->boolean('is_approved')->default(false);
+            $table->boolean('status')->default(false);
             $table->timestamps();
             $table->foreign('customer_id')->references('id')->on('customers')->onDelete('cascade');
             $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');

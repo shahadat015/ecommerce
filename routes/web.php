@@ -15,6 +15,8 @@ Route::get('/product/{slug}', 'ProductController@show')->name('product');
 Route::get('/contact', 'ContactController@index')->name('contact');
 Route::post('/contact', 'ContactController@store')->name('contact');
 
+Route::post('/product/review/{product}', 'ReviewController@store')->name('product.review');
+
 Route::get('/cart', 'CartController@index')->name('cart');
 Route::post('/cart/add/{product}', 'CartController@store')->name('cart.add');
 Route::get('/cart/item', 'CartController@itemCount')->name('cart.item');
@@ -142,6 +144,7 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'namespace' => 'Admin', 'mi
 	// Product review routes
 	Route::get('/reviews/datatables', 'ReviewController@reviews')->name('reviews.datatables');
 	Route::delete('/review/destroy', 'ReviewController@destroy')->name('review.destroy');
+	Route::put('/review/{review}/update', 'ReviewController@updateStatus')->name('review.update');
 	Route::resource('/reviews', 'ReviewController')->only('index', 'edit', 'update');
 
 	// coupon routes

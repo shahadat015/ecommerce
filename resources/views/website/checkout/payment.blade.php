@@ -16,7 +16,22 @@
                         <div class="row">
                             <div class="col-xl-6 col-lg-6 col-md-6">
                                 <div class="payment_method_option">
-                                    <h4>Your Card</h4>
+                                    <h4>Payment Method</h4>
+                                    @if(config('settings.cod_enabled'))
+                                    <div class="custom-control custom-radio custom-control-inline mb-1">
+                                        <input type="radio" id="customRadioInline1" name="payment_method" class="shipping-method custom-control-input" value="cod" checked>
+                                        <label class="custom-control-label" for="customRadioInline1">{{ config('settings.cod_label') }} </label>
+                                    </div>
+                                    @endif
+                                    @if(config('settings.ssl_commrz_enabled'))
+                                    <div class="custom-control custom-radio custom-control-inline mb-1">
+                                        <input type="radio" id="customRadioInline2" name="payment_method" class="shipping-method custom-control-input" value="ssl_commerz">
+                                        <label class="custom-control-label" for="customRadioInline2">{{ config('settings.ssl_commrz_label') }} </label>
+                                    </div>
+                                    @endif
+                                </div>
+                                <div class="payment_method_option mt-4">
+                                    <h4>We Accept</h4>
                                     <img class="img-fluid" src="{{ asset('contents/website/img/card-icon.png') }}" alt="">
                                 </div>
                             </div>

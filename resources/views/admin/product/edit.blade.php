@@ -214,7 +214,7 @@
                                                 <div class="col-sm-3">
                                                     <label class="control-label">Attribute<b class="text-danger">*</b></label>
                                                     <select class="form-control custom-select attributes" name="attribute_id" style="width: 100%; height:36px;">
-                                                        <option value="">Select Attribute</option>
+                                                        <option value="" disabled>Select Attribute</option>
                                                         @foreach($attributesets as $attributeset)
                                                         <optgroup label="{{ $attributeset->name }}">
                                                             @foreach($attributeset->attributes as $attribute)

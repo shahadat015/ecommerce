@@ -54,7 +54,7 @@
                     { name: 'reviewer_name'},
                     { name: 'product.name', orderable: false},
                     { name: 'rating' },
-                    { name: 'is_approved' },
+                    { name: 'status' },
                     { name: 'action', orderable: false, searchable: false }
                 ]
             });

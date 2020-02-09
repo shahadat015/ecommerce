@@ -52,7 +52,7 @@
                                     @php $statuses = ['canceled', 'completed', 'pending', 'processing', 'refunded'] @endphp
                                     <select name="status" class="status" data-url="{{ route('admin.orders.status', $order->id) }}">
                                         @foreach($statuses as $status)
-                                            <option value="{{ $status }}" {{ $request->status == $status ? 'selected' : '' }}>{{ ucfirst(str_replace('_', ' ', $status)) }}</option>
+                                            <option value="{{ $status }}" {{ request('status') == $status ? 'selected' : '' }}>{{ ucfirst(str_replace('_', ' ', $status)) }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -72,8 +72,10 @@
                             <div class="text-center bg-light p-3 mb-3">
                                 <h5 class="m-0 d-sm-inline-block">Payment Method</h5>
                                 <h6 class="font-13">{{ $order->payment_method }}</h6>
-                                @if($order->payment_method != 'Cash On Delivery')
+                                @if($order->payment_method != 'cod')
                                 <p class="mb-0 text-muted">Transaction ID : {{ $order->transaction->transaction_id }}</p>
+                                @else
+                                    <p class="mb-0 text-muted">Cash on Delivery</p>
                                 @endif
                             </div>
                         </div>

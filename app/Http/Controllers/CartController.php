@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Option;
 use App\Product;
-use Illuminate\Http\Request;
 use Cart;
+use Illuminate\Http\Request;
 
 class CartController extends Controller
 {
@@ -15,6 +16,8 @@ class CartController extends Controller
 
     public function store(Product $product, Request $request)
     {
+        $options = array_filter($request->options);
+
     	$added = Cart::add([
 			'id' => $product->id, 
 			'name' => $product->name, 
@@ -23,8 +26,7 @@ class CartController extends Controller
 			'weight' => 0,
 			'options' => [
 				'image' => $product->image,
-				'size' => $request->size ?: NULL,
-				'color' => $request->color ?: NULL
+				'options' => $this->options($product, $options)
 			]
     	]);
 
@@ -33,6 +35,14 @@ class CartController extends Controller
     	}else{
     		return response()->json(['success' => 'Adding failed to cart!']);
     	}
+    }
+
+    private function options($product, $options)
+    {
+        return $product->options()
+            ->with(['values' => function ($query) use ($options) {
+                $query->whereIn('id', array_flatten($options));
+            }])->get();
     }
 
     public function update($rowId, Request $request)

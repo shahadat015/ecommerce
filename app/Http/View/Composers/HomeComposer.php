@@ -48,44 +48,44 @@ class HomeComposer
     public function carousel1Products()
     {
         $ids = json_decode(config('settings.product_carousel_1_products'));
-        return Product::published()->whereIn('id', $ids ?: [])->get();
+        return Product::inStock()->published()->whereIn('id', $ids ?: [])->get();
     }
 
     public function carousel2Products()
     {
         $ids = json_decode(config('settings.product_carousel_2_products'));
-        return Product::published()->whereIn('id', $ids ?: [])->get();
+        return Product::inStock()->published()->whereIn('id', $ids ?: [])->get();
     }
 
     public function carousel3Products()
     {
         $ids = json_decode(config('settings.product_carousel_3_products'));
-        return Product::published()->whereIn('id', $ids ?: [])->get();
+        return Product::inStock()->published()->whereIn('id', $ids ?: [])->get();
     }
 
     public function featuredProducts()
     {
         $ids = json_decode(config('settings.featured_products'));
-        return Product::published()->whereIn('id', $ids ?: [])->get();
+        return Product::inStock()->published()->whereIn('id', $ids ?: [])->get();
     }
     public function recentProducts()
     {
         $limit = config('settings.recent_total_products');
-        return Product::latest('id')->published()->limit($limit)->get();
+        return Product::latest('id')->inStock()->published()->limit($limit)->get();
     }
     public function tab1Products()
     {
         $ids = json_decode(config('settings.product_tab_1_products'));
-        return Product::published()->whereIn('id', $ids ?: [])->get();
+        return Product::inStock()->published()->whereIn('id', $ids ?: [])->get();
     }
     public function tab2Products()
     {
         $ids = json_decode(config('settings.product_tab_2_products'));
-        return Product::published()->whereIn('id', $ids ?: [])->get();
+        return Product::inStock()->published()->whereIn('id', $ids ?: [])->get();
     }
     public function tab3Products()
     {
         $ids = json_decode(config('settings.product_tab_3_products'));
-        return Product::published()->whereIn('id', $ids ?: [])->get();
+        return Product::inStock()->published()->whereIn('id', $ids ?: [])->get();
     }
 }

@@ -19,7 +19,7 @@ class ProductController extends Controller
         $product = Product::where('slug', $slug)->firstOrFail();
         $brands = Brand::where('status', 1)->inRandomOrder()->limit(10)->get();
         $product->load('categories', 'brand', 'attributes', 'options', 'metadata', 'images');
-        $relatedProducts = $product->relatedProducts()->published()->get();
+        $relatedProducts = $product->relatedProducts()->published()->inStock()->get();
         return view('website.product.show', compact('product', 'brands', 'relatedProducts'));
     }
 

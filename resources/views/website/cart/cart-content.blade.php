@@ -17,13 +17,15 @@
                 @foreach(Cart::content() as $cartItem)
                 <tr scope="row">
                     <td class="remove_btn_cart">
-                        <a class="removefromcart" href="{{ route('cart.remove', $cartItem->rowId) }}"><i class="icofont-trash"></i></a></td>
+                        <a class="removefromcart" href="{{ route('cart.remove', $cartItem->rowId) }}"><i class="icofont-trash"></i></a>
+                    </td>
                     <td class="text-center">
                         <img width="80" class="img-fluid" src="{{ asset($cartItem->options->image) }}" alt=""></td>
                     <td>
                         <h4>{{ $cartItem->name }}</h4>
-                        <p>Size: {{ $cartItem->options->size ?? '' }} </p>
-                        <p>Color: {{ $cartItem->options->color ?? '' }} </p>
+                        @foreach($cartItem->options->options as $option)
+                            <p>{{ $option->name }}:  {{ $option->values->implode('label', ', ') }}</p>
+                        @endforeach
                     </td>
                     <td class="add_cart_price text-center">&#2547; {{ $cartItem->price }}</td>
                     <td>
@@ -31,7 +33,7 @@
                             <input data-rowid="{{ $cartItem->rowId }}" type="number" value="{{ $cartItem->qty }}" min="1" max="100" step="1"> 
                         </div>
                     </td>
-                    <td class="add_cart_price_total text-center">&#2547; {{$cartItem->total}}</td>
+                    <td class="add_cart_price_total text-center">&#2547; {{ $cartItem->total }}</td>
                 </tr>
                 @endforeach
             </tbody>

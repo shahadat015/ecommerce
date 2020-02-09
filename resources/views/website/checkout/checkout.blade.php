@@ -59,7 +59,7 @@
                                                             <label class="mr-sm-2 sr-only" for="inlineFormCustomSelect">Preference</label>
                                                             <select class="custom-select mr-sm-2" name="country">
                                                                 <option selected>Choose...</option>
-                                                                <option value=""></option>
+                                                                <option value="Bangladesh" selected>Bangladesh</option>
                                                             </select>
                                                         </div>
                                                     </div>
@@ -68,7 +68,11 @@
                                                             <label class="mr-sm-2 sr-only" for="inlineFormCustomSelect">Preference</label>
                                                             <select class="custom-select mr-sm-2" name="city">
                                                                 <option selected>Choose...</option>
-                                                                <option value=""></option>
+                                                                <option value="Dhaka" selected>Dhaka</option>
+                                                                <option value="Chittagong">Chittagong</option>
+                                                                <option value="Rajshai">Rajshai</option>
+                                                                <option value="Noakhali">Noakhali</option>
+                                                                <option value="Barishal">Barishal</option>
                                                             </select>
                                                         </div>
                                                     </div>

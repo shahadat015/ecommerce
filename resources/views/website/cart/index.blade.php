@@ -37,8 +37,9 @@
                                         <img width="80" class="img-fluid" src="{{ asset($cartItem->options->image) }}" alt=""></td>
                                     <td>
                                         <h4>{{ $cartItem->name }}</h4>
-                                        <p>Size: {{ $cartItem->options->size ?? '' }} </p>
-                                        <p>Color: {{ $cartItem->options->color ?? '' }} </p>
+                                        @foreach($cartItem->options->options as $option)
+                                            <p>{{ $option->name }}:  {{ $option->values->implode('label', ', ') }}</p>
+                                        @endforeach
                                     </td>
                                     <td class="add_cart_price text-center">&#2547; {{ $cartItem->price }}</td>
                                     <td>
@@ -67,8 +68,25 @@
                                 <div class="cart_sum_content">
                                     <ul>
                                         <li>Sub-Total:<span>Tk {{ Cart::subtotal() }}</span></li>
-                                        <li>Shipping:<span>Tk 50</span></li>
-                                        <li class="sum_total">Total:<span>Tk {{ Cart::total() + 50 }}</span></li>
+                                        <div class="form-group">
+                                            <label><b>Shipping Method</b></label>
+                                            @if(config('settings.free_shipping_enabled'))
+                                            <div class="custom-control custom-radio mb-1">
+                                                <input type="radio" id="customRadioInline1" name="shipping_method" class="shipping-method custom-control-input" data-amount="{{ Cart::total() }}" value="free_shipping" checked>
+                                                <label class="custom-control-label" for="customRadioInline1">{{ config('settings.free_shipping_label') }} </label><span class="float-right">Tk 0.00</span>
+                                            </div>
+                                            @endif
+                                            @if(config('settings.local_pickup_enabled'))
+                                            <div class="custom-control custom-radio">
+                                                <input type="radio" id="customRadioInline2" name="shipping_method" class="shipping-method custom-control-input" data-amount="{{ config('settings.local_pickup_cost') + Cart::total() }}" value="local_pickup">
+                                                <label class="custom-control-label" for="customRadioInline2">{{ config('settings.local_pickup_label') }} </label><span class="float-right">Tk {{ config('settings.local_pickup_cost') }}</span>
+                                            </div>
+                                            @endif
+                                            @if(!config('settings.free_shipping_enabled') && !config('settings.local_pickup_enabled'))
+                                                <li class="sum_total">No shipping enabled</li>
+                                            @endif
+                                        </div>
+                                        <li class="sum_total">Total:<span class="cart-total">Tk {{ Cart::total() }}</span></li>
                                     </ul> <a href="{{ route('checkout') }}">Continue to Checkout</a> 
                                 </div>
                             </div>
@@ -81,7 +99,7 @@
                         <span><i class="icofont-close"></i></span>
                         <h3>There are no items in this cart</h3>
                         <p>Please add some item in your shopping cart.</p>
-                        <a href="{{ url('/') }}">Retuen Shop</a>
+                        <a href="{{ route('home') }}">Retuen Shop</a>
                     </div>
                 </div>
                 @endif
@@ -97,7 +115,15 @@
     <script src="{{asset('contents/website/js/bootstrap-input-spinner.js')}}"></script>
     <script>  
         $(function () {
-            $("input[type='number']").InputSpinner(); 
+            $("input[type='number']").InputSpinner();
+
+            $('.shipping-method').on('change', function(){
+                var method = $(this).val();
+                var amount = $(this).data('amount');
+
+                $('.cart-total').html('<span>Tk '+ amount +' </span>');
+
+            });
         });
     </script>
 @endpush

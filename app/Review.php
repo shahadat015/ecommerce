@@ -18,9 +18,9 @@ class Review extends Model
         return $this->belongsTo(Customer::class);
     }
 
-    public static function laratablesIsApproved($review)
+    public static function laratablesStatus($review)
     {
-        if ($review->is_approved) {
+        if ($review->status) {
             return '<span class="badge badge-soft-info">Active</span>';
         }else{
             return '<span class="badge badge-soft-warning">Inactive</span>';
@@ -29,6 +29,6 @@ class Review extends Model
 
     public static function laratablesCustomAction($action)
     {
-        return view('layouts.partials.actions')->with(['view' => false, 'action' => $action, 'route' => $action->getTable()])->render();
+        return view('layouts.partials.actions')->with(['view' => false, 'switch' => true, 'action' => $action, 'route' => $action->getTable()])->render();
     }
 }

@@ -33,7 +33,7 @@ class ReviewController extends Controller
     		'reviewer_name' => 'required|string|max:255'
     	]);
 
-    	$request['is_approved'] = (boolean) $request->is_approved;
+    	$request['status'] = (boolean) $request->status;
     	$update = $review->update($request->all());
 
     	if($update){
@@ -52,5 +52,18 @@ class ReviewController extends Controller
     	}else{
     		return response()->json(['error' => 'Ops! Please try again']);
     	}
+    }
+
+    public function updateStatus(Review $review)
+    {
+        if($review->status){
+            $review->status = false;
+            $review->save();
+            return response()->json(['success' => 'Review successfully Approved!']);
+        }
+
+        $review->status = true;
+        $review->save();
+        return response()->json(['success' => 'Review successfully unapproved!']);
     }
 }

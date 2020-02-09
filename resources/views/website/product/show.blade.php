@@ -4,6 +4,7 @@
     <link rel="stylesheet" href="{{asset('contents/website/css/owl.carousel.min.css')}}">
     <link rel="stylesheet" href="{{asset('contents/website/css/slick.css')}}">
     <link rel="stylesheet" href="{{asset('contents/website/css/better-rating.css')}}">
+    <link rel="stylesheet" href="{{asset('contents/website/css/selectize.css')}}">
 @endpush
 @section('content')
     <!-- start infobar top -->
@@ -66,45 +67,21 @@
                                         <h3>{{ $product->name }} </h3>
                                         <h4>Product Code: {{ $product->sku }}</h4>
                                         <h2>&#2547; {{ $product->price }}</h2>
-                                        <p>{{ $product->short_description }}. </p>
-                                        <form action="{{ route('cart.add', $product->id)}}" method="post">
+                                        <p>{{ $product->short_description }} </p>
+                                        <form action="{{ route('cart.add', $product->id)}}" method="post" id="addtocart-form">
                                             @csrf
-                                            <div class="details_size">
-                                                <div class="row">
-                                                    <legend class="col-form-label col-sm-2 pt-0">sizes:</legend>
-                                                    <div class="col-sm-10">
-                                                        {{--@foreach($product->sizes as $size)
-                                                        <div class="form-check">
-                                                            <input class="form-check-input" type="radio" name="size" id="gridRadios1" value="{{$size->name}}" checked>
-                                                            <label class="form-check-label" for="gridRadios1">{{$size->name}}</label>
-                                                        </div>
-                                                        @endforeach--}}
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="details_size">
-                                                <div class="row">
-                                                    <legend class="col-form-label col-sm-2 pt-0">Colors:</legend>
-                                                    <div class="col-sm-10">
-                                                        {{--@foreach($product->colors as $color)
-                                                        <div class="form-check">
-                                                            <input class="form-check-input" type="radio" name="color" id="gridRadios1" value="{{$color->name}}" checked>
-                                                            <label class="form-check-label" for="gridRadios1">{{$color->name}}</label>
-                                                        </div>
-                                                        @endforeach --}}
-                                                    </div>
-                                                </div>
-                                            </div>
+
+                                            @include('website.partial.options')
                                             <div class="details_btn">
                                                 <div class="row align-items-center">
                                                     <div class="col-xl-4 col-md-4 col-sm-5">
                                                         <div class="quantity_form_input">
-                                                            <input name="qty" type="number" value="1" min="1" max="{{ $product->qty }}" step="1">
+                                                            <input name="qty" type="number" value="1" min="1" max="100" step="1">
                                                         </div>
                                                     </div>
                                                     <div class="col-xl-8 col-md-8 col-sm-7">
-                                                        <button class="detail_shop_btn"><i class="icofont-shopping-cart"></i> Buy Now</button>
-                                                        <a href="{{ route('customer.favorite', $product->id) }}"><i class="fas fa-heart"></i></a>
+                                                        <button class="detail_shop_btn btn-submit"><i class="icofont-shopping-cart"></i> Buy Now</button>
+                                                        <a class="addtofavorite" href="{{ route('customer.favorite', $product->id) }}"><i class="fas fa-heart"></i></a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -173,25 +150,24 @@
                                         </div>
                                         <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
                                             <div class="list list-row block">
-                                                @foreach($product->reviews as $review)
+                                                @foreach($product->reviews()->where('status', 1)->get() as $review)
                                                 <div class="list-item" data-id="19">
-                                                    <div><span class="w-48 avatar gd-warning">{{substr($review->name, 0,1)}}</span></div>
+                                                    <div><span class="w-48 avatar gd-warning">{{ substr($review->reviewer_name, 0,1) }}</span></div>
                                                     <div class="flex"> 
-                                                        <a href="javascript:void(0)" class="item-author text-color" data-abc="true">{{ $review->name }}</a>
-                                                        <div class="item-except text-muted text-sm h-1x">{{ $review->description }}</div>
+                                                        <a href="javascript:void(0)" class="item-author text-color" data-abc="true">{{ $review->reviewer_name }}</a>
+                                                        <div class="item-except text-muted text-sm h-1x">{{ $review->comment }}</div>
                                                     </div>
                                                     <div class="no-wrap summmer_item_content">
                                                         @include('website.partial.rating', ['rating' => $review->rating])
                                                     </div>
                                                 </div>
-
                                                 @endforeach
                                             </div>
                                             @auth('customer')
-                                            <form action="{{ url('product/review/', $product->id) }}" method="post" id="better-rating-form">
+                                            <form action="{{ route('product.review', $product->id) }}" method="post" id="better-rating-form">
                                                 @csrf
 
-                                                <input type="text" name="name" placeholder="Your Name"  required>
+                                                <input type="text" name="reviewer_name" placeholder="Your Name"  required>
                                                 <div class="rating">
                                                     <i class="far fa-star" data-rate="1"></i>
                                                     <i class="far fa-star" data-rate="2"></i>
@@ -200,8 +176,8 @@
                                                     <i class="far fa-star" data-rate="5"></i>
                                                     <input type="hidden" id="rating-count" name="rating" value="0">
                                                 </div>
-                                                <textarea name="description" cols="30" rows="7" required></textarea>
-                                                <button type="submit" class="btn btn-danger">Submit Now</button>
+                                                <textarea name="comment" cols="30" rows="7" required></textarea>
+                                                <button type="submit" class="btn btn-danger btn-submit">Submit Now</button>
                                             </form>
                                             @else
                                                 <ul>
@@ -270,11 +246,15 @@
     <script src="{{asset('contents/website/js/slick.active.js')}}"></script>
     <script src="{{asset('contents/website/js/bootstrap-input-spinner.js')}}"></script>
     <script src="{{asset('contents/website/js/better-rating.js')}}"></script>
+    <script src="{{asset('contents/website/js/selectize.min.js')}}"></script>
     <script>
         $(function(){
             // this is for input group
             $("input[type='number']").InputSpinner();
             $('#better-rating-form').betterRating();
+            $('.selectize').selectize({
+                plugins: ['remove_button']
+            });
         });
     </script>
 @endpush
