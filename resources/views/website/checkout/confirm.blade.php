@@ -34,9 +34,9 @@
                             <table class="table">
                                 <tbody>
                                     <tr>
-                                        <td>Payment Method: {{ $order->transaction->payment_method }}</td>
-                                        <td>Transaction ID: {{ $order->transaction->transaction_id }}</td>
-                                        <td>Amount: {{ $order->transaction->amount }}</td>
+                                        <td>Payment Method: {{ $order->transaction->payment_method ?? "Cash on Hand" }}</td>
+                                        <td>Transaction ID: {{ $order->transaction->transaction_id ?? 'No transaction ID' }}</td>
+                                        <td>Amount: {{ $order->transaction->amount ?? 'Tk 0.00' }}</td>
                                     </tr>
                                 </tbody>
                             </table>

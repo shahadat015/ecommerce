@@ -63,17 +63,18 @@
                 </div>
                 <div class="col-xl-5 col-lg-5 col-md-5 col-sm-5">
                     <div class="serach_bar">
-                        <form action="{{ url('search') }}" method="get">
+                        <form id="search" action="{{ route('search') }}" method="get">
                             <div class="search_form_box">
-                                <input type="text" name="query" placeholder="Search for product" value="{{ request('query') }}" required="">
-                                <button type="submit"><i class="fas fa-search"></i></button>
-                                @error('query')
-                                    <span class="invalid-feedback">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
+                                <input class="search" type="text" name="query" placeholder="Search for product" value="{{ request('query') }}" required>
+                                <button type="submit" class="btn-search"><i class="fas fa-search"></i></button>
                             </div>
                         </form>
+                    </div>
+                    <div class="typed-search-box d-none">
+                        <div class="search-preloader d-none">
+                            <div class="loader"><div></div><div></div><div></div></div>
+                        </div>
+                        <div class="product"></div>
                     </div>
                 </div>
                 <div class="col-xl-5 col-lg-5 col-md-5 col-sm-5">
@@ -333,23 +334,31 @@
                         </a>
                         <p>{{ config('settings.store_tagline') }}. </p>
                         <ul>
-                            @if(config('settings.storefront_facebook_link'))
-                            <li><a target="_blank" href="{{ config('settings.storefront_facebook_link') }}"><i class="fab fa-facebook-f"></i></a></li>
+                            @php
+                                $facebook = config('settings.storefront_facebook_link');
+                                $twitter = config('settings.storefront_twitter_link');
+                                $instagram = config('settings.storefront_instagram_link');
+                                $linkedin = config('settings.storefront_linkedin_link');
+                                $google = config('settings.storefront_google_link');
+                                $youtube = config('settings.storefront_youtube_link');
+                            @endphp
+                            @if($facebook)
+                            <li><a target="_blank" href="{{ $facebook }}"><i class="fab fa-facebook-f"></i></a></li>
                             @endif
-                            @if(config('settings.storefront_twitter_link'))
-                            <li><a target="_blank" href="{{ config('settings.storefront_twitter_link') }}"><i class="fab fa-twitter"></i></a></li>
+                            @if($twitter)
+                            <li><a target="_blank" href="{{ $twitter }}"><i class="fab fa-twitter"></i></a></li>
                             @endif
-                            @if(config('settings.storefront_instagram_link'))
-                            <li><a target="_blank" href="{{ config('settings.storefront_instagram_link') }}"><i class="fab fa-instagram"></i></a></li>
+                            @if($instagram)
+                            <li><a target="_blank" href="{{ $instagram }}"><i class="fab fa-instagram"></i></a></li>
                             @endif
-                            @if(config('settings.storefront_linkedin_link'))
-                            <li><a target="_blank" href="{{ config('settings.storefront_linkedin_link') }}"><i class="fab fa-linkedin"></i></a></li>
+                            @if($linkedin)
+                            <li><a target="_blank" href="{{ $linkedin }}"><i class="fab fa-linkedin"></i></a></li>
                             @endif
-                            @if(config('settings.storefront_google_link'))
-                            <li><a target="_blank" href="{{ config('settings.storefront_google_link') }}"><i class="fab fa-google-plus"></i></a></li>
+                            @if($google)
+                            <li><a target="_blank" href="{{ $google }}"><i class="fab fa-google-plus"></i></a></li>
                             @endif
-                            @if(config('settings.storefront_youtube_link'))
-                            <li><a target="_blank" href="{{ config('settings.storefront_youtube_link') }}"><i class="fab fa-youtube"></i></a></li>
+                            @if($youtube)
+                            <li><a target="_blank" href="{{ $youtube }}"><i class="fab fa-youtube"></i></a></li>
                             @endif
                         </ul>
                     </div>

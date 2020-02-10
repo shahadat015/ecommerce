@@ -8,6 +8,9 @@
 
 Route::get('/', 'WebsiteController@index')->name('home');
 
+Route::get('/search', 'SearchController@search')->name('search');
+Route::get('/search/product', 'SearchController@searchProduct')->name('search.product');
+
 Route::get('/product/category/{slug}', 'ProductController@productByCategory')->name('product.category');
 Route::get('/product/brand/{slug}', 'ProductController@productByBrand')->name('product.brand');
 Route::get('/product/{slug}', 'ProductController@show')->name('product');
@@ -30,10 +33,10 @@ Route::post('/checkout', 'CheckoutController@store')->name('checkout');
 
 Route::get('/payment', 'PaymentController@index')->name('payment');
 Route::post('/payment', 'PaymentController@store')->name('payment');
-Route::get('/confirm', 'PaymentController@confirm')->name('confirm');
-Route::post('/order/confirm', 'PaymentController@confirm')->name('order.confirm');
-Route::post('/payment/failed', 'PaymentController@failed')->name('payment.failed');
 Route::post('/payment/canceled', 'PaymentController@canceled')->name('payment.canceled');
+Route::post('/payment/failed', 'PaymentController@failed')->name('payment.failed');
+Route::get('/order/confirm', 'PaymentController@confirm')->name('order.confirm');
+Route::post('/order/confirm', 'PaymentController@confirm')->name('order.confirm');
 Route::get('/order/success', 'PaymentController@success')->name('payment.success');
 
 Route::get('/subscribe', 'SubscriberController@index')->name('subscribe');

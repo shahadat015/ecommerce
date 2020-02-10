@@ -7,6 +7,44 @@ $(function() {
         }
     });
 
+    // add to cart form
+    $(document).on('keyup', '.search', function () {
+
+        var query = $(this).val();
+        var preloader = $('.search-preloader');
+        var search_box = $('.typed-search-box');
+
+        if(query.length){
+            search_box.removeClass('d-none');
+        }else{
+           search_box.addClass('d-none');
+           return;
+        }
+
+        $.ajax({
+            url: '/search/product',
+            type: "GET",
+            data: query,
+            dataType: "HTML",
+            contentType: false,
+            processData: false,
+            cache: false,
+            beforeSend:function() {
+                preloader.removeClass('d-none');
+            },
+            success(data) {
+                if(!$.isEmptyObject(data)){
+                    $('.typed-search-box .product').html(data);
+                }else{
+                    $('.search-nothing').removeClass('d-none').text('Sorry, nothing found for "' + query +'"');
+                }
+            },
+            complete:function() {
+                preloader.addClass('d-none');
+            }
+        });
+    });
+
 	// contact form
 	$(document).on('submit', '#contact-form', function (event) {
 		event.preventDefault();

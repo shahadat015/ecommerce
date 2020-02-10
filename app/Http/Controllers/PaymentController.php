@@ -23,7 +23,7 @@ class PaymentController extends Controller
             $order = session()->get('order');
             $order->payment_method = 'cod';
             $order->save();
-            return redirect('order.confirm')->with(['success' => 'Payment Successful!']);
+            return redirect('order/confirm')->with(['success' => 'Payment Successful!']);
         }
 
         if($request->payment_method == 'ssl_commerz'){
@@ -38,6 +38,7 @@ class PaymentController extends Controller
 
     public function confirm()
     {
+        $order = session()->get('order');
 
         if(ipn_hash_varify(config('sslcommerz.store_password'))){
             $ipn = new IpnNotification($_POST);
@@ -46,7 +47,6 @@ class PaymentController extends Controller
             $amount = $ipn->getAmount();
             $resp = Client::verifyOrder($val_id);
 
-            $order = session()->get('order');
             $order->payment_method = 'SSL Commerz';
             $update = $order->save();
 
@@ -55,9 +55,9 @@ class PaymentController extends Controller
                 'amount' => $amount,
                 'payment_method' => "SSL Commerz"
             ]);
-
-            return view('website.checkout.confirm', compact('order'));
         }
+        
+        return view('website.checkout.confirm', compact('order'));
     }
 
     public function success()

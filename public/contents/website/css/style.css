@@ -3621,3 +3621,123 @@ p {
 .no-wrap {
     white-space: nowrap
 }
+
+.typed-search-box {
+    position: absolute;
+    top: 100%;
+    border: 1px solid #eceff1;
+    box-shadow: 0 5px 25px 0 rgba(123,123,123,0.15);
+    background: #fff;
+    width: calc(100% - 119px);
+    height: auto;
+    transition: all 0.3s;
+    -webkit-transition: all 0.3s;
+    -ms-webkit-transition: all 0.3s;
+    min-height: 200px;
+    z-index: 999999;
+    left: 12.5%;
+}
+.typed-search-box .search-preloader {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    z-index: 1;
+}
+.typed-search-box .search-preloader .loader {
+    position: absolute;
+    top: 0px;
+    left: 50%;
+    transform: translateX(-18px);
+    -webkit-transform: translateX(-18px);
+}
+.loader > div {
+    display: inline-flex;
+    width: 8px;
+    height: 8px;
+    border-radius: 100%;
+    margin: 0 2px;
+    background: #777;
+    -webkit-animation: bounce 1.48s ease-in-out infinite both;
+    animation: bounce 1.48s ease-in-out infinite both;
+}
+.loader > div:nth-child(1) {
+    -webkit-animation-delay: -0.32s;
+    animation-delay: -0.32s;
+}
+.loader > div:nth-child(2) {
+    -webkit-animation-delay: -0.16s;
+    animation-delay: -0.16s;
+}
+
+.typed-search-box .search-nothing {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
+    font-size: 15px;
+    text-align: center;
+    width: 100%;
+    padding: 5px 20px;
+}
+
+.typed-search-box .title {
+    background: #ddd;
+    font-size: 10px;
+    text-align: right;
+    opacity: 0.5;
+    padding: 3px 15px 4px;
+    text-transform: uppercase;
+    line-height: 1;
+}
+
+.typed-search-box ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.typed-search-box .product a {
+    padding: 8px 15px;
+}
+.typed-search-box ul a {
+    display: block;
+    color: #525252;
+}
+
+.typed-search-box .search-product .image {
+    width: 50px;
+    min-width: 50px;
+    background-color: #ffffff;
+    background-size: cover;
+    height: 50px;
+    background-position: center;
+}
+
+.overflow--hidden {
+    overflow: hidden !important;
+}
+
+.typed-search-box .search-product .product-name {
+    margin-bottom: 5px;
+    font-size: 13px;
+    font-weight: 600;
+    margin-left: 20px;
+}
+
+.typed-search-box .search-product .price-box {
+    margin-left: 20px;
+}
+.product-price {
+    color: #e62e04;
+}
+
+.price-box .product-price {
+    font-size: 16px;
+}
+
+.strong-600 {
+    font-weight: 600 !important;
+}
