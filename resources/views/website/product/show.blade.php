@@ -149,20 +149,20 @@
 
                                         </div>
                                         <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
+                                            @foreach($product->reviews()->where('status', 1)->get() as $review)
                                             <div class="list list-row block">
-                                                @foreach($product->reviews()->where('status', 1)->get() as $review)
-                                                <div class="list-item" data-id="19">
+                                                <div class="list-item">
                                                     <div><span class="w-48 avatar gd-warning">{{ substr($review->reviewer_name, 0,1) }}</span></div>
                                                     <div class="flex"> 
-                                                        <a href="javascript:void(0)" class="item-author text-color" data-abc="true">{{ $review->reviewer_name }}</a>
+                                                        <a href="javascript:void(0)" class="item-author text-color">{{ $review->reviewer_name }}</a>
                                                         <div class="item-except text-muted text-sm h-1x">{{ $review->comment }}</div>
                                                     </div>
                                                     <div class="no-wrap summmer_item_content">
                                                         @include('website.partial.rating', ['rating' => $review->rating])
                                                     </div>
                                                 </div>
-                                                @endforeach
                                             </div>
+                                            @endforeach
                                             @auth('customer')
                                             <form action="{{ route('product.review', $product->id) }}" method="post" id="better-rating-form">
                                                 @csrf

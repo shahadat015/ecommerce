@@ -20,7 +20,7 @@
                 <div class="col-sm-10">
                     <div class="form-group">
                         @foreach($option->values as $value)
-                        <div class="custom-control custom-checkbox d-inline">
+                        <div class="custom-control custom-checkbox custom-control-inline">
                           <input type="checkbox" class="custom-control-input" name="options[{{ $option->id }}][]" id="customCheck{{$value->id}}" value="{{ $value->id }}">
                           <label class="custom-control-label mr-3" for="customCheck{{$value->id}}">{{ $value->label }}</label>
                         </div>

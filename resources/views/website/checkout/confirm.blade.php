@@ -5,7 +5,7 @@
     <!-- start card process progress -->
     <section id="payment_process">
         <div class="container">
-            @include('website.checkout.stepsbar')
+            @include('website.partial.stepsbar')
         </div>
     </section>
     <!-- confirm order content -->
@@ -18,12 +18,12 @@
                             <h3>Shopping Cart</h3>
                             <table class="table">
                                 <tbody>
-                                    @foreach($cartItems as $cartItem)
+                                    @foreach(Cart::content() as $cartItem)
                                     <tr>
-                                        <td>{{$cartItem->name}}</td>
-                                        <td>Tk {{$cartItem->price}}</td>
-                                        <td>{{$cartItem->qty}} Items</td>
-                                        <td>Tk {{$cartItem->total}}</td>
+                                        <td>{{ $cartItem->name }}</td>
+                                        <td>Tk {{ $cartItem->price }}</td>
+                                        <td>{{ $cartItem->qty }} Items</td>
+                                        <td>Tk {{ $cartItem->total }}</td>
                                     </tr>
                                     @endforeach
                                 </tbody>
@@ -34,16 +34,15 @@
                             <table class="table">
                                 <tbody>
                                     <tr>
-                                        <td>Name: {{$payment->name}}</td>
-                                        <td>Card No: {{$payment->card_number}}</td>
-                                        <td>Exp Date: {{$payment->exp_month}}, {{$payment->exp_year}}</td>
-                                        <td>CVV: {{$payment->cvv}}</td>
+                                        <td>Payment Method: {{ $order->transaction->payment_method }}</td>
+                                        <td>Transaction ID: {{ $order->transaction->transaction_id }}</td>
+                                        <td>Amount: {{ $order->transaction->amount }}</td>
                                     </tr>
                                 </tbody>
                             </table>
                         </div>
                         <div class="delevary_information">
-                            <h3>Delivery infomation</h3>
+                            <h3>Billing infomation</h3>
                             <table class="table">
                                 <thead>
                                     <tr>
@@ -55,10 +54,10 @@
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td>{{$shipping->first_name}} {{$shipping->last_name}}</td>
-                                        <td>{{$shipping->phone}}</td>
-                                        <td>{{$shipping->email}}</td>
-                                        <td>{{$shipping->country->name}}</td>
+                                        <td>{{ $order->customer_name }}</td>
+                                        <td>{{ $order->customer_phone }}</td>
+                                        <td>{{ $order->customer_email }}</td>
+                                        <td>{{ $order->billing_country }}</td>
                                     </tr>
                                     <tr>
                                         <td style="color:#767676">City</td>
@@ -66,25 +65,21 @@
                                         <td style="color:#767676">Address</td>
                                     </tr>
                                     <tr>
-                                        <td>{{$shipping->city->name}}</td>
-                                        <td>{{$shipping->zip_code}}</td>
-                                        <td>{{$shipping->address}}</td>
+                                        <td>{{$order->billing_city }}</td>
+                                        <td>{{ $order->billing_zip }}</td>
+                                        <td>{{ $order->billing_address }}</td>
                                     </tr>
                                 </tbody>
                             </table>
                         </div>
                         <div class="total_price">
-                            <h4><span>Toral Price : </span>Tk {{cart::total() + 50}}</h4>
+                            <h4><span>Toral Price : </span>Tk {{ $order->total }}</h4>
                         </div>
                     </div>
                     <div class="payment_process_btn">
-                        <a href="{{url('delivery/method')}}">Delivery Methods</a>
-                        <a href="{{url('order/confirm')}}" onclick="event.preventDefault();
-                        document.getElementById('order-form').submit();">Proceed to Checkout</a>
+                        <a href="{{ route('payment') }}">Back to Payment</a>
+                        <a href="{{ route('payment.success') }}">Proceed to Checkout</a>
                     </div>
-                    <form action="{{url('order/confirm')}}" method="post" id="order-form">
-                        @csrf
-                    </form>
                 </div>
             </div>
         </div>

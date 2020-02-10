@@ -23,6 +23,7 @@
                             <tr>
                                 <th>Order ID</th>
                                 <th>Transaction ID</th>       
+                                <th>Amount</th>       
                                 <th>Payment Method</th>
                                 <th>Transaction Time</th>
                                 <th>
@@ -53,6 +54,7 @@
                 columns: [
                     { name: 'order_id'},
                     { name: 'transaction_id'},
+                    { name: 'amount'},
                     { name: 'payment_method' },
                     { name: 'created_at' },
                     { name: 'action', orderable: false, searchable: false }

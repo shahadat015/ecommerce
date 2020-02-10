@@ -18,6 +18,7 @@ class CreateTransactionsTable extends Migration
             $table->unsignedBigInteger('order_id')->unique();
             $table->string('transaction_id');
             $table->string('payment_method');
+            $table->float('amount');
             $table->timestamps();
             $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade');
         });

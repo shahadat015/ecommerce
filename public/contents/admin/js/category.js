@@ -29,7 +29,7 @@ $(function() {
                 if(error.status == 422) {
                     var errors = error.responseJSON.errors;
                     var errorField = Object.keys(errors)[0];
-                    var inputField = $('input[name="'+ errorField +'"], select[name="'+ errorField +'"]');
+                    var inputField = $('name="'+ errorField +'"]');
                     var errorMessage = errors[errorField][0];
 
                     // Show error message
@@ -82,7 +82,7 @@ $(function() {
                 if(error.status == 422) {
                     var errors = error.responseJSON.errors;
                     var errorField = Object.keys(errors)[0];
-                    var inputField = $('input[name="'+ errorField +'"], select[name="'+ errorField +'"]');
+                    var inputField = $('[name="'+ errorField +'"]');
                     var errorMessage = errors[errorField][0];
 
                     // Show error message

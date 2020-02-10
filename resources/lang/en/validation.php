@@ -207,6 +207,39 @@ return [
         ],
         'banner_section_2_cta_4_url' => [
             'required_with' => 'The url field is required when image is present',
+        ],
+        'billing.name' => [
+            'required' => 'The first name field is required',
+        ],
+        'billing.address' => [
+            'required' => 'The address field is required',
+        ],
+        'billing.country' => [
+            'required' => 'The country field is required',
+        ],
+        'billing.city' => [
+            'required' => 'The city field is required',
+        ],
+        'billing.zip_code' => [
+            'required' => 'The zip code is required',
+        ],
+        'shipping.name' => [
+            'required_with' => 'The first name field is required',
+        ],
+        'shipping.phone' => [
+            'required_with' => 'The phone field is required',
+        ],
+        'shipping.address' => [
+            'required_with' => 'The address field is required',
+        ],
+        'shipping.country' => [
+            'required_with' => 'The country field is required',
+        ],
+        'shipping.city' => [
+            'required_with' => 'The city field is required',
+        ],
+        'shipping.zip_code' => [
+            'required_with' => 'The zip code is required',
         ]
     ],
 

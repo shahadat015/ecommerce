@@ -13,6 +13,7 @@ $(function() {
 
 		var formdata = new FormData($(this)[0]);
         var btnText = $('.btn-submit').text();
+        var btn = $('.btn-submit');
 
 		$.ajax({
             url: this.action,
@@ -23,7 +24,7 @@ $(function() {
             processData: false,
             cache: false,
             beforeSend:function() {
-                $('.btn-submit').attr("disabled", true).html("<span class='spinner-border spinner-border-sm'></span> Loadding...");
+                btn.attr("disabled", true).html("<span class='spinner-border spinner-border-sm'></span> Loadding...");
             },
             success(data) {
                 if(data.success) {
@@ -38,7 +39,7 @@ $(function() {
             	if(error.status == 422) {
                     var errors = error.responseJSON.errors;
                     var errorField = Object.keys(errors)[0];
-                    var inputField = $('input[name="'+ errorField +'"], textarea[name="'+ errorField +'"]');
+                    var inputField = $('[name="'+ errorField +'"]');
                     var errorMessage = errors[errorField][0];
 
                     // Show error message
@@ -57,7 +58,7 @@ $(function() {
                 }
             },
             complete:function() {
-                $('.btn-submit').attr("disabled", false).html(btnText);
+                btn.attr("disabled", false).html(btnText);
             }
         });
 	});
@@ -68,6 +69,7 @@ $(function() {
 
         var formdata = new FormData($(this)[0]);
         var btnText = $('.btn-subscribe').text();
+        var btn = $('.btn-subscribe');
 
         $.ajax({
             url: this.action,
@@ -78,7 +80,7 @@ $(function() {
             processData: false,
             cache: false,
             beforeSend:function() {
-                $('.btn-subscribe').attr("disabled", true).html("<span class='spinner-border spinner-border-sm'></span> Loadding...");
+                btn.attr("disabled", true).html("<span class='spinner-border spinner-border-sm'></span> Loadding...");
             },
             success(data) {
                 if(data.success) {
@@ -93,7 +95,7 @@ $(function() {
                 if(error.status == 422) {
                     var errors = error.responseJSON.errors;
                     var errorField = Object.keys(errors)[0];
-                    var inputField = $('input[name="'+ errorField +'"]');
+                    var inputField = $('[name="'+ errorField +'"]');
                     var errorMessage = errors[errorField][0];
 
                     // Show error message
@@ -112,7 +114,7 @@ $(function() {
                 }
             },
             complete:function() {
-                $('.btn-subscribe').attr("disabled", false).html(btnText);
+                btn.attr("disabled", false).html(btnText);
             }
         });
     });
@@ -123,6 +125,7 @@ $(function() {
 
         var formdata = new FormData($(this)[0]);
         var btnText = $('.btn-submit').text();
+        var btn = $('.btn-submit');
 
         $.ajax({
             url: this.action,
@@ -148,7 +151,7 @@ $(function() {
                 if(error.status == 422) {
                     var errors = error.responseJSON.errors;
                     var errorField = Object.keys(errors)[0];
-                    var inputField = $('input[name="'+ errorField +'"]');
+                    var inputField = $('[name="'+ errorField +'"]');
                     var errorMessage = errors[errorField][0];
 
                     // Show error message

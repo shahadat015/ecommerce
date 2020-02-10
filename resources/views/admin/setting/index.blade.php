@@ -217,7 +217,7 @@
                         </div>
                     </div>
                     <div class="card-footer">
-                        <button type="submit" class="btn btn-submit btn-primary waves-effect waves-light">Submit</button>
+                        <button type="submit" class="btn btn-submit btn-primary waves-effect waves-light">Update</button>
                         <button type="reset" class="btn btn-info waves-effect waves-light">Reset</button>
                     </div>
                 </form>

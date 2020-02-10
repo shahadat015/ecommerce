@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Setting;
 use Illuminate\Http\Request;
+use App\Http\Requests\SettingsValidate;
 
 class SettingController extends Controller
 {
@@ -16,18 +17,15 @@ class SettingController extends Controller
 	/**
 	 * @param Request $request
 	 */
-	public function update(Request $request)
+	public function update(SettingsValidate $request)
 	{  
-		$request->validate([
-			'mail_host' => 'nullable|string|required_with:mail_port',
-			'mail_port' => 'nullable|string|required_with:mail_host,mail_username',
-			'mail_username' => 'nullable|string|required_with:mail_port,mail_password',
-			'mail_password' => 'nullable|string|required_with:mail_username',
-			'ssl_commrz_store_id' => 'nullable|string|required_with:ssl_commrz_store_password',
-			'ssl_commrz_store_password' => 'nullable|string|required_with:ssl_commrz_store_id',
-		]);
 
-		$keys = $request->except('_token', '_method');
+		$request['free_shipping_enabled'] = (boolean)$request->free_shipping_enabled;
+		$request['local_pickup_enabled'] = (boolean)$request->local_pickup_enabled;
+		$request['cod_enabled'] = (boolean)$request->cod_enabled;
+		$request['ssl_commrz_enabled'] = (boolean)$request->ssl_commrz_enabled;
+		$request['facebook_login_enable'] = (boolean)$request->facebook_login_enable;
+		$request['google_login_enable'] = (boolean)$request->google_login_enable;
 
 		$this->changeEnv([
             'FACEBOOK_CLIENT_ID'  => $request->facebook_client_id,
@@ -43,6 +41,8 @@ class SettingController extends Controller
 			'MAIL_FROM_ADDRESS' => $request->mail_from_address,
 			'MAIL_FROM_NAME' => $request->mail_from_name
         ]);
+
+		$keys = $request->except('_token', '_method');
 
         foreach ($keys as $key => $value)
         {

@@ -31,6 +31,10 @@ Route::post('/checkout', 'CheckoutController@store')->name('checkout');
 Route::get('/payment', 'PaymentController@index')->name('payment');
 Route::post('/payment', 'PaymentController@store')->name('payment');
 Route::get('/confirm', 'PaymentController@confirm')->name('confirm');
+Route::post('/order/confirm', 'PaymentController@confirm')->name('order.confirm');
+Route::post('/payment/failed', 'PaymentController@failed')->name('payment.failed');
+Route::post('/payment/canceled', 'PaymentController@canceled')->name('payment.canceled');
+Route::get('/order/success', 'PaymentController@success')->name('payment.success');
 
 Route::get('/subscribe', 'SubscriberController@index')->name('subscribe');
 Route::post('/subscribe', 'SubscriberController@store')->name('subscribe');
@@ -48,13 +52,14 @@ Route::group(['as' => 'customer.', 'prefix' => 'customer', 'namespace' => 'Custo
 
 	Route::middleware(['auth:customer'])->group(function(){
 
-		Route::get('/', 'CustomerController@index')->name('dashboard');
-		Route::get('/orders', 'CustomerController@orders')->name('orders');
-		Route::get('/account', 'CustomerController@account')->name('account');
-		Route::put('/account', 'CustomerController@updateAccount')->name('account');
-		Route::get('/favorites', 'CustomerController@favorite')->name('favorites');
-		Route::post('/favorite/{id}', 'CustomerController@storeFavorite')->name('favorite');
-		Route::delete('/favorite/{id}', 'CustomerController@removeFavorite')->name('favorite');
+		Route::get('/', 'DashboardController@index')->name('dashboard');
+		Route::get('/orders', 'OrderController@index')->name('orders');
+		Route::get('/order/{order}', 'OrderController@show')->name('order');
+		Route::get('/account', 'AccountController@index')->name('account');
+		Route::put('/account', 'AccountController@update')->name('account');
+		Route::get('/favorites', 'FavoriteController@index')->name('favorites');
+		Route::post('/favorite/{id}', 'FavoriteController@store')->name('favorite');
+		Route::delete('/favorite/{id}', 'FavoriteController@destroy')->name('favorite');
 
 	});
 	

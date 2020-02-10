@@ -23,6 +23,7 @@
                             <tr>
                                 <th>Customer Name</th>
                                 <th>Customer Email</th>       
+                                <th>Customer Phone</th>       
                                 <th>Total</th>
                                 <th>Status</th>
                                 <th>Order Time</th>
@@ -54,6 +55,7 @@
                 columns: [
                     { name: 'customer_name'},
                     { name: 'customer_email'},
+                    { name: 'customer_phone'},
                     { name: 'total' },
                     { name: 'status' },
                     { name: 'created_at' },

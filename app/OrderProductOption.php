@@ -15,8 +15,17 @@ class OrderProductOption extends Model
 
     public function values()
     {
-        return $this->belongsToMany(OptionValue::class, 'order_product_option_values')
-            ->using(OrderProductOptionValue::class)
-            ->withPivot('price');
+        return $this->belongsToMany(OptionValue::class, 'order_product_option_values');
+    }
+
+    public function storeValues($values)
+    {
+        $values = $values->mapWithKeys(function ($value) {
+            return [$value->id => [
+                'price' => $value->price,
+            ]];
+        });
+
+        $this->values()->attach($values->all());
     }
 }

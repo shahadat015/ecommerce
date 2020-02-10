@@ -1,6 +1,7 @@
 <?php
 
 use Carbon\Carbon;
+use Gloudemans\Shoppingcart\Facades\Cart;
 
 if (! function_exists('date_formate')) {
     

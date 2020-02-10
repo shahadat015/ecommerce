@@ -17,7 +17,7 @@ class CreateOrdersTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('customer_id')->nullable();
             $table->string('customer_email');
-            $table->string('customer_phone')->nullable();
+            $table->string('customer_phone');
             $table->string('customer_name');
             $table->string('billing_name');
             $table->string('billing_phone');

@@ -24,6 +24,18 @@ class Order extends Model
         return $this->hasOne(Transaction::class);
     }
 
+    public function storeProducts($cartItem)
+    {
+        $orderProduct = $this->products()->create([
+            'product_id' => $cartItem->id,
+            'unit_price' => $cartItem->price,
+            'qty' => $cartItem->qty,
+            'line_total' => $cartItem->total,
+        ]);
+
+        $orderProduct->storeOptions($cartItem->options->options);
+    }
+
     public static function salesAnalytics()
     {
         return static::selectRaw('SUM(total) as total')

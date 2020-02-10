@@ -9,13 +9,14 @@
                     @include('website.partial.sidebar')
                 </div>
                 <div class="col-xl-8 col-md-8">
-                    @foreach ($errors->all() as $message)
-                        <div class="alert alert-danger">{{$message}}</div>
-                    @endforeach
                     <div class="user_dashboard_sidebar_main_content">
                         <div class="user_dashboard_acount_content">
                             <div class="user_image_dashboard text-center">
-                                <img class="img-fluid" src="{{asset('contents/website/img/profile.jpg')}}" alt="">
+                                @if($customer->provider_id)
+                                <img class="img-fluid" src="{{ $customer->image }}" alt="">
+                                @else
+                                <img class="img-fluid" src="{{ asset('contents/website/img/profile.jpg') }}" alt="">
+                                @endif
                             </div>
                             <div class="row">
                                 <div class="col-xl-12 col-md-6">
@@ -63,7 +64,7 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="name">Email</label>
-                                    <input type="text" class="form-control" name="email" value="{{ $customer->email }}" required="">
+                                    <input type="email" class="form-control" name="email" value="{{ $customer->email }}" required="">
                                 </div>
                             </div>
                         </div>

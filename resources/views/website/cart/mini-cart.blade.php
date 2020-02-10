@@ -21,7 +21,7 @@
         <p>There are no items in this cart</p>
     </div>
     @endforelse
-    @if(Cart::count() > 0)
+    @if(Cart::count())
     <div class="min_cart_button_bottom text-center">
         <a href="{{ route('cart') }}">View Cart</a>
         <a href="{{ route('checkout') }}" class="min_cart_btn_sp">Check Out</a>

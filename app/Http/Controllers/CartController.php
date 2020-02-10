@@ -16,7 +16,7 @@ class CartController extends Controller
 
     public function store(Product $product, Request $request)
     {
-        $options = array_filter($request->options);
+        $options = array_filter($request->options ?? []);
 
     	$added = Cart::add([
 			'id' => $product->id, 

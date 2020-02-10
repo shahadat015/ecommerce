@@ -14,26 +14,23 @@
                 <div class="card-body invoice-head">
                     <div class="row">
                         <div class="col-md-4 align-self-center">
-                            <img src="{{ asset('contents/admin') }}/images/logo-sm.png" alt="logo-small" class="logo-sm mr-2" height="26"> 
-                            <img src="{{ asset('contents/admin') }}/images/logo-dark.png" alt="logo-large" class="logo-lg" height="16"></div>
+                            <img src="{{ asset('contents/admin/images/logo-sm.png') }}" alt="logo-small" class="logo-sm mr-2" height="26"> 
+                            <img src="{{ asset('contents/admin/images/logo-dark.png') }}" alt="logo-large" class="logo-lg" height="16"></div>
                         <div class="col-md-8">
                             <ul class="list-inline mb-0 contact-detail float-right">
                                 <li class="list-inline-item">
                                     <div class="pl-3"><i class="mdi mdi-web"></i>
-                                        <p class="text-muted mb-0">{{ url('/') }}</p>
-                                        <p class="text-muted mb-0">{{ url('/') }}</p>
+                                        <p class="text-muted mb-0">{{ route('home') }}</p>
                                     </div>
                                 </li>
                                 <li class="list-inline-item">
                                     <div class="pl-3"><i class="mdi mdi-phone"></i>
                                         <p class="text-muted mb-0">{{ config('settings.store_phone') }}</p>
-                                        <p class="text-muted mb-0">{{ config('settings.store_phone_two') }}</p>
                                     </div>
                                 </li>
                                 <li class="list-inline-item">
                                     <div class="pl-3"><i class="mdi mdi-map-marker"></i>
                                         <p class="text-muted mb-0">{{ config('settings.store_address') }}</p>
-                                        <p class="text-muted mb-0">{{ config('settings.store_address_two') }}</p>
                                     </div>
                                 </li>
                             </ul>
@@ -72,7 +69,7 @@
                             <div class="text-center bg-light p-3 mb-3">
                                 <h5 class="m-0 d-sm-inline-block">Payment Method</h5>
                                 <h6 class="font-13">{{ $order->payment_method }}</h6>
-                                @if($order->payment_method != 'cod')
+                                @if(!$order->payment_method != 'cod')
                                 <p class="mb-0 text-muted">Transaction ID : {{ $order->transaction->transaction_id }}</p>
                                 @else
                                     <p class="mb-0 text-muted">Cash on Delivery</p>

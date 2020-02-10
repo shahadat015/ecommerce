@@ -91,6 +91,9 @@
                                             <li class="{{ request()->is('customer/orders') ? 'active' : '' }}">
                                                 <a href="{{ route('customer.orders') }}"><i class="fas fa-shopping-bag"></i> My Orders</a>
                                            </li>
+                                           <li class="{{ request()->is('customer/favorites') ? 'active' : '' }}">
+                                                <a href="{{ route('customer.favorites') }}"><i class="fas fa-heart"></i> Wishlist</a>
+                                           </li>
                                             <li>
                                                 <a href="{{ route('customer.logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="fas fa-unlock"></i> Logout</a>
                                            </li>
@@ -414,7 +417,6 @@
     </form>
     <!-- ========== this is main js link ========== -->
     <script src="{{ asset('contents/website/js/jquery-3.3.1.min.js') }}"></script>
-    <script src="{{ asset('contents/website/js/sweet-alert.js') }}"></script>
     <script src="{{ asset('contents/website/js/toastr.min.js') }}"></script>
     <script src="{{ asset('contents/website/js/popper.min.js') }}"></script>
     <script src="{{ asset('contents/website/js/bootstrap.min.js') }}"></script>

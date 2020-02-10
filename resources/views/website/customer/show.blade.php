@@ -7,7 +7,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-xl-4 col-md-4">
-                    @include('website.customer.sidebar')
+                    @include('website.partial.sidebar')
                 </div>
                 <div class="col-xl-8 col-md-8">
                     <div class="cofirm_page_container">
@@ -19,31 +19,35 @@
                                         <th style="color:#767676">Name</th>
                                         <th style="color:#767676">Price</th>
                                         <th style="color:#767676">Qty</th>
-                                        <th style="color:#767676">Color</th>
-                                        <th style="color:#767676">Size</th>
+                                        <th style="color:#767676">Options</th>
                                         <th style="color:#767676">Total</th>
                                     </tr>
-                                    @foreach($products as $product)
+                                    @foreach($order->products as $product)
                                     <tr>
-                                        <td>{{$product->name}}</td>
-                                        <td>{{$product->price}}</td>
-                                        <td>{{$product->qty}}</td>
-                                        <td>{{$product->color != NULL ? $product->size : '--'}}</td>
-                                        <td>{{$product->size != NULL ? $product->color : '--'}}</td>
-                                        <td>{{$product->price * $product->qty}}</td>
+                                        <td>{{ $product->product->name }}</td>
+                                        <td>{{ $product->product->price }}</td>
+                                        <td>{{ $product->qty }}</td>
+                                        <td>
+                                            @forelse($product->options as $option) 
+                                               <p> {{ $option->option->name }} : {{ $option->values->implode('label', ', ') }} </p>
+                                               @empty
+                                               <p>-------</p>
+                                            @endforelse
+                                        </td>
+                                        <td>Tk {{ $product->line_total }}</td>
                                     </tr>
                                     @endforeach
                                     <tr>
-                                        <td class="text-right" colspan="5">Subtotal:</td>
-                                        <td>Tk {{$order->order_total}}</td>
+                                        <td class="text-right" colspan="4">Subtotal:</td>
+                                        <td>Tk {{ $order->sub_total }}</td>
                                     </tr>
                                     <tr>
-                                        <td class="text-right" colspan="5">Delivery Charge:</td>
-                                        <td>Tk {{$order->shipping_charge}}</td>
+                                        <td class="text-right" colspan="4">Delivery Charge:</td>
+                                        <td>Tk {{ $order->shipping_cost }}</td>
                                     </tr>
                                     <tr>
-                                        <td class="text-right" colspan="5">Total:</td>
-                                        <td>Tk {{$order->order_total + $order->shipping_charge}}</td>
+                                        <td class="text-right" colspan="4">Total:</td>
+                                        <td>Tk {{ $order->total }}</td>
                                     </tr>
                                 </tbody>
                             </table>

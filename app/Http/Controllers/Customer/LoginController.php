@@ -231,8 +231,12 @@ class LoginController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function handleProviderCallback($provider)
+    public function handleProviderCallback($provider, Request $request)
     {
+        if (!$request->has('code') || $request->has('denied')) {
+            return redirect('customer/login');
+        }
+
         $socialUser = Socialite::driver($provider)->user();
 
         $user = $this->findOrCreateUser($socialUser);
@@ -249,6 +253,7 @@ class LoginController extends Controller
         if($user->exists) return $user;
 
         $user->fill([
+            'provider_id' => $socialUser->getId(),
             'name' => $socialUser->getName(),
             'password' => bcrypt('12345678'),
             'image' => $socialUser->getAvatar()

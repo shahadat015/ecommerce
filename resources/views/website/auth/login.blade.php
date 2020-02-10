@@ -46,15 +46,21 @@
                             </div>
                         </form>
                     </div>
+                    @if(config('settings.facebook_login_enable') || config('settings.google_login_enable'))
                     <div class="login_with_social_container">
                         <h4>or</h4>
                         <div class="login_with_social_button text-center">
                             <ul>
+                                @if(config('settings.facebook_login_enable'))
                                 <li><a class="facebook_login" href="{{ url('login/facebook') }}"><i class="fab fa-facebook-f"></i> Log In via Facebook</a></li>
+                                @endif
+                                @if(config('settings.google_login_enable'))
                                 <li><a class="google_login" href="{{ url('login/google') }}"><i class="fab fa-google-plus-g"></i> Log In via Google+</a></li>
+                                @endif
                             </ul>
                         </div>
                     </div>
+                    @endif
                 </div>
             </div>
         </div>

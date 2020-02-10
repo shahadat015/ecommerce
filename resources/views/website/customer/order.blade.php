@@ -13,7 +13,7 @@
                     <div class="user_dashboard_sidebar_main_content">
                         <div class="order_status_container">
                             @forelse($orders as $order)
-                            <a href="{{ url('customer/order/'.$order->id) }}">
+                            <a href="{{ route('customer.order', $order->id) }}">
                                 <div class="order_status_item">
                                     <div class="row align-items-center">
                                         <div class="col-xl-3 col-md-3 col-sm-3">
@@ -64,7 +64,7 @@
                                     <nav aria-label="Page navigation example">
                                         <ul class="pagination justify-content-end">
                                             <li class="page-item">
-                                                {{ $orders->links() }}
+                                                {{ $orders->links('website.partial.pagination') }}
                                             </li>
                                         </ul>
                                     </nav>
