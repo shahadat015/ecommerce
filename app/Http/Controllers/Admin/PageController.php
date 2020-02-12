@@ -9,6 +9,13 @@ use Illuminate\Http\Request;
 
 class PageController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:Create Page')->only(['create', 'store']);
+        $this->middleware('permission:View Page')->only(['index']);
+        $this->middleware('permission:Update Page')->only(['edit', 'update']);
+        $this->middleware('permission:Delete Page')->only(['destroy']);
+    }
 
     public function pages()
     {

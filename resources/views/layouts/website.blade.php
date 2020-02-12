@@ -74,7 +74,11 @@
                         <div class="search-preloader d-none">
                             <div class="loader"><div></div><div></div><div></div></div>
                         </div>
-                        <div class="product"></div>
+                        <div class="search-nothing d-none">Sorry, nothing found for <strong></strong></div>
+                        <div class="product">
+                            <div class="title">Products</div>
+                            <ul></ul>
+                        </div>
                     </div>
                 </div>
                 <div class="col-xl-5 col-lg-5 col-md-5 col-sm-5">
@@ -125,7 +129,7 @@
                                         <div class="row">
                                             <div class="col-4 col-xl-4 col-lg-4 col-md-4 col-sm-4">
                                                 <div class="mini_cart_image">
-                                                    <img class="img-fluid" src="{{ asset($cartItem->options->image) }}" alt="cart">
+                                                    <img class="img-fluid" src="{{ asset($cartItem->options->image ?? 'contents/admin/images/placeholder.png') }}" alt="cart">
                                                 </div>
                                             </div>
                                             <div class="col-8 col-xl-8 col-lg-8 col-md-8 col-sm-8">

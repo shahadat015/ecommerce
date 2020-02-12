@@ -9,6 +9,14 @@ use Illuminate\Http\Request;
 
 class OptionController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:Create Option')->only(['create', 'store']);
+        $this->middleware('permission:View Option')->only(['index']);
+        $this->middleware('permission:Update Option')->only(['edit', 'update']);
+        $this->middleware('permission:Delete Option')->only(['destroy']);
+    }
+
     public function options()
     {
         return Laratables::recordsOf(Option::class, function($query)

@@ -13,6 +13,12 @@ use Illuminate\Http\Request;
 
 class StorefrontController extends Controller
 {
+	public function __construct()
+    {
+        $this->middleware('permission:View Settings')->only(['index', 'sections']);
+        $this->middleware('permission:Update Settings')->only(['update', 'updateSections']);
+    }
+
     public function index()
 	{
 		$sliders = Slider::all();

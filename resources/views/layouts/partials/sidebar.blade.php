@@ -36,12 +36,15 @@
                 </svg>
             </a>
             @endcan
+            @can('View Media')
             <a href="#MetricaProject" class="nav-link" data-toggle="tooltip-custom" data-placement="top" title="" data-original-title="Media">
                 <svg class="nav-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
                     <path class="svg-primary" d="M256 32C132.288 32 32 132.288 32 256s100.288 224 224 224 224-100.288 224-224S379.712 32 256 32zm135.765 359.765C355.5 428.028 307.285 448 256 448s-99.5-19.972-135.765-56.235C83.972 355.5 64 307.285 64 256s19.972-99.5 56.235-135.765C156.5 83.972 204.715 64 256 64s99.5 19.972 135.765 56.235C428.028 156.5 448 204.715 448 256s-19.972 99.5-56.235 135.765z" />
                     <path d="M200.043 106.067c-40.631 15.171-73.434 46.382-90.717 85.933H256l-55.957-85.933zM412.797 288A160.723 160.723 0 0 0 416 256c0-36.624-12.314-70.367-33.016-97.334L311 288h101.797zM359.973 134.395C332.007 110.461 295.694 96 256 96c-7.966 0-15.794.591-23.448 1.715L310.852 224l49.121-89.605zM99.204 224A160.65 160.65 0 0 0 96 256c0 36.639 12.324 70.394 33.041 97.366L201 224H99.204zM311.959 405.932c40.631-15.171 73.433-46.382 90.715-85.932H256l55.959 85.932zM152.046 377.621C180.009 401.545 216.314 416 256 416c7.969 0 15.799-.592 23.456-1.716L201.164 288l-49.118 89.621z" />
                 </svg>
             </a>
+            @endcan
+            @can('View Report')
             <!--end MetricaEcommerce-->
             <a href="#MetricaCRM" class="nav-link" data-toggle="tooltip-custom" data-placement="top" title="" data-original-title="Report">
                 <svg class="nav-svg" version="1.1" id="Layer_3" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve">
@@ -55,6 +58,8 @@
                     </g>
                 </svg>
             </a>
+            @endcan
+            @can('View Settings')
             <!--end MetricaCRM-->
             <a href="#MetricaOthers" class="nav-link" data-toggle="tooltip-custom" data-placement="top" title="" data-original-title="Appearance">
                 <svg class="nav-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
@@ -63,6 +68,8 @@
                     <path d="M441.3 347.5s-30.9-14.9-35-16.9-5.2-1.9-9.5.1S272.1 391 272.1 391c-4.5 2.1-10.3 3.2-16.1 3.2s-11.7-1.1-16.1-3.2c0 0-117.3-56.6-122.8-59.3-6-2.9-7.7-2.9-13.1-.3l-33.4 16.1c-8.9 4.3-8.9 11.3 0 15.6l169.2 81.7c4.4 2.2 10.3 3.2 16.1 3.2s11.7-1.1 16.1-3.2l169.2-81.7c9-4.3 9-11.3.1-15.6z" />
                 </svg>
             </a>
+            @endcan
+            @can('View Page')
             <!--end MetricaOthers-->
             <a href="#MetricaPages" class="nav-link" data-toggle="tooltip-custom" data-placement="top" title="" data-original-title="Pages">
                 <svg class="nav-svg" version="1.1" id="Layer_4" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve">
@@ -80,6 +87,7 @@
                     </g>
                 </svg>
             </a>
+            @endcan
             @can('View User')
             <!--end MetricaPages-->
             <a href="#MetricaAuthentication" class="nav-link" data-toggle="tooltip-custom" data-placement="top" title="" data-original-title="Authentication">
@@ -100,7 +108,7 @@
     <!--end main-icon-menu-->
     <div class="main-menu-inner">
         <div class="menu-body slimscroll">
-            <div id="MetricaAnalytic" class="main-icon-menu-pane">
+            <div id="MetricaAnalytic" class="main-icon-menu-pane {{ request()->is('admin/messages/*') ? 'active' : '' }}">
                 <div class="title-box">
                     <h6 class="menu-title">Dashboard</h6>
                 </div>
@@ -108,21 +116,29 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('admin.dashboard') }}"><i class="dripicons-meter"></i>Dashboard</a>
                     </li>
+                    @can('View Visitor')
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('admin.visitors') }}"><i class="dripicons-user-group"></i>Visitors</a>
                     </li>
+                    @endcan
+                    @can('View Messages')
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('admin.messages.index') }}"><i class="dripicons-message"></i>Messages</a>
                     </li>
+                    @endcan
+                    @can('View Subscriber')
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('admin.subscribers.index') }}"><i class="dripicons-user-group"></i>Subscribers</a>
                     </li>
+                    @endcan
                     <li class="nav-item">
                         <a class="nav-link" href="{{ url('/') }}" target="_blank"><i class="dripicons-monitor"></i>Visit Store</a>
                     </li>
+                    @can('View Settings')
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('admin.settings') }}"><i class="dripicons-gear"></i>Settings</a>
                     </li>
+                    @endcan
                 </ul>
             </div>
             <!-- end Analytic -->
@@ -131,11 +147,11 @@
                     <h6 class="menu-title">Products</h6>
                 </div>
                 <ul class="nav">
-                    <li class="nav-item"><a class="nav-link" href="{{ route('admin.products.index') }}"><i class="dripicons-view-apps"></i>Catalog</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ route('admin.products.index') }}"><i class="dripicons-view-apps"></i>Products</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ route('admin.categories.index') }}"><i class="dripicons-list"></i>Categories</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ route('admin.brands.index') }}"><i class="dripicons-article"></i>Brands</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{ route('admin.attributes.index') }}"><i class="dripicons-checklist"></i>Attributes</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{ route('admin.attribute-sets.index') }}"><i class="dripicons-view-list"></i>Attribute Set</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ route('admin.attributes.index') }}"><i class="dripicons-checklist"></i>Features</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ route('admin.attribute-sets.index') }}"><i class="dripicons-view-list"></i>Feature Sets</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ route('admin.options.index') }}"><i class="dripicons-view-list-large"></i>Options</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ route('admin.reviews.index') }}"><i class="mdi mdi-star-outline"></i>Review</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ route('admin.coupons.index') }}"><i class="dripicons-card"></i>Coupons</a></li>
@@ -145,15 +161,21 @@
                 <div class="title-box">
                     <h6 class="menu-title">Sales</h6></div>
                 <ul class="nav">
+                    @can('View Order')
                     <li class="nav-item"><a class="nav-link" href="{{ route('admin.orders.index') }}"><i class="dripicons-swap"></i>Orders</a></li>
+                    @endcan
+                    @can('View Transaction')
                     <li class="nav-item"><a class="nav-link" href="{{ route('admin.transactions') }}"><i class="dripicons-wallet"></i> Transactions</a></li>
+                    @endcan
                 </ul>
             </div>
             <div id="MetricaProject" class="main-icon-menu-pane">
                 <div class="title-box">
                     <h6 class="menu-title">Media</h6></div>
                 <ul class="nav">
+                    @can('View Media')
                     <li class="nav-item"><a class="nav-link" href="{{ route('admin.images.index') }}"><i class="dripicons-camera"></i>Media</a></li>
+                    @endcan
                 </ul>
             </div>
             <!-- end Ecommerce -->
@@ -162,7 +184,9 @@
                     <h6 class="menu-title">Reports</h6>
                 </div>
                 <ul class="nav">
+                    @can('View Report')
                     <li class="nav-item"><a class="nav-link" href="{{ route('admin.reports') }}"><i class="dripicons-document"></i>Reports</a></li>
+                    @endcan
                 </ul>
             </div>
             <!-- end CRM -->
@@ -171,14 +195,20 @@
                     <h6 class="menu-title">Appearance</h6>
                 </div>
                 <ul class="nav metismenu" id="main_menu_side_nav">
+                    @can('View Meu')
                     <li class="nav-item"><a class="nav-link" href="{{ route('admin.menus.index') }}"><i class="dripicons-menu"></i>Menus</a></li>
+                    @endcan
+                    @can('View Slider')
                     <li class="nav-item"><a class="nav-link" href="{{ route('admin.sliders.index') }}"><i class="dripicons-photo-group"></i>Sliders</a></li>
+                    @endcan
+                    @can('settings')
                     <li class="nav-item"><a class="nav-link" href="#"><i class="dripicons-view-thumb"></i><span class="w-100">Storefront</span><span class="menu-arrow"><i class="mdi mdi-chevron-right"></i></span></a>
                         <ul class="nav-second-level" aria-expanded="false">
                             <li><a href="{{ route('admin.storefront.general') }}">General Settings</a></li>
                             <li><a href="{{ route('admin.storefront.sections') }}">Home Page Sections</a></li>
                         </ul>
                     </li>
+                    @endcan
                     <!-- <li class="nav-item"><a class="nav-link" href="#"><i class="dripicons-web"></i><span class="w-100">Localization</span><span class="menu-arrow"><i class="mdi mdi-chevron-right"></i></span></a>
                         <ul class="nav-second-level" aria-expanded="false">
                             <li><a href="../others/email-inbox.html">Translations</a></li>
@@ -196,7 +226,9 @@
                     <h6 class="menu-title">Pages</h6>
                 </div>
                 <ul class="nav">
+                    @can('View Page')
                     <li class="nav-item"><a class="nav-link" href="{{ route('admin.pages.index') }}"><i class="dripicons-document"></i>Pages</a></li>
+                    @endcan
                 </ul>
             </div>
             <!-- end Pages -->
@@ -205,9 +237,15 @@
                     <h6 class="menu-title">Authentication</h6>
                 </div>
                 <ul class="nav metismenu">
+                    @can('View Customer')
                     <li class="nav-item"><a class="nav-link" href="{{ route('admin.customers.index') }}"><i class="dripicons-user-group"></i>Customers</a></li>
+                    @endcan
+                    @can('View User')
                     <li class="nav-item"><a class="nav-link" href="{{ route('admin.users.index') }}"><i class="dripicons-user-group"></i>Users</a></li>
+                    @endcan
+                    @can('View Role')
                     <li class="nav-item"><a class="nav-link" href="{{ route('admin.roles.index') }}"><i class="dripicons-user-id"></i>Roles</a></li>
+                    @endcan
                     <li class="nav-item"><a class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="dripicons-clockwise"></i>Logout</a></li>
                 </ul>
             </div>

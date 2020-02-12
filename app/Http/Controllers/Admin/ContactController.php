@@ -9,6 +9,12 @@ use Illuminate\Http\Request;
 
 class ContactController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:View Message')->only(['index', 'show']);
+        $this->middleware('permission:Delete Message')->only(['destroy']);
+    }
+
 	public function messages()
     {
     	return Laratables::recordsOf(Contact::class, function($query)

@@ -9,6 +9,12 @@ use Illuminate\Http\Request;
 
 class TransactionController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:View Transaction')->only(['index']);
+        $this->middleware('permission:Delete Transaction')->only(['destroy']);
+    }
+
 	public function transactions()
 	{
 		return Laratables::recordsOf(Transaction::class, function($query)

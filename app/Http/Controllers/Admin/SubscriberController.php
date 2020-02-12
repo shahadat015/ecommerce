@@ -9,6 +9,12 @@ use Illuminate\Http\Request;
 
 class SubscriberController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:View Subscriber')->only(['index']);
+        $this->middleware('permission:Delete Subscriber')->only(['destroy']);
+    }
+
 	public function subscribers()
     {
     	return Laratables::recordsOf(Subscriber::class, function($query)

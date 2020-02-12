@@ -11,6 +11,12 @@ use Illuminate\Support\Facades\Mail;
 
 class OrderController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:View Order')->only(['index', 'show']);
+        $this->middleware('permission:Delete Order')->only(['destroy']);
+    }
+
 	public function orders()
 	{
 		return Laratables::recordsOf(Order::class, function($query)

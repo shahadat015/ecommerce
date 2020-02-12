@@ -345,7 +345,7 @@
                     @foreach($brands as $brand)
                     <div class="shop_brand_slide_item">
                         <a href="{{ route('product.brand', $brand->slug) }}">
-                            <img src="{{ asset($brand->image) }}" alt="{{ $brand->name }}">
+                            <img src="{{ asset($brand->image ?? 'contents/admin/images/placeholder.png') }}" alt="{{ $brand->name }}">
                         </a>
                     </div>
                     @endforeach

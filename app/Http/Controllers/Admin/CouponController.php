@@ -10,6 +10,14 @@ use Illuminate\Http\Request;
 
 class CouponController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:Create Coupon')->only(['create', 'store']);
+        $this->middleware('permission:View Coupon')->only(['index']);
+        $this->middleware('permission:Update Coupon')->only(['edit', 'update']);
+        $this->middleware('permission:Delete Coupon')->only(['destroy']);
+    }
+
     public function coupons()
     {
     	return Laratables::recordsOf(Coupon::class, function($query)

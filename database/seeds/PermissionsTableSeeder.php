@@ -18,6 +18,38 @@ class PermissionsTableSeeder extends Seeder
     	Permission::truncate();
 
     	Permission::insert([
+            [
+                'name' => 'View Message',
+                'guard_name' => 'web'
+            ],
+            [
+                'name' => 'Delete Message',
+                'guard_name' => 'web'
+            ],
+            [
+                'name' => 'View Subscriber',
+                'guard_name' => 'web'
+            ],
+            [
+                'name' => 'Delete Subscriber',
+                'guard_name' => 'web'
+            ],
+            [
+                'name' => 'View Visitor',
+                'guard_name' => 'web'
+            ],
+            [
+                'name' => 'Delete Visitor',
+                'guard_name' => 'web'
+            ],
+            [
+                'name' => 'View Settings',
+                'guard_name' => 'web'
+            ],
+            [
+                'name' => 'Update Settings',
+                'guard_name' => 'web'
+            ],
         	[
 	            'name' => 'Create Product',
                 'guard_name' => 'web'
@@ -67,6 +99,130 @@ class PermissionsTableSeeder extends Seeder
                 'guard_name' => 'web'
             ],
             [
+                'name' => 'Create Feature',
+                'guard_name' => 'web'
+            ],
+            [
+                'name' => 'Update Feature',
+                'guard_name' => 'web'
+            ],
+            [
+                'name' => 'View Feature',
+                'guard_name' => 'web'
+            ],
+            [
+                'name' => 'Delete Feature',
+                'guard_name' => 'web'
+            ],
+            [
+                'name' => 'Create Option',
+                'guard_name' => 'web'
+            ],
+            [
+                'name' => 'View Option',
+                'guard_name' => 'web'
+            ],
+            [
+                'name' => 'Delete Option',
+                'guard_name' => 'web'
+            ],
+            [
+                'name' => 'View Review',
+                'guard_name' => 'web'
+            ],
+            [
+                'name' => 'Update Review',
+                'guard_name' => 'web'
+            ],
+            [
+                'name' => 'Delete Review',
+                'guard_name' => 'web'
+            ],
+            [
+                'name' => 'Create Coupon',
+                'guard_name' => 'web'
+            ],
+            [
+                'name' => 'Update Coupon',
+                'guard_name' => 'web'
+            ],
+            [
+                'name' => 'Delete Coupon',
+                'guard_name' => 'web'
+            ],
+            [
+                'name' => 'View Media',
+                'guard_name' => 'web'
+            ],
+            [
+                'name' => 'Delete Media',
+                'guard_name' => 'web'
+            ],
+            [
+                'name' => 'View Report',
+                'guard_name' => 'web'
+            ],
+            [
+                'name' => 'Create Menu',
+                'guard_name' => 'web'
+            ],
+            [
+                'name' => 'Update Menu',
+                'guard_name' => 'web'
+            ],
+            [
+                'name' => 'View Menu',
+                'guard_name' => 'web'
+            ],
+            [
+                'name' => 'Delete Menu',
+                'guard_name' => 'web'
+            ],
+            [
+                'name' => 'Create Page',
+                'guard_name' => 'web'
+            ],
+            [
+                'name' => 'Update Page',
+                'guard_name' => 'web'
+            ],
+            [
+                'name' => 'Delete Page',
+                'guard_name' => 'web'
+            ],
+            [
+                'name' => 'View Order',
+                'guard_name' => 'web'
+            ],
+            [
+                'name' => 'Delete Order',
+                'guard_name' => 'web'
+            ],
+            [
+                'name' => 'View Transaction',
+                'guard_name' => 'web'
+            ],
+            [
+                'name' => 'Delete Transaction',
+                'guard_name' => 'web'
+            ],
+            [
+                'name' => 'Create Customer',
+                'guard_name' => 'web'
+            ],
+            [
+                'name' => 'View Customer',
+                'guard_name' => 'web'
+            ],
+            [
+                'name' => 'Update Customer',
+                'guard_name' => 'web'
+            ],
+            [
+                'name' => 'Delete Customer',
+                'guard_name' => 'web'
+            ],
+            [
                 'name' => 'Create User',
                 'guard_name' => 'web'
             ],
@@ -98,30 +254,6 @@ class PermissionsTableSeeder extends Seeder
                 'name' => 'Delete Role',
                 'guard_name' => 'web'
             ],
-            [
-                'name' => 'View Subscriber',
-                'guard_name' => 'web'
-            ],
-            [
-                'name' => 'Delete Subscriber',
-                'guard_name' => 'web'
-            ],
-            [
-                'name' => 'View Order',
-                'guard_name' => 'web'
-            ],
-            [
-                'name' => 'Delete Order',
-                'guard_name' => 'web'
-            ],
-            [
-                'name' => 'View Message',
-                'guard_name' => 'web'
-            ],
-            [
-                'name' => 'Delete Message',
-                'guard_name' => 'web'
-            ]
         ]);
 
         $admin = Role::find(2);
@@ -129,8 +261,8 @@ class PermissionsTableSeeder extends Seeder
         $admin->givePermissionTo(Permission::all());
 
         $editor = Role::find(3);
-        $editor->revokePermissionTo(['Create Product', 'View Product', 'Update Product', 'Delete Product', 'Create Category', 'View Category', 'Update Category', 'Delete Category', 'Create Brand', 'View Brand', 'Update Brand', 'Delete Brand', 'View Subscriber', 'Delete Subscriber', 'View Order', 'Delete Order', 'View Message', 'Delete Message']);
-        $editor->givePermissionTo(['Create Product', 'View Product', 'Update Product', 'Delete Product', 'Create Category', 'View Category', 'Update Category', 'Delete Category', 'Create Brand', 'View Brand', 'Update Brand', 'Delete Brand', 'View Subscriber', 'Delete Subscriber', 'View Order', 'Delete Order', 'View Message', 'Delete Message']);
+        $editor->revokePermissionTo([ 'View Message', 'Delete Message', 'View Subscriber', 'Delete Subscriber', 'View Visitor', 'Delete Visitor', 'View Settings', 'Update Settings', 'Create Product', 'View Product', 'Update Product', 'Delete Product', 'Create Category', 'View Category', 'Update Category', 'Delete Category', 'Create Brand', 'View Brand', 'Update Brand', 'Delete Brand', 'Create Feature', 'Update Feature', 'View Feature', 'Delete Feature', 'Create Option', 'View Option', 'Delete Option', 'View Review', 'Update Review', 'Delete Review', 'Create Coupon', 'Update Coupon', 'Delete Coupon', 'View Media', 'Delete Media', 'View Report', 'Create Menu', 'Update Menu', 'View Menu', 'Delete Menu', 'Create Page', 'Update Page', 'Delete Page', 'View Order', 'Delete Order', 'View Transaction', 'Delete Transaction', 'Create Customer', 'View Customer', 'Update Customer', 'Delete Customer', 'Create User', 'View User', 'Update User', 'Delete User', 'Create Role', 'View Role', 'Update Role', 'Delete Role' ]);
+        $editor->revokePermissionTo([ 'View Message', 'Delete Message', 'View Subscriber', 'Delete Subscriber', 'View Visitor', 'Delete Visitor', 'View Settings', 'Update Settings', 'Create Product', 'View Product', 'Update Product', 'Delete Product', 'Create Category', 'View Category', 'Update Category', 'Delete Category', 'Create Brand', 'View Brand', 'Update Brand', 'Delete Brand', 'Create Feature', 'Update Feature', 'View Feature', 'Delete Feature', 'Create Option', 'View Option', 'Delete Option', 'View Review', 'Update Review', 'Delete Review', 'Create Coupon','Update Coupon', 'Delete Coupon', 'View Media', 'Delete Media', 'View Report', 'Create Menu', 'Update Menu', 'View Menu', 'Delete Menu', 'Create Page', 'Update Page', 'Delete Page', 'View Order', 'Delete Order', 'View Transaction', 'Delete Transaction', 'Create Customer', 'View Customer', 'Update Customer', 'Delete Customer', 'Create User', 'View User', 'Update User', 'Delete User', 'Create Role', 'View Role', 'Update Role', 'Delete Role' ]);
         
     }
 }

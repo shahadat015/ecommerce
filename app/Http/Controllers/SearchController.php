@@ -4,10 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class SearchController extends Controller
 {
-    public function search(Request $request)
+    public function index(Request $request)
     {
         $query = $request->input('query');
 
@@ -19,14 +20,14 @@ class SearchController extends Controller
         return view('website.product.index', compact('products'));
     }
 
-    public function searchProduct(Request $request)
+    public function search(Request $request)
     {
         $query = $request->input('query');
 
         $products = Product::where('name', 'LIKE', "%$query%")
-        					->orWhere('price', 'LIKE', "%$query%")
-        					->orWhere('short_description', 'LIKE', "%$query%")
-        					->orWhere('description', 'LIKE', "%$query%")->limit(6)->get();
+                            ->orWhere('price', 'LIKE', "%$query%")
+                            ->orWhere('short_description', 'LIKE', "%$query%")
+                            ->limit(7)->get();
 
         return view('website.partial.searchbox', compact('products'));
     }

@@ -16,6 +16,8 @@
         "laravel/helpers": "^1.1",
         "laravel/socialite": "^4.3",
         "laravel/tinker": "^1.0",
+        "simplesoftwareio/simple-qrcode": "^2.0",
+        "spatie/laravel-activitylog": "^3.9",
         "spatie/laravel-permission": "^3.3",
         "torann/geoip": "^1.1",
         "typicms/nestablecollection": "^1.1",

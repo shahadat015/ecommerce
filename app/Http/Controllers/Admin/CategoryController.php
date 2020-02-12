@@ -9,6 +9,13 @@ use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:Create Category')->only(['store']);
+        $this->middleware('permission:View Category')->only(['index']);
+        $this->middleware('permission:Update Category')->only(['edit', 'update']);
+        $this->middleware('permission:Delete Category')->only(['destroy']);
+    }
 
     public function categories()
     {

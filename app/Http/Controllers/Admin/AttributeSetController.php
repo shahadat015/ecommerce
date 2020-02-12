@@ -9,6 +9,14 @@ use Illuminate\Http\Request;
 
 class AttributeSetController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:Create Feature')->only(['create', 'store']);
+        $this->middleware('permission:View Feature')->only(['index']);
+        $this->middleware('permission:Update Feature')->only(['edit', 'update']);
+        $this->middleware('permission:Delete Feature')->only(['destroy']);
+    }
+
     public function attributesets()
     {
         return Laratables::recordsOf(AttributeSet::class, function($query)

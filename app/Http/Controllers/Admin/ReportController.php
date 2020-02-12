@@ -13,6 +13,11 @@ use Illuminate\Http\Request;
 
 class ReportController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:View Report')->only(['index']);
+    }
+
     private $reports = [
         'coupons_report' => CouponsReport::class,
         'order_report' => OrderReport::class,

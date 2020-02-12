@@ -13,6 +13,10 @@ $(function() {
         var query = $(this).val();
         var preloader = $('.search-preloader');
         var search_box = $('.typed-search-box');
+        var message = $('.search-nothing');
+        var products = $('.product ul');
+
+        // console.loh
 
         if(query.length){
             search_box.removeClass('d-none');
@@ -22,21 +26,21 @@ $(function() {
         }
 
         $.ajax({
-            url: '/search/product',
-            type: "GET",
-            data: query,
+            url: '/search',
+            type: "POST",
+            data: {query},
             dataType: "HTML",
-            contentType: false,
-            processData: false,
             cache: false,
             beforeSend:function() {
                 preloader.removeClass('d-none');
             },
             success(data) {
                 if(!$.isEmptyObject(data)){
-                    $('.typed-search-box .product').html(data);
+                    message.addClass('d-none')
+                    products.html(data);
                 }else{
-                    $('.search-nothing').removeClass('d-none').text('Sorry, nothing found for "' + query +'"');
+                    products.empty();
+                    message.removeClass('d-none').children().text(query);
                 }
             },
             complete:function() {

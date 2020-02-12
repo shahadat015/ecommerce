@@ -149,7 +149,7 @@
 
                                         </div>
                                         <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
-                                            @foreach($product->reviews()->where('status', 1)->get() as $review)
+                                            @foreach($product->reviews as $review)
                                             <div class="list list-row block">
                                                 <div class="list-item">
                                                     <div><span class="w-48 avatar gd-warning">{{ substr($review->reviewer_name, 0,1) }}</span></div>

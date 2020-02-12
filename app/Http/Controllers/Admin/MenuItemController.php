@@ -13,6 +13,13 @@ use Illuminate\Validation\Rule;
 
 class MenuItemController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:Create Menu')->only(['create', 'store']);
+        $this->middleware('permission:View Menu')->only(['index']);
+        $this->middleware('permission:Update Menu')->only(['edit', 'update']);
+        $this->middleware('permission:Delete Menu')->only(['destroy']);
+    }
 
     public function create(Menu $menu)
     {

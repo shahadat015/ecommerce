@@ -11,6 +11,13 @@ use Illuminate\Support\Facades\Storage;
 
 class ImageController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:Create Image')->only(['store']);
+        $this->middleware('permission:View Image')->only(['index']);
+        $this->middleware('permission:Delete Image')->only(['destroy']);
+    }
+
     public function images()
     {
         return Laratables::recordsOf(Image::class, function($query)

@@ -9,14 +9,17 @@ use App\Http\Requests\SettingsValidate;
 
 class SettingController extends Controller
 {
+	public function __construct()
+    {
+        $this->middleware('permission:View Settings')->only(['index']);
+        $this->middleware('permission:Update Settings')->only(['update']);
+    }
+
     public function index()
 	{
 	    return view('admin.setting.index');
 	}
 
-	/**
-	 * @param Request $request
-	 */
 	public function update(SettingsValidate $request)
 	{  
 

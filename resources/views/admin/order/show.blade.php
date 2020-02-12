@@ -14,8 +14,7 @@
                 <div class="card-body invoice-head">
                     <div class="row">
                         <div class="col-md-4 align-self-center">
-                            <img src="{{ asset('contents/admin/images/logo-sm.png') }}" alt="logo-small" class="logo-sm mr-2" height="26"> 
-                            <img src="{{ asset('contents/admin/images/logo-dark.png') }}" alt="logo-large" class="logo-lg" height="16"></div>
+                            <img src="{{ asset(config('settings.storefront_logo')) ?? config('settings.store_name') }}" alt="logo-large" class="logo-lg" height="40"></div>
                         <div class="col-md-8">
                             <ul class="list-inline mb-0 contact-detail float-right">
                                 <li class="list-inline-item">
@@ -69,10 +68,10 @@
                             <div class="text-center bg-light p-3 mb-3">
                                 <h5 class="m-0 d-sm-inline-block">Payment Method</h5>
                                 <h6 class="font-13">{{ $order->payment_method }}</h6>
-                                @if(!$order->payment_method != 'cod')
-                                <p class="mb-0 text-muted">Transaction ID : {{ $order->transaction->transaction_id }}</p>
-                                @else
+                                @if($order->payment_method == 'cod')
                                     <p class="mb-0 text-muted">Cash on Delivery</p>
+                                @else
+                                    <p class="mb-0 text-muted">Transaction ID : {{ $order->transaction->transaction_id }}</p>
                                 @endif
                             </div>
                         </div>
@@ -86,6 +85,7 @@
                                             <th>Item</th>
                                             <th>Name</th>
                                             <th>Quantity</th>
+                                            <th>Options</th>
                                             <th>Unit Cost</th>
                                             <th>Total</th>
                                         </tr>
@@ -94,25 +94,32 @@
                                         @foreach($order->products as $key=>$product)
                                         <tr>
                                             <th>{{ $key + 1 }}</th>
-                                            <td>{{  $product->product->name }}</td>
-                                            <td>{{  $product->qty }}</td>
-                                            <td>{{ $product->unit_price }}</td>
-                                            <td>{{ $product->line_total }}</td>
+                                            <td>{{ $product->product->name }}</td>
+                                            <td>{{ $product->qty }}</td>
+                                            <td>
+                                                @forelse($product->options as $option) 
+                                                   <p> {{ $option->option->name }} : {{ $option->values->implode('label', ', ') }} </p>
+                                                   @empty
+                                                   <p>------</p>
+                                                @endforelse
+                                            </td>
+                                            <td>Tk {{ $product->unit_price }}</td>
+                                            <td>Tk {{ $product->line_total }}</td>
                                         </tr>
                                         @endforeach
                                         </tr>
                                         <tr>
-                                            <td colspan="3" class="border-0"></td>
+                                            <td colspan="4" class="border-0"></td>
                                             <td class="border-0 font-14"><b>Sub Total</b></td>
                                             <td class="border-0 font-14"><b>Tk {{ $order->sub_total }}</b></td>
                                         </tr>
                                         <tr>
-                                            <th colspan="3" class="border-0"></th>
-                                            <td class="border-0 font-14"><b>Local Pickup</b></td>
+                                            <th colspan="4" class="border-0"></th>
+                                            <td class="border-0 font-14"><b>{{ $order->shipping_method }}</b></td>
                                             <td class="border-0 font-14"><b>Tk {{ $order->shipping_cost }}</b></td>
                                         </tr>
                                         <tr class="bg-dark text-white">
-                                            <th colspan="3" class="border-0"></th>
+                                            <th colspan="4" class="border-0"></th>
                                             <td class="border-0 font-14"><b>Total</b></td>
                                             <td class="border-0 font-14"><b>Tk {{ $order->total }}</b></td>
                                         </tr>
@@ -133,7 +140,7 @@
                         <div class="col-lg-6 align-self-end">
                             <div class="w-25 float-right">
                                 <small>Account Manager</small> 
-                                <img src="{{ asset('contents/admin') }}/images/signature.png" alt="" class="" height="48">
+                                <!-- <img src="{{ asset('contents/admin') }}/images/signature.png" alt="" class="" height="48"> -->
                                 <p class="border-top">Signature</p>
                             </div>
                         </div>
@@ -141,7 +148,7 @@
                     <hr>
                     <div class="row d-flex justify-content-center">
                         <div class="col-lg-12 col-xl-4 ml-auto align-self-center">
-                            <div class="text-center text-muted"><small>Thank you very much for doing business with us. Thanks !</small></div>
+                            <div class="text-center text-muted"><small>Thank you very much for your Order!</small></div>
                         </div>
                         <div class="col-lg-12 col-xl-4">
                             <div class="float-right d-print-none">

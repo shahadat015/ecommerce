@@ -53,5 +53,26 @@
     <script src="{{asset('contents/admin')}}/plugins/dropzone/dropzone.js"></script>
     <script src="{{asset('contents/admin')}}/plugins/datatables/jquery.dataTables.min.js"></script>
     <script src="{{asset('contents/admin')}}/plugins/datatables/dataTables.bootstrap4.min.js"></script>
-    <script src="{{asset('contents/admin')}}/js/media.js"></script>
+    <script>
+        Dropzone.options.myDropzone = {
+            paramName: "file",
+            maxFilesize: 2,
+            init() {
+                this.on("success", function(file) {
+                    $('#datatable').DataTable().ajax.reload();
+                });
+            }
+        };
+
+        $('#datatable').DataTable({
+            serverSide: true,
+            ajax: "{{ route('admin.images.datatables') }}",
+            columns: [
+                { name: 'path' },
+                { name: 'name' },
+                { name: 'action', orderable: false, searchable: false }
+            ]
+        });
+
+    </script>
 @endpush

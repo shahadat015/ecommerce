@@ -9,6 +9,13 @@ use Illuminate\Http\Request;
 
 class CustomerController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:Create Customer')->only(['create', 'store']);
+        $this->middleware('permission:View Customer')->only(['index', 'show']);
+        $this->middleware('permission:Update Customer')->only(['edit', 'update']);
+        $this->middleware('permission:Delete Customer')->only(['destroy']);
+    }
 
     public function customers()
     {

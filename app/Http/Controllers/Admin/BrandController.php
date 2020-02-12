@@ -10,6 +10,14 @@ use Illuminate\Support\Str;
 
 class BrandController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:Create Brand')->only(['create', 'store']);
+        $this->middleware('permission:View Brand')->only(['index', 'show']);
+        $this->middleware('permission:Update Brand')->only(['edit', 'update']);
+        $this->middleware('permission:Delete Brand')->only(['destroy']);
+    }
+
     public function brands()
     {
         return Laratables::recordsOf(Brand::class, function($query)

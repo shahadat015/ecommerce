@@ -9,6 +9,13 @@ use Illuminate\Http\Request;
 
 class SliderController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:Create Slider')->only(['create', 'store']);
+        $this->middleware('permission:View Slider')->only(['index']);
+        $this->middleware('permission:Update Slider')->only(['edit', 'update']);
+        $this->middleware('permission:Delete Slider')->only(['destroy']);
+    }
 
     public function sliders()
     {

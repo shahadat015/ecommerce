@@ -9,6 +9,13 @@ use Illuminate\Http\Request;
 
 class ReviewController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:View Review')->only(['index']);
+        $this->middleware('permission:Update Review')->only(['edit', 'update']);
+        $this->middleware('permission:Delete Review')->only(['destroy']);
+    }
+
 	public function reviews()
     {
     	return Laratables::recordsOf(Review::class, function($query)

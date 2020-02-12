@@ -9,6 +9,12 @@ use Illuminate\Http\Request;
 
 class VisitorController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:View Visitor')->only(['index']);
+        $this->middleware('permission:Delete Visitor')->only(['destroy']);
+    }
+
 	public function visitors()
 	{
 		return Laratables::recordsOf(Visitor::class, function($query)
