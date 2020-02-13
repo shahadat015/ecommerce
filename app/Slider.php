@@ -2,10 +2,13 @@
 
 namespace App;
 
+use App\Http\Traits\ActivityLog;
 use Illuminate\Database\Eloquent\Model;
 
 class Slider extends Model
 {
+    use ActivityLog;
+
     protected $fillable = [
         'name', 'autoplay', 'autoplay_speed', 'arrows', 'dots', 'status'
     ];

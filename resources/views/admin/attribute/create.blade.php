@@ -1,9 +1,9 @@
 @extends('layouts.admin')
-@section('title', 'Create Attribute')
+@section('title', 'Create Features')
 @section('content')
     <!-- Page-Title -->
     @component('layouts.partials.breadcumb')
-    	<li class="breadcrumb-item"><a href="{{ route('admin.attributes.index') }}">Attributes</a></li>
+    	<li class="breadcrumb-item"><a href="{{ route('admin.attributes.index') }}">Features</a></li>
         <li class="breadcrumb-item active">Create</li>
     @endcomponent
     
@@ -12,7 +12,7 @@
         <div class="col-10">
             <div class="card">
                 <div class="card-header">
-                    <h4 class="mt-2 header-title float-left">Create Attribute</h4>
+                    <h4 class="mt-2 header-title float-left">Create Features</h4>
                     <a class="btn btn-info btn-sm float-right" href="{{ route('admin.attributes.index') }}"><i class="mdi mdi-arrow-left-thick"></i> Back</a>
                 </div>
                     
@@ -21,7 +21,7 @@
 
                     <div class="card-body">
                         <div class="form-group">
-                            <label for="example-email-input1" class="col-form-label">Attribute Set</label>
+                            <label for="example-email-input1" class="col-form-label">Features Set</label>
                             <select name="attribute_set_id" class="form-control">
                                 @foreach($attributesets as $attributeset)
                                 <option value="{{ $attributeset->id }}">{{ $attributeset->name }}</option>

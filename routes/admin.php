@@ -13,6 +13,11 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'namespace' => 'Admin', 'mi
 	Route::get('/sales/analytics', 'DashboardController@salesAnalytics');
 	Route::get('/visitors/analytics', 'DashboardController@visitorsAnalytics');
 
+	// Activity logs route
+	Route::get('/activitylog/datatables', 'ActivityLogController@activitylogs')->name('activitylog.datatables');
+	Route::delete('/activitylog/destroy', 'ActivityLogController@destroy')->name('activitylog.destroy');
+	Route::resource('/activitylog', 'ActivityLogController')->only('index','show');
+
 	// Contact messsage routes
 	Route::get('/messages/datatables', 'ContactController@messages')->name('messages.datatables');
 	Route::delete('/message/destroy', 'ContactController@destroy')->name('message.destroy');

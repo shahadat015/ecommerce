@@ -2,11 +2,16 @@
 
 namespace App;
 
+use App\Http\Traits\ActivityLog;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 
 class Visitor extends Model
 {
+	use ActivityLog;
+    
+    protected static $recordEvents = ['deleted'];
+
     protected $fillable = [
     	'ip', 'country', 'state', 'city', 'postal_code', 'lat', 'lon', 'timezone', 'currency'
 	];
@@ -36,7 +41,7 @@ class Visitor extends Model
         return static::selectRaw('count(id) as total_visitors')
             ->selectRaw('city, lat, lon')
             ->whereBetween('created_at', [now()->startOfMonth(), now()->endOfMonth()])
-            ->groupBy('city', 'lat', 'lon')
+            ->groupBy('city')
             ->orderby('total_visitors', "desc")
             ->limit(4)
             ->get();

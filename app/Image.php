@@ -2,10 +2,13 @@
 
 namespace App;
 
+use App\Http\Traits\ActivityLog;
 use Illuminate\Database\Eloquent\Model;
 
 class Image extends Model
 {
+    use ActivityLog;
+    
     protected $fillable = ['name', 'path', 'size', 'mime', 'extension'];
 
     public function path()

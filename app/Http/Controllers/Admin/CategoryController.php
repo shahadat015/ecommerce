@@ -89,7 +89,7 @@ class CategoryController extends Controller
 
     public function getCategories()
     {
-        $categories = Category::orderBy('parent_id')->get()->nest()->setIndent('|-- ')->listsFlattened('name');
+        $categories = Category::treeList();
         return view('admin.category.category', compact('categories'));
     }
 }

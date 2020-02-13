@@ -2,12 +2,13 @@
 
 namespace App;
 
+use App\Http\Traits\ActivityLog;
 use Illuminate\Database\Eloquent\Model;
 use TypiCMS\NestableTrait;
 
 class Category extends Model
 {
-	use NestableTrait;
+	use NestableTrait, ActivityLog;
 
     protected $fillable = ['name', 'slug', 'parent_id', 'status'];
 

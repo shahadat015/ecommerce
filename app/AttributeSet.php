@@ -2,10 +2,13 @@
 
 namespace App;
 
+use App\Http\Traits\ActivityLog;
 use Illuminate\Database\Eloquent\Model;
 
 class AttributeSet extends Model
 {
+    use ActivityLog;
+    
     protected $fillable = ['name', 'slug', 'status'];
 
     public function attributes() {

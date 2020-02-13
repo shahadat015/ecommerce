@@ -2,10 +2,13 @@
 
 namespace App;
 
+use App\Http\Traits\ActivityLog;
 use Illuminate\Database\Eloquent\Model;
 
 class Page extends Model
 {
+    use ActivityLog;
+    
 	protected $fillable = ['name', 'slug', 'body', 'template', 'is_active'];
 
 	public function metadata()

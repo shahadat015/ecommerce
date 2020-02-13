@@ -43,6 +43,14 @@ class PermissionsTableSeeder extends Seeder
                 'guard_name' => 'web'
             ],
             [
+                'name' => 'View Activity Log',
+                'guard_name' => 'web'
+            ],
+            [
+                'name' => 'Delete Activity Log',
+                'guard_name' => 'web'
+            ],
+            [
                 'name' => 'View Settings',
                 'guard_name' => 'web'
             ],
@@ -147,6 +155,10 @@ class PermissionsTableSeeder extends Seeder
                 'guard_name' => 'web'
             ],
             [
+                'name' => 'View Coupon',
+                'guard_name' => 'web'
+            ],
+            [
                 'name' => 'Delete Coupon',
                 'guard_name' => 'web'
             ],
@@ -179,7 +191,26 @@ class PermissionsTableSeeder extends Seeder
                 'guard_name' => 'web'
             ],
             [
+                'name' => 'Create Slider',
+                'guard_name' => 'web'
+            ],
+            [
+                'name' => 'Update Slider',
+                'guard_name' => 'web'
+            ],
+            [
+                'name' => 'View Slider',
+                'guard_name' => 'web'
+            ],
+            [
+                'name' => 'Delete Slider',
+                'guard_name' => 'web'
+            ],
+            [
                 'name' => 'Create Page',
+                'guard_name' => 'web'
+            ],[
+                'name' => 'View Page',
                 'guard_name' => 'web'
             ],
             [
@@ -261,8 +292,8 @@ class PermissionsTableSeeder extends Seeder
         $admin->givePermissionTo(Permission::all());
 
         $editor = Role::find(3);
-        $editor->revokePermissionTo([ 'View Message', 'Delete Message', 'View Subscriber', 'Delete Subscriber', 'View Visitor', 'Delete Visitor', 'View Settings', 'Update Settings', 'Create Product', 'View Product', 'Update Product', 'Delete Product', 'Create Category', 'View Category', 'Update Category', 'Delete Category', 'Create Brand', 'View Brand', 'Update Brand', 'Delete Brand', 'Create Feature', 'Update Feature', 'View Feature', 'Delete Feature', 'Create Option', 'View Option', 'Delete Option', 'View Review', 'Update Review', 'Delete Review', 'Create Coupon', 'Update Coupon', 'Delete Coupon', 'View Media', 'Delete Media', 'View Report', 'Create Menu', 'Update Menu', 'View Menu', 'Delete Menu', 'Create Page', 'Update Page', 'Delete Page', 'View Order', 'Delete Order', 'View Transaction', 'Delete Transaction', 'Create Customer', 'View Customer', 'Update Customer', 'Delete Customer', 'Create User', 'View User', 'Update User', 'Delete User', 'Create Role', 'View Role', 'Update Role', 'Delete Role' ]);
-        $editor->revokePermissionTo([ 'View Message', 'Delete Message', 'View Subscriber', 'Delete Subscriber', 'View Visitor', 'Delete Visitor', 'View Settings', 'Update Settings', 'Create Product', 'View Product', 'Update Product', 'Delete Product', 'Create Category', 'View Category', 'Update Category', 'Delete Category', 'Create Brand', 'View Brand', 'Update Brand', 'Delete Brand', 'Create Feature', 'Update Feature', 'View Feature', 'Delete Feature', 'Create Option', 'View Option', 'Delete Option', 'View Review', 'Update Review', 'Delete Review', 'Create Coupon','Update Coupon', 'Delete Coupon', 'View Media', 'Delete Media', 'View Report', 'Create Menu', 'Update Menu', 'View Menu', 'Delete Menu', 'Create Page', 'Update Page', 'Delete Page', 'View Order', 'Delete Order', 'View Transaction', 'Delete Transaction', 'Create Customer', 'View Customer', 'Update Customer', 'Delete Customer', 'Create User', 'View User', 'Update User', 'Delete User', 'Create Role', 'View Role', 'Update Role', 'Delete Role' ]);
+        $editor->revokePermissionTo([ 'View Message', 'Delete Message', 'View Subscriber', 'Delete Subscriber', 'View Visitor', 'Delete Visitor', 'View Settings', 'Update Settings', 'Create Product', 'View Product', 'Update Product', 'Delete Product', 'Create Category', 'View Category', 'Update Category', 'Delete Category', 'Create Brand', 'View Brand', 'Update Brand', 'Delete Brand', 'Create Feature', 'Update Feature', 'View Feature', 'Delete Feature', 'Create Option', 'View Option', 'Delete Option', 'View Review', 'Update Review', 'Delete Review', 'Create Coupon', 'View Coupon', 'Update Coupon', 'Delete Coupon', 'View Media', 'Delete Media', 'View Report', 'Create Menu', 'Update Menu', 'View Menu', 'Delete Menu', 'Create Slider', 'Update Slider', 'View Slider', 'Delete Slider', 'Create Page', 'View Page', 'Update Page', 'Delete Page', 'View Order', 'Delete Order', 'View Transaction', 'Delete Transaction', 'Create Customer', 'View Customer', 'Update Customer', 'Delete Customer']);
+        $editor->givePermissionTo([ 'View Message', 'Delete Message', 'View Subscriber', 'Delete Subscriber', 'View Visitor', 'Delete Visitor', 'View Settings', 'Update Settings', 'Create Product', 'View Product', 'Update Product', 'Delete Product', 'Create Category', 'View Category', 'Update Category', 'Delete Category', 'Create Brand', 'View Brand', 'Update Brand', 'Delete Brand', 'Create Feature', 'Update Feature', 'View Feature', 'Delete Feature', 'Create Option', 'View Option', 'Delete Option', 'View Review', 'Update Review', 'Delete Review', 'Create Coupon', 'View Coupon', 'Update Coupon', 'Delete Coupon', 'View Media', 'Delete Media', 'View Report', 'Create Menu', 'Update Menu', 'View Menu', 'Delete Menu', 'Create Slider', 'Update Slider', 'View Slider', 'Delete Slider', 'Create Page', 'View Page', 'Update Page', 'Delete Page', 'View Order', 'Delete Order', 'View Transaction', 'Delete Transaction', 'Create Customer', 'View Customer', 'Update Customer', 'Delete Customer' ]);
         
     }
 }

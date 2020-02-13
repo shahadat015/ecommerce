@@ -2,10 +2,13 @@
 
 namespace App;
 
+use App\Http\Traits\ActivityLog;
 use Illuminate\Database\Eloquent\Model;
 
 class Menu extends Model
 {
+    use ActivityLog;
+    
     protected $fillable = ['name', 'is_active'];
 
     public function menuItems()

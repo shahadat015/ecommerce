@@ -14,7 +14,12 @@
                 <div class="card-body invoice-head">
                     <div class="row">
                         <div class="col-md-4 align-self-center">
-                            <img src="{{ asset(config('settings.storefront_logo')) ?? config('settings.store_name') }}" alt="logo-large" class="logo-lg" height="40"></div>
+                            @if(config('settings.storefront_logo'))
+                            <img src="{{ asset(config('settings.storefront_logo')) }}" alt="logo-large" class="logo-lg" height="40">
+                            @else
+                               {{ config('settings.store_name') }}
+                            @endif
+                        </div>
                         <div class="col-md-8">
                             <ul class="list-inline mb-0 contact-detail float-right">
                                 <li class="list-inline-item">

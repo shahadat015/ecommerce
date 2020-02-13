@@ -2,10 +2,15 @@
 
 namespace App;
 
+use App\Http\Traits\ActivityLog;
 use Illuminate\Database\Eloquent\Model;
 
 class Review extends Model
 {
+    use ActivityLog;
+
+    protected static $recordEvents = [ 'updated', 'deleted'];
+
     protected $fillable = ['customer_id', 'product_id', 'rating', 'reviewer_name', 'comment', 'is_approved'];
 
     public function product()

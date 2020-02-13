@@ -108,7 +108,7 @@
     <!--end main-icon-menu-->
     <div class="main-menu-inner">
         <div class="menu-body slimscroll">
-            <div id="MetricaAnalytic" class="main-icon-menu-pane {{ request()->is('admin/messages/*') ? 'active' : '' }}">
+            <div id="MetricaAnalytic" class="main-icon-menu-pane {{ request()->is('admin/messages/*', 'admin/activitylog/*') ? 'active' : '' }}">
                 <div class="title-box">
                     <h6 class="menu-title">Dashboard</h6>
                 </div>
@@ -121,7 +121,7 @@
                         <a class="nav-link" href="{{ route('admin.visitors') }}"><i class="dripicons-user-group"></i>Visitors</a>
                     </li>
                     @endcan
-                    @can('View Messages')
+                    @can('View Message')
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('admin.messages.index') }}"><i class="dripicons-message"></i>Messages</a>
                     </li>
@@ -130,6 +130,11 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('admin.subscribers.index') }}"><i class="dripicons-user-group"></i>Subscribers</a>
                     </li>
+                    @can('View Activity Log')
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('admin.activitylog.index') }}"><i class="dripicons-document"></i>Activity Logs</a>
+                    </li>
+                    @endcan
                     @endcan
                     <li class="nav-item">
                         <a class="nav-link" href="{{ url('/') }}" target="_blank"><i class="dripicons-monitor"></i>Visit Store</a>
@@ -147,14 +152,30 @@
                     <h6 class="menu-title">Products</h6>
                 </div>
                 <ul class="nav">
+                    @can('View Product')
                     <li class="nav-item"><a class="nav-link" href="{{ route('admin.products.index') }}"><i class="dripicons-view-apps"></i>Products</a></li>
+                    @endcan
+                    @can('View Category')
                     <li class="nav-item"><a class="nav-link" href="{{ route('admin.categories.index') }}"><i class="dripicons-list"></i>Categories</a></li>
+                    @endcan
+                    @can('View Brand')
                     <li class="nav-item"><a class="nav-link" href="{{ route('admin.brands.index') }}"><i class="dripicons-article"></i>Brands</a></li>
+                    @endcan
+                    @can('View Feature')
                     <li class="nav-item"><a class="nav-link" href="{{ route('admin.attributes.index') }}"><i class="dripicons-checklist"></i>Features</a></li>
+                    @endcan
+                    @can('View Feature')
                     <li class="nav-item"><a class="nav-link" href="{{ route('admin.attribute-sets.index') }}"><i class="dripicons-view-list"></i>Feature Sets</a></li>
+                    @endcan
+                    @can('View Option')
                     <li class="nav-item"><a class="nav-link" href="{{ route('admin.options.index') }}"><i class="dripicons-view-list-large"></i>Options</a></li>
+                    @endcan
+                    @can('View Review')
                     <li class="nav-item"><a class="nav-link" href="{{ route('admin.reviews.index') }}"><i class="mdi mdi-star-outline"></i>Review</a></li>
+                    @endcan
+                    @can('View Coupon')
                     <li class="nav-item"><a class="nav-link" href="{{ route('admin.coupons.index') }}"><i class="dripicons-card"></i>Coupons</a></li>
+                    @endcan
                 </ul>
             </div>
             <div id="MetricaCrypto" class="main-icon-menu-pane {{ request()->is('admin/orders/*') ? 'active' : '' }}">
@@ -195,13 +216,13 @@
                     <h6 class="menu-title">Appearance</h6>
                 </div>
                 <ul class="nav metismenu" id="main_menu_side_nav">
-                    @can('View Meu')
+                    @can('View Menu')
                     <li class="nav-item"><a class="nav-link" href="{{ route('admin.menus.index') }}"><i class="dripicons-menu"></i>Menus</a></li>
                     @endcan
                     @can('View Slider')
                     <li class="nav-item"><a class="nav-link" href="{{ route('admin.sliders.index') }}"><i class="dripicons-photo-group"></i>Sliders</a></li>
                     @endcan
-                    @can('settings')
+                    @can('View Settings')
                     <li class="nav-item"><a class="nav-link" href="#"><i class="dripicons-view-thumb"></i><span class="w-100">Storefront</span><span class="menu-arrow"><i class="mdi mdi-chevron-right"></i></span></a>
                         <ul class="nav-second-level" aria-expanded="false">
                             <li><a href="{{ route('admin.storefront.general') }}">General Settings</a></li>
@@ -232,7 +253,7 @@
                 </ul>
             </div>
             <!-- end Pages -->
-            <div id="MetricaAuthentication" class="main-icon-menu-pane {{ request()->is('admin/users/*', 'admin/roles/*', 'admin/user/*') ? 'active' : '' }}">
+            <div id="MetricaAuthentication" class="main-icon-menu-pane {{ request()->is('admin/users/*', 'admin/roles/*', 'admin/user/*', 'admin/customers/*') ? 'active' : '' }}">
                 <div class="title-box">
                     <h6 class="menu-title">Authentication</h6>
                 </div>

@@ -2,10 +2,13 @@
 
 namespace App;
 
+use App\Http\Traits\ActivityLog;
 use Illuminate\Database\Eloquent\Model;
 
 class Attribute extends Model
 {
+    use ActivityLog;
+    
     protected $fillable = ['attribute_set_id', 'name', 'slug', 'status'];
     
     public function values() {

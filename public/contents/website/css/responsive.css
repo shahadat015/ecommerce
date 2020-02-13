@@ -1056,7 +1056,7 @@
         font-size: 20px;
     }
 
-#category_menu_mobile {
+    #category_menu_mobile {
         padding: 10px 0px;
         background: #ddd;
     }
@@ -1224,7 +1224,7 @@
     #auto-collapse-menu-demo li.active > a {
         background: #EA222E;
     }
-#header_top{
+    #header_top{
         display: none;
     }
     #banar_top_area{
@@ -1258,6 +1258,10 @@
     }
     .mobile_menu_top_search_box button:hover{
         background: #2c3e50;
+    }
+    .mobile-box{
+        width: calc(100% - 30px);
+        left: 4.7%;
     }
     .mobile_menu_menu_user ul li{
         display: inline-block;

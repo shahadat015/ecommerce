@@ -1,8 +1,8 @@
 <nav>
     <ul>
         @php 
-            $primaryMenus = $primaryMenu->menuItems()->where('is_root', 0)->orderBy('position')->with('category', 'page')->get();
-            $rootItem = $primaryMenu->menuItems()->where('is_root', 1)->first();
+            $primaryMenus = $primaryMenu->menuItems()->whereIsRoot(0)->orderBy('position')->with('category', 'page')->get();
+            $rootItem = $primaryMenu->menuItems()->whereIsRoot(1)->first();
         @endphp
         @foreach($primaryMenus as $menuItem)
         @if($menuItem->isCategoryType() && $rootItem->id == $menuItem->parent_id)

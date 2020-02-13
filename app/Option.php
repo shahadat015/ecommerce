@@ -2,10 +2,13 @@
 
 namespace App;
 
+use App\Http\Traits\ActivityLog;
 use Illuminate\Database\Eloquent\Model;
 
 class Option extends Model
 {
+    use ActivityLog;
+    
     protected $fillable = ['name', 'type', 'is_required', 'is_global'];
     
     public function values() {

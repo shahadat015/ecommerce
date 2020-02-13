@@ -2,10 +2,15 @@
 
 namespace App;
 
+use App\Http\Traits\ActivityLog;
 use Illuminate\Database\Eloquent\Model;
 
 class Transaction extends Model
 {
+    use ActivityLog;
+    
+    protected static $recordEvents = ['deleted'];
+
 	protected $fillable = [
     	'order_id', 'transaction_id', 'payment_method', 'amount'
 	];

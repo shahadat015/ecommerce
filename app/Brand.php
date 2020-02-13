@@ -2,10 +2,13 @@
 
 namespace App;
 
+use App\Http\Traits\ActivityLog;
 use Illuminate\Database\Eloquent\Model;
 
 class Brand extends Model
 {
+    use ActivityLog;
+    
     protected $fillable = ['name', 'slug', 'tagline', 'image', 'status'];
 
     public function products()

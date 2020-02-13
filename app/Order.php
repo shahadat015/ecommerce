@@ -2,11 +2,16 @@
 
 namespace App;
 
+use App\Http\Traits\ActivityLog;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 
 class Order extends Model
 {
+    use ActivityLog;
+
+    protected static $recordEvents = [ 'updated', 'deleted'];
+
     protected $guarded = [];
 
     public function products()

@@ -59,7 +59,7 @@ class MenuController extends Controller
     public function edit(Menu $menu)
     {
         $menuItems = $menu->menuItems()
-            ->where('parent_id', NULL)
+            ->whereNULL('parent_id')
             ->orderBy('parent_id')
             ->get()->nest();
         return view('admin.menu.edit', compact('menu', 'menuItems'));

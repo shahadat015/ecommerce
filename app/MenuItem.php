@@ -2,12 +2,13 @@
 
 namespace App;
 
+use App\Http\Traits\ActivityLog;
 use Illuminate\Database\Eloquent\Model;
 use TypiCMS\NestableTrait;
 
 class MenuItem extends Model
 {
-    use NestableTrait;
+    use NestableTrait, ActivityLog;
     
     protected $fillable = [
         'menu_id', 'category_id', 'page_id', 'parent_id', 'name', 'type', 'url', 'target', 'position', 'is_root', 'is_fluid', 'is_active',

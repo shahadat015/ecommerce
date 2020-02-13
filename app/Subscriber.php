@@ -2,10 +2,15 @@
 
 namespace App;
 
+use App\Http\Traits\ActivityLog;
 use Illuminate\Database\Eloquent\Model;
 
 class Subscriber extends Model
 {
+    use ActivityLog;
+    
+    protected static $recordEvents = [ 'updated', 'deleted'];
+    
     protected $fillable = [ 'email' ];
 
     public static function laratablesCreatedAt($message)

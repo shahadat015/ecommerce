@@ -1,12 +1,12 @@
 @extends('layouts.admin')
-@section('title', 'Attributes')
+@section('title', 'Features')
 @push('css')
     <link href="{{asset('contents/admin')}}/plugins/datatables/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css">
 @endpush
 @section('content')
     <!-- Page-Title -->
     @component('layouts.partials.breadcumb')
-        <li class="breadcrumb-item active">Attributes</li>
+        <li class="breadcrumb-item active">Features</li>
     @endcomponent
     
     <!-- end page title end breadcrumb -->
@@ -14,8 +14,8 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
-                    <h4 class="mt-2 float-left">Attributes</h4>
-                    <a class="btn btn-info btn-sm float-right" href="{{ route('admin.attributes.create') }}"><i class="mdi mdi-plus-circle-outline"></i> Create Attributes</a>
+                    <h4 class="mt-2 float-left">Features</h4>
+                    <a class="btn btn-info btn-sm float-right" href="{{ route('admin.attributes.create') }}"><i class="mdi mdi-plus-circle-outline"></i> Create Features</a>
                     <button class="btn-delete btn btn-danger btn-sm float-right mr-2" data-url="{{ route('admin.attribute.destroy') }}" disabled=""><i class="mdi mdi-delete"></i> Delete</button>
                 </div>
                 <div class="card-body">

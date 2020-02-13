@@ -2,12 +2,14 @@
 
 namespace App;
 
+use App\Http\Traits\ActivityLog;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Spatie\Activitylog\Traits\LogsActivity;
 
 class Customer extends Authenticatable
 {
-    use Notifiable;
+    use Notifiable, ActivityLog;
 
    /**
      * The attributes that are mass assignable.

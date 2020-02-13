@@ -3,7 +3,7 @@
 @section('content')
     <!-- Page-Title -->
     @component('layouts.partials.breadcumb')
-    	<li class="breadcrumb-item"><a href="{{ route('admin.attribute-sets.index') }}">Attribute Sets</a></li>
+    	<li class="breadcrumb-item"><a href="{{ route('admin.attribute-sets.index') }}">Features Sets</a></li>
         <li class="breadcrumb-item active">Update</li>
     @endcomponent
     
@@ -12,7 +12,7 @@
         <div class="col-10">
             <div class="card">
                 <div class="card-header">
-                    <h4 class="mt-2 header-title float-left">Update Attribute Sets</h4>
+                    <h4 class="mt-2 header-title float-left">Update Features Sets</h4>
                     <a class="btn btn-info btn-sm float-right" href="{{ route('admin.attribute-sets.index') }}"><i class="mdi mdi-arrow-left-thick"></i> Back</a>
                 </div>
                     

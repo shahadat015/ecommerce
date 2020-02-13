@@ -2,10 +2,15 @@
 
 namespace App;
 
+use App\Http\Traits\ActivityLog;
 use Illuminate\Database\Eloquent\Model;
 
 class Contact extends Model
 {
+    use ActivityLog;
+
+    protected static $recordEvents = ['deleted'];
+
     protected $fillable = [
     	'name', 'email', 'subject', 'message'
     ];

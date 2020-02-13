@@ -2,8 +2,12 @@
 <div class="topbar">
     <!-- LOGO -->
     <div class="topbar-left">
-    	<a href="ecommerce-index.html" class="logo">
-    		<span><img src="{{ asset(config('settings.storefront_logo')) }}" alt="logo-large" height="40"></span>
+    	<a href="{{ route('admin.dashboard') }}" class="logo">
+            @if(config('settings.storefront_logo'))
+            <span><img src="{{ asset(config('settings.storefront_logo')) }}" alt="logo-large" height="40"></span>
+            @else
+               {{ config('settings.store_name') }}
+            @endif
         </a>
     </div>
     <!--end logo-->
@@ -40,7 +44,7 @@
             </li> -->
             <li class="dropdown">
                 <a class="nav-link dropdown-toggle waves-effect waves-light nav-user" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
-                    <img src="{{ asset($user->image ?? '/images/users/avatar.png') }}" alt="profile-user" class="rounded-circle">
+                    <img src="{{ asset($user->image ?? '/contents/admin/images/users/avatar.png') }}" alt="profile-user" class="rounded-circle">
                     <span class="ml-1 nav-user-name hidden-sm">{{ $user->name }} <i class="mdi mdi-chevron-down"></i></span>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right">

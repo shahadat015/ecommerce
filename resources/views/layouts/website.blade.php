@@ -63,7 +63,7 @@
                 </div>
                 <div class="col-xl-5 col-lg-5 col-md-5 col-sm-5">
                     <div class="serach_bar">
-                        <form id="search" action="{{ route('search') }}" method="get">
+                        <form action="{{ route('search') }}" method="get">
                             <div class="search_form_box">
                                 <input class="search" type="text" name="query" placeholder="Search for product" value="{{ request('query') }}" required>
                                 <button type="submit" class="btn-search"><i class="fas fa-search"></i></button>
@@ -181,7 +181,11 @@
                 <div class="col-4 col-sm-4">
                     <div class="mobile_menu_top_logo">
                         <a href="{{ route('home') }}">
+                            @if(config('settings.storefront_logo'))
                             <img class="img-fluid" src="{{ asset(config('settings.storefront_logo')) }}" alt="logo">
+                            @else
+                            <h5>{{ config('settings.store_name') }}</h5>
+                            @endif
                         </a>
                     </div>
                 </div>
@@ -189,15 +193,20 @@
                     <div class="mobile_menu_top_search">
                         <form action="{{ url('search') }}" method="get">
                             <div class="mobile_menu_top_search_box">
-                                <input type="text" name="query" placeholder="Search for product" value="{{ request('query') }}" required>
+                                <input class="search" type="text" name="query" placeholder="Search for product" value="{{ request('query') }}" required>
                                 <button type="submit"><i class="fas fa-search"></i></button>
-                                @error('query')
-                                    <span class="invalid-feedback">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
                             </div>
                         </form>
+                    </div>
+                    <div class="typed-search-box mobile-box d-none">
+                        <div class="search-preloader d-none">
+                            <div class="loader"><div></div><div></div><div></div></div>
+                        </div>
+                        <div class="search-nothing d-none">Sorry, nothing found for <strong></strong></div>
+                        <div class="product">
+                            <div class="title">Products</div>
+                            <ul></ul>
+                        </div>
                     </div>
                 </div>
             </div>

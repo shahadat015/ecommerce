@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Http\Traits\ActivityLog;
 use App\Option;
 use App\ProductAttribute;
 use Gloudemans\Shoppingcart\Facades\Cart;
@@ -9,6 +10,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
 {
+    use ActivityLog;
+    
     protected $fillable = ['name', 'slug', 'image', 'brand_id', 'price', 'special_price', 'special_price_start', 'special_price_end', 'description', 'short_description', 'sku', 'manage_stock', 'qty', 'in_stock', 'viewed', 'new_from', 'new_to', 'status'];
 
     public function images()

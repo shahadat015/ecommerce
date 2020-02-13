@@ -2,10 +2,13 @@
 
 namespace App;
 
+use App\Http\Traits\ActivityLog;
 use Illuminate\Database\Eloquent\Model;
 
 class Coupon extends Model
 {
+    use ActivityLog;
+    
 	protected $fillable = ['name', 'code', 'value', 'is_percent', 'free_shipping', 'minimum_spend', 'maximum_spend', 'usage_limit_per_coupon', 'usage_limit_per_customer', 'used', 'is_active', 'start_date', 'end_date'];
 
 	public function products()
