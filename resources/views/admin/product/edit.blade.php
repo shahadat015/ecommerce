@@ -42,7 +42,7 @@
                                 <a class="nav-link" data-toggle="tab" href="#seo" role="tab">SEO</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" data-toggle="tab" href="#attributes" role="tab">Attributes</a>
+                                <a class="nav-link" data-toggle="tab" href="#attributes" role="tab">Features</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" data-toggle="tab" href="#options" role="tab">Options</a>
@@ -204,7 +204,7 @@
                                 </div>
                             </div>
                             <div class="tab-pane p-3" id="attributes" role="tabpanel">
-                                <h4>Attributes</h4><hr>
+                                <h4>Features</h4><hr>
                                 <div class="repeater-attribute">
                                     <div data-repeater-list="attribute">
                                         @forelse($product->attributes as $productAttribute)

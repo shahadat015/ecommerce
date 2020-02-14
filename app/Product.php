@@ -12,7 +12,7 @@ class Product extends Model
 {
     use ActivityLog;
     
-    protected $fillable = ['name', 'slug', 'image', 'brand_id', 'price', 'special_price', 'special_price_start', 'special_price_end', 'description', 'short_description', 'sku', 'manage_stock', 'qty', 'in_stock', 'viewed', 'new_from', 'new_to', 'status'];
+    protected $fillable = ['name', 'qr_code', 'slug', 'image', 'brand_id', 'price', 'special_price', 'special_price_start', 'special_price_end', 'description', 'short_description', 'sku', 'manage_stock', 'qty', 'in_stock', 'viewed', 'new_from', 'new_to', 'status'];
 
     public function images()
     {

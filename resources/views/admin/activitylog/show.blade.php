@@ -27,7 +27,7 @@
                             <tr>
                                 <th>Performed By</th>
                                 <td>
-                                    Name: {{ $activitylog->causer->name }}
+                                    Name: {{ $activitylog->causer->name }} <br>
                                     Email: {{ $activitylog->causer->email }}
                                 </td>
                                 <td></td>

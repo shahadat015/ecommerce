@@ -41,7 +41,7 @@
                                 <a class="nav-link" data-toggle="tab" href="#seo" role="tab">SEO</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" data-toggle="tab" href="#attributes" role="tab">Attributes</a>
+                                <a class="nav-link" data-toggle="tab" href="#attributes" role="tab">Features</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" data-toggle="tab" href="#options" role="tab">Options</a>
@@ -158,8 +158,8 @@
                                 <div class="form-group">
                                     <label for="name">Stock Availability</label>
                                     <select name="in_stock" class="form-control">
-                                        <option value="0">In Stock</option>
-                                        <option value="1">Out of Stock</option>
+                                        <option value="1">In Stock</option>
+                                        <option value="0">Out of Stock</option>
                                     </select>
                                 </div>
                             </div>
@@ -182,7 +182,7 @@
                                 </div>
                             </div>
                             <div class="tab-pane p-3" id="attributes" role="tabpanel">
-                                <h4>Attributes</h4><hr>
+                                <h4>Features</h4><hr>
                                 <div class="repeater-attribute">
                                     <div data-repeater-list="attribute">
                                         <div data-repeater-item="">

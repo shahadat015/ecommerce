@@ -13,6 +13,8 @@ use App\Product;
 use App\ProductAttribute;
 use Freshbitsweb\Laratables\Laratables;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class ProductController extends Controller
 {
@@ -54,13 +56,18 @@ class ProductController extends Controller
 
     public function store(ProductValidate $request)
     {
+        $code = time() . rand();
         $slug = str_slug($request->name);
-        $product = Product::where('slug', $slug)->first();
+        $product = Product::whereSlug($slug)->first();
 
         $request['status'] = (boolean)$request->status;
-        $request['slug'] = $product ? $slug .'-'. uniqid() : $slug;
+        $request['slug'] = $product ? $slug ."-$code" : $slug;
+        $request['qr_code'] = "storage/images/$code.png";
+
         $product = Product::create($request->all());
         $product->saveRelations($request);
+
+        QrCode::format('png')->size(399)->generate($code, storage_path("app/public/images/$code.png"));
 
         if($product){
             return response()->json(['success' => 'Product successfully created!']);
@@ -106,6 +113,9 @@ class ProductController extends Controller
         $delete = Product::findOrFail($request->id)->each(function ($product){
             $product->images()->detach();
             $product->metadata()->delete();
+            if(File::exists($product->qr_code)) {
+                File::delete($product->qr_code);
+            }
             $product->delete();  
         });
 

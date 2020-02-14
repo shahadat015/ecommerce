@@ -5,6 +5,7 @@
 | Admin Routes
 |--------------------------------------------------------------------------
 */
+
 Auth::routes(['register' => false]);
 
 Route::group(['as' => 'admin.', 'prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'auth'], function(){
