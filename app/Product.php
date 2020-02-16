@@ -134,6 +134,56 @@ class Product extends Model
         return $query->where('status', 1);
     }
 
+    public function getSellingPrice()
+    {
+        if ($this->hasSpecialPrice()) {
+            return $this->special_price;
+        }
+
+        return $this->price;
+    }
+
+    public function hasSpecialPrice()
+    {
+        if (is_null($this->special_price)) {
+            return false;
+        }
+
+        if ($this->hasSpecialPriceStartDate() && $this->hasSpecialPriceEndDate()) {
+            return $this->specialPriceStartDateIsValid() && $this->specialPriceEndDateIsValid();
+        }
+
+        if ($this->hasSpecialPriceStartDate()) {
+            return $this->specialPriceStartDateIsValid();
+        }
+
+        if ($this->hasSpecialPriceEndDate()) {
+            return $this->specialPriceEndDateIsValid();
+        }
+
+        return true;
+    }
+
+    private function hasSpecialPriceStartDate()
+    {
+        return ! is_null($this->special_price_start);
+    }
+
+    private function hasSpecialPriceEndDate()
+    {
+        return ! is_null($this->special_price_end);
+    }
+
+    private function specialPriceStartDateIsValid()
+    {
+        return today() >= $this->special_price_start;
+    }
+
+    private function specialPriceEndDateIsValid()
+    {
+        return today() <= $this->special_price_end;
+    }
+
     public static function laratablesStatus($product)
     {
         if ($product->status) {

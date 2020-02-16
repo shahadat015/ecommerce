@@ -25,7 +25,7 @@
                                     @foreach($order->products as $product)
                                     <tr>
                                         <td>{{ $product->product->name }}</td>
-                                        <td>{{ $product->product->price }}</td>
+                                        <td>{{ $product->unit_price }}</td>
                                         <td>{{ $product->qty }}</td>
                                         <td>
                                             @forelse($product->options as $option) 

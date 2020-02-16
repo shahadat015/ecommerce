@@ -13,6 +13,7 @@ class CheckoutController extends Controller
     public function index()
     {
         if(!Cart::count()) return redirect('cart');
+        session()->put('shipping_method', request('shipping_method'));
         return view('website.checkout.checkout');
     }
 
@@ -38,6 +39,7 @@ class CheckoutController extends Controller
     }
 
     protected function createOrder($request){
+
         $order = Order::create([
             'customer_id' => auth('customer')->id(),
             'customer_email' => $request->email,
@@ -56,11 +58,11 @@ class CheckoutController extends Controller
             'shipping_zip' => $request->shipping['zip_code'],
             'shipping_country' => $request->shipping['country'],
             'sub_total' => Cart::subtotal(),
-            'shipping_method' => $request->shipping_method,
-            'shipping_cost' => $request->shipping_cost,
-            'coupon_id' => NULL,
-            'discount' => NULL,
-            'total' => Cart::total() + $request->shipping_cost,
+            'shipping_method' => Cart::shippingMethod(),
+            'shipping_cost' => Cart::shippingCost(),
+            'coupon_id' => Cart::coupon()->id ?? NULL,
+            'discount' => Cart::couponDiscount(),
+            'total' => Cart::cartTotal(),
             'payment_method' => NULL,
             'status' => 'pending',
         ]);

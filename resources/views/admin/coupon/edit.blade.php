@@ -57,7 +57,7 @@
 
                                 <div class="form-group">
                                     <label for="example-email-input1" class="col-form-label">Value</label>
-                                    <input name="value" class="form-control" type="number" value="{{ $coupon->value }}" min="1">
+                                    <input name="value" class="form-control" type="number" value="{{ $coupon->value }}" min="0">
                                 </div>
 
                                 <div class="form-group">

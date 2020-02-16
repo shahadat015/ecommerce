@@ -64,7 +64,7 @@
                                     </div>
                                     <div class="summmer_item_content">
                                         <h4>{{str_limit($carousel_1_product->name, 20)}}</h4>
-                                        <h3>Tk {{$carousel_1_product->price}}</h3>
+                                        <h3>Tk {{$carousel_1_product->getSellingPrice()}}</h3>
                                         @include('website.partial.rating', ['rating' => $carousel_1_product->reviews()->avg('rating')])
                                         <a class="addtocart" href="{{ route('cart.add', $carousel_1_product->id) }}"><i class="icofont-shopping-cart"></i> Add To Cart</a>
                                     </div>
@@ -112,7 +112,7 @@
                                                 <img class="img-fluid" src="{{asset($featured_product->image ?? 'contents/admin/images/placeholder.png')}}" alt="">
                                             </a>
                                             <h4>{{str_limit($featured_product->name, 20)}}</h4>
-                                            <h3>TK {{$featured_product->price}}</h3>
+                                            <h3>TK {{$featured_product->getSellingPrice()}}</h3>
                                             @include('website.partial.rating', ['rating' => $featured_product->reviews()->avg('rating')])
                                             <a class="addtocart" href="{{ route('cart.add', $featured_product->id) }}"><i class="icofont-shopping-cart"></i></a>
                                              <a class="addtofavorite" href="{{ route('customer.favorite', $featured_product->id) }}"><i class="fas fa-heart"></i></a>
@@ -133,7 +133,7 @@
                                     <a href="{{ route('product', $featured_product->slug)}}">
                                         <h4>{{str_limit($featured_product->name, 20)}}</h4>
                                     </a>
-                                    <h3>Tk {{$featured_product->price}}</h3>
+                                    <h3>Tk {{$featured_product->getSellingPrice()}}</h3>
                                     @include('website.partial.rating', ['rating' => $featured_product->reviews()->avg('rating')])
                                     <a class="addtocart" href="{{ route('cart.add', $featured_product->id) }}"><i class="icofont-shopping-cart"></i></a>
                                      <a class="addtofavorite" href="{{ route('customer.favorite', $featured_product->id)}}"><i class="fas fa-heart"></i></a>
@@ -219,7 +219,7 @@
                                             <div class="row">
                                                 <div class="col-xl-6">
                                                     <div class="new_arival_content_price">
-                                                        <h3>Tk {{$recent_product->price}}</h3>
+                                                        <h3>Tk {{$recent_product->getSellingPrice()}}</h3>
                                                     </div>
                                                 </div>
                                                 <div class="col-xl-6">
@@ -276,7 +276,7 @@
                                         <div class="row">
                                             <div class="col-xl-6">
                                                 <div class="teshirt_slide_cotent_price">
-                                                    <h3>Tk {{$carousel_2_product->price}}</h3>
+                                                    <h3>Tk {{$carousel_2_product->getSellingPrice()}}</h3>
                                                 </div>
                                             </div>
                                             <div class="col-xl-6">
@@ -390,7 +390,7 @@
                                     <div class="row">
                                         <div class="col-xl-6">
                                             <div class="gadget_slid_content_price">
-                                                <h3>Tk {{$carousel_3_product->price}}</h3>
+                                                <h3>Tk {{$carousel_3_product->getSellingPrice()}}</h3>
                                             </div>
                                         </div>
                                         <div class="col-xl-6">
@@ -444,7 +444,7 @@
                                                 <a href="{{ route('product', $tab_1_product->slug) }}">
                                                     <h4>{{ str_limit($tab_1_product->name, 20) }}</h4>
                                                 </a>
-                                                <h3>Tk {{ $tab_1_product->price }}</h3>
+                                                <h3>Tk {{ $tab_1_product->getSellingPrice() }}</h3>
                                             </div>
                                         </div>
                                     </a>
@@ -473,7 +473,7 @@
                                                 <a href="{{ route('product', $tab_2_product->slug) }}">
                                                     <h4>{{ str_limit($tab_2_product->name, 20) }}</h4>
                                                 </a>
-                                                <h3>Tk {{ $tab_2_product->price }}</h3>
+                                                <h3>Tk {{ $tab_2_product->getSellingPrice() }}</h3>
                                             </div>
                                         </div>
                                     </a>
@@ -502,7 +502,7 @@
                                                 <a href="{{ route('product', $tab_3_product->slug) }}">
                                                     <h4>{{str_limit($tab_3_product->name, 20)}}</h4>
                                                 </a>
-                                                <h3>Tk {{$tab_3_product->price}}</h3>
+                                                <h3>Tk {{$tab_3_product->getSellingPrice()}}</h3>
                                             </div>
                                         </div>
                                     </a>

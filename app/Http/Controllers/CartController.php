@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Coupon;
 use App\Option;
 use App\Product;
 use Cart;
@@ -21,7 +22,7 @@ class CartController extends Controller
     	$added = Cart::add([
 			'id' => $product->id, 
 			'name' => $product->name, 
-			'price' => $product->price,
+			'price' => $product->getSellingPrice(),
 			'qty' => $request->qty ?: 1,
 			'weight' => 0,
 			'options' => [
@@ -76,6 +77,44 @@ class CartController extends Controller
     public function cartContent()
     {
         return view('website.cart.cart-content');
+    }
+
+    public function coupon(Request $request)
+    {
+        $request->validate([
+            'coupon' => 'required|string|max:60'
+        ]);
+
+
+        $coupon = Coupon::whereCode($request->coupon)->whereIsActive(1)->first();
+
+        if(!$coupon){
+            return response()->json(['error' => 'Coupon is invalid']);
+        }
+
+        if($coupon->invalid()){
+            return response()->json(['error' => 'Coupon was expeired']);
+        }
+
+        if ($coupon->usageLimitReached()) {
+            return response()->json(['error' => 'Coupon maximum use reached']);
+        }
+
+        if ($coupon->minimumSpend()) {
+            return response()->json(['error' => "Purchase minimum Tk $coupon->minimum_spend"]);
+        }
+
+        if ($coupon->maximumSpend()) {
+            return response()->json(['error' => "Maximum purchase limit Tk $coupon->maximum_spend"]);
+        }
+
+        if(!session()->get('coupon')){
+            session()->put('coupon', $coupon);
+            return response()->json(['success' => 'Coupon successfully applied']);
+        }else{
+            return response()->json(['error' => 'Coupon already applied']);
+        }
+
     }
 
 }

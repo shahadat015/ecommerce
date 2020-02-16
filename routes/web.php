@@ -30,6 +30,7 @@ Route::get('/cart/minicart', 'CartController@miniCart')->name('cart.minicart');
 Route::get('/cart/content', 'CartController@cartContent')->name('cart.content');
 Route::put('/cart/update/{rowId}', 'CartController@update')->name('cart.update');
 Route::post('/cart/remove/{rowId}', 'CartController@destroy')->name('cart.remove');
+Route::post('/coupon', 'CartController@coupon')->name('coupon');
 
 // checkout routes
 Route::get('/checkout', 'CheckoutController@index')->name('checkout');

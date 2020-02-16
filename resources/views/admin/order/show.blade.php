@@ -53,7 +53,7 @@
                                     @php $statuses = ['canceled', 'completed', 'pending', 'processing', 'refunded'] @endphp
                                     <select name="status" class="status" data-url="{{ route('admin.orders.status', $order->id) }}">
                                         @foreach($statuses as $status)
-                                            <option value="{{ $status }}" {{ request('status') == $status ? 'selected' : '' }}>{{ ucfirst(str_replace('_', ' ', $status)) }}</option>
+                                            <option value="{{ $status }}" {{ $order->status == $status ? 'selected' : '' }}>{{ ucfirst(str_replace('_', ' ', $status)) }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -123,6 +123,13 @@
                                             <td class="border-0 font-14"><b>{{ $order->shipping_method }}</b></td>
                                             <td class="border-0 font-14"><b>Tk {{ $order->shipping_cost }}</b></td>
                                         </tr>
+                                        @if($order->discount)
+                                        <tr>
+                                            <th colspan="4" class="border-0"></th>
+                                            <td class="border-0 font-14"><b>Coupon Discount</b></td>
+                                            <td class="border-0 font-14"><b>Tk ({{ $order->discount }})</b></td>
+                                        </tr>
+                                        @endif
                                         <tr class="bg-dark text-white">
                                             <th colspan="4" class="border-0"></th>
                                             <td class="border-0 font-14"><b>Total</b></td>

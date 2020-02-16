@@ -20,7 +20,6 @@ class CreateProductsTable extends Migration
             $table->string('qr_code');
             $table->string('image')->nullable();
             $table->float('price');
-            $table->float('selling_price')->nullable();
             $table->float('special_price')->nullable();
             $table->timestamp('special_price_start')->nullable();
             $table->timestamp('special_price_end')->nullable();

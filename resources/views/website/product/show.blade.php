@@ -66,7 +66,7 @@
                                     <div class="product_slide_right_content">
                                         <h3>{{ $product->name }} </h3>
                                         <h4>Product Code: {{ $product->sku }}</h4>
-                                        <h2>&#2547; {{ $product->price }}</h2>
+                                        <h2>&#2547; {{ $product->getSellingPrice() }}</h2>
                                         <p>{{ $product->short_description }} </p>
                                         <form action="{{ route('cart.add', $product->id)}}" method="post" id="addtocart-form">
                                             @csrf
@@ -226,7 +226,7 @@
                                 </div>
                                 <div class="related_product_slide_item_content text-center">
                                     <h4>{{ str_limit($relatedProduct->name, 20) }}</h4>
-                                    <h3>&#2547; {{ $relatedProduct->price }}</h3>
+                                    <h3>&#2547; {{ $relatedProduct->getSellingPrice() }}</h3>
                                     <a class="addtocart" href="{{ route('cart.add', $relatedProduct->id)}}"><i class="icofont-shopping-cart"></i> Add To Cart</a>
                                 </div>
                             </div>

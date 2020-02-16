@@ -39,7 +39,7 @@
                                         </div>
                                         <div class="product_page_product_content text-center">
                                             <h4>{{ str_limit($product->name, 20) }}</h4>
-                                            <h3>&#2547; {{ $product->price }}</h3>
+                                            <h3>&#2547; {{ $product->getSellingPrice() }}</h3>
                                             <a class="addtocart" href="{{ route('cart.add', $product->id)}}"><i class="icofont-ui-cart"></i> Add To Cart</a>
                                         </div>
                                     </div>

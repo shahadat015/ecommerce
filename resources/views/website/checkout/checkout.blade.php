@@ -133,31 +133,6 @@
                                                     </div>
                                                     <div class="col-xl-12 col-md-12">
                                                         <div class="form-group">
-                                                            @php
-                                                                $freeShippingEnabled = config('settings.free_shipping_enabled');
-                                                                $freeShippingMinAmount = config('settings.free_shipping_min_amount');
-                                                                $localPicupEnabled = config('settings.local_pickup_enabled');
-                                                                $localPicupCost = config('settings.local_pickup_cost');
-                                                                $freeshippingAble = $freeShippingEnabled && $freeShippingMinAmount < Cart::subtotal();
-                                                                $shippingCharge = $freeshippingAble ? 0 : $localPicupCost;
-                                                            @endphp
-                                                            @if($freeShippingEnabled)
-                                                            <div class="custom-control custom-radio mb-1 custom-control-inline">
-                                                                <input type="radio" id="customRadioInline1" name="shipping_method" class="shipping-method custom-control-input" value="free_shipping" checked>
-                                                                <label class="custom-control-label" for="customRadioInline1">{{ config('settings.free_shipping_label') }} </label>
-                                                            </div>
-                                                            @endif
-                                                            @if($localPicupEnabled)
-                                                            <div class="custom-control custom-radio custom-control-inline">
-                                                                <input type="radio" id="customRadioInline2" name="shipping_method" class="shipping-method custom-control-input" value="local_pickup">
-                                                                <label class="custom-control-label" for="customRadioInline2">{{ config('settings.local_pickup_label') }} </label>
-                                                            </div>
-                                                            @endif
-                                                            <input type="hidden" name="shipping_cost" value="{{ $shippingCharge }}">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-xl-12 col-md-12">
-                                                        <div class="form-group">
                                                             <div class="custom-control custom-checkbox custom-control-inline">
                                                                 <input type="checkbox" class="custom-control-input shipping-address" name="ship_to_a_different_address" id="customCheck1" value="1" {{ old('ship_to_a_different_address') ? 'checked' : '' }}>
                                                                 <label class="custom-control-label mr-3" for="customCheck1">Ship to a different address</label>

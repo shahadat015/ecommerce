@@ -60,42 +60,43 @@
                             <div class="col-xl-7 col-lg-7 col-md-6">
                                 <div class="cart_sum_btn"> <a href="{{ route('cart')}}">Update Cart</a> <a class="btn_cart_sum_sp" href="{{ url('/') }}"><i class="icofont-shopping-cart"></i> Continue Shoping</a> </div>
                                 <div class="copon_apply_form">
-                                    <input type="text" placeholder="Coupe Code">
-                                    <button type="submit">Apply Code</button>
+                                    <form action="{{ route('coupon') }}" method="post" id="coupon">
+                                        @csrf
+
+                                        <input type="text" placeholder="Coupe Code" name="coupon" required>
+                                        <button class="btn-submit" type="submit">Apply Code</button>
+                                    </form>
                                 </div>
                             </div>
                             <div class="col-xl-5 col-lg-5 col-md-6">
                                 <div class="cart_sum_content">
                                     <ul>
-                                        @php
-                                            $freeShippingEnabled = config('settings.free_shipping_enabled');
-                                            $freeShippingMinAmount = config('settings.free_shipping_min_amount');
-                                            $localPicupEnabled = config('settings.local_pickup_enabled');
-                                            $localPicupCost = config('settings.local_pickup_cost');
-                                            $freeshippingAble = $freeShippingEnabled && $freeShippingMinAmount < Cart::subtotal();
-                                            $cartTotal = $freeshippingAble ? Cart::total() : Cart::total() + $localPicupCost;
-                                        @endphp
                                         <li>Sub-Total:<span>Tk {{ Cart::subtotal() }}</span></li>
-                                        <div class="form-group">
-                                            <label><b>Shipping Method</b></label>
-                                            @if($freeShippingEnabled && $freeshippingAble)
-                                            <div class="custom-control custom-radio mb-1">
-                                                <input type="radio" id="customRadioInline1" name="shipping_method" class="shipping-method custom-control-input" value="{{ Cart::total() }}" checked>
-                                                <label class="custom-control-label" for="customRadioInline1">{{ config('settings.free_shipping_label') }} </label><span class="float-right">Tk 0.00</span>
+                                        <form action="{{ route('checkout') }}" method="get" id="checkout-form">
+                                            <div class="form-group">
+                                                <label><b>Shipping Method</b></label>
+                                                @if(Cart::freeshippingAble())
+                                                <div class="custom-control custom-radio mb-1">
+                                                    <input type="radio" id="customRadioInline1" name="shipping_method" class="shipping-method custom-control-input" data-amount="{{ Cart::total() }}" value="free_shipping" checked>
+                                                    <label class="custom-control-label" for="customRadioInline1">{{ config('settings.free_shipping_label') }} </label><span class="float-right">Tk 0.00</span>
+                                                </div>
+                                                @endif
+                                                @if(Cart::localPicupEnabled())
+                                                <div class="custom-control custom-radio">
+                                                    <input type="radio" id="customRadioInline2" name="shipping_method" class="shipping-method custom-control-input" data-amount="{{  Cart::total() + Cart::localPicupCost() }}" value="local_pickup" {{  Cart::freeshippingAble() ? '' : 'checked' }}>
+                                                    <label class="custom-control-label" for="customRadioInline2">{{ config('settings.local_pickup_label') }} </label><span class="float-right">Tk {{ Cart::localPicupCost() }}</span>
+                                                </div>
+                                                @endif
+                                                @if(!Cart::freeshippingAble() && !Cart::localPicupEnabled())
+                                                    <h6 class="text-danger">No shipping method enabled</h6>
+                                                @endif
                                             </div>
-                                            @endif
-                                            @if($localPicupEnabled)
-                                            <div class="custom-control custom-radio">
-                                                <input type="radio" id="customRadioInline2" name="shipping_method" class="shipping-method custom-control-input" value="{{  Cart::total() + $localPicupCost }}" {{  !$freeshippingAble ? 'checked' : '' }}>
-                                                <label class="custom-control-label" for="customRadioInline2">{{ config('settings.local_pickup_label') }} </label><span class="float-right">Tk {{ $localPicupCost }}</span>
-                                            </div>
-                                            @endif
-                                            @if(!$localPicupEnabled && !$freeShippingEnabled)
-                                                <h6 class="text-danger">No shipping method enabled</h6>
-                                            @endif
-                                        </div>
-                                        <li class="sum_total">Total:<span class="cart-total">Tk {{ $cartTotal }}</span></li>
-                                    </ul> <a href="{{ route('checkout') }}">Continue to Checkout</a> 
+                                        </form>
+                                        @if(Cart::coupon())
+                                        <li>Coupon ({{ Cart::coupon()->code }}) applied:<span>Tk ({{ Cart::couponDiscount() }})</span></li>
+                                        @endif
+                                        <li class="sum_total">Total:<span class="cart-total">Tk {{ Cart::cartAmount() }}</span></li>
+                                    </ul> <a href="{{ route('checkout') }}" class="btn-checkout">Continue to Checkout</a> 
                                 </div>
                             </div>
                         </div>
@@ -122,8 +123,13 @@
             $("input[type='number']").InputSpinner();
 
             $(document).on('change', '.shipping-method', function(){
-                var amount = $(this).val();
+                var amount = $(this).data('amount');
                 $('.cart-total').html('<span>Tk '+ amount +' </span>');
+            });
+
+            $(document).on('click', '.btn-checkout', function(e){
+                e.preventDefault();
+                $('#checkout-form').submit();
             });
         });
     </script>

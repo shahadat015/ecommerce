@@ -64,9 +64,8 @@ class PaymentController extends Controller
     {
 
         if(!session()->get('order')) return redirect('payment');
-
         Cart::destroy();
-        session()->forget('order');
+        session()->forget(['order', 'coupon']);
         return view('website.checkout.success');
     }
 

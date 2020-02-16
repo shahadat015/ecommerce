@@ -56,18 +56,17 @@ class ProductController extends Controller
 
     public function store(ProductValidate $request)
     {
-        $code = time() . rand();
+        $qrcode = rand(100000000000, 199999999999);
         $slug = str_slug($request->name);
         $product = Product::whereSlug($slug)->first();
-
         $request['status'] = (boolean)$request->status;
-        $request['slug'] = $product ? $slug ."-$code" : $slug;
+        $request['slug'] = $product ? "$slug-$qrcode" : $slug;
         $request['qr_code'] = "storage/images/$code.png";
 
         $product = Product::create($request->all());
         $product->saveRelations($request);
 
-        QrCode::format('png')->size(399)->generate($code, storage_path("app/public/images/$code.png"));
+        QrCode::format('png')->size(399)->generate($qrcode, storage_path("app/public/images/$qrcode.png"));
 
         if($product){
             return response()->json(['success' => 'Product successfully created!']);
@@ -95,7 +94,6 @@ class ProductController extends Controller
 
     public function update(ProductValidate $request, Product $product)
     {
-
         $request['status'] = (boolean)$request->status;
         $request['slug'] = str_slug($request->url);
         $product->update($request->all());

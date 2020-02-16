@@ -7,7 +7,7 @@ $(function() {
         }
     });
 
-    // add to cart form
+    // search form
     $(document).on('keyup', '.search', function () {
 
         var query = $(this).val();
@@ -26,7 +26,7 @@ $(function() {
         }
 
         $.ajax({
-            url: '/search',
+            url: route('search'),
             type: "POST",
             data: {query},
             dataType: "HTML",
@@ -45,6 +45,62 @@ $(function() {
             },
             complete:function() {
                 preloader.addClass('d-none');
+            }
+        });
+    });
+
+    // coupon form
+    $(document).on('submit', '#coupon', function (e) {
+        event.preventDefault();
+
+        var formdata = new FormData($(this)[0]);
+        var btnText = $('.btn-submit').text();
+        var btn = $('.btn-submit');
+
+        $.ajax({
+            url: route('coupon'),
+            type: "POST",
+            data: formdata,
+            dataType: "JSON",
+            contentType: false,
+            processData: false,
+            cache: false,
+            beforeSend:function() {
+                btn.attr("disabled", true).html("<span class='spinner-border spinner-border-sm'></span> Loadding...");
+            },
+            success(data) {
+                if(data.success) {
+                    $("#coupon")[0].reset();
+                    $('.invalid-feedback').remove();
+                    return cartContent() + successMessage(data.success);
+                }else{
+                    return errorMessage(data.error);
+                }
+            },
+            error(error) {
+                if(error.status == 422) {
+                    var errors = error.responseJSON.errors;
+                    var errorField = Object.keys(errors)[0];
+                    var inputField = $('[name="'+ errorField +'"]');
+                    var errorMessage = errors[errorField][0];
+
+                    // Show error message
+                    if(inputField.next('.invalid-feedback').length == 0){
+                        inputField.focus().after('<div class="invalid-feedback"> <strong>'+ errorMessage +'</strong> </div>');
+                    }else{
+                        inputField.focus();
+                    }
+
+                    // Remove error message
+                    inputField.on('keydown, change', function() {
+                        inputField.next('.invalid-feedback').remove();
+                    });
+                }else{
+                    return errorStatusText(error);
+                }
+            },
+            complete:function() {
+                btn.attr("disabled", false).html(btnText);
             }
         });
     });
